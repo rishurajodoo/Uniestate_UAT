@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <record id="paper_format_advance_payment" model="report.paperformat">
+            <field name="name">INTERIM PAYMENT CERTIFICATE</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="subcontractors_payment_certificate_report_pdf" model="ir.actions.report">
+            <field name="name">SUBCONTRACTOR'S PAYMENT CERTIFICATE</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">advance_payment.report_subcontractors_payment_certificate</field>
+            <field name="report_file">advance_payment.report_subcontractors_payment_certificate</field>
+            <field name="print_report_name">('SUBCONTRACTORS Payment Certificate')</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paper_format_advance_payment"/>
+        </record>
+
+        <record id="advance_payment_report_pdf" model="ir.actions.report">
+            <field name="name">INTERIM PAYMENT CERTIFICATE</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">advance_payment.report_advance_amount_temp</field>
+            <field name="report_file">advance_payment.report_advance_amount_temp</field>
+            <field name="print_report_name">('Interim Payment Certificate - %s' % (object.name).replace('/', ''))
+            </field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paper_format_advance_payment"/>
+        </record>
+
+        <!--        Local Purchase Order-->
+        <record id="paper_format_local_po" model="report.paperformat">
+            <field name="name">Local Purchase Order</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="local_po_report_pdf" model="ir.actions.report">
+            <field name="name">Local Purchase Order</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">advance_payment.report_local_po_temp</field>
+            <field name="report_file">advance_payment.report_local_po_temp</field>
+            <field name="print_report_name">('Local Purchase Order - %s' % (object.name))</field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paper_format_local_po"/>
+        </record>
+
+        <!--        <report-->
+        <!--                id="local_po_report_pdf"-->
+        <!--                string="Local Purchase Order"-->
+        <!--                model="purchase.order"-->
+        <!--                report_type="qweb-pdf"-->
+        <!--                name="advance_payment.report_local_po_temp"-->
+        <!--                file="advance_payment.report_local_po_temp"-->
+        <!--                paperformat="paper_format_local_po"-->
+        <!--                print_report_name="('Local Purchase Order - %s' % (object.name))"-->
+        <!--        />-->
+    </data>
+</odoo>

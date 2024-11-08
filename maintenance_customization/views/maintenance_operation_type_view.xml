@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record id="maintenance_operation_type_form" model="ir.ui.view">
+            <field name="name">maintenance.operation.type.form</field>
+            <field name="model">maintenance.operation.type</field>
+            <field name="arch" type="xml">
+                <form string="Operation Type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="maintenance_operation_type_tree" model="ir.ui.view">
+            <field name="name">maintenance.operation.type.tree</field>
+            <field name="model">maintenance.operation.type</field>
+            <field name="arch" type="xml">
+                <tree string="Operation Type">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_maintenance_operation_type" model="ir.actions.act_window">
+            <field name="name">Operation Type</field>
+            <field name="res_model">maintenance.operation.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    You have not created any operation yet.
+                </p>
+            </field>
+        </record>
+        <menuitem
+                id="maintenance_operation_type_menu"
+                name="Operation Type"
+                parent="maintenance.menu_maintenance_configuration"
+                action="action_maintenance_operation_type"
+                sequence="21"/>
+    </data>
+</odoo>

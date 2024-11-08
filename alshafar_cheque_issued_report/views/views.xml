@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="alshafar_cheque_issued_report.list">
+      <field name="name">alshafar_cheque_issued_report list</field>
+      <field name="model">alshafar_cheque_issued_report.alshafar_cheque_issued_report</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="alshafar_cheque_issued_report.action_window">
+      <field name="name">alshafar_cheque_issued_report window</field>
+      <field name="res_model">alshafar_cheque_issued_report.alshafar_cheque_issued_report</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="alshafar_cheque_issued_report.action_server">
+      <field name="name">alshafar_cheque_issued_report server</field>
+      <field name="model_id" ref="model_alshafar_cheque_issued_report_alshafar_cheque_issued_report"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="alshafar_cheque_issued_report" id="alshafar_cheque_issued_report.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="alshafar_cheque_issued_report.menu_1" parent="alshafar_cheque_issued_report.menu_root"/>
+    <menuitem name="Menu 2" id="alshafar_cheque_issued_report.menu_2" parent="alshafar_cheque_issued_report.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="alshafar_cheque_issued_report.menu_1_list" parent="alshafar_cheque_issued_report.menu_1"
+              action="alshafar_cheque_issued_report.action_window"/>
+    <menuitem name="Server to list" id="alshafar_cheque_issued_report" parent="alshafar_cheque_issued_report.menu_2"
+              action="alshafar_cheque_issued_report.action_server"/>
+-->
+  </data>
+</odoo>

@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- project.project -->
+        <record id="unique_code_project" model="ir.sequence">
+            <field name="name">Project unique Code</field>
+            <field name="code">project.project.seq</field>
+            <field name="active">TRUE</field>
+            <field name="prefix">P</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="view_id" model="ir.ui.view">
+            <field name="name">project.project.inherit.view.form</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <header>
+                    <button name="%(create_buiding_wizard)d" string="Create Building" type="action"
+                            class="oe_highlight"/>
+                </header>
+                <xpath expr="//group[last()]" position="after">
+                    <group string="Property Details" col="4">
+                        <field name="short_name"/>
+                        <field name="code"/>
+                        <field name="parent_project"/>
+                        <field name="analytic_account_id" force_save="1" invisible="1"/>
+                        <field name="analytic_tag_id" force_save="1" invisible="1"/>
+                        <field name="number_of_buildings"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- property.building -->
+        <record id="view_building_form" model="ir.ui.view">
+            <field name="name">property.building.form</field>
+            <field name="model">property.building</field>
+            <field name="arch" type="xml">
+                <form string="Add Building" create="0">
+                    <header>
+                        <button name="%(create_floor_wizard)d" string="Create Floor " type="action"
+                                class="oe_highlight"/>
+                    </header>
+                    <sheet string="Buildings">
+                        <field name="image_1920" widget="image" class="oe_avatar"/>
+                        <group>
+                            <group>
+                                <field name="name" string="Name"/>
+                                <field name="project_id" string="Project"/>
+                                <field name="project_analytical"/>
+                                <field name="building_account_analytical" readonly="1"/>
+                                <field name="analytic_tag_id" force_save="1" invisible="1"/>
+                            </group>
+                            <group>
+
+                                <field name="short_name" string="Short Name"/>
+                                <field name="code" string="Code"/>
+                                <field name="plot_no" readonly="1"/>
+                                <field name="number_of_floors" string="Number Of Floors"/>
+                                <field name="tax_afm_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+
+                </form>
+
+            </field>
+        </record>
+
+        <record id="view_building_tree" model="ir.ui.view">
+            <field name="name">property.building.tree</field>
+            <field name="model">property.building</field>
+            <field name="arch" type="xml">
+                <tree string="Buildings" create="0">
+                    <field name="name"/>
+                    <field name="project_id"/>
+                    <field name="short_name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- pdc tree view -->
+        <record id="pdc_view_building_form" model="ir.ui.view">
+            <field name="name">post.date.checks.form</field>
+            <field name="model">post.date.checks</field>
+            <field name="arch" type="xml">
+                <form string="PDC">
+                    <sheet string="PDC">
+                        <group string="Post Date Checks">
+                            <group>
+                                <field name="customer_name"/>
+                                <field name="name_of_cheque"/>
+                                <field name="date_of_cheqeu"/>
+                                <field name="Bank"/>
+                                <field name="type_char"/>
+                                <field name="attach" widget="many2many_binary"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="pdc_view_building_tree" model="ir.ui.view">
+            <field name="name">post.date.checks.tree</field>
+            <field name="model">post.date.checks</field>
+            <field name="arch" type="xml">
+                <tree string="PDC">
+                    <field name="customer_name"/>
+                    <field name="name_of_cheque"/>
+                    <field name="date_of_cheqeu"/>
+                    <field name="Bank"/>
+                    <field name="type_char"/>
+                    <field name="attach" widget="many2many_binary"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_building" model="ir.actions.act_window">
+            <field name="name">Buildings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.building</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_building_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Instance Found
+                </p>
+            </field>
+        </record>
+
+        <!-- building.floor -->
+        <record id="view_floor_form" model="ir.ui.view">
+
+            <field name="name">property.floor.form</field>
+            <field name="model">property.floor</field>
+            <field name="arch" type="xml">
+                <form string="Add Floor" create="0">
+                    <header>
+                        <button name="%(create_units_wizard)d" string="Create Units " type="action"
+                                class="oe_highlight"/>
+                    </header>
+                    <sheet string="Buildings">
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="short_name"/>
+                                <field name="code"/>
+                                <field name="building_id"/>
+                                <field name="project_name"/>
+                            </group>
+                            <group>
+                                <field name="project_analytical"/>
+                                <field name="building_analytic_account"/>
+                                <field name="floor_analytic_account"/>
+                                <field name="analytic_tag_id" force_save="1" invisible="1"/>
+                                <field name="number_of_units"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="view_floor_tree" model="ir.ui.view">
+            <field name="name">property.floor.tree</field>
+            <field name="model">property.floor</field>
+            <field name="arch" type="xml">
+                <tree create="0">
+                    <field name="name"/>
+                    <field name="building_id"/>
+                    <field name="short_name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_floor" model="ir.actions.act_window">
+            <field name="name">Floor</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.floor</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_floor_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Instance Found
+                </p>
+            </field>
+        </record>
+
+        <!-- pdc Action -->
+        <record id="property_pdc_menu_action" model="ir.actions.act_window">
+            <field name="name">PDC</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">post.date.checks</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="pdc_view_building_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Instance Found
+                </p>
+            </field>
+        </record>
+
+
+        <record id="product_normal_form_view_inherite" model="ir.ui.view">
+            <field name="name">product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <!--                    <button string="PDC Received" class="btn btn-primary"/>-->
+                    <field name="state" widget="statusbar"/>
+                </xpath>
+                <xpath expr="//page[@name='general_information']" position="before">
+                    <page string="Property Information">
+                        <group string="Property Information">
+                            <group>
+                                <field name="sale_order"/>
+                                <field name="so_amount"/>
+                                <field name="short_name"/>
+                                <field name="code"/>
+                                <field name="project"/>
+                                <field name="building"/>
+                                <field name="floor_id"/>
+                                <field name="reasonable_price"/>
+                                <field name="property_owner"/>
+                                <field name="lessor"/>
+                                <field name="construction_status"/>
+                            </group>
+                            <group>
+                                <field name="category"/>
+                                <field name="view_type" invisible="1"/>
+                                <field name="property_price"/>
+                                <field name="allow_discount"/>
+                                <field name="furnishing"/>
+                                <field name="build_up_area"/>
+                                <field name="carpet_area"/>
+                                <field name="bedroom"/>
+                                <field name="washroom"/>
+                                <field name="balconies"/>
+                                <field name="plot_num"/>
+                            </group>
+                        </group>
+                        <group string="Analytic Account">
+                            <field name="project_analytical"/>
+                            <field name="building_analytic_account"/>
+                            <field name="floor_analytic_account"/>
+                            <field name="units_analytic_account"/>
+                            <field name="analytic_tag_id" force_save="1" invisible="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_tree_view_inherited" model="ir.ui.view">
+            <field name="name">product.product.tree.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_open_label_layout']" position="before">
+<!--                    <field name="invoice_date"/>-->
+                    <button string="Generate Invoice" type="object" name="generate_invoices_active"/>
+                    <button string="Block Unit" type="object" name="action_block_activate"/>
+                    <button string="Un Block Unit" type="object" name="action_un_block_activate"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="invoice_date_wizard_view_form" model="ir.ui.view">
+            <field name="name">invoice.date.wizard.view.form</field>
+            <field name="model">invoice.date.wizard</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Create Invoice">
+                    <group>
+                        <field name="product_ids"/>
+                        <field name="invoice_date"/>
+                    </group>
+                    <footer>
+                        <button name="action_create_invoices" string="Create Invoice" type="object"/>
+                        <button name="cancel" string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- analytic account inherit view -->
+        <record id="account_analytic_plan_form_view_inherti" model="ir.ui.view">
+            <field name="name">account.analytic.plan.inherit</field>
+            <field name="model">account.analytic.plan</field>
+            <field name="inherit_id" ref="analytic.account_analytic_plan_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[last()]" position="after">
+                    <group string="Property Details" col="4">
+                        <field name="project_id" force_save="1"/>
+                        <field name="building_id" force_save="1"/>
+                        <field name="floor_id" force_save="1"/>
+                        <field name="unit_id" force_save="1"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_analytic_account_form_inherti" model="ir.ui.view">
+            <field name="name">account.analytic.account.inherit</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/group/group/field[@name='code']" position="after">
+                    <field name="project_id" force_save="1"/>
+                    <field name="building_id" force_save="1"/>
+                    <field name="floor_id" force_save="1"/>
+                    <field name="unit_id" force_save="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--         CRM inherit view -->
+        <record id="view_crm_lead_inherit_new" model="ir.ui.view">
+            <field name="name">crm.lead.inherit.new</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='lead_partner']//field[@name='partner_name']" position="after">
+                    <field name="project_id"/>
+                    <field name="building_id"/>
+                    <field name="floor_id"/>
+                    <field name="unit_id" widget="many2many_tags" domain="[('state', '=', 'new'), ('floor_id', '=', floor_id)]"/>
+                    <field name="broker_id" widget="many2many_tags"/>
+                    <!--                    <field name="broker_id"/>-->
+                </xpath>
+                <xpath expr="//group[@name='opportunity_partner']" position="inside">
+                    <field name="project_id"/>
+                    <field name="building_id"/>
+                    <field name="floor_id"/>
+                    <field name="unit_id" widget="many2many_tags"/>
+                    <field name="broker_id" widget="many2many_tags"/>
+                    <!--                    <field name="broker_id"/>-->
+                </xpath>
+            </field>
+        </record>
+        <record id="crm_case_tree_view_leads_inherit_new" model="ir.ui.view">
+            <field name="name">crm.lead.inherit.new</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="broker_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="crm_case_tree_view_oppor_inherit_new" model="ir.ui.view">
+            <field name="name">crm.lead.inherit.new</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="broker_id"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <menuitem id="property_menu_act"
+                  name="Property"
+                  action="action_building"
+                  web_icon="ol_property_custom,static/description/icon.png"/>
+
+        <menuitem id="property_project_menu_act"
+                  name="Projects"
+                  action="project.open_view_project_all"
+                  parent="property_menu_act"
+                  sequence="1"/>
+
+        <menuitem id="property_building_menu_act"
+                  name="Buildings"
+                  action="action_building"
+                  parent="property_menu_act"
+                  sequence="2"/>
+
+        <menuitem id="property_floors_menu_act"
+                  name="Floors"
+                  action="action_floor"
+                  parent="property_menu_act"
+                  sequence="3"/>
+
+        <menuitem id="property_product_menu_act"
+                  name="Units"
+                  action="product.product_normal_action_sell"
+                  parent="property_menu_act"
+                  sequence="4"/>
+
+        <record model="ir.actions.act_window" id="action_afm_invoices">
+            <field name="name">AFM Invoices</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_afm','=',True)]</field>
+        </record>
+
+        <menuitem id="menu_afm_invoices" name="AFM Invoices"
+                  parent="account.menu_finance_receivables" action="action_afm_invoices" sequence="2"/>
+
+    </data>
+</odoo>

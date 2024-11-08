@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="floor_tree_view_inherit_id" model="ir.ui.view">
+            <field name="name">Floor Tree View Inherit</field>
+            <field name="model">property.floor</field>
+            <field name="inherit_id" ref="ol_property_custom.view_floor_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='short_name']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="floor_type_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="floor_form_inherit_id" model="ir.ui.view">
+            <field name="name">Floor Form Inherit</field>
+            <field name="model">property.floor</field>
+            <field name="inherit_id" ref="ol_property_custom.view_floor_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='short_name']" position="replace">
+                    <field name="floor_type_id"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

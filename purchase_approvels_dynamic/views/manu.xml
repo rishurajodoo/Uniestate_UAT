@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="user_purchase_form_view" model="ir.ui.view">
+        <field name="name">user.purchase.form</field>
+        <field name="model">user.purchase</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="approver_ids" widget="many2many_tags"/>
+                        <!-- Add other fields as needed -->
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="user_purchase_tree_view" model="ir.ui.view">
+        <field name="name">user.purchase.tree</field>
+        <field name="model">user.purchase</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="approver_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Purchase Approvals Form view -->
+    <record id="purchase_approvals_form_view" model="ir.ui.view">
+        <field name="name">purchase.approvals.form</field>
+        <field name="model">purchase.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="companies_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="discount_approval" widget='radio'/>
+                            <field name="minimum_percent" invisible="discount_approval != 'base'"/>
+                            <field name="minimum_amount" invisible="discount_approval != 'amount base'"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="approval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="approver_ids" widget="many2many_tags"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Purchase Approvals Tree view -->
+    <record id="purchase_approvals_tree_view" model="ir.ui.view">
+        <field name="name">purchase.approvals.tree</field>
+        <field name="model">purchase.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="minimum_percent"/>
+                <field name="minimum_amount"/>
+                <field name="companies_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Window Action for which is called in the menu = Discount Approval Configuration -->
+    <record id="purchase_approvals_action" model="ir.actions.act_window">
+        <field name="name">Purchase Approval Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.approvals</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a New Approval
+            </p>
+        </field>
+    </record>
+
+    <record id="user_purchase_action" model="ir.actions.act_window">
+        <field name="name">User Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">user.purchase</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add the Users
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_purchase_approvals"
+            name="Purchase Approval Configuration"
+            parent="purchase.menu_purchase_config"
+            action="purchase_approvals_action"
+            sequence="49"/>
+
+    <menuitem
+            id="user_purchase_approvals"
+            name="User Configuration"
+            parent="purchase.menu_purchase_config"
+            action="user_purchase_action"
+            sequence="50"/>
+
+    <!-- Purchase Order Inherit -->
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="purchase_approval_id" invisible="1"/>
+                <field name="level_of_approval_needed" invisible="1"/>
+                <field name="levels_approved" invisible="1"/>
+                <field name="all_level_approved" invisible="1"/>
+                <field name="l1_purchase_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l2_purchase_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l3_purchase_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l1_purchase_approved_id" invisible="1"/>
+                <field name="l2_purchase_approved_id" invisible="1"/>
+                <field name="l3_purchase_approved_id" invisible="1"/>
+                <field name="show_first" invisible="1"/>
+                <field name="show_second" invisible="1"/>
+                <field name="show_third" invisible="1"/>
+                <field name="is_level_one" invisible="1"/>
+                <field name="is_level_two" invisible="1"/>
+                <field name="is_level_three" invisible="1"/>
+            </xpath>
+             <xpath expr="//header" position="inside">
+               <button name="submit_for_purchase_approval" string="Submit For Approval" type="object" class="oe_highlight"
+                        invisible="state != 'draft'"/>
+             <button name="approve_first_discount" string="First Approve" type="object" class="oe_highlight"
+        invisible="show_first == False"/>
+
+                <button name="approve_second_discount" string="Second Approve" type="object" class="oe_highlight"
+                        invisible="show_second == False"/>
+                <button name="approve_third_discount" string="Third Approve" type="object" class="oe_highlight"
+                        invisible="show_third  == False"/>
+                 <button name="button_confirm_action" type="object" invisible="state != 'approved'" string="Confirm Order" />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="discount_approve" string="Purchase Approvers" invisible="purchase_approval_id==False "
+                     >
+                    <group string="Level 1 Approval" invisible="is_level_one == False">
+                        <group>
+
+
+                            <field name="l1_purchase_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l1_purchase_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Level 2 Approval" invisible="is_level_two == False">
+                        <group>
+                            <field name="l2_purchase_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l2_purchase_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Level 3 Approval" invisible="is_level_three == False">
+                        <group>
+                            <field name="l3_purchase_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l3_purchase_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

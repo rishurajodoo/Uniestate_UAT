@@ -1,0 +1,95 @@
+<odoo>
+    <data>
+        <record id="hr_equipment_request_view_form_inherited_rent" model="ir.ui.view">
+            <field name="name">maintenance.request.form.rent</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//sheet//div[1]" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="create_petty_cash_entries"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-bars"
+                                string="Imprest Fund">
+                        </button>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='email_cc']" position="after">
+                    <field name="invoice_amount"/>
+                    <label for="actual_amount" string="Actual Amount"/>
+                    <div class="o_row actual_amount-fields">
+                        <field name="actual_amount" readonly="1" force_save="1"/>
+                        <button name="get_actual_amount" type="object" icon="fa-undo"/>
+                    </div>
+                    <!--                    <field name="actual_amount" force_save="1"/>-->
+                </xpath>
+                <xpath expr="//field[@name='maintenance_type']" position="after">
+                    <!--                    <field name="operation_id"/>-->
+                    <field
+                            name="move_id"
+                            invisible="0"
+                    />
+                    <field name="sale_order_id"/>
+                </xpath>
+                <xpath expr="//sheet/group[1]" position="after">
+                    <group col="4" string="Property Details">
+                        <field name="unit_id"/>
+                        <field name="floor_id"/>
+                        <field name="building_id"/>
+                        <field name="project_id"/>
+                        <field name="petty_cash_ids" widget="many2many_tags" readonly="1"/>
+                        <field name="is_petty" invisible="1"/>
+                        <field name="is_ecr"/>
+                    </group>
+                    <group string="Tenancy Details">
+                        <group>
+                            <field name="tenancy_id"/>
+                            <field name="tenancy_state" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="start_date" readonly="1"/>
+                            <field name="end_date" readonly="1"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button type="object" string="Create Invoice" name="create_invoice" class="oe_highlight"
+                            invisible="stage != 'in_progress' or is_ecr"/>
+                    <button name="move_to_in_progress" type="object" string="Move To Inprogress"
+                            invisible="stage == 'in_progress'"/>
+                </xpath>
+                <xpath expr="//page[@name='approval_details']" position="attributes">
+                    <attribute name="invisible">is_ecr != True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='request_date']" position="after">
+                    <field name="maintenance_category_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <menuitem action="maintenance.hr_equipment_request_action" id="menu_tenancy_contract_root"
+                  name="Maintenance Request"
+                  parent="ol_property_custom.property_menu_act"
+                  sequence="6"/>
+
+        <!--        Imprest Fund Menu in Maintenance-->
+        <menuitem id="menu_snd_petty_cash_maintenance" name="Imprest Fund"
+                  parent="maintenance.menu_maintenance_title"
+                  action="snd_petty_cash.action_snd_petty_cash" sequence="3"/>
+
+
+        <!--        Tree View-->
+        <record id="hr_equipment_request_view_tree_inherited_rent" model="ir.ui.view">
+            <field name="name">maintenance.request.tree.rent</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='stage_id']" position="after">
+                    <field name="invoice_amount" sum="inv_sum"/>
+                    <field name="actual_amount" sum="Total"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

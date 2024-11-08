@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Refund Approvals Form view -->
+    <record id="credit_approvals_form_view" model="ir.ui.view">
+        <field name="name">credit.approvals.form</field>
+        <field name="model">credit.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="credit_companies_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="credit_discount_approval" widget='radio'/>
+                            <field name="credit_minimum_percent" invisible="credit_discount_approval != 'base'"/>
+                            <field name="credit_minimum_amount"
+                                   invisible="credit_discount_approval != 'amount base'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="credit_approval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="credit_approver_ids" widget="many2many_tags"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Refund Approvals Tree view -->
+    <record id="credit_approvals_tree_view" model="ir.ui.view">
+        <field name="name">credit.approvals.tree</field>
+        <field name="model">credit.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="credit_minimum_percent"/>
+                <field name="credit_minimum_amount"/>
+                <field name="credit_companies_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Window Action for which is called in the menu = Refund Approval Configuration -->
+    <record id="credit_approvals_action" model="ir.actions.act_window">
+        <field name="name">Credit Approval Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">credit.approvals</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a New Credit Approval
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_credit_approvals"
+            name="Credit Approval Configuration"
+            parent="account.menu_finance_configuration"
+            action="credit_approvals_action"
+            sequence="45"/>
+
+    <!-- Account Move Inherit -->
+    <record id="account_move_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="in_credit_approval_id" invisible="1"/>
+                <field name="level_of_credit_approval_needed" invisible="1"/>
+                <field name="credit_levels_approved" invisible="1"/>
+                <field name="credit_all_level_approved" invisible="1"/>
+                <field name="l1_in_credit_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l2_in_credit_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l3_in_credit_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l1_in_credit_approved_id" invisible="1"/>
+                <field name="l2_in_credit_approved_id" invisible="1"/>
+                <field name="l3_in_credit_approved_id" invisible="1"/>
+                <field name="credit_show_first" invisible="1"/>
+                <field name="credit_show_second" invisible="1"/>
+                <field name="credit_show_third" invisible="1"/>
+                <field name="credit_is_level_one" invisible="1"/>
+                <field name="credit_is_level_two" invisible="1"/>
+                <field name="credit_is_level_three" invisible="1"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+               <button name="credit_approve_first_discount" string="First Approve" type="object" class="oe_highlight" invisible="credit_show_first == False"/>
+<button name="credit_approve_second_discount" string="Second Approve" type="object" class="oe_highlight" invisible="credit_show_second == False"/>
+<button name="credit_approve_third_discount" string="Third Approve" type="object" class="oe_highlight" invisible="credit_show_third == False"/>
+
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="credit_discount_approve" string="Credit Note Approvers"
+                      invisible="in_credit_approval_id == False or move_type != 'out_refund'">
+                    <group string="Level 1 Approval"
+                           invisible="credit_is_level_one == False or move_type != 'out_refund'"
+                    >
+                        <group>
+                            <field name="l1_in_credit_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l1_in_credit_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Level 2 Approval"
+                           invisible="credit_is_level_two == False or move_type != 'out_refund'"
+
+                         >
+                        <group>
+                            <field name="l2_in_credit_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l2_in_credit_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Level 3 Approval"
+                           invisible="credit_is_level_three == False or move_type != 'out_refund'"
+
+                    >
+                        <group>
+                            <field name="l3_in_credit_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l3_in_credit_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

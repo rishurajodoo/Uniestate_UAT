@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="property_performance_report_wizard_form_id" model="ir.ui.view">
+            <field name="name">Property Performance Report</field>
+            <field name="model">property.performance.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="start_date"  widget="daterange"
+                                    required="1" options = "{'end_date_field': 'end_date'}"
+                                    />
+                                <field name="project" widget="many2many_tags"/>
+                                <field name="end_date" invisible="1"/>
+                                <field name="leasing_monthly_rental_income"/>
+                                <field name="leasing_monthly_cost_rental"/>
+                                <field name="general_account_id" widget="many2many_tags" options="{'no_create':True}" invisible="not leasing_monthly_cost_rental"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button type="object" string="Print" name="property_performance_report"
+                                class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="property_performance_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">Property Performance Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.performance.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="property_performance_report_menu_item" name="Property Performance Report"
+                  parent="ol_property_custom.property_menu_act"
+                  sequence="10" action="property_performance_report_wizard_action"/>
+
+    </data>
+</odoo>

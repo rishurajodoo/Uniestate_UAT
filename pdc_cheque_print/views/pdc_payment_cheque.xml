@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pdc_payment_cheque_view_form_inherited" model="ir.ui.view">
+        <field name="name">pdc.cheque.form.view.form.inherit</field>
+        <field name="model">pdc.cheque.print</field>
+        <field name="arch" type="xml">
+            <form string="PDC Cheque Print">
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+                    </group>
+                    <group>
+                        <group string="BANK CHEQUE">
+                            <field name="cheque_width"/>
+                            <field name="cheque_height"/>
+                            <field name="maximum_char"/>
+                        </group>
+                        <group>
+                            <field name="cheque_image" widget='image'/>
+                        </group>
+                    </group>
+                    <notebook>
+<!--                        <page name="cheque_attributes" string="Check Attributes">-->
+<!--                            <button name="action_config_attribute" type="object"-->
+<!--                                    icon="fa-cogs" string="CONFIGURE ATTRIBUTES"-->
+<!--                                    lass="btn-primary">-->
+<!--                            </button>-->
+<!--                            <field name="pdc_cheque_line">-->
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="name"/>-->
+<!--                                    <field name="font_size"/>-->
+<!--                                    <field name="letter_spacing"/>-->
+<!--                                    <field name="top_displacement"/>-->
+<!--                                    <field name="left_displacement"/>-->
+<!--                                    <field name="height"/>-->
+<!--                                    <field name="width"/>-->
+<!--                                    <field name="pdc_cheque" column_invisible="True"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                        </page>-->
+                        <!-- To print account payee-->
+                        <page string="Crossed Account Payee cheque Format"
+                              name="account_payee_page">
+                            <group>
+                                <field name="is_account_payee"/>
+                            </group>
+                            <group
+                                    invisible="is_account_payee == False">
+                                <field name="a_c_payee_top_margin"/>
+                                <field name="a_c_payee_left_margin"/>
+                                <field name="a_c_payee_width"/>
+                                <field name="a_c_payee_height"/>
+                            </group>
+                        </page>
+                        <!--To print sequence number-->
+                        <page string="Cheque Sequence Number Format"
+                              name="cheque_sequence_page">
+                            <group>
+                                <field name="print_cheque_number"/>
+                                <field name="print_cheque_number"/>
+                            </group>
+                            <group invisible="print_cheque_number == False">
+                                <field name="cheque_no_tm"/>
+                                <field name="cheque_no_lm"/>
+                            </group>
+                        </page>
+                        <!--To print date-->
+                        <page string="Date Format" name="date_format_page">
+                            <group>
+                                <field name="date_remove_slashes"/>
+                                <field name="date_top_margin"/>
+                                <field name="date_left_margin"/>
+                                <field name="date_letter_spacing"/>
+                            </group>
+                        </page>
+                        <!--To print beneficiary name-->
+                        <page string="Beneficiary Format"
+                              name="Beneficiary_format_page">
+                            <group>
+                                <field name="beneficiary_top_margin"/>
+                                <field name="beneficiary_left_margin"/>
+                            </group>
+                        </page>
+                        <!--To print amount in words-->
+                        <page string="Amount in word Format"
+                              name="word_format_page">
+                            <group>
+                                <field name="amount_word_tm"/>
+                                <field name="amount_word_lm"/>
+                                <field name="amount_word_ls"/>
+                            </group>
+                        </page>
+                        <!--To print amount in digits-->
+                        <page string="Amount in digit Format"
+                              name="digit_format_page">
+                            <group>
+                                <field name="print_currency"/>
+                                <field name="amount_digit_tm"/>
+                                <field name="amount_digit_lm"/>
+                                <field name="amount_digit_ls"/>
+                                <field name="amount_digit_size"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pdc_cheque_print_tree" model="ir.ui.view">
+        <field name="name">pdc.cheque.print.tree</field>
+        <field name="model">pdc.cheque.print</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="cheque_height"/>
+                <field name="cheque_width"/>
+                <field name="maximum_char"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_pdc_print_cheque" model="ir.actions.act_window">
+        <field name="name">Configure Cheques</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pdc.cheque.print</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_pdc_print_cheque"
+              name="Configure Cheques"
+              parent="pdc_payments.menu_pdc_conf"
+              action="action_pdc_print_cheque"
+    />
+
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="unietstate_sale_transfer_process_inherited_view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="show_invoices"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-bars"
+                        string="Invoices"
+                />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Transfer" invisible="not for_sale">
+                    <group>
+                        <group>
+                            <field name="outstanding_invoice"/>
+                            <button name="confirm_to_cancel_draft_invoice_and_make_new_sale" type="object"
+                                    string="Confirm"
+                                    class="btn-primary"/>
+                        </group>
+                        <group>
+                            <field name="new_owner"/>
+                            <field name="admin_fees_due"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_lease_orders">
+        <field name="name">Lease Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('for_rent', '=', True)]</field>
+    </record>
+    <record model="ir.actions.act_window" id="action_sale_contract">
+        <field name="name">Sale Contract Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('for_sale', '=', True)]</field>
+    </record>
+
+    <menuitem parent="sale.sale_order_menu" id="menu_lease_order_menu"
+              action="action_lease_orders" sequence="103"/>
+
+    <menuitem parent="sale.sale_order_menu" id="menu_sale_contract"
+                  action="action_sale_contract" sequence="103"/>
+</odoo>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Menu items # T4964 -->
+
+    <menuitem
+        id="menu_employee_activities_root"
+        name="Employee Activity"
+    />
+        <!-- <menuitem id="menu_employee_activities"
+            name="Employee Activity"
+            parent="menu_employee_activities_root"
+            sequence="1"/> -->
+            <!-- <menuitem id="menu_employee_activities_employee"
+                name="Portal Employee"
+                parent="menu_employee_activities"
+                action="portal_employee_action"
+                sequence="1"/> -->
+
+            <!-- Add menu for portal attendance # T4964 -->
+            <!-- <menuitem id="menu_employee_activities_attendance"
+                name="Portal Attendance"
+                parent="menu_employee_activities"
+                action="portal_attendance_action"
+                sequence="2"/> -->
+
+</odoo>

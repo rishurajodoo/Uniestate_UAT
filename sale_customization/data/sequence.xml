@@ -1,0 +1,21 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Sequence for Sale Orders marked For Sale -->
+        <record id="seq_sale_order_for_sale" model="ir.sequence">
+            <field name="name">Sale Order for Sale</field>
+            <field name="code">sale.order.for_sale</field>
+            <field name="prefix">S</field>
+            <field name="padding">5</field>
+            <field name="implementation">no_gap</field>
+        </record>
+
+        <!-- Sequence for Sale Orders marked For Rent -->
+        <record id="seq_sale_order_for_rent" model="ir.sequence">
+            <field name="name">Sale Order for Rent</field>
+            <field name="code">sale.order.for_rent</field>
+            <field name="prefix">R</field>
+            <field name="padding">5</field>
+            <field name="implementation">no_gap</field>
+        </record>
+    </data>
+</odoo>

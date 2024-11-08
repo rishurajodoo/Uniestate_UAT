@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_deffered_revenue,deffered.revenue,model_deffered_revenue,,1,1,1,1
+access_deffered_revenue_wizard,deffered.revenue.wizard,model_deffered_revenue_wizard,,1,1,1,1
+access_deffered_revenue_credit_wizard,deffered.revenue.credit.wizard,model_deffered_revenue_credit_wizard,,1,1,1,1

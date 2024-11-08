@@ -1,0 +1,451 @@
+<odoo>
+    <data>
+        <template id="tax_invoice_temp_id">
+            <t t-call="web.html_container">
+                <t t-call="property_custom_reports.alsharaf_property_letterhead_tax_inv"/>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page" style="font-size: 13px;">
+                            <div class="oe_structure"/>
+                            <h1 style="text-align:center;">Tax Invoice</h1>
+                            <br/>
+                            <table class="table table-sm table-borderless">
+                                <tr>
+                                    <td class="text-left" width="50%">
+                                        <strong>Date of Issue :</strong>
+                                        <span t-field="o.invoice_date"/>
+                                    </td>
+                                    <td class="text-left" width="50%">
+                                        <strong>Invoice No :</strong>
+                                        <span t-field="o.name"/>
+                                    </td>
+                                </tr>
+                                <tr style="background-color: #C0C0C0;">
+                                    <th class="text-left">
+                                        Bill To :
+                                    </th>
+                                    <th class="text-left">
+                                        Bill From :
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" style="line-height: 1.8;">
+                                        <t t-if="o.partner_id">
+                                            <strong t-field="o.partner_id.name"/>
+                                            <br/>
+                                        </t>
+                                        <t t-if="o.partner_id.street or o.partner_id.state_id or o.partner_id.country_id or o.partner_id.zip">
+                                            <t t-if="o.partner_id.street">
+                                                <span t-field="o.partner_id.street"/>,
+                                                <br/>
+                                            </t>
+                                            <t t-if="o.partner_id.state_id">
+                                                <span t-field="o.partner_id.state_id.name"/>,
+                                            </t>
+                                            <t t-if="o.partner_id.country_id">
+                                                <span t-field="o.partner_id.country_id.name"/>,
+                                            </t>
+                                            <t t-if="o.partner_id.zip">
+                                                <span t-field="o.partner_id.zip"/>
+                                            </t>
+                                            <br/>
+                                        </t>
+                                        <t t-if="o.partner_id.email">
+                                            <span t-field="o.partner_id.email"/>
+                                            <br/>
+                                        </t>
+                                        <t t-if="o.partner_id.phone">
+                                            <span t-field="o.partner_id.phone"/>
+                                            <br/>
+                                        </t>
+                                        <strong>Trade Licence:</strong>
+                                        <t t-if="o.company_id.company_registry">
+                                            <span t-field="o.company_id.company_registry"/>
+                                        </t>
+                                    </td>
+                                    <td class="text-left" style="line-height: 1.8;">
+                                        <t t-if="res_company">
+                                            <strong t-esc="res_company.name"/>
+                                            <br/>
+                                        </t>
+                                        <t t-if="res_company.street or res_company.state_id or res_company.country_id or res_company.zip">
+                                            <t t-if="res_company.street">
+                                                <span t-esc="res_company.street"/>,
+                                                <br/>
+                                            </t>
+                                            <t t-if="res_company.state_id">
+                                                <span t-esc="res_company.state_id.name"/>,
+                                            </t>
+                                            <t t-if="res_company.country_id">
+                                                <span t-esc="res_company.country_id.name"/>,
+                                            </t>
+                                            <t t-if="res_company.zip">
+                                                <span t-esc="res_company.zip"/>
+                                            </t>
+                                            <br/>
+                                        </t>
+                                        <t t-if="res_company.email">
+                                            <span t-esc="res_company.email"/>
+                                            <br/>
+                                        </t>
+                                        <t t-if="res_company.phone">
+                                            <span t-field="res_company.phone"/>
+                                            <br/>
+                                        </t>
+                                        <strong>TRN :</strong>
+                                        <t t-if="o.company_id.vat">
+                                            <span t-field="o.company_id.vat"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <!--                                <tr>-->
+                                <!--                                    <td class="text-left">-->
+                                <!--                                        <t t-if="o.partner_id.street">-->
+                                <!--                                            <span t-field="o.partner_id.street"/>,-->
+                                <!--                                            <br/>-->
+                                <!--                                        </t>-->
+                                <!--                                        <t t-if="o.partner_id.state_id">-->
+                                <!--                                            <span t-field="o.partner_id.state_id.name"/>,-->
+                                <!--                                        </t>-->
+                                <!--                                        <t t-if="o.partner_id.country_id">-->
+                                <!--                                            <span t-field="o.partner_id.country_id.name"/>,-->
+                                <!--                                        </t>-->
+                                <!--                                        <t t-if="o.partner_id.zip">-->
+                                <!--                                            <span t-field="o.partner_id.zip"/>-->
+                                <!--                                        </t>-->
+                                <!--                                    </td>-->
+                                <!--                                    <td class="text-left">-->
+                                <!--                                        <t t-if="res_company.street">-->
+                                <!--                                            <span t-esc="res_company.street"/>,-->
+                                <!--                                            <br/>-->
+                                <!--                                        </t>-->
+                                <!--                                        <t t-if="res_company.state_id">-->
+                                <!--                                            <span t-esc="res_company.state_id.name"/>,-->
+                                <!--                                        </t>-->
+                                <!--                                        <t t-if="res_company.country_id">-->
+                                <!--                                            <span t-esc="res_company.country_id.name"/>,-->
+                                <!--                                        </t>-->
+                                <!--                                        <t t-if="res_company.zip">-->
+                                <!--                                            <span t-esc="res_company.zip"/>-->
+                                <!--                                        </t>-->
+                                <!--                                    </td>-->
+                                <!--                                </tr>-->
+                                <!--                                <tr>-->
+                                <!--                                    <td class="text-left">-->
+                                <!--                                        <span t-field="o.partner_id.email"/>-->
+                                <!--                                    </td>-->
+                                <!--                                    <td class="text-left">-->
+                                <!--                                        <span t-esc="res_company.email"/>-->
+                                <!--                                    </td>-->
+                                <!--                                </tr>-->
+                                <!--                                <tr>-->
+                                <!--                                    <td class="text-left">-->
+                                <!--                                        <span t-field="o.partner_id.phone"/>-->
+                                <!--                                    </td>-->
+                                <!--                                    <td class="text-left">-->
+                                <!--                                        <span t-esc="res_company.phone"/>-->
+                                <!--                                    </td>-->
+                                <!--                                </tr>-->
+                                <!--                                <tr>-->
+                                <!--                                    <td class="text-left">-->
+                                <!--                                        <strong>TRN :</strong>-->
+                                <!--                                        <span t-field="o.partner_id.vat"/>-->
+                                <!--                                    </td>-->
+                                <!--                                    <td class="text-left">-->
+                                <!--                                        <strong>TRN :</strong>-->
+                                <!--                                        <span t-esc="res_company.vat"/>-->
+                                <!--                                    </td>-->
+                                <!--                                </tr>-->
+                            </table>
+                            <table class="table table-bordered table-sm" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th width="5%" class="text-center">Sr.</th>
+                                        <th class="text-center" width="35%">Description</th>
+                                        <th class="text-center">Unit</th>
+                                        <th class="text-center">Unit Price</th>
+                                        <th class="text-center">Sub Total</th>
+                                        <th class="text-center">VAT Rate %</th>
+                                        <th class="text-center">VAT Amount -
+                                            <span t-esc="res_company.currency_id.name"/>
+                                        </th>
+                                        <th class="text-right">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="sr_no" t-value="0"/>
+                                    <t t-set="sum_subtotal" t-value="0"/>
+                                    <t t-set="sum_vatnet" t-value="0"/>
+                                    <t t-set="sum_total" t-value="0"/>
+                                    <t t-foreach="o.invoice_line_ids" t-as="line">
+                                        <tr>
+                                            <t t-set="sr_no" t-value="sr_no + 1"/>
+                                            <td class="text-center" width="5%">
+                                                <span t-esc="sr_no"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="line.name"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="line.quantity" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="line.price_unit"
+                                                      t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="line.price_subtotal"
+                                                      t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                <t t-set="sum_subtotal" t-value="sum_subtotal + line.price_subtotal"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <t t-if="line.tax_ids">
+                                                    <span t-esc="line.tax_ids[0].name"/>
+                                                </t>
+                                            </td>
+                                            <td class="text-center">
+                                                <t t-if="line.tax_ids">
+                                                    <span t-esc="o.get_vat_net(line)"
+                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                    <t t-set="sum_vatnet" t-value="sum_vatnet + o.get_vat_net(line)"/>
+                                                </t>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="o.get_total_price(line)"
+                                                      t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                <t t-set="sum_total" t-value="sum_total + o.get_total_price(line)"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td width="5%"><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="5%"><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="5%"><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                        <td><![CDATA[&nbsp;]]></td>
+                                    </tr>
+                                    <tr>
+                                        <td width="5%"/>
+                                        <th class="text-center">Sub Total</th>
+                                        <td class="text-center"/>
+                                        <td class="text-center"/>
+                                        <th class="text-center">
+                                            <span t-esc="sum_subtotal"
+                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                        </th>
+                                        <td class="text-center"/>
+                                        <th class="text-center">
+                                            <span t-esc="sum_vatnet"
+                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                        </th>
+                                        <th class="text-right">
+                                            <span t-esc="sum_total"
+                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-4"/>
+                                <div class="col-8">
+                                    <table class="table table-sm table-bordered" width="100%">
+                                        <tr>
+                                            <th class="text-left">Sub Total</th>
+                                            <th class="text-right">
+                                                <span t-esc="res_company.currency_id.name"/>&#160;
+                                                <span t-esc="sum_subtotal"
+                                                      t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-left">Total VAT Chargeable</th>
+                                            <th class="text-right">
+                                                <span t-esc="res_company.currency_id.name"/>&#160;
+                                                <span t-esc="sum_vatnet"
+                                                      t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                            </th>
+                                        </tr>
+                                        <!--                                        <tr>-->
+                                        <!--                                            <th class="text-left">Less: Received</th>-->
+                                        <!--                                            <th class="text-right"><![CDATA[&nbsp;]]></th>-->
+                                        <!--                                        </tr>-->
+                                        <tr>
+                                            <th class="text-left">Total Amount Payable</th>
+                                            <th class="text-right">
+                                                <span t-esc="res_company.currency_id.name"/>&#160;
+                                                <span t-esc="sum_total"
+                                                      t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                            </th>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <br/>
+                            <table class="table table-sm table-bordered">
+                                <tr>
+                                    <td>
+                                        <strong>In Words :&#160;
+                                            <t t-esc="o.get_amount_in_words(sum_total)"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Payment Terms :&#160;</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>For Cheque Payment :&#160;</strong>Cheque should be issued payable to "
+                                        <strong>
+                                            <t t-esc="res_company.name"/>
+                                        </strong>
+                                        "
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>For Bank Transfer :&#160;</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Bank Name :&#160;</strong>
+                                        <span t-field="o.bank_info.bank_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Account Name :&#160;</strong>
+                                        <span t-field="o.bank_info.bank_account_id.acc_holder_name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Account No :&#160;</strong>
+                                        <span t-field="o.bank_info.bank_account_id.acc_number"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>IBAN :&#160;</strong>
+                                        <span t-field="o.bank_info.bank_account_id.iban_number"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Swift Code :&#160;</strong>
+                                        <span t-field="o.bank_info.bank_id.swift"/>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <template id="alsharaf_property_letterhead_tax_inv">
+            <t t-set="company" t-value="user.company_id"/>
+            <div class="header border-bottom" width="100%">
+                <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                    <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                        <tr>
+                            <td style="padding-top:40px; text-align:left;">
+                                <strong>
+                                    <h2 t-esc="res_company.name"/>
+                                </strong>
+                            </td>
+                            <td style="padding-top:10px;">
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                     style="max-height: 80px;" alt="Logo"/>
+                            </td>
+                            <td style="padding-top:40px; text-align:right;">
+                                <strong>
+                                    <h2 t-esc="res_company.name_arabic"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+                </table>
+            </div>
+            <div class="footer" width="100%" >
+<!--                <table class="table table-sm table-borderless">-->
+<!--                    <tr>-->
+<!--                        <td class="text-center" style="height:150px;">-->
+<!--                            <hr style="border-top:1px solid black;"/>-->
+<!--                            Prepared by-->
+<!--                        </td>-->
+<!--                        <td width="50%"/>-->
+<!--                        <td class="text-center" style="height:150px;">-->
+<!--                            <hr style="border-top:1px solid black;"/>-->
+<!--                            Approved by-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+                <table class="table table-sm table-borderless" style="font-size: 13px;">
+                    <tr>
+                        <td width="30%" class="text-center">
+                            <div style="border-top: 1px solid black; width:90%;margin-left:20px;">
+                                Prepared by
+                            </div>
+                        </td>
+                        <td width="40%">
+                        </td>
+                        <td width="30%" class="text-center">
+                            <div style="border-top: 1px solid black; width:90%;">
+                                Approved by
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="border-top border-bottom" style="font-size:12px;">
+                <table class="table table-sm table-borderless text-center" width="100%"
+                       style="padding:5px !important; margin:5px !important;">
+                    <tr>
+                        <td style="text-align:left;">
+                            <img src="/marquespoint_overall/static/description/location.png"
+                                 style="height:20px; width:20px; margin-right:10px;"/>
+                            <!--                                <span>Office no. 101 &amp; 102, The V Building, Al Barsha South Arjan, Dubai, UAE</span>-->
+                            <span>Uniestate Building, Oman Street, Ras Al Khaimah
+                            </span>
+                        </td>
+                        <td style="text-align:center;">
+                            <img src="/marquespoint_overall/static/description/phone.png"
+                                 style="height:20px; width:20px; margin-right:10px;"/>
+                            <span>800-776-776</span>
+                        </td>
+                        <td style="text-align:right;">
+                            <img src="/marquespoint_overall/static/description/global.png"
+                                 style="height:20px; width:20px; margin-right:10px;"/>
+                            <span>http://www.uniestate.com</span>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

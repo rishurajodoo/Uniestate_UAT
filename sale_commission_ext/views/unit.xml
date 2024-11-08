@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_init_form_is_maintainence" model="ir.ui.view">
+        <field name="name">product.product.inherit.maintainence</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='construction_status']" position="after">
+                <field name="is_maintenance_request_allowed"/>
+            </xpath>
+        </field>
+
+    </record>
+
+</odoo>

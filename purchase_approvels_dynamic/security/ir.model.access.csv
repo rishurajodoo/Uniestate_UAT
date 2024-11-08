@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_approvals,access.purchase.approvals,model_purchase_approvals,,1,1,1,1
+access_papprovals_levels,access.papprovals.levels,model_papprovals_levels,,1,1,1,1
+access_user_purchase,access.user.purchase,model_user_purchase,,1,1,1,1

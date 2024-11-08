@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="unit_view_form_inherit_product_variants_form_inherit_id" model="ir.ui.view">
+            <field name="name">Product Variants Form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="unit_customiztion.product_variants_form_inherit_id"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='property_size']" position="after">
+                    <field name="price_sqft"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

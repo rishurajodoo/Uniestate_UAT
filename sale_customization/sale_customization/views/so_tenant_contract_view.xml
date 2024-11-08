@@ -1,0 +1,96 @@
+<odoo>
+    <data>
+        <!--        Search View-->
+        <record id="view_sales_order_filter_tenancy" model="ir.ui.view">
+            <field name="name">Sale Order Rent Installment Plan</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <filter string="For Sale" name="for_sale" domain="[]" context="{'group_by': 'for_sale'}"/>
+                    <filter string="For Rent" name="for_rent" domain="[]" context="{'group_by': 'for_rent'}"/>
+                </xpath>
+                <xpath expr="//search" position="inside">
+                    <field name="project"/>
+                    <field name="building"/>
+                    <field name="floor"/>
+                    <field name="unit"/>
+                    <field name="tenancy"/>
+                    <field name="for_sale"/>
+                    <field name="for_rent"/>
+                    <separator/>
+                    <filter string="For Sale" name="for_sale" domain="[('for_sale','=',True)]"/>
+                    <filter string="For Rent" name="for_rent" domain="[('for_rent','=',True)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_sale_order_form_inherit" model="ir.ui.view">
+            <field name="name">Sale Customization</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                    <attribute name="invisible">for_sale</attribute>
+                    <attribute name="string">Rent Price</attribute>
+                </xpath>
+                <!--                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">-->
+                <!--                    <attribute name="invisible">for_rent</attribute>-->
+                <!--                    <attribute name="string">Sale Price</attribute>-->
+                <!--                </xpath>-->
+
+                <xpath expr="//page[@name='optional_products']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="replace">
+                    <field name="partner_id" widget="res_partner_many2one"/>
+                    <field name="is_crm" invisible="1"/>
+                </xpath>
+                <xpath expr="//page[@name='customer_signature']" position="after">
+                    <page string="Tenancy Contract Period"  invisible="for_rent != True">
+                        <!--                        <group>-->
+                        <!--                            <group>-->
+                        <!--                                <field name="leased_unit"/>-->
+                        <!--                                <field name="unit_number"/>-->
+                        <!--                                <field name="location"/>-->
+                        <!--                                <field name="land_no"/>-->
+                        <!--                                <field name="tenancy"/>-->
+                        <!--                            </group>-->
+                        <!--                            <group>-->
+                        <!--                                <field name="dm_no"/>-->
+                        <!--                                <field name="premise_no"/>-->
+                        <!--                                <field name="sub_type"/>-->
+                        <!--                                <field name="floor_no"/>-->
+                        <!--                                <field name="unit_size_sqft"/>-->
+                        <!--                                <field name="property_type"/>-->
+                        <!--                                <field name="makani_number"/>-->
+                        <!--                            </group>-->
+                        <!--                        </group>-->
+                        <group name="contract_period" string="Contract Period" col="2">
+                            <field name="start_date" force_save="1"/>
+                            <field name="end_date" force_save="1"/>
+                            <field name="tenancy" readonly="1"/>
+                            <field name="tenancy_state" invisible="0" force_save="1" readonly="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!--        &lt;!&ndash; Inherit Form View to Modify it &ndash;&gt;-->
+        <!--        <record id="sale_installment_inherit_id" model="ir.ui.view">-->
+        <!--            <field name="name">Sale Order Installment</field>-->
+        <!--            <field name="model">sale.order</field>-->
+        <!--            <field name="inherit_id" ref="marquespoint_overall.view_order_form_inherited"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//field[@name='installment_ids']/tree/field[@name='payment_status']" position="after">-->
+        <!--                    <button type="object" string="Create Inv" name="create_inv" class="oe_highlight"/>-->
+        <!--                    <button type="object" string="Create PDC" name="create_pdc" class="oe_highlight"/>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+    </data>
+</odoo>

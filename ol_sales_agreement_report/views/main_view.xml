@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="res_partner_new_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.fields</field>
+            <field name="model">res.partner</field>
+            <field name="priority" eval="4" />
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//h1" position="after">
+                    <h1><field name="name_arabic" placeholder="على سبيل المثال براندوم فريمان"/></h1>
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="is_unit"/>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

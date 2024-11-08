@@ -1,0 +1,323 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="petty_cash_tree_view" model="ir.ui.view">
+        <field name="name">petty.cash.view.tree</field>
+        <field name="model">petty.cash</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="petty_cash_owner_id"/>
+                <field name="limit_number"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="petty_cash_form_view" model="ir.ui.view">
+        <field name="name">petty.cash.view.form</field>
+        <field name="model">petty.cash</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="general_limit_approval_id" invisible="1"/>
+                <field name="special_limit_approval_id" invisible="1"/>
+                <field name="level_of_approval_needed" invisible="1"/>
+                <field name="levels_approved" invisible="1"/>
+                <field name="all_level_approved" invisible="1"/>
+                <field name="l1_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l2_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l3_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l1_sale_approved_id" invisible="1"/>
+                <field name="l2_sale_approved_id" invisible="1"/>
+                <field name="l3_sale_approved_id" invisible="1"/>
+                <field name="show_first" invisible="1"/>
+                <field name="show_second" invisible="1"/>
+                <field name="show_third" invisible="1"/>
+                <field name="is_level_one" invisible="1"/>
+                <field name="is_level_two" invisible="1"/>
+                <field name="is_level_three" invisible="1"/>
+                <field name="is_payment_generated" invisible="1"/>
+                <field name="payment_paid" invisible="1"/>
+
+                <!--                    <field name="general_limit_approval_id"/>-->
+                <!--                    <field name="special_limit_approval_id"/>-->
+                <!--                    <field name="level_of_approval_needed"/>-->
+                <!--                    <field name="levels_approved"/>-->
+                <!--                    <field name="all_level_approved"/>-->
+                <!--                    <field name="l1_sale_approver_ids"/>-->
+                <!--                    <field name="l2_sale_approver_ids"/>-->
+                <!--                    <field name="l3_sale_approver_ids"/>-->
+                <!--                    <field name="l1_sale_approved_id"/>-->
+                <!--                    <field name="l2_sale_approved_id"/>-->
+                <!--                    <field name="l3_sale_approved_id"/>-->
+                <!--                    <field name="show_first"/>-->
+                <!--                    <field name="show_second"/>-->
+                <!--                    <field name="show_third"/>-->
+                <!--                    <field name="is_level_one"/>-->
+                <!--                    <field name="is_level_two"/>-->
+                <!--                    <field name="is_level_three"/>-->
+                <!--                    <field name="is_payment_generated"/>-->
+                <!--                    <field name="payment_paid"/>-->
+
+                <header>
+                    <button name="limit_submit" type="object" string="Submit" state="draft"
+                            class="btn-primary" invisible="state in ['submitted', 'to_approve', 'approved', 'paid']"/>
+                    <button name="limit_generate_payment" type="object" string="Generate Payment"
+                            class="btn-primary"
+                            invisible="(state in ['draft', 'submitted', 'to_approve', 'paid']) or is_payment_generated == True"/>
+                    <button name="approve_first_discount" string="First Approve" type="object" class="oe_highlight"
+                            invisible="show_first == False"/>
+
+                    <button name="approve_second_discount" string="Second Approve" type="object" class="oe_highlight"
+                            invisible="show_second == False"/>
+
+                    <button name="approve_third_discount" string="Third Approve" type="object" class="oe_highlight"
+                            invisible="show_third == False"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-list" name="action_get_vehicle_record">
+                            <field string="Payment" name="payment_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <!--                        <label for="name"/>-->
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="petty_cash_owner_id"/>
+                            <field name="limit_type" class="o_light_label" widget="radio"
+                                   options="{'horizontal': true}"/>
+                            <field name="limit_number"/>
+                            <field name="period_start_date"/>
+                            <field name="period_end_date"/>
+                        </group>
+                        <group>
+                            <field name="request_amount"/>
+                            <field name="petty_cash_journal_id"/>
+                            <field name="petty_cash_destination_journal_id"/>
+                            <field name="date"/>
+                            <field name="payment_type" widget="radio"/>
+                            <field name="balance_limit" readonly="0"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Approvers">
+                            <group>
+                                <field name="l1_sale_approved_id" readonly="1"
+                                       invisible="l1_sale_approved_id == False"/>
+                                <field name="l2_sale_approved_id" readonly="1"
+                                       invisible="l2_sale_approved_id == False"/>
+                                <field name="l3_sale_approved_id" readonly="1"
+                                       invisible="l3_sale_approved_id == False"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="petty_cash_expense_tree_view" model="ir.ui.view">
+        <field name="name">petty.cash.expense.view.tree</field>
+        <field name="model">petty.cash.expense</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="request_owner_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="petty_cash_expense_form_view" model="ir.ui.view">
+        <field name="name">petty.cash.expense.view.form</field>
+        <field name="model">petty.cash.expense</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="general_expense_approval_id" invisible="1"/>
+                <field name="special_expense_approval_id" invisible="1"/>
+                <field name="level_of_approval_needed" invisible="1"/>
+                <field name="levels_approved" invisible="1"/>
+                <field name="all_level_approved" invisible="1"/>
+                <field name="l1_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l2_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l3_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l1_sale_approved_id" invisible="1"/>
+                <field name="l2_sale_approved_id" invisible="1"/>
+                <field name="l3_sale_approved_id" invisible="1"/>
+                <field name="show_first" invisible="1"/>
+                <field name="show_second" invisible="1"/>
+                <field name="show_third" invisible="1"/>
+                <field name="is_level_one" invisible="1"/>
+                <field name="is_level_two" invisible="1"/>
+                <field name="is_level_three" invisible="1"/>
+                <field name="is_move_generated" invisible="1"/>
+                <!--                    <field name="payment_paid" invisible="1"/>-->
+                <header>
+                    <button name="limit_submit" type="object" string="Submit" state="draft"
+                            class="btn-primary" invisible="state in ['submitted', 'to_approve', 'approved', 'paid']"/>
+                    <button name="expense_generate_bill" type="object" string="Generate Bill"
+                            class="btn-primary"
+                            invisible="(state in ['draft', 'submitted', 'to_approve', 'paid']) or (is_move_generated == True)"/>
+                    <button name="approve_first_discount" string="First Approve" type="object" class="oe_highlight"
+                            invisible="show_first == False"/>
+
+                    <button name="approve_second_discount" string="Second Approve" type="object" class="oe_highlight"
+                            invisible="show_second == False"/>
+
+                    <button name="approve_third_discount" string="Third Approve" type="object" class="oe_highlight"
+                            invisible="show_third == False"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-truck" name="action_get_bill_record">
+                            <field string="Bill" name="move_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" icon="fa-dollar" name="action_get_payment_record">
+                            <field string="Payment" name="payment_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <!--                        <label for="name"/>-->
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="request_owner_id"/>
+                            <field name="limit_type" class="o_light_label" widget="radio"
+                                   options="{'horizontal': true}"/>
+
+                            <!--                            <field name="limit_type" class="o_light_label" widget="radio" options="{'horizontal': true}"/>-->
+                            <!--                            <field name="limit_number"/>-->
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="payment_type" widget="radio"/>
+                            <field name="account_id" invisible="1"/>
+                            <field name="journal_id" readonly="0" invisible="state != 'approved' or payment_type != '0'"/>
+                            <!--                                <field name="balance_amount"/>-->
+                            <!--                            <field name="period_start_date"/>-->
+                            <!--                            <field name="period_end_date"/>-->
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Expense Lines">
+                            <field name="petty_cash_expense_ids">
+                                <tree editable="bottom">
+                                    <field name="product"/>
+                                    <field name="name"/>
+                                    <field name="account"/>
+                                    <!--                                    <field name="analytic_account_json_id" widget="analytic_distribution"/>-->
+                                    <!--                                    <field name="analytic_account_id"/>-->
+                                    <!--                                    <field name="analytic_account_ids" widget="analytic_distribution"/>-->
+                                    <field name="analytic_distribution" widget="analytic_distribution"/>
+                                    <field name="taxes"/>
+                                    <!--                                    <field name="qty"/>-->
+                                    <field name="amount"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                            <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                <group class="oe_subtotal_footer" colspan="2" name="expense_total">
+                                    <field name="balance_amount" colspan="2" readonly="1"/>
+                                    <field name="expense_amount" colspan="2" readonly="1"/>
+                                    <field name="remaining_amount" colspan="2" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="petty_cash_balances_tree_view" model="ir.ui.view">
+        <field name="name">petty.cash.balances.tree</field>
+        <field name="model">petty.cash.balances</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="owner_id"/>
+                <field name="limit_type"/>
+                <field name="due_date"/>
+                <field name="balance_amount"/>
+                <button name="expense" string="Expense" type="object" class="oe_highlight"/>
+                <button name="limit" string="Limit" type="object" class="oe_highlight"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="petty_cash_balances_form_view" model="ir.ui.view">
+        <field name="name">petty.cash.balances.view.form</field>
+        <field name="model">petty.cash.balances</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <!--                        <div class="oe_title">-->
+                    <!--&lt;!&ndash;                        <label for="name"/>&ndash;&gt;-->
+                    <!--                        <h1>-->
+                    <!--                            <field name="name"/>-->
+                    <!--                        </h1>-->
+                    <!--                        </div>-->
+                    <group>
+                        <group>
+                            <field name="owner_id"/>
+                            <field name="limit_type"/>
+                            <field name="due_date"/>
+                            <field name="balance_amount"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="followup_level" string="Follow Up Level">
+                            <field name="followup_line_ids" widget="one2many" nolabel="1">
+                                <tree name="followup_line_tree" editable="bottom" create="false" delete="false" string="Follow Up Level">
+                                    <field name="name"/>
+                                    <field name="delay"/>
+                                    <field name="activity_type_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_users_form_inherited_journal" model="ir.ui.view">
+        <field name="name">users.inherited.journal.petty.cash</field>
+        <field name="inherit_id" ref="base.view_users_simple_form"/>
+        <field name="model">res.users</field>
+        <field type="xml" name="arch">
+            <xpath expr="//field[@name='mobile']" position="after">
+                <field name="user_journal_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_account_move_form_inherited_petty_cash" model="ir.ui.view">
+        <field name="name">account.inherited.petty.cash.expense</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="model">account.move</field>
+        <field type="xml" name="arch">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="petty_cash_expense_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

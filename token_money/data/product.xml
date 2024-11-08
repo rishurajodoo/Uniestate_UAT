@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="booking_charges_product" model="product.product">
+        <field name="name">Booking Charges</field>
+        <field name="sale_ok">True</field>
+        <field name="purchase_ok">True</field>
+        <field name="is_unit">True</field>
+        <field name="detailed_type">product</field>
+        <field name="list_price">1.0</field>
+<!--        <field name="taxes_id">False</field>-->
+        <field name="standard_price">1.0</field>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

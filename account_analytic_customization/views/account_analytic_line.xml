@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_analytic_line_form_property" model="ir.ui.view">
+        <field name="name">account.analytic.line.form.property</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="account.view_account_analytic_line_form_inherit_account"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom_id']" position="after">
+                <field name="building"/>
+                <field name="floor"/>
+                <field name="unit" widget="many2many_tags"/>
+            </xpath>
+            <xpath expr="//field[@name='account_id']" position="after">
+                <field name="analytic_account_id"/>
+                <field name="analytic_plan_account_id"/>
+            </xpath>
+        </field>
+    </record>
+
+     <record id="view_account_analytic_line_tree_property" model="ir.ui.view">
+        <field name="name">account.analytic.line.tree.property</field>
+        <field name="model">account.analytic.line</field>
+         <field name="inherit_id" ref="account.view_account_analytic_line_tree_inherit_account"/>
+        <field name="arch" type="xml">
+           <data>
+            <xpath expr="//field[@name='account_id']" position="after">
+                <field name="building"/>
+                <field name="floor"/>
+                <field name="unit" widget="many2many_tags"/>
+            </xpath>
+           </data>
+        </field>
+     </record>
+
+    <record id="view_account_analytic_line_filter_inherit_account_property" model="ir.ui.view">
+        <field name="name">account.analytic.line.select.inherit.account.property</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="account.view_account_analytic_line_filter_inherit_account"/>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="unit" widget="many2many_tags"/>
+                <field name="floor"/>
+                <field name="building"/>
+                <field name="analytic_account_id"/>
+            </xpath>
+             <xpath expr="//group[@name='groupby']" position="inside">
+                <filter string="Analytic Account" name="group_by_analytic_account_id" domain="[]" context="{'group_by': 'analytic_account_id'}"/>
+                 <filter string="Unit" name="group_by_unit" domain="[]" context="{'group_by': 'unit'}"/>
+                <filter string="Floor" name="group_by_floor" domain="[]" context="{'group_by': 'floor'}"/>
+                <filter string="Building" name="group_by_building" domain="[]" context="{'group_by': 'building'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,29 @@
+<odoo>
+
+<!--    <report id="pdc_payment_report"-->
+<!--            model="pdc.payment"-->
+<!--            string="Partner Ledger Report"-->
+<!--            report_type="qweb-pdf"-->
+<!--            name="pdc_payments.pdc_payment_template"-->
+<!--            file="pdc_payments.pdc_payment_template"-->
+<!--    />-->
+
+<!--    <report id="pdc_payment_report_id"-->
+<!--            model="pdc.payment"-->
+<!--            report_type="qweb-pdf"-->
+<!--            string="PDC Payment Report"-->
+<!--            name="pdc_payments.pdc_payment_template"-->
+<!--            file="pdc_payments.pdc_payment_template"-->
+<!--    />-->
+
+    <record id="pdc_payment_report_id" model="ir.actions.report">
+        <field name="name">Sale Quote Report</field>
+        <field name="model">pdc.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mdc_payments.pdc_payment_template</field>
+        <field name="report_file">pdc_payments.pdc_payment_template</field>
+        <field name="binding_model_id" ref="model_pdc_payment"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

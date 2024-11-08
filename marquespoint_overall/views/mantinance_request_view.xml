@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+        <record id="maintenance_request_form_view_inherited" model="ir.ui.view">
+            <field name="name">maintenance.request.form.inherited</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+            <field name="arch" type="xml">
+                <field name="stage_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <xpath expr="//header" position="inside">
+
+                    <button type="object" name="action_manager_approval" string="Manager Approval" class="oe_highlight"
+                            invisible="stage not in ['new_req']"/>
+                    <!-- <button groups="marquespoint_overall.customer_approval_for_maintenance_req" -->
+                            <!-- name="action_customer_acceptance" -->
+                            <!-- invisible="stage not in ['in_progress']" -->
+                            <!-- string="Customer Acceptance" type="object"/> -->
+                    <field name="stage" widget="statusbar" statusbar_visible="new_req,in_progress,repaired,scrap"
+                           readonly="1"/>
+                    <!--                    <button type="object" name="action_approve" string="Approve" class="oe_highlight"-->
+                    <!--                            groups="marquespoint_overall.group_differed_approval" invisible="approve_stage not in ['sent']"/>-->
+                    <!--                    <button type="object" name="action_sent_approve" string="Sent for Approval" class="oe_highlight"-->
+                    <!--                            invisible="approve_stage in ['sent', 'approved'] or is_closed != True"/>-->
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Approval Details" name="approval_details">
+                        <group>
+                            <field name="approve_stage" widget="badge"/>
+                            <field name="approve_by"/>
+                            <field name="approve_date"/>
+                            <field name="is_closed" invisible="1"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="maintenance_team_tree_view_inherited" model="ir.ui.view">
+            <field name="name">maintenance.team.tree.inherited</field>
+            <field name="model">maintenance.team</field>
+            <field name="inherit_id" ref="maintenance.maintenance_team_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="manager_id"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

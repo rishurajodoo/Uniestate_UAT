@@ -1,0 +1,545 @@
+<odoo>
+    <data>
+        <template id="sale_marquis">
+            <t t-call="web.html_container">
+                <t t-call="property_custom_reports.alsharaf_property_letterhead"/>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            <h1 class="text-center">Property Rental Quotation</h1>
+                            <br/>
+                            <table class="table-borderless" width="40%">
+                                <tr>
+                                    <th>
+                                        Reference No:
+                                    </th>
+                                    <td>
+                                        <span t-field="o.name"/>
+                                    </td>
+                                    <!--                                    <th>-->
+                                    <!--                                        Date:-->
+                                    <!--                                    </th>-->
+                                    <!--                                    <td>-->
+                                    <!--                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <th>-->
+                                    <!--                                        Trade Licence:-->
+                                    <!--                                    </th>-->
+                                    <!--                                    <td>-->
+                                    <!--                                        <span t-field="o.company_id.company_registry"/>-->
+                                    <!--                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <th>
+                                        Date:
+                                    </th>
+                                    <td>
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+                                    </td>
+                                    <!--                                    <th>-->
+                                    <!--                                        TRN:-->
+                                    <!--                                    </th>-->
+                                    <!--                                    <td>-->
+                                    <!--                                        <span t-field="o.company_id.vat"/>-->
+                                    <!--                                    </td>-->
+                                </tr>
+                            </table>
+                            <br/>
+                            <span>For
+                                <t t-if="o.partner_id.title">
+                                    <span t-field="o.partner_id.title"/>
+                                </t>
+                                <t t-else="">
+
+                                </t>
+                                <t t-if="o.partner_id.name">
+                                    <span t-esc="o.partner_id.name"/>
+                                </t>
+                                <t t-else="">
+
+                                </t>
+
+                                <!--                                Dear Customer,-->
+                                <br/>
+                                Considering the points we discussed, I believe the below listed projects will cater to
+                                your requirements.
+                            </span>
+                            <br/>
+                            <!--                            <t t-esc="o.more_is_unit"/>-->
+                            <t t-if="o.more_is_unit == 'False'">
+                                <table class="table table-sm"
+                                       style="width: 100%; border:1px solid black; border-collapse: collapse;">
+                                    <tr>
+                                        <th colspan="2" style='border:1px solid black; text-align:center;'>
+                                            <i>Building</i>
+                                        </th>
+                                        <th colspan="2" style='border:1px solid black; text-align:center;'>
+                                            <i>Unit Number</i>
+                                        </th>
+                                        <th colspan="3" style='border:1px solid black; text-align:center;'>
+                                            <i>Rental contract duration</i>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style='border:1px solid black; text-align:center;'>
+                                            <t t-if="o.building">
+                                                <span t-field="o.building.name"/>
+                                            </t>
+                                            <t t-else="">
+                                                -
+                                            </t>
+                                        </td>
+                                        <td colspan="2" style='border:1px solid black; text-align:center;'>
+                                            <span t-esc="o.get_property_number()"/>
+                                        </td>
+                                        <td colspan="3" style='border:1px solid black; text-align:center;'>
+                                            <t t-if="o.start_date or o.end_date">
+                                                <span t-esc="o.start_date.strftime('%d/%m/%Y')"/>
+                                                -
+                                                <span t-esc="o.end_date.strftime('%d/%m/%Y')"/>
+                                            </t>
+                                            <t t-else="">
+                                                -
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style='border:1px solid black; text-align:center;'>Type</th>
+                                        <th style='border:1px solid black; text-align:center;'>Sub Type</th>
+                                        <th style='border:1px solid black; text-align:center;'>Unit Model</th>
+                                        <!--                                    <th style='border:1px solid black; text-align:center;'>Property Status</th>-->
+                                        <th style='border:1px solid black; text-align:center;'>Bath Rooms</th>
+                                        <th style='border:1px solid black; text-align:center;'>Total Area (SQ. FT)</th>
+                                        <th style='border:1px solid black; text-align:center;'>Rent Price (AED)</th>
+                                    </tr>
+                                    <tr>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <t t-if="o.unit.unit_type_id">
+                                                <span t-field="o.unit.unit_type_id.name"/>
+                                            </t>
+                                            <t t-else="">
+                                                -
+                                            </t>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <t t-if="o.unit.sub_unit_id">
+                                                <span t-field="o.unit.sub_unit_id.name"/>
+                                            </t>
+                                            <t t-else="">
+                                                -
+                                            </t>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <!--                                        <span t-field="o.unit.bedroom"/>-->
+                                            -
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <t t-if="o.unit.washroom">
+                                                <span t-field="o.unit.washroom"/>
+                                            </t>
+                                            <t t-else="">
+                                                -
+                                            </t>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <span t-field="o.unit.property_size"
+                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <span t-field="o.unit.rent_price"
+                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <th style='border:1px solid black; text-align:center;'>Parking</th>
+                                        <th style='border:1px solid black; text-align:center;'>Amenities</th>
+                                        <th style='border:1px solid black; text-align:center;'>Furnished</th>
+                                        <th style='border:1px solid black; text-align:center;'>Security
+                                            Deposit
+                                        </th>
+                                        <th style='border:1px solid black; text-align:center;'>Security
+                                            Mode
+                                        </th>
+                                        <th style='border:1px solid black; text-align:center;'>Maintenance</th>
+                                    </tr>
+                                    <tr>
+
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <t t-if="o.unit.is_parking">
+                                                <span t-field="o.unit.is_parking"/>
+                                            </t>
+                                            <t t-else="">
+                                                -
+                                            </t>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <t t-if="o.unit.amenities_id">
+                                                <span t-field="o.unit.amenities_id.name"/>
+                                            </t>
+                                            <t t-else="">
+                                                -
+                                            </t>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <span t-field="o.unit.furnishing"/>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <t t-if="o.get_cheque_deposit()">
+                                                <span t-esc="o.get_cheque_deposit()"
+                                                      t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                            </t>
+                                            <t t-else="">
+                                                0.00
+                                            </t>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <t t-if="o.unit.security_mode">
+                                                <span t-field="o.unit.security_mode"/>
+                                            </t>
+                                            <t t-else="">
+                                                -
+                                            </t>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <t t-if="o.unit.is_maintenance">
+                                                <span t-field="o.unit.is_maintenance"/>
+                                            </t>
+                                            <t t-else="">
+                                                -
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <!--                                <tr>-->
+                                    <!--                                    <th style='border:1px solid black; text-align:center;' colspan="2">Security-->
+                                    <!--                                        Deposit-->
+                                    <!--                                    </th>-->
+                                    <!--                                    <th style='border:1px solid black; text-align:center;' colspan="2">Security Mode-->
+                                    <!--                                    </th>-->
+                                    <!--                                    <th style='border:1px solid black; text-align:center;'>Maintenance</th>-->
+                                    <!--                                    <th style='border:1px solid black; text-align:center;'></th>-->
+                                    <!--                                </tr>-->
+                                    <!--                                <tr>-->
+                                    <!--                                    <td style='border:1px solid black; text-align:center;' colspan="2">-->
+                                    <!--                                        <t t-if="o.get_cheque_deposit()">-->
+                                    <!--                                            <span t-esc="o.get_cheque_deposit()"-->
+                                    <!--                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>-->
+                                    <!--                                        </t>-->
+                                    <!--                                        <t t-else="">-->
+                                    <!--                                            - -->
+                                    <!--                                        </t>-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td style='border:1px solid black; text-align:center;' colspan="2">-->
+                                    <!--                                        <t t-if="o.unit.security_mode">-->
+                                    <!--                                            <span t-field="o.unit.security_mode"/>-->
+                                    <!--                                        </t>-->
+                                    <!--                                        <t t-else="">-->
+                                    <!--                                            - -->
+                                    <!--                                        </t>-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td style='border:1px solid black; text-align:center;'>-->
+                                    <!--                                        <t t-if="o.unit.is_maintenance">-->
+                                    <!--                                            <span t-field="o.unit.is_maintenance"/>-->
+                                    <!--                                        </t>-->
+                                    <!--                                        <t t-else="">-->
+                                    <!--                                            - -->
+                                    <!--                                        </t>-->
+                                    <!--                                    </td>-->
+                                    <!--                                    <td style='border:1px solid black; text-align:center;'/>-->
+                                    <!--                                </tr>-->
+                                </table>
+
+                            </t>
+                            <t t-else="">
+                                <br/>
+                                <center>
+                                    <table>
+                                        <tr>
+                                            <td  style='border:1px solid black; text-align:center;width:45%;'>
+                                                <b>Rental contract duration</b>
+                                            </td>
+<!--                                            <td style='border:1px solid black; text-align:center;width:30%;'>-->
+<!--                                                <b>Security Deposit</b>-->
+<!--                                            </td>-->
+<!--                                            <td style='border:1px solid black; text-align:center;width:25%;'>-->
+<!--                                                <b><![CDATA[&nbsp;]]>Security Mode<![CDATA[&nbsp;]]></b>-->
+<!--                                            </td>-->
+                                        </tr>
+                                        <tr>
+                                            <td style='border:1px solid black; text-align:center;'>
+                                                <t t-if="o.start_date or o.end_date">
+                                                    <span t-esc="o.start_date.strftime('%d/%m/%Y')"/>
+                                                    -
+                                                    <span t-esc="o.end_date.strftime('%d/%m/%Y')"/>
+                                                </t>
+                                                <t t-else="">
+                                                    -
+                                                </t>
+                                            </td>
+<!--                                            <td style='border:1px solid black; text-align:center;'>-->
+<!--                                                <t t-if="o.get_cheque_deposit()">-->
+<!--                                                    <span t-esc="o.get_cheque_deposit()"-->
+<!--                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>-->
+<!--                                                </t>-->
+<!--                                                <t t-else="">-->
+<!--                                                    0.00-->
+<!--                                                </t>-->
+<!--                                            </td>-->
+<!--                                            <td style='border:1px solid black; text-align:center;'>-->
+<!--                                                &lt;!&ndash;                                            <t t-if="o.get_cheque_deposit_mode()">&ndash;&gt;-->
+<!--                                                <span t-esc="o.get_cheque_deposit_mode()"/>-->
+<!--                                                &lt;!&ndash;                                            </t>&ndash;&gt;-->
+
+<!--                                            </td>-->
+                                        </tr>
+                                    </table>
+                                </center>
+                                <br/>
+                                <table
+                                        style="width: 100%; border:1px solid black; ">
+                                    <tr>
+                                        <th style='border:1px solid black; text-align:center;'>
+                                            Name
+                                        </th>
+                                        <th style='border:1px solid black; text-align:center;'>
+                                            Building
+                                        </th>
+                                        <th style='border:1px solid black; text-align:center;'>
+                                            Unit Type
+                                        </th>
+                                        <th style='border:1px solid black; text-align:center;'>
+                                            Sub Unit
+                                        </th>
+                                        <th style='border:1px solid black; text-align:center;'>
+                                            SQ FT
+                                        </th>
+                                        <th style='border:1px solid black; text-align:center;'>
+                                            Rent Price
+                                        </th>
+                                        <th style='border:1px solid black; text-align:center;'>
+                                            Parking
+                                        </th>
+                                        <th style='border:1px solid black; text-align:center;'>
+                                            Furnished
+                                        </th>
+                                    </tr>
+                                    <t t-foreach="o.order_line" t-as="line">
+                                        <t t-if="line.is_ejari">
+                                            <tr>
+                                                <td style='border:1px solid black; text-align:center;'>
+                                                    Unit<![CDATA[&nbsp;]]>
+                                                    <t t-esc="line.get_unit_name()"/>
+                                                </td>
+                                                <td style='border:1px solid black; text-align:center;'>
+                                                    <t t-esc="line.product_id.building.name"/>
+                                                </td>
+                                                <td style='border:1px solid black; text-align:center;'>
+                                                    <t t-esc="line.product_id.unit_type_id.name"/>
+                                                </td>
+                                                <td style='border:1px solid black; text-align:center;'>
+                                                    <t t-esc="line.product_id.sub_unit_id.name"/>
+                                                </td>
+                                                <td style='border:1px solid black; text-align:center;'>
+                                                    <t t-esc="line.product_id.property_size"/>
+                                                </td>
+                                                <td style='border:1px solid black; text-align:center;'>
+                                                    <t t-esc="line.product_id.rent_price"/>
+                                                </td>
+                                                <td style='border:1px solid black; text-align:center;'>
+                                                    <t t-esc="line.is_parking()"/>
+                                                </td>
+                                                <td style='border:1px solid black; text-align:center;'>
+                                                    <t t-esc="line.is_furnished()"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+                                    </t>
+
+                                </table>
+                            </t>
+                            <br/>
+                            <br/>
+                            
+                            <h3 class="text-center">Payment Schedule of Tenancy Contract</h3>
+                            <t t-set="grand_total" t-value="0"/>
+                            <table class="table table-sm"
+                                   style="width: 100%; border:1px solid black; border-collapse: collapse;">
+                                <t t-set="sr_no" t-value="0"/>
+                                <tr style="font-size: 13px;">
+                                    <th style='border:1px solid black; text-align:center;' width="8%">Sr. No</th>
+                                    <th style='border:1px solid black; text-align:center;'>Payment Type</th>
+                                    <!--                                    <th style='border:1px solid black; text-align:center;'>Percentage (%)</th>-->
+                                                                        <th style='border:1px solid black; text-align:center;'>Mode</th>
+
+                                    <th style='border:1px solid black; text-align:center;'>Date</th>
+                                    <th style='border:1px solid black; text-align:right;'>Amount (<span
+                                            t-esc="res_company.currency_id.name"/>)
+                                    </th>
+                                    <th style='border:1px solid black; text-align:center;'>Vat Rate (%)</th>
+                                    <th style='border:1px solid black; text-align:center;'>Vat Amount (<span
+                                            t-esc="res_company.currency_id.name"/>)
+                                    </th>
+                                    <!-- <th style='border:1px solid black; text-align:right;'>Amount (<span
+                                            t-esc="res_company.currency_id.name"/>)
+                                    </th> -->
+                                    <th style='border:1px solid black; text-align:right;'>Amount Total</th>
+                                </tr>
+
+                                <t t-foreach="data_list" t-as="data_dict">
+                                    <tr style="font-size: 13px;">
+                                        <t t-set="sr_no" t-value="sr_no + 1"/>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <span t-esc="sr_no"/>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <!-- <span t-esc="data_dict.milestone_id"/> -->
+                                            <t t-esc="data_dict['milestone']"/>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <!-- <span t-esc="data_dict.milestone_id"/> -->
+                                            <t t-esc="data_dict['mode']"/>
+                                        </td>
+                                        <!--                                        <td style='border:1px solid black; text-align:center;'>-->
+                                        <!--                                            <span t-esc="plan.percentage"-->
+                                        <!--                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>-->
+                                        <!--                                            %-->
+                                        <!--                                        </td>-->
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <!--                                            <t t-if="o.get_milestone_date(plan.milestone_id)">-->
+                                            <!--                                                <span t-esc="o.get_milestone_date(plan.milestone_id).strftime('%d/%m/%Y')"/>-->
+                                            <!--                                            </t>-->
+                                            <t t-if="data_dict['date']">
+                                                <t t-esc="data_dict['date']"/>
+                                            </t>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+
+                                            <span t-esc="'{:,}'.format(data_dict['amount'])"/>
+                                        </td>
+                                        <td style='border:1px solid black; text-align:center;'>
+                                            <t t-esc="data_dict['tax']"/>
+                                        </td>
+
+                                        <td style='border:1px solid black; text-align:center;'>
+
+                                            <span t-esc="'{:,}'.format(data_dict['tax_amount'])"/>
+                                        </td>
+                                        <!-- <td style='border:1px solid black; text-align:center;'>
+                                            <span t-esc="plan.amount"/>
+                                        </td> -->
+                                        <!--                                        <td style='border:1px solid black; text-align:right;'>-->
+                                        <!--                                            <t t-set="amo_total" t-value="plan.amount + plan.tax_amount"/>-->
+                                        <!--                                            <span t-esc="amo_total"-->
+                                        <!--                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>-->
+
+                                        <!--                                            <t t-set="grand_total" t-value="grand_total + amo_total"/>-->
+                                        <!--                                        </td>-->
+                                        <td style='border:1px solid black; text-align:right;'>
+                                            <!-- <t t-set="amo_total" t-value="plan.amount + plan.tax_amount"/> -->
+                                            <span t-esc="'{:,}'.format(data_dict['total'])"/>
+
+                                            <t t-set="grand_total" t-value="grand_total + float(data_dict['total'])"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr style="font-size: 13px;">
+                                    <th style='text-align:center;' width="8%"><![CDATA[&nbsp;]]></th>
+                                    <th style='text-align:center;'>
+                                        Total
+                                    </th>
+                                    <th style='text-align:center;'>
+                                        <!--                                        <span t-esc="o.get_total_rent_percentage()"-->
+                                        <!--                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>-->
+                                        <!--                                        %-->
+                                    </th>
+                                    <th style='text-align:center;'><![CDATA[&nbsp;]]></th>
+                                    <th style='text-align:center;'></th>
+                                    <th style='text-align:center;'></th>
+                                                                        <th style='text-align:center;'></th>
+
+                                    <th style='text-align:right;'>
+                                        <span t-esc="res_company.currency_id.name"/>&#160;<span t-esc="grand_total"
+                                                                                                t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                    </th>
+                                </tr>
+                            </table>
+<!--                            <ul style="font-size: 12px;">-->
+<!--                                <li>Ejari 250-->
+<!--                                    <span t-esc="res_company.currency_id.name"/>-->
+<!--                                    Cash-->
+<!--                                </li>-->
+<!--                                <li>Prices and availability are subject to change as per demand frequency,-->
+<!--                                </li>-->
+<!--                                <li>Add terms and conditions as per-->
+<!--                                    <span t-esc="res_company.name"/>-->
+<!--                                    compliance.-->
+<!--                                </li>-->
+<!--                            </ul>-->
+                            <div style="font-size: 12px !important;">
+                                <t t-if="o.note">
+                                    <span t-field="o.note" style="font-size: 12px !important;"/>
+                                </t>
+                            </div>
+                            <p style="page-break-before:always;"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="alsharaf_property_letterhead">
+            <t t-set="company" t-value="user.company_id"/>
+            <div class="header border-bottom" width="100%">
+                <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                    <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                        <tr>
+                            <td style="padding-top:40px; text-align:left;">
+                                <strong>
+                                    <h2 t-esc="res_company.name"/>
+                                </strong>
+                            </td>
+                            <td style="padding-top:10px;">
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                     style="max-height: 80px;" alt="Logo"/>
+                            </td>
+                            <td style="padding-top:40px; text-align:right;">
+                                <strong>
+                                    <h2 t-esc="res_company.name_arabic"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+                </table>
+            </div>
+            <div class="footer border-top border-bottom" width="100%" style="font-size:12px;">
+                <table class="table table-sm table-borderless text-center" width="100%"
+                       style="padding:5px !important; margin:5px !important;">
+                    <tr>
+                        <td style="text-align:left;">
+                            <img src="/marquespoint_overall/static/description/location.png"
+                                 style="height:20px; width:20px; margin-right:10px;"/>
+                            <!--                                <span>Office no. 101 &amp; 102, The V Building, Al Barsha South Arjan, Dubai, UAE</span>-->
+                            <span>Uniestate Building, Oman Street, Ras Al Khaimah</span>
+                        </td>
+                        <td style="text-align:center;">
+                            <img src="/marquespoint_overall/static/description/phone.png"
+                                 style="height:20px; width:20px; margin-right:10px;"/>
+                                <span>800-776-776</span>
+                        </td>
+                        <td style="text-align:right;">
+                            <img src="/marquespoint_overall/static/description/global.png"
+                                 style="height:20px; width:20px; margin-right:10px;"/>
+                                <span>http://www.uniestate.com</span>
+                        </td>
+                    </tr>
+                </table>
+                <!--                <span>-->
+                <!--                    Office no. 101 &amp; 102, The V Building, Al Barsha South Arjan, Dubai, UAE | Tel. 04 240 1014 |-->
+                <!--                    PO Box 95447-->
+                <!--                </span>-->
+            </div>
+        </template>
+    </data>
+</odoo>

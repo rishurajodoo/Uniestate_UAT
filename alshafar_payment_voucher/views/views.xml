@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="alshafar_payment_voucher.list">
+      <field name="name">alshafar_payment_voucher list</field>
+      <field name="model">alshafar_payment_voucher.alshafar_payment_voucher</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="alshafar_payment_voucher.action_window">
+      <field name="name">alshafar_payment_voucher window</field>
+      <field name="res_model">alshafar_payment_voucher.alshafar_payment_voucher</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="alshafar_payment_voucher.action_server">
+      <field name="name">alshafar_payment_voucher server</field>
+      <field name="model_id" ref="model_alshafar_payment_voucher_alshafar_payment_voucher"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="alshafar_payment_voucher" id="alshafar_payment_voucher.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="alshafar_payment_voucher.menu_1" parent="alshafar_payment_voucher.menu_root"/>
+    <menuitem name="Menu 2" id="alshafar_payment_voucher.menu_2" parent="alshafar_payment_voucher.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="alshafar_payment_voucher.menu_1_list" parent="alshafar_payment_voucher.menu_1"
+              action="alshafar_payment_voucher.action_window"/>
+    <menuitem name="Server to list" id="alshafar_payment_voucher" parent="alshafar_payment_voucher.menu_2"
+              action="alshafar_payment_voucher.action_server"/>
+-->
+  </data>
+</odoo>

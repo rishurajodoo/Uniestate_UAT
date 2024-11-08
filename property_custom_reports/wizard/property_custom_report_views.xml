@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="property_custom_report_wizard_form_id" model="ir.ui.view">
+            <field name="name">Property Report</field>
+            <field name="model">property.custom.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="building_ids" widget="many2many_tags"/>
+                                <field name="for_rent"/>
+                                <field name="for_sale"/>
+                            </group>
+                            <group>
+                                <field name="state"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <footer>
+                        <button type="object" string="Print XLSX" name="property_custom_report_excel"
+                                class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="property_custom_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">Property Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.custom.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="property_custom_report_menu_item" name="Property Report"
+                  parent="ol_property_custom.property_menu_act"
+                  sequence="10" action="property_custom_report_wizard_action"/>
+
+    </data>
+</odoo>

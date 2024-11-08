@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="create_building_wizard_id" model="ir.ui.view">
+            <field name="name">Create Building Wizard</field>
+            <field name="model">create.building.wizard</field>
+            <field name="inherit_id" ref="ol_property_custom.create_building_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <notebook>
+                        <page string="Building Detail">
+                            <field name="building_detail_id">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="building_type_id"/>
+                                    <field name="plot_no"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

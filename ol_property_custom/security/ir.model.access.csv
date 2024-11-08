@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_property_building,access.property.building,model_property_building,,1,1,1,1
+access_property_floor,access.property.floor,model_property_floor,,1,1,1,1
+access_post_date_checks,access.post.date.checks,model_post_date_checks,,1,1,1,1
+access_post_date_checks,access.post.date.checks,model_post_date_checks,,1,1,1,1
+access_create_building_wizard,access.create.building.wizard,model_create_building_wizard,,1,1,1,1
+access_create_floor_wizard,access.create.floor.wizard,model_create_floor_wizard,,1,1,1,1
+access_create_units_wizard,access.create.units.wizard,model_create_units_wizard,,1,1,1,1
+access_other_purchaser_company,other_purchaser_company,model_purchaser_company,base.group_user,1,1,1,1
+access_floor_name,floor.name,model_floor_name,,1,1,1,1
+access_invoice_date_wizard,access.invoice.date.wizard,model_invoice_date_wizard,,1,1,1,1

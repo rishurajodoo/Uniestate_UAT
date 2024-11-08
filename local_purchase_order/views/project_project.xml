@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="edit_project_document_form_inherit_unit" model="ir.ui.view">
+        <field name="name">project.project.form.inherit.unit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_start']" position="after">
+                <field name="location"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,202 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="product_variants_form_inherit_id" model="ir.ui.view">
+            <field name="name">Product Variants Form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="ol_property_custom.product_normal_form_view_inherite"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='carpet_area']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='sale_ok']" position="after">
+                    <field name="for_rent" invisible="True"/>
+                    <field name="for_sale" invisible="True"/>
+                </xpath>
+                <xpath expr="//field[@name='category']" position="replace">
+                    <field name="unit_type_id"/>
+                    <field name="sub_unit_id"/>
+                </xpath>
+                <xpath expr="//field[@name='build_up_area']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='property_price']" position="replace">
+                    <field name="property_price" string="Sale Price"
+                           invisible="(for_rent == True or for_sale == False) or sale_ok == False"
+                           />
+                </xpath>
+                <xpath expr="//field[@name='property_price']" position="after">
+                    <field name="rent_price"
+                           invisible="for_sale == True"
+                          />
+                </xpath>
+                <xpath expr="//field[@name='bedroom']" position="after">
+                    <field name="property_size"/>
+                    <field name="makani_no"/>
+                    <field name="premise_no"/>
+                    <field name="unit_location"/>
+                    <field name="no_of_hall"/>
+                    <field name="amenities_id"/>
+                    <field name="is_maintenance"/>
+                    <field name="is_parking"/>
+                    <field name="security_mode"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="product_form_inherit_id" model="ir.ui.view">
+            <field name="name">Product Form Inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button name="create_deferred"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                            string="Deferred Revenues" invisible="for_rent != True"/>
+                </xpath>
+
+                <label for="sale_ok" position="after">
+                    <div>
+                        <field name="for_sale"/>
+                        <label for="for_sale"/>
+                    </div>
+                </label>
+                <label for="sale_ok" position="after">
+                    <div>
+                        <field name="for_rent"/>
+                        <label for="for_rent"/>
+                    </div>
+                </label>
+                <xpath expr="//header/field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="available,reserved,booked,sold"
+                           invisible="for_rent != True"
+                          />
+                    <field name="state" widget="statusbar" statusbar_visible="available,reserved,rented"
+                            invisible="for_rent != True"
+                          />
+                </xpath>
+<!--                <xpath expr="//page[@name='general_information']" position="after">-->
+<!--                    <page string="Plans and Photos">-->
+<!--                        <notebook>-->
+<!--                            <page string="Floor Plans" name="floor_plans">-->
+<!--                                <field name="floor_plans_ids">-->
+<!--                                    <tree editable="bottom">-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="photos"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                            </page>-->
+<!--                            <page string="Floor Photos" name="floor_images">-->
+<!--                                <field name="floor_images_ids">-->
+<!--                                    <tree editable="bottom">-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="photo"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+<!--                            </page>-->
+<!--                            <page string="Cover Photos" name="floor_images">-->
+<!--                                <field name="cover_photo" widget="image"/>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
+<!--                    </page>-->
+<!--                </xpath>-->
+
+            </field>
+        </record>
+        <record id="product.product_normal_action_sell" model="ir.actions.act_window">
+            <field name="context">{}</field>
+        </record>
+
+
+        <record id="product_tree_inherit_id" model="ir.ui.view">
+            <field name="name">Product Product</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='default_code']" position="replace">
+                    <field name="unit_type_id"/>
+                    <field name="sub_unit_id"/>
+                </xpath>
+                <xpath expr="//field[@name='lst_price']" position="after">
+                    <field name="rent_price"/>
+                    <field name="so_amount"/>
+                    <field name="state"/>
+                    <field name="furnishing"/>
+                    <button type="object" name="got_to_opportunity" string="Go Opportunity" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='qty_available']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='virtual_available']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='categ_id']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='type']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='barcode']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='product_template_variant_value_ids']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!--For Sale-->
+        <record id="action_for_sale_unit" model="ir.actions.act_window">
+            <field name="name">For Sale</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('for_sale', '=', True)]</field>
+            <field name="context">{'default_for_sale': True}</field>
+        </record>
+
+        <menuitem id="driver_root"
+                  name="For Sale"
+                  parent="ol_property_custom.property_product_menu_act"
+                  action="action_for_sale_unit"
+                  sequence="1"/>
+
+        <!--For Rent-->
+        <record id="action_for_sent_unit" model="ir.actions.act_window">
+            <field name="name">For Rent</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('for_rent', '=', True)]</field>
+            <field name="context">{'default_for_rent': True}</field>
+        </record>
+
+        <menuitem id="menu_for_rent_unit"
+                  name="For Rent"
+                  parent="ol_property_custom.property_product_menu_act"
+                  action="action_for_sent_unit"
+                  sequence="2"/>
+
+
+        <!--        Tax-->
+        <record id="view_tax_form_inherit_id" model="ir.ui.view">
+            <field name="name">account.tax.unit.type</field>
+            <field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name="unit_type"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

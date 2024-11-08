@@ -1,0 +1,43 @@
+<odoo>
+
+    <record id="view_rent_installment_wizard_form" model="ir.ui.view">
+        <field name="name">rent.installment Wizard</field>
+        <field name="model">rent.installment.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group col="4">
+                    <field name="amount" invisible="is_post_cheque == True"/>
+                    <!--                    <field name="percentage" attrs="{'invisible': [('is_post_cheque', '=', True)]}"/>-->
+                    <field name="percentage"
+                           invisible="is_post_cheque == True or is_ejari == True or is_renewal == True or is_utility_charge == True"/>
+                    <field name="start_date"
+                           invisible="is_post_cheque == True or is_ejari==True or is_renewal == True or is_utility_charge == True"
+                           required="is_post_cheque == False and is_ejari == False or is_renewal == False or is_utility_charge == False"/>
+                    <field name="end_date"
+                           invisible="is_post_cheque == True or is_ejari==True or is_renewal == True or is_utility_charge == True"
+                           required="is_post_cheque == False and is_ejari == False or is_renewal == False or is_utility_charge == False"
+                    />
+                    <field name="post_amount"
+                           invisible="is_post_cheque == False" required="is_post_cheque == True"
+                    />
+                    <field name="is_post_cheque" force_save="1" invisible="1"/>
+                    <field name="is_ejari" invisible="1"/>
+                    <field name="is_renewal" invisible="1"/>
+                    <field name="is_utility_charge" invisible="1"/>
+                    <!--                    <field name="type" invisible="is_ejari == False and is_post_cheque == False"/>-->
+                    <field name="type"/>
+                    <field name="is_tax_include"/>
+                    <field name="tax_amount" invisible="1"/>
+                    <field name="is_booked" invisible="1"/>
+                    <field name="is_token_money" invisible="is_booked == False"/>
+                    <!--                    <field name="no_of_cheques" required="1"/>-->
+                </group>
+                <footer>
+                    <button name="create_installments" string="Create Installments" type="object" class="btn-primary"/>
+                    <button string="Cancel" type="object" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

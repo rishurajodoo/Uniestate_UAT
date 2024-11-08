@@ -1,0 +1,134 @@
+<odoo>
+    <data>
+        <template id="sale_order_portal_content_inherit_tenant_contract" name="Order Options"
+                  inherit_id="sale.sale_order_portal_content">
+
+            <xpath expr="//section[@id='terms']" position="before">
+                <section t-if="sale_order.for_rent" id="tenant_contact" class="mt-5">
+                    <h3 class="">Tenant Contract</h3>
+
+                    <div class="row">
+                        <div clas="col-8">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <strong>Start Date:</strong>
+                                    </td>
+                                    <td>
+                                        <em t-field="sale_order.start_date"/>
+                                    </td>
+                                    <td>
+                                        <strong>End Date:</strong>
+                                    </td>
+                                    <td>
+                                        <em t-field="sale_order.end_date"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Tenancy:</strong>
+                                    </td>
+                                    <td>
+                                        <em t-field="sale_order.tenancy"/>
+                                    </td>
+                                    <td>
+                                        <strong>Tenancy State:</strong>
+                                    </td>
+                                    <td>
+                                        <em t-field="sale_order.tenancy_state"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 class="">TC Payment Plan</h3>
+
+                    <div class="row">
+                        <div clas="col-8">
+                            <table class="table">
+                                <thead>
+                                    <th>
+                                        <strong>Milestone</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Amount</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Start Date</strong>
+                                    </th>
+                                    <th>
+                                        <strong>End Date</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Invoice</strong>
+                                    </th>
+                                </thead>
+                                <t t-foreach="sale_order.rent_plan_ids" t-as="plan">
+                                    <tr>
+                                        <td>
+                                            <span t-field="plan.milestone_id"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="plan.amount"
+                                                  t-options='{"widget": "monetary", "display_currency": sale_order.currency_id}'/>
+                                        </td>
+                                        <td>
+                                            <span t-field="plan.start_date"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="plan.end_date"/>
+                                        </td>
+                                        <td>
+                                            <t t-if="plan.move_id">
+                                                <a t-attf-href="/my/invoices/{{ plan.move_id.id }}">
+                                                    <i t-if="plan.move_id.state == 'draft'">Draft Invoice</i>
+                                                    <t t-else="" t-esc="plan.move_id.name"/>
+                                                </a>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h3 t-if="sale_order.pdc_ids" class="">PDC Payment</h3>
+
+                    <div t-if="sale_order.pdc_ids" class="row">
+                        <div clas="col-8">
+                            <table class="table">
+                                <thead>
+                                    <th>
+                                        <strong>Cheque No</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Status</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Amount</strong>
+                                    </th>
+                                </thead>
+                                <t t-foreach="sale_order.pdc_ids" t-as="pdc">
+                                    <tr>
+                                        <td>
+                                            <span t-field="pdc.cheque_no"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="pdc.state"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="pdc.payment_amount"
+                                                  t-options='{"widget": "monetary", "display_currency": sale_order.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

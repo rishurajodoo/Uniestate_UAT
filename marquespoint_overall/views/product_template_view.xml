@@ -1,0 +1,182 @@
+<odoo>
+    <data>
+        <record id="product_template_only_form_view_inherited" model="ir.ui.view">
+            <field name="name">product.template.form.inherited</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <label for="sale_ok" position="after">
+                    <div>
+                        <field name="for_sale"/>
+                        <label for="for_sale"/>
+                    </div>
+                </label>
+                <label for="sale_ok" position="after">
+                    <div>
+                        <field name="for_rent"/>
+                        <label for="for_rent"/>
+                    </div>
+                </label>
+                <xpath expr="//header" position="inside">
+                    <button string="PDC Received" class="btn btn-primary" invisible="1"/>
+                    <field name="state" widget="statusbar" statusbar_visible="available,reserved,booked,sold"
+                           invisible="for_sale != True"/>
+                    <field name="state" widget="statusbar" statusbar_visible="available,reserved,rented"
+                           invisible="for_rent != True"/>
+                </xpath>
+                <xpath expr="//label[@for='purchase_ok']" position="after">
+                    <span class="d-inline-block">
+                        <field name="is_unit"/>
+                        <label for="is_unit"/>
+                    </span>
+                    <span invisible="1">
+                        <field name="chiller_charge_config"/>
+                        <label for="chiller_charge_config"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_sec"/>
+                        <label for="is_sec"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_ejari"/>
+                        <label for="is_ejari"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_dld"/>
+                        <label for="is_dld"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_service_charges"/>
+                        <label for="is_service_charges"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_oqood"/>
+                        <label for="is_oqood"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_renewal"/>
+                        <label for="is_renewal"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_utility_charge"/>
+                        <label for="is_utility_charge"/>
+                    </span>
+                    <span invisible="chiller_charge_config == False" class="d-inline-block">
+                        <field name="is_chiller_charges"/>
+                        <label for="is_chiller_charges"/>
+                    </span>
+                </xpath>
+                <!--                <xpath expr="//field[@name='uom_po_id']" position="after">-->
+                <!--                    <field name="project"/>-->
+                <!--                    <field name="unit_id"/>-->
+                <!--                </xpath>-->
+                <xpath expr="//notebook/page[last()]" position="after">
+                    <page string="Multiple Images">
+                        <group>
+                            <field name="multi_image" widget="many2many_binary"/>
+                        </group>
+                    </page>
+                    <page string="Tenancy Details">
+                        <group col="4">
+                            <field name="tenancy_id" readonly="0"/>
+                            <field name="tenancy_state" force_save="1" readonly="1"/>
+                            <field name="start_date" force_save="1" readonly="1"/>
+                            <field name="end_date" force_save="1" readonly="1"/>
+                        </group>
+                    </page>
+                </xpath>
+
+                <xpath expr="//page[@name='general_information']" position="before">
+                    <page string="Property Information">
+                        <group string="Property Information">
+                            <group>
+                                <field name="sale_order"/>
+                                <field name="short_name"/>
+                                <field name="code"/>
+                                <field name="project"/>
+                                <field name="building"/>
+                                <field name="floor_id"/>
+                                <field name="reasonable_price"/>
+                                <field name="property_owner"/>
+                                <field name="construction_status"/>
+                            </group>
+                            <group>
+                                <field name="category"/>
+                                <field name="view_type" invisible="1"/>
+                                <field name="property_price"/>
+                                <field name="allow_discount"/>
+                                <field name="furnishing"/>
+                                <field name="build_up_area"/>
+                                <field name="carpet_area"/>
+                                <field name="bedroom"/>
+                                <field name="washroom"/>
+                                <field name="balconies"/>
+                            </group>
+                        </group>
+                        <group string="Analytic Account">
+                            <field name="project_analytical"/>
+                            <field name="building_analytic_account"/>
+                            <field name="floor_analytic_account"/>
+                            <field name="units_analytic_account"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="product_normal_form_view_inherited" model="ir.ui.view">
+            <field name="name">product.product.form.inherited</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='purchase_ok']" position="after">
+                    <span class="d-inline-block">
+                        <field name="is_unit"/>
+                        <label for="is_unit"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_sec"/>
+                        <label for="is_sec"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_ejari"/>
+                        <label for="is_ejari"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_renewal"/>
+                        <label for="is_renewal"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_utility_charge"/>
+                        <label for="is_utility_charge"/>
+                    </span>
+                    <span invisible="1">
+                        <field name="chiller_charge_config"/>
+                        <label for="chiller_charge_config"/>
+                    </span>
+                    <span invisible="chiller_charge_config == False" class="d-inline-block">
+                        <field name="is_chiller_charges"/>
+                        <label for="is_chiller_charges"/>
+                    </span>
+                </xpath>
+                <xpath expr="//notebook/page[last()]" position="after">
+                    <page string="Multiple Images">
+                        <group>
+                            <field name="multi_image" widget="many2many_binary"
+                                   options="{'preview_image': 'image_small', 'size': [30, 30]}"/>
+                            <!--                            <field name="multi_image" widget="image"-->
+                            <!--                                   class="oe_avatar" options="{'preview_image': 'image_small', 'size': [30, 30]}"/>-->
+                        </group>
+                    </page>
+                    <page string="Tenancy Details">
+                        <group col="4">
+                            <field name="tenancy_id" readonly="0"/>
+                            <field name="tenancy_state" force_save="1" readonly="1"/>
+                            <field name="start_date" force_save="1" readonly="1"/>
+                            <field name="end_date" force_save="1" readonly="1"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

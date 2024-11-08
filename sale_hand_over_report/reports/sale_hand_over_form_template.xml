@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="sale_hand_over_report_form">
+            <t t-call="web.html_container">
+                <t t-call="sale_hand_over_report.sale_hand_over_report_header"/>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page" style="font-size: 15px;">
+                            <div class="oe_structure"/>
+                            <div class="Heading-section">
+                                <h2 style="text-align: center;background-color: #C0C0C0;">HANDING OVER NOTE</h2>
+                                <div class="row">
+                                    <div class="col-6">
+                                    </div>
+                                    <div class="col-6" style="text-align: right;">
+                                        <p>Reference:
+                                            <span t-esc="o.name"/>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p>To<span/>,
+                                        </p>
+                                    </div>
+                                    <div class="col-6" style="text-align: right;">
+                                        <p>Date:
+                                            <span t-esc="o.date_order.strftime('%d-%b-%Y')"/>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding:16px;">
+                                    <t t-foreach="spa_list" t-as="spa">
+                                        <div class="col-6">
+                                            <strong>
+                                                <span t-esc="spa['name']"/>
+                                                <br/>
+                                                <span t-esc="spa['street']"/>,
+                                                <span t-esc="spa['street2']"/>
+                                                <br/>
+                                                <span t-esc="spa['city']"/>,<span t-esc="spa['state']"/>,
+                                                <span t-esc="spa['zip']"/>
+                                                <br/>
+                                                <p>
+                                                    <span t-esc="spa['country']"/>
+                                                </p>
+                                            </strong>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                            <br/>
+                            <p>Dears ,</p>
+                            <p style="padding:12px;">First of all, allow us to congratulate you on taking possession of
+                                your property No.
+                                <strong>
+                                    <span t-esc="o.unit[0].name"/>
+                                    in<span t-esc="o.project.name"/>.
+                                </strong>
+                            </p>
+                            <div class="content">
+                                <span>We wish you a wonderful life in the new home.</span>
+                                <br/>
+                                <span>Enclosed with this letter are the following keys to your unit and Notice for
+                                    completion,we look forward to your
+                                    company in our unique community.
+                                </span>
+                                <p>At your service for making your living comfortable in
+                                    <strong>
+                                        <span t-esc="o.project.name"/>
+                                    </strong>
+                                    is our Facility
+                                    Management Department, please note the contact details, who will assist by attending
+                                    to your maintenance and
+                                    Property Management related needs
+                                </p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span>
+                                            <strong>Uniestate Properties</strong>
+                                        </span>
+                                        <br/>
+                                        <span>
+                                            <strong>Phone No.: +971 72220810</strong>
+                                        </span>
+                                        <br/>
+                                        <span>
+                                            <strong>Email : complaints@uniestate.com</strong>
+                                        </span>
+                                        <br/>
+                                        <span>
+                                            <strong>Office Hours 8 am - 12 noon &amp; 1pm - 5 pm Saturdays through
+                                                Thursdays (Excluding Public Holidays)
+                                            </strong>
+                                        </span>
+                                        <br/>
+                                        <span>
+                                            <strong>Emergency No.: +971 544220222</strong>
+                                        </span>
+                                        <br/>
+                                        <span>
+                                            <strong>For matter other than maintenance, please contact:</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span>
+                                            <strong>Dubai:</strong>
+                                        </span>
+                                        <br/>
+                                        <span>
+                                            <strong>Phone No.: +971 43318333</strong>
+                                        </span>
+                                        <br/>
+                                        <span>
+                                            <strong>Fax No: +971 43322270</strong>
+                                        </span>
+                                    </div>
+                                    <div class="col-6">
+                                        <span>
+                                            <strong>Ras Al Khaimah:</strong>
+                                        </span>
+                                        <br/>
+                                        <span>
+                                            <strong>Phone No.: +971 72220222</strong>
+                                        </span>
+                                        <br/>
+                                        <span>
+                                            <strong>Fax No: +971 72220111</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                                <br/>
+                                <p>Note: Please refer to the Notice for completion letter issued for sales and service
+                                    agreements
+                                </p>
+                                <p>Thanking you for choosing Uniestate Properties!</p>
+                                <p>Yours truly,</p>
+                            </div>
+                            <br/>
+                            <div class="end-section" style="padding-top:30px;">
+                                <hr/>
+                                <h6 style="text-align: center;">
+                                    <strong>ACKNOWLEDGEMENT</strong>
+                                </h6>
+                                <p>I, the Undersigned, holder of Emirates ID No./Passport No.________________________ in
+                                    mycapacity as
+                                    Owner/Owner's Representative of the above unit do hereby declare that I have
+                                    received from M/s Uniestate
+                                    Properties the above-mentioned Unit. I further acknowledges that i have inspected
+                                    the Unit thoroughly and found it
+                                    completed with the conditions set out in the Agreement. From now onwards, I am fully
+                                    responsible for the Unit.
+                                    "As per clause 3.5 of the SPA the seller reserves the right to proceed for
+                                    cancellation in Dubai Land Department
+                                    /Dubai Courts - if any due installment as per payment plan is not paid along with
+                                    penalty within 30 days from the
+                                    due date and all the legal expenses/Court fees, Attorney fess lawyer fess will be
+                                    recovered from Purchaser".
+                                </p>
+                                <br/>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p>Receiver's Name: ____________________</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p>Signature: ____________________</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="sale_hand_over_report_header">
+            <t t-set="company" t-value="user.company_id"/>
+            <div class="header border-bottom" width="100%">
+                <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                    <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                        <tr>
+                            <td style="padding-top:40px; text-align:left;">
+                                <strong>
+                                    <h2 t-esc="res_company.name"/>
+                                </strong>
+                            </td>
+                            <td style="padding-top:10px;">
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                     style="max-height: 80px;" alt="Logo"/>
+                            </td>
+                            <td style="padding-top:40px; text-align:right;">
+                                <strong>
+                                    <h2 t-esc="res_company.name_arabic"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+                </table>
+            </div>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_payslip_approvals,access.hr.payslip.approvals,model_hr_payslip_approvals,,1,1,1,1
+access_payslip_approvals_levels,access.payslip.approvals.levels,model_payslip_approvals_levels,,1,1,1,1
+

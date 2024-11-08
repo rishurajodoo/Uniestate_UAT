@@ -1,0 +1,57 @@
+<odoo>
+
+    <record id="view_installment_wizard_form" model="ir.ui.view">
+        <field name="name">installment Wizard</field>
+        <field name="model">installment.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group col="4">
+                    <field name="percentage" invisible="is_admin_fee == True"/>
+                    <field name="trigger_dates_later"/>
+                    <field name="amount"/>
+                    <field name="start_date" invisible=" trigger_dates_later"/>
+                    <field name="end_date" invisible=" trigger_dates_later"/>
+                    <field name="installment_period" invisible=" trigger_dates_later"/>
+                    <field name="installment_no"/>
+                    <field name="is_token_money" invisible="is_booked == False"/>
+                    <field name="is_admin_fee" invisible="is_admin == False"/>
+                    <field name="admin_fee" invisible="is_admin_fee == False"/>
+                    <field name="is_booked" invisible="1"/>
+                    <field name="is_admin" invisible="1"/>
+                    <field name="is_admin" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="create_installments" string="Create Installments" type="object" class="btn-primary"/>
+                    <button string="Cancel" type="object" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_reschedulement_wizard_form" model="ir.ui.view">
+        <field name="name">Reschedulement</field>
+        <field name="model">reschedulement.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group col="4">
+                    <field name="amounts_due"/>
+                    <field name="installments_due"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="installment_period"/>
+                    <field name="installment_no"/>
+                    <field name="is_submitted" invisible="1"/>
+                    <field name="is_approved" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="create_installments" string="Create Installments" invisible="not is_approved" type="object" class="btn-primary"/>
+                    <button name="submit_for_approval_schedule" invisible="is_approved" string="Submit For Approval" type="object" class="btn-primary"/>
+                    <button string="Cancel" type="object" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

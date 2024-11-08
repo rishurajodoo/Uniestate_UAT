@@ -1,0 +1,51 @@
+<odoo>
+<!--    <template id="tenant_view_partner_form" inherit_id="base.view_partner_form">-->
+<!--        <xpath expr="//div[field('header')]" position="replace">-->
+<!--            <div class="header">-->
+<!--            <div class="row">-->
+<!--                <div class="text-center">-->
+<!--                    <img src="/tenancy_contract_report/static/description/uniestate_logo.png" width="280"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+    <record id="tenant_view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.tenant.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="tenant_id" invisible="company_type != 'company'"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_view_inherit_form" model="ir.ui.view">
+        <field name="name">product.form.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_parking']" position="after">
+                <field name="parking_space"/>
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record id="paperformat_tenant_contract" model="report.paperformat">-->
+<!--        <field name="name">Tenancy Contract</field>-->
+<!--        <field name="default" eval="True"/>-->
+<!--        <field name="format">A4</field>-->
+<!--        <field name="page_height">0</field>-->
+<!--        <field name="page_width">0</field>-->
+<!--        <field name="orientation">Portrait</field>-->
+<!--        <field name="margin_top">30</field>-->
+<!--        <field name="margin_bottom">32</field>-->
+<!--        <field name="margin_left">7</field>-->
+<!--        <field name="margin_right">7</field>-->
+<!--        <field name="header_line" eval="False"/>-->
+<!--        <field name="header_spacing">20</field>-->
+<!--        <field name="dpi">90</field>-->
+<!--    </record>-->
+</odoo>

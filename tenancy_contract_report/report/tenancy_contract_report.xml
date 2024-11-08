@@ -1,0 +1,2317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="tenancy_contract_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="s">
+                <t t-call="web.basic_layout">
+                    <div class="header">
+                        <div class="row">
+                            <div class="text-center">
+                                <img src="/tenancy_contract_report/static/description/uniestate_logo.png" width="280"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page"
+                         style="font-size:18px;font-family: Tahoma, 'sans-serif';width:100%;border-collapse:collapse">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:50%;text-align: center;">
+                                    <u>
+                                        <span style="font-size: 18px; font-weight: bold;text-align: center;">Tenancy
+                                            Contract
+                                        </span>
+                                    </u>
+                                </td>
+                                <td style="width:50%; text-align: center;">
+                                    <u>
+                                        <span style="font-size: 18px; font-weight: bold;text-decoration-line: underline;">
+                                            ﻋﻘﺪ ﺇﻳﺠـــﺎﺭ
+                                        </span>
+                                    </u>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="border-color:white;width:100%;margin-top:5px;">
+                            <tr>
+                                <td style="border:none;width:50%; text-align: left;">
+                                    <span style="font-size: 14px;">This Tenancy Contract, the “Contract”
+                                        is made in two original copies
+                                        ,on date
+                                        <t t-esc="(s.date_order).strftime('%d-%b-%Y')"/>
+                                        ,by and between
+                                        The Tenant as specifically mentioned in Schedule II, AND
+                                        The Landlord as specifically mentioned in Schedule II (Together referred to as
+                                        Parties and singly as Party)
+                                        In consideration of the mutual covenants contained herein, the parties agree as
+                                        follows:
+                                    </span>
+                                </td>
+                                <td style="border:none;width:50%; text-align: right;font-size: 14px;">
+                                    <span style="font-size: 14px;">
+                                        <t t-esc="(s.date_order).strftime('%d-%b-%Y')"/>
+                                        -ُﺃﺑﺮﻡ ﻋﻘﺪ ﺍﻹﻳﺠﺎﺭ " ﺍﻟﻌﻘﺪ"
+                                        ﻫﺬﺍ ﻣﻦ ﻧﺴﺨﺘﻴﻦ ﺃﺻﻠﻴﺘﻴﻦ ، ﺑﺘﺎﺭﻳﺦ ﺍﻟﻴﻮﻡ ﺍﻟﻤﻮﺍﻓﻖ
+                                        : ﻓﻴﻤﺎ ﺑﻴﻦ ﻛﻞ ﻣﻦ ، ﺍﻟﻤﺴﺘﺄﺟﺮ، ﺍﻟﻤﺤﺪﺩ ﺑﺎﻹﺳﻢ ﺑﺎﻟﺠﺪﻭﻝ ﺭﻗﻢ 2
+                                        ﻭ
+                                        ﺍﻟﻤﺎﻟﻚ ﺍﻟﻤﺤﺪﺩ ﺑﺎﻻﺳﻢ ﺑﺎﻟﺠﺪﻭﻝ 2 ﻭﻓﻲ ﻣﻘﺎﺑﻞ ﺍﻟﺘﻌﻬﺪﺍﺕ ﺍﻟﻤﺸﺘﺮﻛﺔ ﺍﻟﻤﻨﺼﻮﺹ ﻋﻠﻴﻬﺎ ﻓﻲ ﻫﺬﺍ
+                                        ﺍﻟﻌﻘﺪ
+                                        ، ﺍﺗﻔﻖ
+                                        : ﺍﻟﻄﺮﻓﻴﻦ ﻓﻴﻤﺎ ﺑﻴﻨﻬﻤﺎ ﻋﻠﻰ ﻣﺎ ﻳﻠﻲ
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width:100%;margin-top:5px;">
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">1-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">INTERPRETATIONS</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﺍﻟﺘﻔﺴﻴـﺮﺍﺕ -١
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-1</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">1-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">Where used in this Contract the following words and
+                                        phrases shall have the same meanings as set forth below unless the context
+                                        otherwise requires:
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﺗﺤﻤﻞ ﺍﻟﻜﻠﻤﺎﺕ ﻭﺍﻟﺘﻌﺒﻴﺮﺍﺕ ﺍﻟﺘﺎﻟﻴﺔ ﺣﻴﺜﻤﺎ ﻭﺭﺩﺕ ﻓﻲ ﻫﺬﺍ ﺍﻟﻌﻘﺪ ﺍﻟﻤﻌﺎﻧﻲ ﺍﻟﻤﺤﺪﺩﺓ ﻟﻬﺎ ﻋﻠﻰ
+                                        ﺍﻟﻨﺤﻮ ﺍﻟﺘﺎﻟﻲ ﻣﺎ ﻟﻢ ﻳﻘﺘﻀﻰ ﺳﻴﺎﻕ
+                                        : ﺍﻟﻜﻼﻡ ﺧﻼﻑ ﺫﻟﻚ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">1- A-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">“Contract “ means this Tenancy contract and it's
+                                        include from terms and conditions and annexure and
+                                        the schedules and instrument making part of this contract
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﺍﻟﻌﻘﺪ" ﻳﻌﻨﻰ ﻋﻘﺪ ﺍﻹﻳﺠﺎﺭ ﻫﺬﺍ ﻭﻣﺎ ﻳﺸﺘﻤﻞ ﻋﻠﻴﻪ ﻣﻦ ﺷﺮﻭﻁ " ﻭﺃﺣﻜﺎﻡ ﻭﺟﻤﻴﻊ ﺍﻟﻤﺮﻓﻘﺎﺕ ﻣﻦ
+                                        ﻣﻼﺣﻖ ﻭﺟﺪﺍﻭﻝ ﻭﻣﺴﺘﻨﺪﺍﺕ
+                                        .ﻭﺍﻟﺘﻰ ﺗﺸﻜﻞ ﺟﺰء ﻻ ﻳﺘﺠﺰء ﻣﻦ ﻫﺬﺍ ﺍﻟﻌﻘﺪ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺃ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">1- B-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">“Unit” means the property unit subject to rentals as
+                                        defined Clause 2 and described in Schedule II.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﺍﻟﻮﺣﺪﺓ" ﺗﻌﻨﻰ ﺍﻟﻮﺣﺪﺓ ﺍﻟﺴﻜﻨﻴﺔ ﻣﻮﺿﻮﻉ ﻋﻘﺪ ﺍﻹﻳﺠﺎﺭ"
+                                        ﻭﺍﻟﻤﻮﺻﻮﻓﺔ ﺑﺎﻟﻤﻠﺤﻖ ﺭﻗﻢ 2
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺏ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">1- C-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">“Tenancy Period” means the period of tenancy as
+                                        described in Schedule II
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﻣﺪﺓ ﺍﻹﻳﺠﺎﺭ" ﺗﻌﻨﻰ ﺍﻟﻔﺘﺮﺓ ﺍﻟﺰﻣﻨﻴﺔ ﺍﻟﺨﺎﺻﺔ ﺑﺴﺮﻳﺎﻥ ﻧﻔﺎﺫ
+                                        ﻋﻘﺪ"
+                                        . ﺍﻹﻳﺠﺎﺭ ﺍﻟﻤﻮﺻﻮﻓﺔ ﺑﺎﻟﻤﻠﺤﻖ ﺭﻗﻢ 2
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺕ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">1- D-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">“Rental Value” means the amount of money to be paid
+                                        by the Tenant to the Landlord in consideration to the Permitted Use, as
+                                        described in Schedule II
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﺍﻟﻘﻴﻤﺔ ﺍﻹﻳﺠﺎﺭﻳﺔ" ﺗﻌﻨﻰ ﻣﺒﻠﻎ ﻣﻦ ﺍﻟﻤﺎﻝ ﺍﻟﻮﺍﺟﺐ ﺩﻓﻌﻪ ﻣﻦ" ﻗﺒﻞ ﺍﻟﻤﺴﺘﺄﺟﺮ ﺇﻟﻰ ﺍﻟﻤﺎﻟﻚ
+                                        ﻣﻘﺎﺑﻞ ﺍﻹﻧﺘﻔﺎﻉ ﺑﺎﻟﻮﺣﺪﺓ ﺍﻟﻤﻮﺿﺤﺔ
+                                        .ﺑﺎﻟﺘﻔﺼﻴﻞ ﺑﺎﻟﺠﺪﻭﻝ ﺭﻗﻢ 2
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺝ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">1- E-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        “Commencement Period.
+                                        Date”
+                                        the
+                                        first
+                                        day
+                                        of
+                                        Tenancy
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﺗﺎﺭﻳﺦ ﺑﺪء ﺍﻟﻌﻘﺪ " ﺗﻌﻨﻰ ﺗﺎﺭﻳﺦ ﺃﻭﻝ ﻳﻮﻡ ﺑﺎﻟﻔﺘﺮﺓﺍﻟﺰﻣﻨﻴﺔ "
+                                        .ﻟﺴﺮﻳﺎﻥ ﻋﻘﺪ ﺍﻹﻳﺠﺎﺭ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺡ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">1- F-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">“Schedule” the schedules which are attached an
+                                        forming part to this Contract namely, Schedule I, Schedule II, Schedule III and
+                                        Schedule IV.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﺍﻟﺠﺪﻭﻝ" ﺗﻌﻨﻰ ﺍﻟﺠﺪﺍﻭﻝ ﺍﻟﻤﺮﻓﻘﺔ ﻭﺍﻟﺘﻰ ﺗﺸﻜﻞ ﺟﺰءﺍ ﻻ " . ﻳﺘﺠﺰء ﻣﻦ ﻫﺬﺍ ﺍﻟﻌﻘﺪ ، ﻭﻫﻰ
+                                        ﺍﻟﺠﺪﻭﻝ ﺭﻗﻢ 4-3-2-1
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺩ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">2-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">Rental Contract</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﻋﻘﺪ ﺍﻹﻳﺠﺎﺭ 2-</span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-2</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">2-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">Subject to the terms and conditions of the Contract
+                                        set forth herewith the Landlord agrees to rent to the Tenant and Tenant agrees
+                                        to rent from the Landlord a property unit as described in Schedule II, the
+                                        “Unit” for the Tenancy Period as described in Schedule II exclusively for the
+                                        purpose of Permitted Use as described in Schedule II in consideration to the
+                                        Rental Value as described in Schedule II to be paid by the Tenant to the Land
+                                        Lord as per payment plan
+                                        described in Schedule III.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻳﻮﺍﻓﻖ ﺍﻟﻤﺎﻟﻚ ﻋﻠﻰ ﺍﻟﺘﺄﺟﻴﺮ ﻟﻠﻤﺴﺘﺄﺟﺮ ﻭﻳﻮﺍﻓﻖ ﺍﻟﻤﺴﺘﺄﺟﺮ ﻋﻠﻰ ﺍﻻﺳﺘﺌﺠﺎﺭ ﻣﻦ ﺍﻟﻤﺎﻟﻚ ﺍﻟﻮﺣﺪﺓ
+                                        ﺍﻟﻌﻘﺎﺭﻳﺔ ﺍﻟﻤﻮﺿﺤﺔ ﻓﻲ ﺍﻟﺠﺪﻭﻝ 2 )ﺍﻟﻮﺣﺪﺓ(" ﻁﻮﺍﻝ ﻣﺪﺓ ﺍﻹﻳﺠﺎﺭ ﺍﻟﻤﻮﺿﺤﻪ ﻓﻲ ﺍﻟﺠﺪﻭﻝ ﺭﻗﻢ 2
+                                        ﻭﻗﺎﺻﺮﺓ ﻋﻠﻰ ﺃﻏﺮﺍﺽ ﺍﻻﺳﺘﺨﺪﺍﻡ ﺍﻟﻤﺴﻤﻮﺡ ﺑﻪ ﻭﻓﻖ ﺍﻟﻮﺍﺭﺩ ﻓﻲ ﺍﻟﺠﺪﻭﻟﺮﻗﻢ 2 ﻭﻓﻲ ﻣﻘﺎﺑﻞ ﺍﻟﻘﻴﻤﺔ
+                                        ﺍﻹﻳﺠﺎﺭﻳﺔ ﻭﻓﻖ ﺍﻟﺘﻲ ﻳﺪﻓﻌﻬﺎ ﺍﻟﻤﺴﺘﺄﺟﺮ ﻟﻠﻤﺎﻟﻚ ﻭﻓﻖ IIﺍﻟﻮﺍﺭﺩ ﻓﻲ ﺍﻟﺠﺪﻭﻝ
+                                        .ﺧﻄﺔ ﺍﻟﺪﻓﻊ ﺍﻟﻮﺍﺭﺩﺓ ﻓﻲ ﺍﻟﺠﺪﻭﻝ ﺭﻗﻢ 3
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">COVENANTS OF THE PARTIES</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﺗﻌﻬﺪﺍﺕ ﺍﻟﻄﺮﻓﻴـﻦ 3-</span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-3</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 1-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">The Tenant has inspected the Unit and irrevocably
+                                        agrees and accepts to receive the custody of the Unit in its present state and
+                                        confirms that Unit is free of any visible defects or effects which can hinder or
+                                        can create any seen or unseen hurdle to the utilization of
+                                        Unit as per Permitted Use
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻗﺎﻡ ﺍﻟﻤﺴﺘﺄﺟﺮ ﺑﻤﻌﺎﻳﻨﺔ ﺍﻟﻮﺣﺪﺓ ﺍﻟﻤﻌﺎﻳﻨﺔ ﺍﻟﻨﺎﻓﻴﺔ ﻟﻠﺠﻬﺎﻟﻪ ﻭﻳﻮﺍﻓﻖ ﺑﺼﻔﺔ ﻧﻬﺎﺋﻴﺔ ﻭﻳﻘﺒﻞ
+                                        ﺑﺎﺳﺘﻼﻡ ﺍﻟﻮﺣﺪﺓ ﺑﺤﺎﻟﺘﻬﺎ ﺍﻟﺤﺎﻟﻴﺔ ﻭﻳﺆﻛﺪ ﻋﻠﻰ ﺃﻥ ﺍﻟﻮﺣﺪﺓ ﺧﺎﻟﻴﺔ ﻣﻦ ﺃﻳﺔ ﻋﻴﻮﺏ ﺃﻭ ﺗﺄﺛﻴﺮﺍﺕ
+                                        ﺑﺎﺭﺯﺓ ﻣﻤﺎ ﻗﺪ ﺗﻜﻮﻥ ﻋﺎﺋﻘﺎ ً ﺃﻭ ﺗﺸﻜﻞ ﻋﻘﺒﺔ ﻣﺮﺋﻴﺔ ﺃﻭ ﻏﻴﺮ ﻣﺮﺋﻴﺔ ﻓﻲ
+                                        .ﺍﻻﻧﺘﻔﺎﻉ ﺑﺎﻟﻮﺣﺪﺓ ﻭﻓﻖ ﺍﻻﺳﺘﺨﺪﺍﻡ ﺍﻟﻤﺴﻤﻮﺡ ﺑﻪ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-1</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 2-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">The Tenant undertakes and affirms that it will not
+                                        utilize or use the Unit for any other purpose other than Permitted Use or to
+                                        sublease, assign, or license the
+                                        use of the Unit to any Sub-Lessee, assignee, or licensee
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻳﺘﻌﻬﺪ ﺍﻟﻤﺴﺘﺄﺟﺮ ﻭﻳﺆﻛﺪ ﻋﻠﻰ ﺃﻻ ﻳﻘﻮﻡ ﺑﺎﺳﺘﺨﺪﺍﻡ ﺍﻟﻮﺣﺪﺓ ﺃﻭ ﺍﻻﻧﺘﻔﺎﻉ ﻣﻨﻬﺎ ﻷﻱ ﻏﺮﺽ ﺑﺨﻼﻑ
+                                        ﺍﻻﺳﺘﺨﺪﺍﻡ ﺍﻟﻤﺴﻤﻮﺡ ﺑﻪ ﻭﺃﻻ ﻳﻘﻮﻡ ﺑﺎﻟﺘﺄﺟﻴﺮ ﻣﻦ ﺍﻟﺒﺎﻁﻦ ﺃﻭ ﺍﻟﺘﻨﺎﺯﻝ ﻋﻦ ﺃﻭ ﺍﻟﺘﺮﺧﻴﺺ
+                                        ﺑﺎﺳﺘﺨﺪﺍﻡ
+                                        ﺍﻟﻮﺣﺪﺓ ﺇﻟﻰ ﺃﻱ ﻣﺴﺘﺄﺟﺮ ﻣﻦ ﺍﻟﺒﺎﻁﻦ ﺃﻭ ﻣﺘﻨﺎ َﺯﻝ ﻟﻪ ﺃﻭ ﻣﺮﺧﺺ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-2</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 3-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        The Tenant undertakes not to remove any or all of the fixtures, fittings and
+                                        installations which are affixed, installed or farming part or ancillary to the
+                                        Unit.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻳﺘﻌﻬﺪ ﺍﻟﻤﺴﺘﺄﺟﺮ ﺑﺄﻻ ﻳﻘﻮﻡ ﺑﺈﺯﺍﻟﺔ ﻛﻞ ﺃﻭ ﺑﻌﺾ ﺍﻟﺘﺮﻛﻴﺒﺎﺕ ﺃﻭ
+                                        ﺍﻟﺘﺠﻬﻴﺰﺍﺕ ﺍﻟﺘﻲ ﺗﻢ ﺗﺮﻛﻴﺒﻬﺎ ﺃﻭ ﺗﺜﺒﻴﺘﻬﺎ ﺃﻭ ﺍﻟﺘﻲ ﺗﺸﻜﻞ ﺟﺰءﺍ ً
+                                        .ﻣﻦ ﺍﻟﻮﺣﺪﺓ ﺃﻭ ﻣﻠﺤﻘﺎ ً ﺑﻬﺎ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-3</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 4-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        The Tenant undertakes not to make any changes,
+                                        alternations, improvements or impairment, loss or
+                                        damage to the Unit and will continue to maintain and
+                                        upkeep the Unit at its own expense and cost and will
+                                        return the Unit to the Landlord in the same state as it
+                                        was handed over to the Tenant on Commencement
+                                        Date
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻛﻤﺎ ﻳﺘﻌﻬﺪ ﺍﻟﻤﺴﺘﺄﺟﺮ ﺑﺄﻻ ﻳﻘﻮﻡ ﺑﻌﻤﻞ ﺃﻳﺔ ﺗﻐﻴﻴﺮﺍﺕ ﺃﻭ ﺗﻌﺪﻳﻼﺕ
+                                        ﺃﻭ ﺗﺤﺴﻴﻨﺎﺕ ﺃﻭ ﺗﻠﻔﻴﺎﺕ ﺃﻭ ﺧﺴﺎﺋﺮ ﺃﻭ ﺃﺿﺮﺍﺭ ﺑﺎﻟﻮﺣﺪﺓ ﻭﺑﺄﻥ
+                                        ﻳﻮﺍﺻﻞ ﻣﺤﺎﻓﻈﺘﻪ ﻋﻠﻴﻬﺎ ﻭﺻﻴﺎﻧﺘﻬﺎ ﻋﻠﻰ ﻧﻔﻘﺘﻪ ﺍﻟﺨﺎﺻﺔ ﻭﺃﻥ
+                                        ﻳﻘﻮﻡ ﺑﺈﻋﺎﺩﺓ ﺍﻟﻮﺣﺪﺓ ﺇﻟﻰ ﺍﻟﻤﺎﻟﻚ ﺑﻨﻔﺲ ﺍﻟﺤﺎﻟﺔ ﺍﻟﺘﻲ ﻛﺎﻧﺖ
+                                        .ﻋﻠﻴﻬﺎ ﻋﻨﺪ ﺗﺴﻠﻴﻤﻬﺎ ﺇﻟﻴﻪ ﻓﻲ ﺗﺎﺭﻳﺦ ﺍﻟﺒﺪء ﺑﺎﻹﻧﺘﻔﺎﻉ ﻣﻨﻬﺎ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-4</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 5-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        The tenant oblige to bear the maintenance cost for (a)
+                                        the minor damages in the unit which not exceed
+                                        amount of AED 300 (Three Hundred Dirham), or (b)
+                                        any damages which caused by the tenant whatever it
+                                        cost to be fixed.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻳﻠﺘﺰﻡ ﺍﻟﻤﺴﺘﺄﺟﺮ ﺑﺘﺤﻤﻞ ﺗﻜﺎﻟﻴﻒ ﺍﻟﺼﻴﺎﻧﺔ ﻟـ )ﺃ( ﺍﻷﺿﺮﺍﺭ
+                                        ﺍﻟﻄﻔﻴﻔﺔ ﻓﻲ ﺍﻟﻮﺣﺪﺓ ﺍﻟﺘﻲ ﻻ ﺗﺘﺠﺎﻭﺯ 300 ﺩﺭﻫﻢ )ﺛﻼﺛﻤﺎﺋﺔ
+                                        ﺩﺭﻫﻢ( ، ﺃﻭ )ﺏ( ﺃﻱ ﺃﺿﺮﺍﺭ ﺗﺴﺒﺐ ﻓﻴﻬﺎ ﺍﻟﻤﺴﺘﺄﺟﺮ ﻣﻬﻤﺎ ﻛﺎﻧﺖ
+                                        .ﺍﻟﺘﻜﻠﻔﺔ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-5</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 6-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        The lessor will bear the maintenance cost in case its
+                                        more than that amount mentioned above in Item (5)
+                                        and related to major damages which not caused by the
+                                        tenant
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻳﺘﺤﻤﻞ ﺍﻟﻤﺆﺟﺮ ﺗﻜﻠﻔﺔ ﺍﻟﺼﻴﺎﻧﺔ ﻓﻲ ﺣﺎﻟﺔ ﺯﻳﺎﺩﺓ ﺍﻟﻤﺒﻠﻎ
+                                        ﺍﻟﻤﺬﻛﻮﺭ ﺃﻋﻼﻩ ﻓﻲ ﺍﻟﺒﻨﺪ (5) ﻭﺍﻟﻤﺘﻌﻠﻘﺔ ﺑﺄﺿﺮﺍﺭ ﺟﺴﻴﻤﺔ ﻟﻢ
+                                        .ﻳﺘﺴﺒﺐ ﻓﻴﻬﺎ ﺍﻟﻤﺴﺘﺄﺟﺮ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-6</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 7-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        The Contract is not renewable however, at sole
+                                        discretion of the Landlord; a new tenancy contract can
+                                        be made based on new terms and conditions to be
+                                        agreed between the Parties
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻫﺬﺍ ﺍﻟﻌﻘﺪ ﻏﻴﺮ ﻗﺎﺑﻞ ﻟﻠﺘﺠﺪﻳﺪ. ﺇﻻ ﺃﻧﻪ ، ﺑﻨﺎء ً ﻋﻠﻰ ﺭﻏﺒﺔ ﻭﺍﺧﺘﻴﺎﺭ
+                                        ﺍﻟﻤﺎﻟﻚ ﻭﺣﺪﻩ ، ﻳﺠﻮﺯ ﺇﺑﺮﺍﻡ ﻋﻘﺪ ﺇﻳﺠﺎﺭ ﺟﺪﻳﺪ ﺑﻤﻮﺟﺐ ﺷﺮﻭﻁ
+                                        .ﻭﺑﻨﻮﺩ ﺟﺪﻳﺪﺓ ﻳﺘﻢ ﺍﻻﺗﻔﺎﻕ ﻋﻠﻴﻬﺎ ﻓﻴﻤﺎ ﺑﻴﻦ ﺍﻟﻄﺮﻓﻴﻦ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-7</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 8-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        The Tenant undertakes to pay any fees or taxes,
+                                        which may be levied by the municipality or any other
+                                        government authority on the leased unit, In addition,
+                                        any and all utilities and other charges to the landlord
+                                        including but not limited to water, electricity,
+                                        telephone, internet, cooling, heating Chiller, etc with
+                                        effect from the Commencement Date,
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻳﺘﻌﻬﺪ ﺍﻟﻤﺴﺘﺄﺟﺮ ﺑﺪﻓﻊ ﺃﻱ ﺭﺳﻮﻡ ﺃﻭ ﺿﺮﺍﺋﺐ ﻗﺪ ﺗﻔﺮﺿﻬﺎ
+                                        ، ﺍﻟﺒﻠﺪﻳﺔ ﺃﻭ ﺃﻱ ﺳﻠﻄﺔ ﺣﻜﻮﻣﻴﺔ ﺃﺧﺮﻯ ﻋﻠﻰ ﺍﻟﻮﺣﺪﺓ ﺍﻟﻤﺆﺟﺮﺓ
+                                        ﺑﺎﻹﺿﺎﻓﺔ ﺇﻟﻰ ﺟﻤﻴﻊ ﺍﻟﻤﺮﺍﻓﻖ ﻭﺍﻟﺮﺳﻮﻡ ﺍﻷﺧﺮﻯ ﻟﻠﻤﺎﻟﻚ ﺑﻤﺎ
+                                        ، ﻓﻲ ﺫﻟﻚ ﻋﻠﻰ ﺳﺒﻴﻞ ﺍﻟﻤﺜﺎﻝ ﻻ ﺍﻟﺤﺼﺮ ﺍﻟﻤﻴﺎﻩ ، ﺍﻟﻜﻬﺮﺑﺎء
+                                        ﺍﻟﻬﺎﺗﻒ ، ﺍﻹﻧﺘﺮﻧﺖ ، ﺍﻟﺘﺒﺮﻳﺪ ، ﺍﻟﺘﺪﻓﺌﺔ ، ﺇﻟﺦ ﺍﻋﺘﺒﺎ ًﺭﺍ ﻣﻦ ﺗﺎﺭﻳﺦ
+                                        ، ﺍﻟﺒﺪء
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-8</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 9-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        Tenant shall comply with all community rules and rules
+                                        and regulations of safety and security concerning the
+                                        use of common and shared facilities, and shall be
+                                        responsible for all actions of kids or minors under its
+                                        supervision or control..
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻋﻠﻰ ﺍﻟﻤﺴﺘﺄﺟﺮ ﺍﻻﻟﺘﺰﺍﻡ ﺑﻜﺎﻓﺔ ﺍﻷﻧﻈﻤﺔ ﻭﺍﻟﻠﻮﺍﺋﺢ ﺍﻟﻤﺤﻠﻴﺔ
+                                        ﻭﺃﻧﻈﻤﺔ ﺍﻟﺴﻼﻣﺔ ﻭﺍﻷﻣﻦ ﻓﻴﻤﺎ ﻳﺨﺺ ﺍﺳﺘﺨﺪﺍﻡ ﺍﻟﻤﺮﺍﻓﻖ
+                                        ﺍﻟﻌﺎﻣﺔ ﻭﺍﻟﻤﺸﺘﺮﻛﺔ ﻭﺃﻥ ﻳﻜﻮﻥ ﻣﺴﺌﻮﻻ ً ﻋﻦ ﻛﺎﻓﺔ ﺗﺼﺮﻓﺎﺕ
+                                        .ﺍﻷﻁﻔﺎﻝ ﺃﻭ ﺍﻟﻘ ﱠﺼﺮ ﺗﺤﺖ ﺇﺷﺮﺍﻓﻪ ﺃﻭ ﺭﻗﺎﺑﺘﻪ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-9</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 10-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        If the Tenant fails to vacate the Unit, the Landlord
+                                        may at its sole discretion consider the Contract as
+                                        extended and will specify terms and conditions of the
+                                        Contract including but not limited to the new rental
+                                        value, effective tenancy period and dates and method
+                                        of payment of the new rental value and the Tenant
+                                        shall have no right to object to such terms and
+                                        conditions in front of the Landlord, the court, rental
+                                        committee or any other department competent of
+                                        settling the rental disputes in the Emirate.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻓﻲ ﺣﺎﻝ ﺇﺧﻔﺎﻕ ﺍﻟﻤﺴﺘﺄﺟـﺮ ﻓﻲ ﺇﺧـﻼء ﺍﻟﻮﺣﺪﺓ ، ﻳﺠﻮﺯ ﻟﻠﻤﺎﻟﻚ
+                                        ﺑﻜﺎﻣﻞ ﺇﺭﺍﺩﺗﻪ ﻭﻣﺤﺾ ﺍﺧﺘﻴﺎﺭﻩ ﺍﻋﺘﺒـﺎﺭ ﺍﻟﻌﻘﺪ ﻣﻤﺘﺪﺍ ً ﻭﻳﻘﻮﻡ
+                                        ﺑﺘﺠﺪﻳﺪ ﺑﻨﻮﺩ ﻭﺷﺮﻭﻁ ﺍﻟﻌﻘﺪ ﺑﻤﺎ ﻓﻲ ﺫﻟﻚ ﺍﻟﻘﻴﻤـﺔ ﺍﻹﻳﺠﺎﺭﻳﺔ
+                                        ﺍﻟﺠﺪﻳﺪﺓ ﻭﻣﺪﺓ ﺳﺮﻳﺎﻥ ﺍﻹﻳﺠﺎﺭ ﻭﺗﻮﺍﺭﻳﺦ ﻭﻁﺮﻳﻘـﺔ ﺳﺪﺍﺩ ﺍﻟﻘﻴﻤـﺔ
+                                        ﺍﻹﻳﺠﺎﺭﻳﺔ ﺍﻟﺠﺪﻳﺪﺓ ، ﻭﻟﻴﺲ ﻟﻠﻤﺴﺘﺄﺟﺮ ﺣﻖ ﺍﻻﻋﺘﺮﺍﺽ ﻋﻠﻰ
+                                        ﺗﻠﻚ ﺍﻟﺒﻨﻮﺩ ﻭﺍﻟﺸﺮﻭﻁ ﻟﺪﻯ ﺍﻟﻤﺎﻟﻚ ﺃﻭ ﻟﺪﻯ ﺍﻟﻤﺤﻜﻤﺔ ﺃﻭ ﺍﻟﻠﺠﻨﺔ
+                                        .ﺃﻭ ﺍﻟﺪﺍﺋﺮﺓ ﺍﻟﻤﺨﺘﺼﺔ ﺑﺘﺴﻮﻳﺔ ﺍﻟﻤﻨﺎﺯﻋﺎﺕ ﺍﻹﻳﺠﺎﺭﻳﺔ ﺑﺎﻹﻣﺎﺭﺓ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-10</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 11-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        The tenant bears all contractual commitments until
+                                        the date of vacating the unit, and handing over the
+                                        unit free of people and concerns, whether it is
+                                        belongings, - garbage, - households and in the
+                                        condition, it was in at the time of receiving the unit and
+                                        in good and clean condition. The Tenant shall bear all
+                                        expenses in case such fees and costs were paid by
+                                        Landlord to revert the Unit back to the condition it was
+                                        in at the time of receiving it again.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻳﺘﺤﻤﻞ ﺍﻟﻤﺴﺘﺄﺟﺮ ﻛﺎﻓﺔ ﺍﻻﻟﺘﺰﺍﻣﺎﺕ ﺍﻟﺘﻌﺎﻓﺪﻳﺔ ﺣﺘﻰ ﺗﺎﺭﻳﺦ
+                                        ﺍﺧﻼء ﺍﻟﻮﺣﺪﺓ ﻭﺗﺴﻠﻴﻤﻪ ﺍﻟﻮﺣﺪﺓ ﺧﺎﻟﻴﺔ ﻣﻦ ﺍﻻﺷﺨﺎﺹ
+                                        ﻭﺍﻟﺸﻮﺍﻏﻞ ﺳﻮﺍء ﻛﺎﻧﺖ ) ﻣﻤﻠﺘﻜﺎﺕ – ﻧﻔﺎﻳﺎﺕ – ﻣﻘﺘﻨﻴﺎﺕ
+                                        ﻣﻨﺰﻟﻴﺔ( ﻭﺑﺎﻟﺤﺎﻟﺔ ﺍﻟﺘﻲ ﻛﺎﻧﺖ ﻋﻠﻴﻬﺎ ﻭﻗﺖ ﺍﺳﺘﻼﻡ ﺍﻟﻮﺣﺪﺓ ﻭﻓﻲ
+                                        ﺣﺎﻟﺔ ﺟﻴﺪﺓ ﻭﻧﻈﻴﻔﺔ، ﻭﻋﻠﻰ ﺍﻟﻤﺘﺴﺄﺟﺮ ﺍﻥ ﻳﺘﺤﻤﻞ ﺍﻟﻤﺴﺆﻟﻴﺔ
+                                        ﻋﻦ ﻛﺎﻓﺔ ﺍﻟﻤﺼﺎﺭﻳﻒ ﻭﺍﻟﺮﺳﻮﻡ ﺍﻟﺘﻲ ﻳﺪﻓﻌﻬﺎ ﺍﻟﻤﺎﻟﻚ ﻻﻋﺎﺩﺓ
+                                        ﺍﻟﻌﻘﺎﺭ )ﺍﻟﻮﺣﺪﺓ( ﺍﻟﻰ ﺍﻟﺤﺎﻟﺔ ﺍﻟﺘﻲ ﻛﺎﻧﺖ ﻋﻠﻴﻬﺎ ﻭﻗﺖ ﺍﺳﺘﻼﻣﻬﺎ
+                                        ﻣﺮﺓ ﺍﺧﺮﻯ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-11</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 12-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">Parties further agree that as and when the Leased
+                                        Units will become available the same shall be notified
+                                        by the Landlord to the Tenant for the purpose of the
+                                        execution of the Annual Lease Agreement(s),
+                                        however, if, the Tenant fails to execute the Annual
+                                        Lease Agreement(s) within 15 days from the date of
+                                        notification by the Landlord then the Landlord shall
+                                        have the right to lease such Leased Unit to any third
+                                        party as it is deems appropriate and the said Lease
+                                        Unit will be deemed not to be part of the Units.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">المؤجرة متاحة ، يجب أن يتم إخطار المستأجر من قبلﻳﻮﺍﻓﻖ
+                                        ﺍﻷﻁﺮﺍﻑ ﺃﻳﻀﺎ ﻋﻠﻰ ﺃﻧﻪ ﻋﻨﺪﻣﺎ ﺗﺼﺒﺢ ﺍﻟﻮﺣﺪﺍﺕ
+                                        المالك لغرض تنفيذ اتفاقية (اتفاقيات) الإيجار السنوية ، ومع
+                                        ذلك ، إذا فشل المستأجر في تنفيذ اتفاقية (اتفاقيات)
+                                        الإيجار السنوية في غضون 15 يومًا من تاريخ الإخطار من قبل
+                                        المالك ، ويكون للمالك الحق في تأجير هذه الوحدة المؤجرة
+                                        إلى أي طرف ثالث كما يراه مناسبًا وستعتبر وحدة الإيجار
+                                        المذكورة ليست جزءًا من الوحدات
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-12</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">3- 13-</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        In the event of the Tenant failing to comply with any
+                                        of his obligations in terms hereof, other than the
+                                        payment of the Annual Rent and any of the amounts
+                                        referred to in Schedule III hereof, and remaining in
+                                        default after fifteen (15) days of having been given
+                                        written notice by the Landlord to remedy or rectify his
+                                        breach, the Landlord shall be able to forthwith cancel
+                                        this Agreement and require the Tenant, the Occupants
+                                        and all those occupying through them, to immediately
+                                        vacate the Units, Building and Property without the
+                                        responsibility of the owner, and in the event of their
+                                        refusal to evacuate the units and buildings, they bear
+                                        legal responsibility
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻓﻲ ﺣﺎﻟﺔ ﻋﺪﻡ ﺍﻣﺘﺜﺎﻝ ﺍﻟﻤﺴﺘﺄﺟﺮ ﻷﻱ ﻣﻦ ﺍﻟﺘﺰﺍﻣﺎﺗﻪ ﺑﻤﻮﺟﺐ
+                                        ﻫﺬﺍ ﺍﻟﻌﻘﺪ ، ﺑﺨﻼﻑ ﺩﻓﻊ ﺍﻹﻳﺠﺎﺭ ﺍﻟﺴﻨﻮﻱ ﻭﺃﻱ ﻣﻦ ﺍﻟﻤﺒﺎﻟﻎ
+                                        ﺍﻟﻤﺸﺎﺭ ﺇﻟﻴﻬﺎ ﻓﻲ ﺍﻟﺠﺪﻭﻝ ﺍﻟﺜﺎﻟﺚ ﻣﻦ ﻫﺬﻩ ﺍﻻﺗﻔﺎﻗﻴﺔ ، ﻭﺍﻟﺒﻘﺎء
+                                        ﻓﻲ ﺣﺎﻟﺔ ﺗﻘﺼﻴﺮ ﺑﻌﺪ ﺧﻤﺴﺔ ﻋﺸﺮ (15) ﻳﻮﻡ ﻣﻦ ﺗﻠﻘﻴﻪ ﻣﻦ
+                                        ﺍﻟﻤﺎﻟﻚ ﺇﺷﻌﺎ ًﺭﺍ ﻛﺘﺎﺑﻴًﺎ ﻟﻠﻮﻓﺎء ﺑﺎﻟﺘﺰﺍﻣﺎﺗﻪ ﻭﺗﺼﺤﻴﺢ ﺗﻘﺼﻴﺮﻩ، ﻳﺤﻖ
+                                        ﻟﻠﻤﺎﻟﻚ ﺇﻟﻐﺎء ﻫﺬﺍ ﺍﻟﻌﻘﺪ ﻋﻠﻰ ﺍﻟﻔﻮﺭ ﻭﻳﺠﺐ ﻋﻠﻰ ﺍﻟﻤﺴﺘﺄﺟﺮ
+                                        ﻭﺍﻟﻤﻘﻴﻤﻴﻦ ﻭﺟﻤﻴﻊ ﻣﻦ ﻳﺸﻐﻠﻮﻧﻪ ﻣﻦ ﺧﻼﻟﻬﻢ ﺇﺧﻼء ﺍﻟﻮﺣﺪﺍﺕ
+                                        ﻭﺍﻟﻤﺒﺎﻧﻲ ﻭﺍﻟﻤﻤﺘﻠﻜﺎﺕ ﻋﻠﻰ ﺍﻟﻔﻮﺭ ﺩﻭﻥ ﻣﺴﺆﻟﻴﺔ ﺍﻟﻤﺎﻟﻚ ﻭﻓﻲ
+                                        ﺣﺎﻟﺔ ﺭﻓﻀﻬﻢ ﺍﺧﻼء ﺍﻟﻮﺣﺪﺍﺕ ﻭﺍﻟﻤﺒﺎﻧﻲ ﻳﺘﺤﻤﻠﻮﺍ ﺍﻟﻤﺴﺆﻟﻴﺔ
+                                        .ﺍﻟﻘﺎﻧﻮﻧﻴﺔ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-13</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">4-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">EVENT OF DEFAULT AND RECOURSES</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﺣﺎﻻﺕ ﺍﻟﺘﻘﺼﻴﺮ ﻭﺍﻟﺮﺟﻮﻉ</span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-4</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">1-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        Any one or more than one of the following cases will
+                                        be considered as event of default and will be dealt
+                                        with by the Landlord as per Clause 4(2) of the
+                                        Contract;
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﺗﻌﺘﺒﺮ ﺃﻱ ﻭﺍﺣﺪﺓ ﺃﻭ ﺃﻛﺜﺮ ﻣﻦ ﺍﻟﺤﺎﻻﺕ ﺍﻟﺘﺎﻟﻴﺔ ﻣﻦ ﺣﺎﻻﺕ ﺍﻟﺘﻘﺼﻴﺮ
+                                        ﻭﻳﺘﻌﺎﻣﻞ ﻣﻌﻬﺎ ﺍﻟﻤﺎﻟﻚ ﻭﻓﻖ ﻣﺎ ﺗﻨﺺ ﻋﻠﻴﻪ ﺍﻟﻔﻘﺮﺓ 4 (2) ﻣﻦ
+                                        .ﻫﺬﺍ ﺍﻟﻌﻘﺪ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-1</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">A-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">The Tenant failed to satisfy the payments as against
+                                        Rental Value as per payment plan as described in
+                                        Schedule III; or
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﺃﺧﻔﻖ ﺍﻟﻤﺴﺘﺄﺟﺮ ﻓﻲ ﺍﻻﻟﺘﺰﺍﻡ ﺑﺪﻓﻌﺎﺕ ﺍﻟﻘﻴﻤﺔ ﺍﻹﻳﺠﺎﺭﻳﺔ ﻭﻓﻘﺎ
+                                        ً ﻟﺨﻄﺔ ﺍﻟﺪﻓﻊ ﺍﻟﻤﻨﺼﻮﺹ ﻋﻠﻴﻬﺎ ﻓﻲ ﺍﻟﺠﺪﻭﻝ ﺭﻗﻢ 3 ؛ ﺃﻭ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺃ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">B-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">The Tenant leaves or vacates the rented Unit without
+                                        handing it over to the Landlord as per Landlord handing over process; or
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">أخفق المستأجر في ترك أو إخلاء الوحدة المُستأجَرَة دون
+                                        تسليمها إلى المالك وفق إجراءات التسليم للمالك ؛ أو
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺏ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">C-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">The Tenant leaves the Unit for a period of more than
+                                        forty five (45) consecutive days by residing
+                                        somewhere else inside or outside the country without
+                                        serving a prior written notice to the Landlord; or
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﻓﻲ ﺣﺎﻝ ﺗﺮﻙ ﺍﻟﻤﺴﺘﺄﺟﺮ ﺍﻟﻮﺣﺪﺓ ﻟﻤﺪﺓ ﺗﺰﻳﺪ ﻋﻦ ﺧﻤﺴﺔ
+                                        ﻭﺃﺭﺑﻌﻴﻦ (45) ﻳﻮﻣﺎ ً ﻣﺘﺘﺎﻟﻴﺔ ﺑﺎﻹﻗﺎﻣﺔ ﻓﻲ ﻣﻜﺎﻥ ﺁﺧﺮ ﺩﺍﺧﻞ ﺃﻭ
+                                        ﺧﺎﺭﺝ ﺍﻟﺪﻭﻟﺔ ﺩﻭﻥ ﺗﻘﺪﻳﻢ ﺍﻹﺧﻄﺎﺭ ﺍﻟﺨﻄﻲ ﺍﻟﻤﺴﺒﻖ ﺑﺬﻟﻚ ﺇﻟﻰ
+                                        ﺍﻟﻤﺎﻟﻚ ؛ ﺃﻭ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺕ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">D-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">The Unit is being used for a cause other than
+                                        mentioned in Permitted Use; or
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﻓﻲ ﺣﺎﻝ ﺍﺳﺘﺨﺪﺍﻡ ﺍﻟﻮﺣﺪﺓ ﻷﻱ ﻏﺮﺽ ﺑﺨﻼﻑ ﻣﺎ ﻫﻮ ﻭﺍﺭﺩ ﻓﻲ
+                                        ﺍﻻﺳﺘﺨﺪﺍﻡ ﺍﻟﻤﺴﻤﻮﺡ ﺑﻪ ؛ ﺃﻭ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺝ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">E-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">Tenancy Period has expired and new tenancy contract
+                                        is not signed; or
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﻓﻲ ﺣﺎﻝ ﺍﻧﺘﻬﺖ ﻣﺪﺓ ﺍﻹﻳﺠﺎﺭ ﺩﻭﻥ ﺍﻟﺘﻮﻗﻴﻊ ﻋﻠﻰ ﻋﻘﺪ ﺇﻳﺠﺎﺭ
+                                        ﺟﺪﻳﺪ
+                                        ؛ ﺃﻭ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺡ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">F-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">The Tenant is otherwise in default as per the terms
+                                        and conditions of Contract.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﻛﺎﻥ ﺍﻟﻤﺴﺘﺄﺟﺮ ﻣﻘﺼّﺮﺍ ً ﺑﺨﻼﻑ ﺫﻟﻚ ﻭﻓﻖ ﻣﺎ ﺗﻨﺺ ﻋﻠﻴﻪ
+                                        .ﺷﺮﻭﻁ ﻭﺑﻨﻮﺩ ﻫﺬﺍ ﺍﻟﻌﻘﺪ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺩ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">G-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">Within default period, the tenant does not have any
+                                        right to apply for Maintenance till he comply with contract obligations
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﺧﻼﻝ ﻓﺘﺮﺓ ﺍﻹﺧﻼﻝ ﻭﺍﻟﺘﻘﺼﻴﺮ ﻻ ﻳﺤﻖ ﻟﻠﻤﺴﺘﺄﺟﺮ ﻣﻄﺎﻟﺒﺔ
+                                        ﺍﻟﻤﺎﻟﻚ ﻟﻠﻘﻴﺎﻡ ﺑﺄﻯ ﺃﻋﻤﺎﻝ ﺻﻴﺎﻧﺔ ﻟﻠﻮﺣﺪﺓ ﻭﺫﻟﻚ ﺣﺘﻰ ﻳﻘﻮﻡ
+                                        . ﺍﻟﻤﺴﺘﺎﺟﺮ ﺑﺎﻟﻮﻓﺎء ﺑﺎﻟﺘﺰﺍﻣﺎﺗﻪ ﺍﻟﺘﻌﺎﻗﺪﻳﺔ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺥ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">H-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">If the tenant cause any damage to the Unit(s),
+                                        Building(s) and/or Property which, in the sole discretion of the Landlord, it
+                                        considered to be serious damage.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﺇﺫﺍ ﺗﺴﺒﺐ ﺍﻟﻤﺴﺘﺄﺟﺮ ﻓﻲ ﺃﻱ ﺿﺮﺭ ﻟﻠﻮﺣﺪﺓ )ﺍﻟﻮﺣﺪﺍﺕ(
+                                        ﻭﺍﻟﻤﺒﻨﻰ )ﺍﻟﻤﺒﺎﻧﻲ( ﻭ / ﺃﻭ ﺍﻟﻤﻤﺘﻠﻜﺎﺕ ﻭﻓﻘﺎ ﻟﺘﻘﺪﻳﺮ ﺍﻟﻤﺎﻟﻚ
+                                        ﻭﺣﺪﻩ ، ﻓﺈﻧﻪ ﻳﻌﺘﺒﺮ ﺿﺮﺭﺍ ﺧﻄﻴ ًﺮﺍ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺡ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">2-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        The Contract will be terminated automatically and will
+                                        be considered as null and void in favor of Landlord,
+                                        subject to the occurrence of Event of Default as per
+                                        Clause 4(1) and subject to all other remedies, rights and recourses legally
+                                        available to the Landlord in this Agreement or Schedule I, the Landlord has the
+                                        right
+                                        on its sole discretion to take one or more of the following actions;
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻳﻨﺘﻬﻲ ﻫﺬﺍ ﺍﻟﻌﻘﺪ ﺑﺼﻔﺔ ﺗﻠﻘﺎﺋﻴﺔ ﻭﻳﻌﺘﺒﺮ ﻻﻏﻴﺎ ً ﻭﺑﺎﻁﻼ ً ﻟﺼﺎﻟﺢ
+                                        ﺍﻟﻤﺎﻟﻚ ، ﻭﻣﻊ ﻣﺮﺍﻋﺎﺓ ﺣﺪﻭﺙ ﺃﻱ ﻣﻦ ﺣﺎﻻﺕ ﺍﻟﺘﻘﺼﻴﺮ ﻭﻓﻖ ﻣﺎ
+                                        ﺗﻨﺺ ﻋﻠﻴﻪ ﺍﻟﻔﻘﺮﺓ 4 (1) ، ﻭﻣﻊ ﻣﺮﺍﻋﺎﺓ ﻛﺎﻓﺔ ﺍﻟﺤﻘﻮﻕ ﻭﺣﻘﻮﻕ
+                                        ﺍﻻﺳﺘﺮﺩﺍﺩ ﻭﺣﻘﻮﻕ ﺍﻟﺮﺟﻮﻉ ﺍﻷﺧﺮﻯ ﺍﻟﻤﺴﻤﻮﺡ ﺑﻬﺎ ﻗﺎﻧﻮﻧﺎ ً
+                                        ﻟﻠﻤﺎﻟﻚ ﻓﻲ ﻫﺬﻩ ﺍﻻﺗﻔﺎﻗﻴﺔ ﺍﻭ ﺍﻟﺠﺪﻭﻝ ﺭﻗﻢ 1 ﻳﺤﻖ ﻟﻠﻤﺎﻟﻚ ﻭﺑﻜﺎﻣﻞ ﺍﺧﺘﻴﺎﺭﻩ ﻭﻣﺤﺾ ﺇﺭﺍﺩﺗﻪ ﺃﻥ
+                                        ﻳﺘﺨﺬ ﻭﺍﺣﺪ ﺃﻭ ﺃﻛﺜﺮ ﻣﻦ
+                                        :ﺍﻹﺟﺮﺍءﺍﺕ ﺍﻟﺘﺎﻟﻴﺔ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-2</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">A-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        (a) revert such termination unilaterally back (su decision will be binding on
+                                        Tenant) and claim the rentals, damages, cost of delays and other charges
+                                        permissible under this Contract or normal market
+                                        practice; or
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﺍﻟﺘﺮﺍﺟﻊ ﻋﻦ ﻫﺬﺍ ﺍﻟﻔﺴﺦ ﻣﻦ ﺟﺎﻧﺐ ﻭﺍﺣﺪ )ﻭﻳﻜﻮﻥ ﻫﺬﺍ ﺍﻟﻘﺮﺍﺭ ﻣﻠﺰﻣﺎ ً ﻟﻠﻤﺴﺘﺄﺟﺮ( ﻭﺍﻟﻤﻄﺎﻟﺒﺔ
+                                        ﺑﺎﻹﻳﺠﺎﺭ ﻭﺍﻷﺿﺮﺍﺭ ﻭﺗﻜﺎﻟﻴﻒ
+                                        ﺍﻟﺘﺄﺧﻴﺮ ﻭﻏﻴﺮﻫﺎ ﻣﻦ ﺍﻷﺟﻮﺭ ﺍﻷﺧﺮﻯ ﺍﻟﻤﺴﻤﻮﺡ ﺑﻬﺎ ﺑﻤﻮﺟﺐ ﻫﺬﺍ ﺍﻟﻌﻘﺪ ﺃﻭ ﻣﺎ ﺗﺴﻤﺢ ﺑﻪ ﺍﻟﻤﻤﺎﺭﺳﺔ
+                                        ﺍﻟﻄﺒﻴﻌﻴﺔ ﻓﻲ ﺍﻟﺴﻮﻕ ؛ ﺃﻭ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺃ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">B-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">to act as it deems fit including but not limited to
+                                        open the rented Unit according to the authorization letter
+                                        issued by the tenant to the Lessor as described in Schedule V.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﺍﻟﺘﺼﺮﻑ ﺑﻤﺎ ﻳﺮﺍﻩ ﻣﻨﺎﺳﺒًﺎ ﺑﻤﺎ ﻓﻲ ﺫﻟﻚ ﻋﻠﻰ ﺳﺒﻴﻞ ﺍﻟﻤﺜﺎﻝ
+                                        ﻻ ﺍﻟﺤﺼﺮ ﻓﺘﺢ ﺍﻟﻮﺣﺪﺓ ﺍﻟﻤﺆﺟﺮﺓ ﻭﻓﻘﺎ ﻟﺨﻄﺎﺏ ﺍﻟﺘﻔﻮﻳﺾ ﺍﻟﺼﺎﺩﺭ ﻣﻦ ﺍﻟﻤﺴﺘﺄﺟﺮ ﺇﻟﻰ ﺍﻟﻤﺆﺟﺮ ﻛﻤﺎ
+                                        ﻫﻮ ﻣﻮﺿﺢ ﻓﻲ ﺍﻟﺠﺪﻭﻝ
+                                        .ﺍﻟﺨﺎﻣﺲ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺏ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">C-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        to allocate the sale proceeds of belongings to set off
+                                        to all or part of all receivable balance from the Tenant as against rentals or
+                                        any other charges.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﺗﻮﺯﻳﻊ ﺍﻟﻌﺎﺋﺪ ﻣﻦ ﺑﻴﻊ ﺍﻟﻤﻘﺘﻨﻴﺎﺕ ﻟﻤﺨﺎﻟﺼﺔ ﻛﻞ ﺃﻭ ﺑﻌﺾ
+                                        ﺍﻟﺮﺻﻴﺪ .ﺍﻟﻤﺴﺘﺤﻖ ﻣﻦ ﺍﻟﻤﺴﺘﺄﺟﺮ ﻣﻘﺎﺑﻞ ﺍﻹﻳﺠﺎﺭ ﺃﻭ ﺃﻳﺔ ﺃﺟﻮﺭ ﺃﺧﺮﻯ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-ﺕ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">5-
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">APPLICABLE LAWS</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﺍﻟﻘﻮﺍﻧﻴﻦ ﻭﺍﺟﺒﺔ ﺍﻟﺘﻄﺒﻴﻖ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">-5</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">Subject to the terms and conditions of this contract
+                                        and rights of both parties hereto set out herein, this contract shall be
+                                        governed by and construed in accordance with the applicable laws of the UAE and
+                                        the Emirate where the property located, and rent
+                                        dispute committee in the emirate shall have the exclusive jurisdiction
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻣﻊ ﻣﺮﺍﻋﺎﺓ ﺷﺮﻭﻁ ﻭﺃﺣﻜﺎﻡ ﻫﺬﺍ ﺍﻟﻌﻘﺪ ﻭﺣﻘﻮﻕ ﻛﻼ ﻁﺮﻓﻴﻬﺎ ﺍﻟﻤﻨﺼﻮﺹ ﻋﻠﻴﻬﺎ ﻓﻴﻬﺎ ، ﻳﺠﺮﻯ ﺗﻔﺴﻴﺮ
+                                        ﻋﻘﺪ ﺍﻹﻳﺠﺎﺭ ﻭﺍﻷﺣﻜﺎﻡ ﻭﺍﻟﺸﺮﻭﻁ ﺍﻟﻤﺮﻓﻘﻪ ﺑﻪ ﻭﻓﻘﺎ ﻟﻠﻘﻮﺍﻧﻴﻦ ﺍﻟﻤﻌﻤﻮﻝ ﺑﻬﺎ ﻓﻰ ﺩﻭﻟﺔ ﺍﻹﻣﺎﺭﺍﺕ
+                                        ﺍﻟﻌﺮﺑﻴﺔ ﺍﻟﻤﺘﺤﺪﺓ ﻭﺍﻹﻣﺎﺭﺓ ﺍﻟﻮﺍﻗﻊ ﺑﻬﺎ ﺍﻟﻌﻘﺎﺭ ﻭﻳﻜﻮﻥ
+                                        ﺍﻹﺧﺘﺼﺎﺹ ﺍﻟﻘﻀﺎﺋﻰ ﻟﻠﺠﻨﺔ ﻓﺾ ﺍﻟﻤﻨﺎﺯﻋﺎﺕ ﺍﻹﻳﺠﺎﺭﻳﺔ ﺑﺎﻻﻣﺎﺭﺓ ؛
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">In Witness whereof, both parties, in their full legal
+                                        capacity to act and contract, has set their respective hand hereunto at the date
+                                        set out hereinabove.
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﻭﺇﺷﻬـﺎﺩﺍ ً ﻋﻠﻰ ﻣﺎ ﺗﻘـﺪﻡ ، ﻭﻋﻠﻴﻪ ﻭﻗﻊ ﺍﻟﻄﺮﻓﻴﻦ ﻭﻫﻤﺎ ﻓﻰ ﻛﺎﻣﻞ ﺃﻫﻠﻴﺘﻬﻤﺎ ﻟﻠﺘﻌﺎﻗﺪ ﺷﺮﻋﺎ
+                                        ﻭﻗﺎﻧﻮﻧﺎ ﻋﻠﻰ ﻫﺬﺍ ﺍﻟﻌﻘﺪ ﻓﻲ
+                                        .ﺍﻟﺘﺎﺭﻳـﺦ ﺍﻟﻤﺬﻛـﻮﺭ ﻓﻲ ﺻﺪﺭ ﻫﺬﺍ ﺍﻟﻌﻘﺪ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">LANDLORD</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﺍﻟﻤﺎﻟﻚ</span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">[signature]</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﺍﻟﺘﻮﻗﻴﻊ</span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">Date:</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">:ﺍﻟﺘﺎﺭﻳﺦ</span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">TENANT</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">ﺍﻟﻤﺴﺘﺄﺟﺮ</span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">[signature]</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        :ﺍﻟﺘﻮﻗﻴﻊ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border:none;width:10%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: left;padding:10px;">
+                                    <span style="font-size: 16px;">Date:</span>
+                                </td>
+                                <td style="border:none;width:40%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                        ﺍﻟﺘﺎﺭﻳﺦ
+                                    </span>
+                                </td>
+                                <td style="border:none;width:10%; text-align: right;padding:10px;">
+                                    <span style="font-size: 16px;">
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="text-center" style="margin-top:50px;">
+                            <u>
+                                <span style="font-weight:bold;">Schedule 1</span>
+                            </u>
+                        </div>
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:10%;text-align: center;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;text-align: center;">ﻡ.</span>
+                                </td>
+                                <td style="width:35%; text-align: left;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;">Type of Fee / Compensation</span>
+                                </td>
+                                <td style="width:35%; text-align: right;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;">ﻧﻮﻉ ﺍﻟﺮﺳﻮﻡ / ﺍﻟﺘﻌﻮﻳﺾ</span>
+                                </td>
+                                <td style="width:20%; text-align: left;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;">Value (AED)/%</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;text-align: center;">Sr. No</span>
+                                </td>
+                                <td style="width:35%; text-align: left;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;"></span>
+                                </td>
+                                <td style="width:35%; text-align: right;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;"></span>
+                                </td>
+                                <td style="width:20%; text-align: left;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;">ﺍﻟﻘﻴﻤﺔ )ﺩﺭﻫﻢ(</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="border-color:white;width:100%;margin-top:1px;">
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">1</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Tenant’s request to replace one
+                                        postdated cheque
+                                        (new cheque to be dated as the old cheque date or the current date whichever is
+                                        earlier)
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">)ﺍﻟﺘﺎﺭﻳﺦ ﺍﻟﺤﺎﻟﻲ ، ﺃﻳﻬﻤﺎ ﺃﻭﻻ ً يُحرر شيك جديد بنفس
+                                        تاريخ الشيك القديم أو)طلب المستأجر استبدال شيك مؤجل واحد
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">100 AED</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px; font-weight: bold;text-align: center;">2</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Tenant’s request to postpone one
+                                        installment
+                                        (in addition to delay payment charges as normally applied by the Landlord)
+
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">ﻁﻠﺐ ﺍﻟﻤﺴﺘﺄﺟﺮ ﺗﺄﺟﻴﻞ ﺃﺣﺪ ﺍﻷﻗﺴﺎﻁ
+                                        ﺑﺎﻹﺿﺎﻓﺔ ﺇﻟﻰ ﺭﺳﻮﻡ ﺍﻟﺘﺄﺧﺮ ﻓﻲ ﺍﻟﺪﻓﻊ ﻭﻓﻖ( )
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">100 AED</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">3</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Cheque dishonor first time
+                                        (single cheque dishonor admin charges for the first time dishonor, as against
+                                        any installment or payment due)
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">ﺍﺭﺗﺠﺎﻉ ﺷﻴﻚ ) ﺍﻟﻤﺮﺓ ﺍﻻﻭﻟﻰ ( ﺍﺭﺗﺠﺎﻉ ﺷﻴﻚ ﻭﺍﺣﺪ ﻷﻭﻝ ﻣﺮﺓ
+                                        ﻣﻘﺎﺑﻞ ﺃﻱ ﻗﺴﻂ ﺃﻭ(
+                                        )
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">250 AED</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">4</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Cheque dishonor second time and
+                                        onward (second time dishonor for the same cheque, installment or payment due)
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">ﺍﺭﺗﺠﺎﻉ ﺷﻴﻚ ) ﺍﻟﻤﺮﺓ ﺍﻟﺜﺎﻧﻴﺔ ﻓﺼﺎﻋﺪﺍ ( ﺍﺭﺗﺠﺎﻉ ﺷﻴﻚ ﻣﺮﺓ
+                                        ﺛﺎﻧﻴﺔ ﻣﻘﺎﺑﻞ ﻧﻔﺲ ﺍﻟﻘﺴﻂ ﺃﻭ)
+                                        )ﺍﻟﻤﺒﻠﻎ ﺍﻟﻤﺴﺘﺤﻖ
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">500 AED</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">5</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Unit not vacated upon expiry of Tenancy Period
+                                        (weekly compensation charge for first 4 weeks in additional to the new rental
+                                        value)
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">)ﺍﻟﺘﺎﺭﻳﺦ ﺍﻟﺤﺎﻟﻲ ، ﺃﻳﻬﻤﺎ ﺃﻭﻻ ً يُحرر شيك جديد بنفس
+                                        ﺗﻌﻮﻳﺾ ﺍﺳﺒﻮﻋﻲ ﺧﻼﻝ ﺃﻭﻝ 4 ﺃﺳﺎﺑﻴﻊ ﺑﺎﻹﺿﺎﻓﺔﺇﻟﻰ ﻗﻴﻤﺔ ﺍﻹﻳﺠﺎﺭ ﺍﻟﺠﺪﻳﺪ
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">200 AED</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">6</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Unit not vacated beyond 1 month of expiry of
+                                        Tenancy Period
+                                        (compensation charge on daily basis after one month of expiry of Tenancy Period
+                                        until the Unit is vacated or new contract is signed)
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">ﻋﺪﻡ ﺇﺧﻼء ﺍﻟﻮﺣﺪﺓ ﺧﻼﻝ ﺷﻬﺮ ﻭﺍﺣﺪ ﻣﻦ ﺗﺎﺭﻳﺦ ﺍﻧﺘﻬﺎء
+                                        ﻣﺪﺓ ﺍﻹﻳﺠﺎﺭ ﺗﻌﻮﻳﺾ ﺑﺼﻔﺔ ﻳﻮﻣﻴﺔ ﺑﻌﺪ ﺷﻬﺮ ﻭﺍﺣﺪ ﻣﻦ ﺗﺎﺭﻳﺦ) ﺍﻧﺘﻬﺎء ﻣﺪﺓ ﺍﻹﻳﺠﺎﺭ ﺇﻟﻰ ﺃﻥ ﻳﺘﻢ
+                                        ﺇﺧﻼء ﺍﻟﻮﺣﺪﺓ ﺃﻭ
+                                        (ﺍﻟﺘﻮﻗﻴﻊ ﻋﻠﻰ ﻋﻘﺪ ﺟﺪﻳﺪ
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">200 AED</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">7</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Request for early termination of Tenancy Contract
+                                        by the Tenant or if contract is terminated by Event of Default per Clause 4(1)
+                                        (subject to the approval of Landlord, two month’s Rental Value or the Rental
+                                        Value of the remaining period whichever is lower)
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">ﻁﻠﺐ ﺍﻟﻤﺴﺘﺄﺟﺮ ﻓﺴﺦ ﺍﻟﻌﻘﺪ ﻗﺒﻞ ﺍﻧﺘﻬﺎء ﻣﺪﺗﻪ ﺍﻭ
+                                        ﺍﻧﻬﺎء ﺍﻟﻌﻘﺪ ﻓﻲ ﺣﺎﻝ ﺍﻻﺧﻼﻝ ﻛﻤﺎ ﻫﻮ ﻣﻮﺿﺢ ﺑﺎﻟﺒﻨﺪ
+                                        4(1)
+                                        ﻣﻊ ﻣﺮﺍﻋﺎﺓ ﻣﻮﺍﻓﻘﺔ ﺍﻟﻤﺎﻟﻚ ، ﻗﻴﻤﺔ ﺍﻹﻳﺠﺎﺭ ﻟﻤﺪﺓ) ﺷﻬﺮﻳﻦ ﻗﻴﻤﺔ ﺍﻹﻳﺠﺎﺭ ﻁﻮﺍﻝ ﺍﻟﻤﺪﺓ
+                                        ﺍﻟﻤﺘﺒﻘﻴﺔ ، ﺃﻳﻬﻤﺎ
+                                        (ﺃﻗﻞ
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">Two Months’ Rent</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">8</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Contract renewal admin charges (percentage of the
+                                        new rental value)
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">ﺭﺳﻮﻡ ﺗﺠﺪﻳﺪ ﺍﻟﻌﻘﺪ
+                                        (ﻧﺴﺒﺔ ﻣﺌﻮﻳﺔ ﻣﻦ ﻗﻴﻤﺔ ﺍﻹﻳﺠﺎﺭ ﺍﻟﺠﺪﻳﺪ)
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">2.5</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">9</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Reconnection of utilities
+                                        (reconnection admin charges, if utilities are provided by the Landlord or any
+                                        company appointed by Landlord)
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">
+                                        ﺇﻋﺎﺩﺓ ﺗﻮﺻﻴﻞ ﺍﻟﺨﺪﻣﺎﺕ
+                                        ﺭﺳﻮﻡ ﺍﻋﺎﺩﺓ ﺗﻮﺻﻴﻞ ﺍﻟﺨﺪﻣﺎﺕ ،ﻓﻲ ﺣﺎﻝ ﻛﺎﻥ ﻳﺘﻢ) ﺗﻮﻓﻴﺮ ﺍﻟﺨﺪﻣﺎﺕ ﻋﻦ ﻁﺮﻳﻖ ﺍﻟﻤﺎﻟﻚ ﺃﻭ ﺃﻳﺔ
+                                        ﺷﺮﻛﺔ
+                                        )
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">100 AED</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">10</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Delayed Renewal Charges
+                                        All renewals should be done on the lsat day of be can days 7 of period Grace
+                                        contract the
+                                        given for completing the paper work
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">ﺭﺳﻮﻡ ﺍﻟﺘﺄﺧﻴﺮ ﻓﻲ ﺗﺠﺪﻳﺪ ﻋﻘﺪ ﺍﻻﻳﺠﺎﺭ
+                                        ﻳﺠﺐ ﺃﻥ ﺗﺘﻢ ﺟﻤﻴﻊ ﺍﻟﺘﺠﺪﻳﺪﺍﺕ ﻓﻲ ﺍﻟﻴﻮﻡ ﺍﻷﺧﻴﺮ ﻣﻦ
+                                        ﺍﻟﻌﻘﺪ. ﻳﻤﻜﻦ ﻣﻨﺢ ﻣﻬﻠﺔ 7 ﺃﻳﺎﻡ ﻹﺗﻤﺎﻡ ﺍﻟﻌﻤﻞ ﺍﻟﻮﺭﻗﻲ
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">250 AED</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">11</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Compensation against throwing waste in the place
+                                        other than allocated one (first time)
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">ﺍﻟﺘﻌﻮﻳﺾ ﻋﻦ ﺭﻣﻰ ﺍﻟﻤﺨﻠﻔﺎﺕ ﻓﻰ ﻏﻴﺮ ﺍﻟﻤﻜﺎﻥ
+                                        ﺍﻟﻤﺨﺼﺺ ﻟﻬﺎ ( ﺍﻟﻤﺮﺓ ﺍﻷﻭﻟﻰ)
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">250</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">12</span>
+                                </td>
+                                <td style="width:35%; text-align: left;">
+                                    <span style="font-size: 15px;">Compensation against throwing waste in the place
+                                        other than allocated one (Second time and onward)
+                                    </span>
+                                </td>
+                                <td style="width:35%; text-align: right;">
+                                    <span style="font-size: 15px;">ﺍﻟﺘﻌﻮﻳﺾ ﻋﻦ ﺭﻣﻰ ﺍﻟﻤﺨﻠﻔﺎﺕ ﻓﻰ ﻏﻴﺮ ﺍﻟﻤﻜﺎﻥ
+                                        ﺍﻟﻤﺨﺼﺺ ﻟﻬﺎ ( ﺍﻟﻤﺮﺓ ﺍﻟﺜﺎﻧﻴﺔ ﻣﺎ ﻳﻠﻴﻬﺎ)
+                                    </span>
+                                </td>
+                                <td style="width:20%; text-align: center;">
+                                    <span style="font-size: 15px;">500</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="text-center" style="margin-top:90px;">
+                            <u>
+                                <span style="font-weight:bold;margin-top:5px;">Schedule 2</span>
+                            </u>
+                        </div>
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:10%;text-align: center;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;text-align: center;">Sr. No</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;">Particulars</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;">Detail</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;">ﻔﺎﺻﻴﻞ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;background-color: grey;">
+                                    <span style="font-size: 15px; font-weight: bold;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(1)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Landlord*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-if="s.order_line">
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.name"/>
+                                    </t>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﻟﻤﺎﻟﻚ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-if="s.order_line">
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.name_arabic"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(2)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Landlord’s Address*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-if="s.order_line">
+                                        <!--                                        <t t-esc="s.order_line[0].product_template_id.property_owner.address"/>-->
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.street"/>
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.street2"/>
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.state_id.name"/>
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.city"/>
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.country_id.name"/>
+                                        <!--                                        <span t-field="s.order_line[0].product_template_id.property_owner" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;]}"/>-->
+                                    </t>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﻋﻨﻮﺍﻥ ﺍﻟﻤﺎﻟﻚ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-if="s.order_line">
+                                        <!--                                        <t t-esc="s.order_line[0].product_template_id.property_owner.address_arabic"/>-->
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.street_arabic"/>
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.street2_arabic"/>
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.state_id_arabic.name"/>
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.city_arabic"/>
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.country_arabic.name"/>
+                                        <!--                                        <span t-field="s.order_line[0].product_template_id.property_owner" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address_arabic&quot;]}"/>-->
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(3)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Landlord’s Phone No.</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-if="s.order_line">
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.phone"/>
+                                    </t>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﺭﻗﻢ ﻫﺎﺗﻒ ﺍﻟﻤﺎﻟﻚ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-if="s.order_line">
+                                        <t t-esc="s.order_line[0].product_template_id.property_owner.phone"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(4)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Tenant Name*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-if="s.partner_id.company_type == 'company'">
+                                        <t t-if="s.partner_id.tenant_id">
+                                            <t t-esc="s.partner_id.tenant_id.name"/>
+                                        </t>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-esc="s.partner_id.name"/>
+                                    </t>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﺇﺳﻢ ﺍﻟﻤﺴﺘﺄﺟﺮ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-if="s.partner_id.company_type == 'company'">
+                                        <t t-if="s.partner_id.tenant_id">
+                                            <t t-esc="s.partner_id.tenant_id.name_arabic"/>
+                                        </t>
+                                    </t>
+                                    <t t-else="">
+                                        <t t-esc="s.partner_id.name_arabic"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(5)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Occupant Name*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.partner_id.name"/>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﺇﺳﻢ ﺷﺎﻏﺮ ﺍﻟﻮﺣﺪﺓ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.name_arabic"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(6)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Company Name*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.partner_id.parent_id.name"/>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﺍﺳﻢ ﺍﻟﺸﺮﻛﺔ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.parent_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(7)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Company Address*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.partner_id.parent_id.street"/>
+                                    <t t-esc="s.partner_id.parent_id.street2"/>
+                                    <t t-esc="s.partner_id.parent_id.state_id.name"/>
+                                    <t t-esc="s.partner_id.parent_id.city"/>
+                                    <t t-esc="s.partner_id.parent_id.country_id.name"/>
+                                    <!--                                    <span t-field="s.partner_id.parent_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;]}"/>-->
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﻋﻨﻮﺍﻥ ﺍﻟﺸﺮﻛﺔ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.parent_id.street_arabic"/>
+                                    <t t-esc="s.partner_id.parent_id.street2_arabic"/>
+                                    <t t-esc="s.partner_id.parent_id.state_id_arabic.name"/>
+                                    <t t-esc="s.partner_id.parent_id.city_arabic"/>
+                                    <t t-esc="s.partner_id.parent_id.country_arabic.name"/>
+                                    <!--                                    <span t-field="s.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;street_arabic&quot;]}"/>-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(8)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Current Address**</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.partner_id.street"/>
+                                    <t t-esc="s.partner_id.street2"/>
+                                    <t t-esc="s.partner_id.state_id.name"/>
+                                    <t t-esc="s.partner_id.city"/>
+                                    <t t-esc="s.partner_id.country_id.name"/>
+                                    <!--                                    <span t-field="s.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;]}"/>-->
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﺍﻟﻌﻨﻮﺍﻥ ﺍﻟﺤﺎﻟﻲ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.street_arabic"/>
+                                    <t t-esc="s.partner_id.street2_arabic"/>
+                                    <t t-esc="s.partner_id.state_id_arabic.name"/>
+                                    <t t-esc="s.partner_id.city_arabic"/>
+                                    <t t-esc="s.partner_id.country_arabic.name"/>
+                                    <!--                                    <span t-field="s.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address_arabic&quot;]}"/>-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(9)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Passport No</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.partner_id.passport_eng"/>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﺭﻗﻢ ﺟﻮﺍﺯ ﺍﻟﺴﻔﺮ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.passport_eng"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(10)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Email Address*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.partner_id.email"/>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﻋﻨﻮﺍﻥ ﺍﻟﺒﺮﻳﺪ ﺍﻻﻟﻜﺘﺮﻭﻧﻲ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.email"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(11)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Phone (R)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">s</span>-->
+                                    <t t-esc="s.partner_id.phone"/>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﺭﻗﻢ ﺗﻠﻔﻮﻥ ﺍﻟﻤﻨﺰﻝ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.phone"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(12)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Phone (O)*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.partner_id.phone"/>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﺭﻗﻢ ﺗﻠﻔﻮﻥ ﺍﻟﻤﻜﺘﺐ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.phone"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(13)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Mobile*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.partner_id.mobile"/>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﻫﺎﺗﻒ ﻣﺘﺤﺮﻙ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.mobile"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(14)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Fax***</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.partner_id.fax_eng"/>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﻓﺎﻛﺲ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.fax_eng"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(15)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Mobile (Reference)*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.partner_id.mobile"/>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﻫﺎﺗﻒ ﻧﻘﺎﻝ )ﻣﺮﺟﻊ(</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.mobile"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(16)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Occupation*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.partner_id.function"/>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﺍﻟﻮﻅﻴﻔﺔ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-esc="s.partner_id.function"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(17)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Tenancy Period*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-if="s.start_date and s.end_date">
+                                        <t t-esc="(s.start_date).strftime('%d-%b-%Y')"/>
+                                        -
+                                        <t t-esc="(s.end_date).strftime('%d-%b-%Y')"/>
+                                    </t>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﺭﻗﻢ ﺗﻠﻔﻮﻥ ﺍﻟﻤﻜﺘﺐ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;font-size: 15px;">
+                                    <!--                                    <span style="font-size: 15px;">ﺍﻟﺘﻔﺎﺻﻴﻞ</span>-->
+                                    <t t-if="s.start_date and s.end_date">
+                                        <t t-esc="(s.start_date).strftime('%d-%b-%Y')"/>
+                                        -
+                                        <t t-esc="(s.end_date).strftime('%d-%b-%Y')"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align: center;">
+                                    <span style="font-size: 15px;text-align: center;">(18)</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">Grace Period*</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+<!--                                    <span style="font-size: 15px;">Detail</span>-->
+                                    <t t-esc="s.grace_period"/>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <span style="font-size: 15px;">ﻓﺘﺮﺓ ﺍﻟﺴﻤﺎﺡ</span>
+                                </td>
+                                <td style="width:22.5%; text-align: center;">
+                                    <t t-esc="s.grace_period"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width:100%;">
+                            <tbody>
+                                <t t-set="sl_no_new" t-value="19"/>
+                                <t t-foreach="docs.order_line" t-as="l">
+                                    <t t-if="l.is_ejari">
+                                        <tr>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:10%">(
+                                                <t t-esc="sl_no_new"/>
+                                                <t t-set="sl_no_new" t-value="sl_no_new+1"/>)
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                Property Unit *
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-esc="l.product_id.sub_unit_id.name"/>
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                ﻋﺪﺩ ﻏﺮﻑ ﺍﻟﻮﺣﺪﺓ
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-esc="l.product_id.sub_unit_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:10%">(
+                                                <t t-esc="sl_no_new"/>
+                                                <t t-set="sl_no_new" t-value="sl_no_new+1"/>)
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                Unit No*
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-esc="l.product_template_id.name"/>
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                ﺭﻗﻢ ﺍﻟﻮﺣﺪﺓ
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-esc="l.product_template_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:10%">(
+                                                <t t-esc="sl_no_new"/>
+                                                <t t-set="sl_no_new" t-value="sl_no_new+1"/>)
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                Sq. ft.*
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-esc="l.product_id.property_size"/>
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                ﺍﻟﻤﺴﺎﺣﺔ
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-esc="l.product_id.property_size"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:10%">(
+                                                <t t-esc="sl_no_new"/>
+                                                <t t-set="sl_no_new" t-value="sl_no_new+1"/>)
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                Rent Value*
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-esc="l.product_id.rent_price"/>
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                ﻗﻴﻤﺔ ﺍﻹﻳﺠﺎﺭ ﺍﻟﺴﻨﻮﻯ
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-esc="l.product_id.rent_price"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:10%">(
+                                                <t t-esc="sl_no_new"/>
+                                                <t t-set="sl_no_new" t-value="sl_no_new+1"/>)
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                Sewerage Charges Yearly
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-set="sewage_charge" t-value="0"/>
+                                                <t t-foreach="docs.order_line" t-as="sc">
+                                                    <t t-if="sc.product_id.is_utility_charge">
+                                                        <t t-set="sewage_charge"
+                                                           t-value="sewage_charge + sc.price_total"/>
+                                                    </t>
+                                                </t>
+                                                <t t-esc="sewage_charge"/>
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                ﺭﺳﻮﻡ ﺍﻟﺼﺮﻑ ﺍﻟﺼﺤﻲ ﺳﻨﻮﻳﺎ
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-set="sewage_charge" t-value="0"/>
+                                                <t t-foreach="docs.order_line" t-as="sc">
+                                                    <t t-if="sc.product_id.is_utility_charge">
+                                                        <t t-set="sewage_charge"
+                                                           t-value="sewage_charge + sc.price_total"/>
+                                                    </t>
+                                                </t>
+                                                <t t-esc="sewage_charge"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:10%">(
+                                                <t t-esc="sl_no_new"/>
+                                                <t t-set="sl_no_new" t-value="sl_no_new+1"/>)
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                Security Deposit*
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-set="security_amount" t-value="0"/>
+                                                <t t-foreach="docs.order_line" t-as="ol">
+                                                    <t t-if="ol.product_id.is_sec">
+                                                        <t t-set="security_amount"
+                                                           t-value="security_amount + ol.price_total"/>
+                                                    </t>
+                                                </t>
+                                                <t t-esc="security_amount"/>
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                ﺘﺄﻣﻴﻦ
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-set="security_amount" t-value="0"/>
+                                                <t t-foreach="docs.order_line" t-as="ol">
+                                                    <t t-if="ol.product_id.is_sec">
+                                                        <t t-set="security_amount"
+                                                           t-value="security_amount + ol.price_total"/>
+                                                    </t>
+                                                </t>
+                                                <t t-esc="security_amount"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:10%">(
+                                                <t t-esc="sl_no_new"/>
+                                                <t t-set="sl_no_new" t-value="sl_no_new+1"/>)
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                Permitted Use*
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">For
+                                                <t t-esc="l.product_id.unit_type_id.name"/>
+                                                Use
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                ﺍﻟﻐﺮﺽ ﻣﻦ ﺇﺳﺘﺨﺪﺍﻡ ﺍﻟﻮﺣﺪﺓ
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">For
+                                                <t t-esc="l.product_id.unit_type_id.name"/>
+                                                Use
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:10%">(
+                                                <t t-esc="sl_no_new"/>
+                                                <t t-set="sl_no_new" t-value="sl_no_new+1"/>)
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                Parking Space*
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-esc="l.product_id.parking_space"/>
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                ﻣﻮﻗﻒ ﺍﻟﻤﺮﻛﺒﺔ
+                                            </td>
+                                            <td style="text-align:center;padding:5px;font-size: 14px;width:22.5%;">
+                                                <t t-esc="l.product_id.parking_space"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                            </tbody>
+                        </table>
+                        <div class="text-center" style="margin-top:50px;">
+                            <u>
+                                <span style="font-weight:bold;margin-top:5px;">Schedule 3</span>
+                            </u>
+                        </div>
+                        <table style="width:100%;">
+                            <thead>
+                                <tr class="text-center" style="font-size: 15px;">
+                                    <th style="background-color: grey;padding:5px;width:10%;">INSTALLMENT NO.</th>
+                                    <th style="background-color: grey;padding:5px;width:10%;">INSTALLMENT DATE</th>
+                                    <th style="background-color: grey;padding:5px;width:10%;">Payment Type</th>
+                                    <th style="background-color: grey;padding:5px;width:30%;">Installment Description
+                                        for Report
+                                    </th>
+                                    <th style="background-color: grey;padding:5px;width:30%;">ﻔﺎﺻﻴﻞ</th>
+                                    <th style="background-color: grey;padding:5px;width:10%;">Installment Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="sl_no" t-value="2"/>
+                                <t t-set="sl_no_token" t-value="1"/>
+                                <t t-foreach="docs.invoice_line_dum_ids" t-as="token">
+                                    <tr>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <t t-esc="sl_no_token"/>
+                                        </td>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <t t-if="token.invoice_date">
+                                                <t t-esc="(token.invoice_date).strftime('%d-%b-%Y')"/>
+                                            </t>
+                                        </td>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <!--                                            <t t-if="token.journal_id.type == 'cash'">-->
+                                            <!--                                                Cash-->
+                                            <!--                                            </t>-->
+                                            <!--                                            <t t-if="token.journal_id.type == 'bank'">-->
+                                            Bank
+                                            <!--                                            </t>-->
+                                        </td>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <t t-esc="token.name"/>
+                                        </td>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <!--                                            <t t-esc="o.milestone_id.name_arabic"/>-->
+                                        </td>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <t t-esc="token.amount_total_signed"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-foreach="docs.rent_plan_ids" t-as="o">
+                                    <tr>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <t t-esc="sl_no"/>
+                                            <t t-set="sl_no" t-value="sl_no+1"/>
+                                        </td>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <t t-if="o.start_date">
+                                                <t t-esc="(o.start_date).strftime('%d-%b-%Y')"/>
+                                            </t>
+                                        </td>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <t t-if="o.type == 'cheque'">
+                                                Cheque
+                                            </t>
+                                            <t t-if="o.type == 'cash_bank'">
+                                                Cash
+                                            </t>
+                                        </td>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <t t-esc="o.milestone_id.name"/>
+                                        </td>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <t t-esc="o.milestone_id.name_arabic"/>
+                                        </td>
+                                        <td style="text-align:center;padding:5px;font-size: 14px;">
+                                            <t t-esc="o.amount"/>
+                                        </td>
+                                    </tr>
+                                    <!--                                    <tr>-->
+                                    <!--                                        <td style="text-align:center;padding:5px;font-size: 14px;">-->
+                                    <!--                                            <t t-esc="o.amount"/>-->
+                                    <!--                                        </td>-->
+                                    <!--                                    </tr>-->
+                                </t>
+                            </tbody>
+                        </table>
+                        <div class="text-center" style="margin-top:50px;">
+                            <u>
+                                <span style="font-weight:bold;margin-top:5px;">Schedule 4</span>
+                            </u>
+                        </div>
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:10%;text-align:left;padding:5px;">
+                                    <span style="font-size: 15px; font-weight: bold;text-align:left;">(1)</span>
+                                </td>
+                                <td style="width:90%; text-align: center;">
+                                    <span style="font-size: 12px;">
+                                        || ﺍﻹﺧﻄﺎﺭﺍﺕ ﻭﺍﻹﻧﺬﺍﺭﺍﺕ ﻳﺘﻢ ﺗﻮﺟﻴﻬﻬﺎ ﺧﻄﻴﺎ ﺑﻴﻦ ﺍﻟﻄﺮﻓﻴﻦ ﻋﻠﻰ ﺍﻟﻌﻨﺎﻭﻳﻦ ﺍﻟﻤﺬﻛﻮﺭﺓ
+                                        ﺑﺼﺪﺭ ﻫﺬﺍ ﺍﻟﻌﻘﺪ ﻓﻲ ﺍﻟﺠﺪﻭﻝ
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align:left;padding:5px;">
+                                    <span style="font-size: 15px; font-weight: bold;text-align:left;"></span>
+                                </td>
+                                <td style="width:90%; text-align: center;">
+                                    <span style="font-size: 12px;">The Notifications" if any" will be sent in writing
+                                        between the parties to the legal addresses mentioned in the Schedule II.
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align:left;padding:5px;">
+                                    <span style="font-size: 15px; font-weight: bold;text-align:left;">(2)</span>
+                                </td>
+                                <td style="width:90%; text-align: center;">
+                                    <span style="font-size: 12px;">ﺍﻟﺴﻴﺎﺳﺔ ﺍﻟﻌﺎﺩﻟﺔ ﻟﻼﺳﺘﺨﺪﺍﻡ ، ﻭﺍﻟﺘﻲ ﻳﺘﻢ ﺇﺭﺳﺎء ﺩﻋﺎﺋﻤﻬﺎ ﻣﻦ
+                                        ﻗﺒﻞ ﺍﻟﻤﺎﻟﻚ/ﺍﻟﻤﺆﺟﺮ ﻭﻟﻪ ﺍﻟﺤﻖ ﺍﻟﻜﺎﻣﻞ ﺍﻟﻤﻨﻔﺮﺩ ﻓﻰ ﺗﻌﺪﻳﻠﻬﺎ ﻣﻦ ﻭﻗﺖ ﻵﺧﺮ، ﻭﺍﻟﺘﻰ ﺗﻄﺒﻖ ﻋﻠﻰ
+                                        ﺍﺳﺘﺨﺪﺍﻡ ﺍﻟﻤﻜﻴﻒ/ ﺧﺪﻣﺔ ﺍﻟﺘﺒﺮﻳﺪ "ﺍﻟﺨﺪﻣﺔ." ﺍﻟﻤﺴﺘﺄﺟﺮ ﻣﻜﻠﻒ ﺑﺎﻟﻌﻤﻞ ﻋﻠﻰ ﻋﺪﻡ ﺇﺳﺎءﺓ
+                                        ﺍﺳﺘﺨﺪﺍﻡ ﺍﻟﺨﺪﻣﺔ ﻛﺎﻻﺳﺘﺨﺪﺍﻡ ﺍﻻﺣﺘﻴﺎﻟﻲ ﺃﻭ ﻏﻴﺮ ﺍﻟﻤﻌﻘﻮﻝ ﻭﻳﻜﻮﻥ ﺍﻹﺳﺘﺨﺪﺍﻡ ﺑﻄﺮﻳﻘﻪ ﺗﻌﺪ
+                                        ﻣﻌﻘﻮﻟﻪ ﺑﺤﺴﺐ ﺍﻟﺘﻘﺪﻳﺮ ﺍﻟﻤﻨﻔﺮﺩ ﻟﻠﻤﺎﻟﻚ/ﺍﻟﻤﺆﺟﺮ، ﻭﻻ ﺗﺘﻌﺎﺭﺽ ﺑﺬﺍﺕ ﺍﻟﻮﻗﺖ ﻣﻊ ﺍﻟﻤﻘﺼﺪ
+                                        ﺍﻟﻤﺒﺎﺷﺮ ﻣﻦ ﺇﺳﺘﺨﺪﺍﻡ ﺍﻟﺨﺪﻣﻪ ﺃﻭ ﺃﻥ ﺗﺆﺛﺮ ﺑﺎﻟﺴﻠﺐ ﻋﻠﻰ ﺍﻟﺬﻣﻪ ﺍﻟﻤﺎﻟﻴﻪ ﻟﻠﻤﺎﻟﻚ/ﺍﻟﻤﺆﺟﺮ ﻭﻋﻠﻰ
+                                        ﺟﻮﺩﺓ ﺍﻟﺨﺪﻣﺔ ﺫﺍﺗﻬﺎ ﺃﻭ ﺑﺸﻜﻞ ﻣﺒﺎﺷﺮ ﺃﻭ ﻏﻴﺮ ﻣﺒﺎﺷﺮﻋﻠﻰ ﺣﻘﻮﻕ ﺍﻟﻌﻤﻼء ﺍﻵﺧﺮﻳﻦ
+                                        ﺍﻟﻤﺴﺘﺄﺟﺮﻳﻦ ﻓﻲ ﺍﻟﺒﻨﺎء. ﻓﻰ ﺣﺎﻝ ﺧﺮﻕ ﻫﺬﻩ ﺍﻟﺴﻴﺎﺳﺔ ﻣﻦ ﻗﺒﻞ ﺍﻟﻤﺴﺘﺄﺟﺮ ﺳﻴﺘﺮﺗﺐ ﻋﻠﻴﻪ ﻋﺪﻡ
+                                        ﺗﻘﻴﺪ ﺍﻟﻤﺎﻟﻚ /ﺍﻟﻤﺆﺟﺮﺑﺎﻟﻔﺎﺗﻮﺭﺓ ﺫﺍﺕ ﺍﻟﻘﻴﻤﺔ ﺍﻟﺜﺎﺑﺘﻪ / . " ﺷﻬﺮﻳﺎ ﻭﺗﺤﺼﻴﻞ ﻣﺎ ﺳﻮﻑ ﻳﻘﻮﻡ
+                                        ﺍﻟﻤﺴﺘﺎﺟﺮ ﺑﺴﺪﺍﺩﻩ ﺑﻨﺎءﺍ ﻋﻠﻰ ﻣﺎ ﻳﺘﻤﺨﺾ ﻋﻦ ﻗﺮﺍء ﻋﺪﺍﺩ ﺍﻟﺨﺪﻣﺔ " ﻳﺘﻄﺒﻖ ﺑﺈﻣﺎﺭﺓ ﺭﺍﺱ ﺍﻟﺨﻴﻤﺔ
+                                        ﻓﻘﻂ
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align:left;padding:5px;">
+                                    <span style="font-size: 15px; font-weight: bold;text-align:left;"></span>
+                                </td>
+                                <td style="width:90%; text-align: center;">
+                                    <span style="font-size: 12px;">Fair Use Policy, as implemented by the Landlord and
+                                        amended from time to time, is applicable on use of cooling/chiller service,
+                                        “Service”. Customers are mandated to not to misuse the Service in such a way
+                                        that it is reasonably considered by Landlord to be fraudulent or unreasonable
+                                        use, to be contrary to the way the service is intended to be used or to
+                                        adversely affect the landlord’s financial position, affect the quality of
+                                        service or affect, directly or indirectly, rights of other customers/tenants in
+                                        the facility. In
+                                        such a case per month fixed billing will be overwritten with the meter reading
+                                        and an amount as equals as the bill calculated based on the meter reading will
+                                        be recovered from and paid by the Tenant “ APPLY IN RAK ONLY”
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align:left;padding:5px;">
+                                    <span style="font-size: 15px; font-weight: bold;text-align:left;">(3)</span>
+                                </td>
+                                <td style="width:90%; text-align: center;">
+                                    <span style="font-size: 12px;">ﻳﺘﻢ ﻗﺮﺍءﺓ ﻋﻘﺪ ﺍﻹﻳﺠﺎﺭ ﻫﺬﺍ ﻭﻓﻬﻤﻪ ﻭﺗﻔﺴﻴﺮﻩ ﻭﻓﻘﺎ ﻟﻨﻤﻮﺫﺝ
+                                        ﺍﻟﻌﻘﺪ ﺍﻟﻤﺤﺪﺩ ﺍﻟﻤﻄﻠﻮﺏ ﺗﻮﻗﻴﻌﻪ ﻭﺗﺴﺠﻴﻠﻪ ﻟﺪﻯ ﺩﺍﺋﺮﺓ ﺍﻷﺭﺍﺿﻲ، ﺍﻟﺒﻠﺪﻳﺔ ﺍﻭ ﺍﻱ ﻫﻴﺌﺔ ﺍﺧﺮﻯ
+                                        ﻣﻤﺎﺛﻠﺔ ﻓﻲ ﺍﻻﻣﺎﺭﺓ ﺍﻟﻤﻮﺟﻮﺩﺓ ﺑﻬﺎ ﺍﻟﻮﺣﺪﺓ" ﻋﻘﺪ ﺍﻻﻣﺎﺭﺓ ﺍﻟﻤﻌﺘﻤﺪ " .ﺇﺫﺍ ﻭﺟﺪ ﺗﻨﺎﻗﺾ ﺑﻴﻦ ﺃﻱ
+                                        ﻣﻦ ﺷﺮﻭﻁ ﻭﺃﺣﻜﺎﻡ ﻋﻘﺪ ﺍﻹﻳﺠﺎﺭ ﻫﺬﺍ ﻭﺷﺮﻭﻁ ﻭﺃﺣﻜﺎﻡ "ﻋﻘﺪ
+                                        ﺍﻻﻣﺎﺭﺓ" ، ﺗﺴﻮﺩ ﺷﺮﻭﻁ ﻭﺃﺣﻜﺎﻡ ﻋﻘﺪ ﺍﻹﻳﺠﺎﺭ ﻫﺬﺍ
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:10%;text-align:left;padding:5px;">
+                                    <span style="font-size: 15px; font-weight: bold;text-align:left;"></span>
+                                </td>
+                                <td style="width:90%; text-align: center;">
+                                    <span style="font-size: 12px;">This Tenancy Contract will be read, understood and
+                                        construed in continuation with the prescribed contract format required to be
+                                        signed and registered with Land Department, Municipality or other equivalent
+                                        body of the emirate Unit is located in, the “Prescribed Format”. In the event of
+                                        contradiction between any of the provisions of this Tenancy Contract and the
+                                        provisions of the Prescribed
+                                        Format, the provisions of this Tenancy Contract shall prevail.
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="text-center" style="margin-top:50px;">
+                            <u>
+                                <span style="font-weight:bold;margin-top:5px;">Schedule 5</span>
+                            </u>
+                        </div>
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:50%;text-align: left;">
+                                    <span style="font-size: 16px; font-weight: bold;text-align: center;">Authorization
+                                        letter
+                                    </span>
+                                </td>
+                                <td style="width:50%; text-align: right;">
+                                    <span style="font-size: 16px; font-weight: bold;text-decoration-line: underline;">
+                                        ﺗﻔﻮﻳﺾ ﺧﺎﺹ
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" style="width:50%;text-align: left;">
+                                    <span style="font-size: 15px;text-align: left;">I, undersigned (*) (Tenant) holder
+                                        of ID/Passport/CL No. (*) issued by State/Emirates of (*), Hereby authorized and
+                                        appoint M/S. Uniestate Properties L.L.C (Lessor) and/or the representative to do
+                                        the following
+                                    </span>
+                                </td>
+                                <td style="width:50%; text-align: right;">
+                                    <span style="font-size: 15px;">ﻧﺎ ﺍﻟﻤﻮﻗﻊ ﺃﺩﻧﺎﻩ (*) )ﺍﻟﻤﺴﺘﺄﺟﺮ( ﺍﺣﻤﻞ ﺑﻄﺎﻗﺔ ﻫﻮﻳﺔ /ﺟﻮﺍﺯ
+                                        ﺳﻔﺮ /ﺭﺧﺼﺔ ﺗﺠﺎﺭﻳﺔ ﺭﻗﻢ ﺻﺎﺩﺭ ﻣﻦ ﺩﻭﻟﺔ /ﺇﻣﺎﺭﺓ (*) ﺃﻓﻮﺽ ﻭﺃﻋﻴﻦ ﺍﻟﺴﺎﺩﺓ / ﻳﻮﻧﻰ ﺇﺳﺘﻴﺖ
+                                        ﺍﻟﻌﻘﺎﺭﻳﺔ (*)
+                                        : ﺫ.ﻡ.ﻡ (ﺍﻟﻤﺆﺟﺮ( ﻭ/ﺃﻭ ﻣﻦ ﻳﻤﺜﻠﻬﺎ ﻭﺫﻟﻚ ﻟﻠﻘﻴﺎﻡ ﺑﻤﺎ ﻳﻠﻰ
+                                    </span>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:50%;text-align: left;">
+                                    <span style="font-size: 15px;text-align: left;">- open the unit which rented by me
+                                        according to the tenancy contract concluded in (*), that in case I left the unit
+                                        and absent for a period of
+                                        time not less than 45 days continues and without paying the due
+                                    </span>
+                                </td>
+                                <td style="width:50%; text-align: right;">
+                                    <span style="font-size: 15px;">ﻓﺘﺢ ﺍﻟﻮﺣﺪﺓ ﺍﻟﻤﺴﺘﺄﺟﺮﺓ ﻣﻦ ﻗﺒﻠﻰ ﺑﻤﻮﺟﺐ ﻋﻘﺪ ﺍﻹﻳﺠﺎﺭ ﺍﻟﻤﺆﺭﺥ
+                                        (*) ، ﻭﺫﻟﻚ ﻓﻰ - ﺣﺎﻝ ﻣﻐﺎﺩﺭﺗﻰ ﻭﻏﻴﺎﺑﻰ ﻋﻦ ﺍﻟﻮﺣﺪﺓ ﻟﻤﺪﺓ ﺗﺰﻳﺪ ﻋﻦ 45 ﻳﻮﻣﺎ ﻣﺘﺼﻠﺔ ﻭﺑﺪﻭﻥ
+                                        ﺳﺪﺍﺩ ﺍﻷﺟﺮﺓ
+                                        ﺍﻟﻤﺴﺘﺤﻘﺔ ، ﻭ
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" style="width:50%;text-align: left;">
+                                    <span style="font-size: 15px;text-align: left;">- have the right to enter to the
+                                        unit and receive it and re-disposal it again for his own benefit, after
+                                        preparing a minute of inventory for the items which is inside the unit and
+                                        transfer it to a suitable location
+                                        for a one months starting from the date of receiving the unit,
+                                    </span>
+                                </td>
+                                <td style="width:50%; text-align: right;">
+                                    <span style="font-size: 15px;">ﻟﻪ ﺣﻖ ﺩﺧﻮﻝ ﺍﻟﻮﺣﺪﺓ ﻭﺍﺳﺘﻼﻣﻬﺎ ﻭﺇﻋﺎﺩﺓ ﺍﻟﺘﺼﺮﻑ ﻓﻴﻬﺎ ﻣﻦ ﺟﺪﻳﺪ
+                                        ﻟﺤﺴﺎﺑﻪ، ﺑﻌﺪ - ﻋﻤﻞ ﻣﺤﻀﺮ ﺑﺠﺮﺩ ﺍﻟﻤﻘﺘﻨﻴﺎﺕ ﺍﻟﻤﻮﺟﻮﺩﺓ ﺩﺍﺧﻞ ﺍﻟﻮﺣﺪﺓ ﻭﻧﻘﻠﻬﺎ ﺇﻟﻰ ﻣﻜﺎﻥ ﻣﻨﺎﺳﺐ
+                                        ﻟﻤﺪﺓ
+                                        ﺷﻬﺮ ﻣﻦ ﺗﺎﺭﻳﺦ ﺍﺳﺘﻼﻣﻪ ﺍﻟﻮﺣﺪﺓ ، ﻭ
+                                    </span>
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:50%;text-align: left;">
+                                    <span style="font-size: 15px;text-align: left;">- Entitle to sell and collect the
+                                        price of the items and deduct the due
+
+                                        from it and keep the remain amount till I claim it later on “if any”.
+                                    </span>
+                                </td>
+                                <td style="width:50%; text-align: right;">
+                                    <span style="font-size: 15px;">ﻟﻪ ﺍﻟﺤﻖ ﺑﻌﺪ ﺫﻟﻚ ﺍﻟﻘﻴﺎﻡ ﺑﺒﻴﻊ ﻭﺗﺤﺼﻴﻞ ﺛﻤﻦ ﺍﻟﻤﻘﺘﻨﻴﺎﺕ ﻭﺧﺼﻢ
+                                        ﻣﺴﺘﺤﻘﺎﺗﻪ ﺍﻹﻳﺠﺎﺭﻳﺔ ﻟﺪﻱ
+
+                                        ".ﻣﻦ ﺍﻟﺜﻤﻦ ﻭﺍﻻﺣﺘﻔﺎﻅ ﺑﺎﻟﺒﺎﻗﻰ ﻟﺤﻴﻦ ﻣﻄﺎﻟﺒﺘﻰ ﺑﻪ " ﺇﻥ ﻭﺟﺪ
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:50%;text-align: left; line-height: 10;">
+                                    <span style="font-size: 15px;text-align: left;">Tenant/Authorized signatory</span>
+                                </td>
+                                <td style="width:50%; text-align: right; line-height: 10;">
+                                    <span style="font-size: 15px;">ﺍﻟﻤﺴﺘﺄﺟﺮ/ﺍﻟﻤﺨﻮﻝ ﺑﺎﻟﺘﻮﻗﻴﻊ</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:50%;text-align: left;">
+                                    <span style="font-size: 15px;text-align: left;">Date:<t t-esc="docs.date_order"/></span>
+                                </td>
+                                <td style="width:50%; text-align: right;">
+                                    <span style="font-size: 15px;">: ﺍﻟﺘﺎﺭﻳﺦ<t t-esc="docs.date_order"/></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_edit_project_inherit_form" model="ir.ui.view">
+        <field name="name">project.project.view.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='settings']" position="after">
+                <page name="commission" string="Commission">
+                    <group>
+                        <group string="For Sale">
+                            <field name="sale_internal_agent_commission"/>
+                            <field name="sale_external_agent_commission"/>
+                            <field name="sale_freelance_agent_commission"/>
+                        </group>
+                        <group string="For Rent">
+                            <field name="rent_internal_agent_commission"/>
+                            <field name="rent_external_agent_commission"/>
+                            <field name="rent_freelance_agent_commission"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

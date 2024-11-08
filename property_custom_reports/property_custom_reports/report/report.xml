@@ -1,0 +1,185 @@
+<odoo>
+    <data>
+        <!--        Sale Reports Start-->
+
+        <record id="paper_format_tenancy_contract" model="report.paperformat">
+            <field name="name">European A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">3</field>
+            <field name="margin_bottom">3</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">3</field>
+            <field name="dpi">75</field>
+        </record>
+
+<!--        <record id="tenancy_contract_ejari_pdf" model="ir.actions.report">-->
+<!--            <field name="name">Tenancy Contract</field>-->
+<!--            <field name="model">sale.order</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">property_custom_reports.tenancy_contract_ejari_id_print</field>-->
+<!--            <field name="report_file">property_custom_reports.tenancy_contract_ejari_id_print</field>-->
+<!--            <field name="binding_model_id" ref="model_sale_order"/>-->
+<!--            <field name="binding_type">report</field>-->
+<!--            <field name="paperformat_id" ref="paper_format_tenancy_contract"/>-->
+<!--        </record>-->
+
+<!--        <record id="paper_format_addendum" model="report.paperformat">-->
+<!--            <field name="name">European A4</field>-->
+<!--            <field name="default" eval="True"/>-->
+<!--            <field name="format">A4</field>-->
+<!--            <field name="page_height">0</field>-->
+<!--            <field name="page_width">0</field>-->
+<!--            <field name="orientation">Portrait</field>-->
+<!--            <field name="margin_top">3</field>-->
+<!--            <field name="margin_bottom">3</field>-->
+<!--            <field name="margin_left">3</field>-->
+<!--            <field name="margin_right">3</field>-->
+<!--            <field name="header_line" eval="False"/>-->
+<!--            <field name="header_spacing">3</field>-->
+<!--            <field name="dpi">90</field>-->
+<!--        </record>-->
+
+        <!--Ejari-->
+        <!--        <report-->
+        <!--                id="tenancy_contract_ejari_pdf"-->
+        <!--                string="Tenancy Contract"-->
+        <!--                model="sale.order"-->
+        <!--                report_type="qweb-pdf"-->
+        <!--                name="property_custom_reports.tenancy_contract_ejari_id_print"-->
+        <!--                file="property_custom_reports.tenancy_contract_ejari_id_print"-->
+        <!--                paperformat="paper_format_tenancy_contract"-->
+        <!--        />-->
+        <!--        Addendum-->
+
+<!--        <record id="tenancy_contract_addendum" model="ir.actions.report">-->
+<!--            <field name="name">Addendum</field>-->
+<!--            <field name="model">sale.order</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">property_custom_reports.addendum_id_print</field>-->
+<!--            <field name="report_file">property_custom_reports.addendum_id_print</field>-->
+<!--            <field name="binding_model_id" ref="model_sale_order"/>-->
+<!--            <field name="binding_type">report</field>-->
+<!--            <field name="paperformat_id" ref="paper_format_addendum"/>-->
+<!--        </record>-->
+
+        <!--        <report-->
+        <!--                id="tenancy_contract_addendum"-->
+        <!--                string="Addendum"-->
+        <!--                model="sale.order"-->
+        <!--                report_type="qweb-pdf"-->
+        <!--                name="property_custom_reports.addendum_id_print"-->
+        <!--                file="property_custom_reports.addendum_id_print"-->
+        <!--                paperformat="paper_format_tenancy_contract"-->
+        <!--        />-->
+
+<!--        <record id="paper_format_sale_order_marquis_rent" model="report.paperformat">-->
+<!--            <field name="name">Rent Quote</field>-->
+<!--            <field name="default" eval="True"/>-->
+<!--            <field name="format">A4</field>-->
+<!--            <field name="page_height">0</field>-->
+<!--            <field name="page_width">0</field>-->
+<!--            <field name="orientation">Portrait</field>-->
+<!--            <field name="margin_top">20</field>-->
+<!--            <field name="margin_bottom">15</field>-->
+<!--            <field name="margin_left">5</field>-->
+<!--            <field name="margin_right">5</field>-->
+<!--            <field name="header_line" eval="False"/>-->
+<!--            <field name="header_spacing">20</field>-->
+<!--            <field name="dpi">90</field>-->
+<!--        </record>-->
+
+<!--        <record id="sale_order_marquis_report_pdf_rent" model="ir.actions.report">-->
+<!--            <field name="name">Rent Quote</field>-->
+<!--            <field name="model">sale.order</field>-->
+<!--            <field name="report_type">qweb-pdf</field>-->
+<!--            <field name="report_name">property_custom_reports.sale_marquis</field>-->
+<!--            <field name="report_file">property_custom_reports.sale_marquis</field>-->
+<!--            <field name="binding_model_id" ref="model_sale_order"/>-->
+<!--            <field name="print_report_name">('Rent Quote - %s' % (object.name))</field>-->
+<!--            <field name="binding_type">report</field>-->
+<!--            <field name="paperformat_id" ref="paper_format_sale_order_marquis_rent"/>-->
+<!--        </record>-->
+
+        <!--        <report-->
+        <!--                id="sale_order_marquis_report_pdf_rent"-->
+        <!--                string="Rent Quote"-->
+        <!--                model="sale.order"-->
+        <!--                report_type="qweb-pdf"-->
+        <!--                name="property_custom_reports.sale_marquis"-->
+        <!--                file="property_custom_reports.sale_marquis"-->
+        <!--                paperformat="paper_format_sale_order_marquis_rent"-->
+        <!--                print_report_name="('Rent Quote - %s' % (object.name))"-->
+        <!--        />-->
+
+        <!--Debit Note-->
+        <record id="paper_format_debit_note" model="report.paperformat">
+            <field name="name">Debit Note</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="debit_note_pdf" model="ir.actions.report">
+            <field name="name">Debit Note</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">property_custom_reports.debit_note_id_print</field>
+            <field name="report_file">property_custom_reports.debit_note_id_print</field>
+            <field name="binding_model_id" ref="model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paper_format_debit_note"/>
+        </record>
+
+        <!--        <report-->
+        <!--                id="debit_note_pdf"-->
+        <!--                string="Debit Note"-->
+        <!--                model="sale.order"-->
+        <!--                report_type="qweb-pdf"-->
+        <!--                name="property_custom_reports.debit_note_id_print"-->
+        <!--                file="property_custom_reports.debit_note_id_print"-->
+        <!--                paperformat="paper_format_debit_note"-->
+        <!--        />-->
+        <!--        Sale Reports Ended-->
+
+        <!--Tax Invoice-->
+
+        <record id="tax_invoice_report_id" model="ir.actions.report">
+            <field name="name">Tax Invoice</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">property_custom_reports.tax_invoice_temp_id</field>
+            <field name="report_file">property_custom_reports.tax_invoice_temp_id</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paper_format_debit_note"/>
+        </record>
+
+        <!--        <report-->
+        <!--                id="tax_invoice_report_id"-->
+        <!--                string="Tax Invoice"-->
+        <!--                model="account.move"-->
+        <!--                report_type="qweb-pdf"-->
+        <!--                name="property_custom_reports.tax_invoice_temp_id"-->
+        <!--                file="property_custom_reports.tax_invoice_temp_id"-->
+        <!--                paperformat="paper_format_debit_note"-->
+        <!--                print_report_name="('Tax Invoice - %s' % (object.name))"-->
+        <!--        />-->
+
+
+    </data>
+</odoo>

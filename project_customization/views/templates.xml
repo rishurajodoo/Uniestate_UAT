@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <record id="building_type_form_id" model="ir.ui.view">
+            <field name="name">Building Type</field>
+            <field name="model">building.type</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="_form">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="building_type_id" model="ir.actions.act_window">
+            <field name="name">Building Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">building.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="config_menu_item_id"
+                  name="Configuration"
+                  action="building_type_id"
+                  parent="ol_property_custom.property_menu_act"
+                  sequence="10"
+        />
+        <menuitem id="building_type"
+                  name="Building Type"
+                  action="building_type_id"
+                  sequence="20"
+                  parent="config_menu_item_id"/>
+
+    </data>
+</odoo>

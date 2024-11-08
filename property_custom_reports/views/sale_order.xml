@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <record id="sale_order_view_form_bank" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="payment_mode_id"/>
+<!--                    attrs="{'invisible': [('move_type', '!=', 'out_invoice')]}"-->
+                </xpath>
+                <xpath expr="//field[@name='analytic_account_id']" position="after">
+                    <field name="property_owner"/>
+                    <field name="lessor"/>
+<!--                    attrs="{'invisible': [('move_type', '!=', 'out_invoice')]}"-->
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

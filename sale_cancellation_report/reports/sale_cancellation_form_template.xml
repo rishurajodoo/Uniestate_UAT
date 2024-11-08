@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="sale_cancellation_form">
+            <t t-call="web.html_container">
+                <t t-call="sale_cancellation_report.sale_cancellation_header"/>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page" style="font-size: 15px;">
+                            <div class="oe_structure"/>
+                            <br/>
+                            <table class="table table-sm table-borderless">
+                                <tr style="background-color: #C0C0C0;">
+                                    <th colspan="2" style="font-size: 18px;">Cancellation Form</th>
+                                </tr>
+                                <tr>
+                                    <td class="text-left" width="50%">
+                                        <strong>Project Title:</strong>
+                                        <t t-if="o.project">
+                                            <span t-field="o.project.name"/>
+                                        </t>
+                                    </td>
+                                    <td class="text-left" width="50%">
+                                        <strong>Sr. No. :</strong>
+                                        <span t-field="o.name"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <style>
+                                .info-table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                }
+                                .info-table th, .info-table td {
+                                border: 1px solid #000;
+                                padding: 8px;
+                                text-align: left;
+                                }
+                                .info-table th {
+                                background-color: #C0C0C0;
+                                }
+                            </style>
+                            <table class="info-table">
+                                <tr>
+                                    <th colspan="2">Buyer Information</th>
+                                    <th colspan="2">Unit Information</th>
+                                </tr>
+                                <t t-foreach="spa_list" t-as="spa">
+                                    <tr>
+                                        <td>
+                                            <strong>Name</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['name']"/>
+                                        </td>
+                                        <td/>
+                                        <td/>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Nationality</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['nationality']"/>
+                                        </td>
+                                        <td>
+                                            <strong>Unit Code</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['unit_code']"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>ID No</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['id']"/>
+                                        </td>
+                                        <td>
+                                            <strong>Building Number</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['building_no']"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                Date of issue
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['date_of_issue']"/>
+                                        </td>
+                                        <td>
+                                            <strong>Apartment Number</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['apartment_no']"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Place of issue</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['place_of_issue']"/>
+                                        </td>
+                                        <td>
+                                            <strong>Unit Description</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['sub_unit']"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>
+                                                Phone
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['phone']"/>
+                                        </td>
+                                        <td>
+                                            <strong>Floor</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['floor']"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Fax</td>
+                                        <td>
+                                            <t t-esc="spa['fax']"/>
+                                        </td>
+                                        <td>
+                                            <strong>Total Area (SFT)</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['total_area']"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Mobile</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['mobile']"/>
+                                        </td>
+                                        <td>
+                                            <strong>Price/SFT</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['price']"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>E-Mail</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['email']"/>
+                                        </td>
+                                        <td>
+                                            <strong>Total Price of Unit</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['total_price_unit']"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Address</strong>
+                                        </td>
+                                        <td>
+                                            <span t-esc="spa['address']"/>
+                                        </td>
+                                        <td>
+                                            <strong>Price of parking</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['price_parking']"/>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Permanent Address</strong>
+                                        </td>
+                                        <td>
+                                            <span t-esc="spa['permanent_address']"/>
+                                        </td>
+                                        <td>
+                                            <strong>Total Price</strong>
+                                        </td>
+                                        <td>
+                                            <t t-esc="spa['total_price']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+
+                            <table class="info-table" style="margin-top: 20px;">
+                                <tr style="width:100%">
+                                    <th colspan="4">Commission Information</th>
+                                    <th colspan="2">Purchase Information</th>
+                                </tr>
+                                <tr>
+                                    <td>Title</td>
+                                    <td>Name</td>
+                                    <td>%</td>
+                                    <td>Amount</td>
+                                    <td>Date of Purchase</td>
+                                    <td>
+                                        <t t-esc="o.agreement_date"/>
+                                    </td>
+                                </tr>
+                                <t t-foreach="commission_list" t-as="commission">
+                                    <tr>
+                                        <td>
+                                            <t t-esc="commission['title']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="commission['name']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="commission['percentage']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="commission['amount']"/>
+                                        </td>
+                                    </tr>
+
+                                </t>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td>Date of Delivery</td>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td>Booking Application No</td>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td>Booking Application Date</td>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td>Purchase Application No</td>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td>Purchase Application Date</td>
+                                    <td>
+                                        <t t-esc="o.agreement_date"/>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <br/>
+                            <p>*Attached Statement of Account</p>
+                            <br/>
+                            <span>Notes</span>
+                            <table border="1" width="100%" style="margin-top: 20px; border-collapse: collapse;">
+                                <tr>
+                                    <td colspan="4" height="100" style="vertical-align: center;">Total Payments:
+                                        <span t-esc="o.amount_total"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <div class="row">
+                                <div class="col-6">
+                                    <span>
+                                        Finance Manager
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <span>
+                                        General Manager
+                                    </span>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-6">
+                                    <span>
+                                        Date
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <span>
+                                        Date
+                                    </span>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col-6">
+                                </div>
+                                <div class="col-6" style="text-align: right;">
+                                    <span>
+                                        CC Marketing Manager
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="sale_cancellation_header">
+            <t t-set="company" t-value="user.company_id"/>
+            <div class="header border-bottom" width="100%">
+                <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                    <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                        <tr>
+                            <td style="padding-top:40px; text-align:left;">
+                                <strong>
+                                    <h2 t-esc="res_company.name"/>
+                                </strong>
+                            </td>
+                            <td style="padding-top:10px;">
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                     style="max-height: 80px;" alt="Logo"/>
+                            </td>
+                            <td style="padding-top:40px; text-align:right;">
+                                <strong>
+                                    <h2 t-esc="res_company.name_arabic"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+                </table>
+            </div>
+        </template>
+    </data>
+</odoo>

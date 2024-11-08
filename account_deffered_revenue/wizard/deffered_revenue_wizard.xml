@@ -1,0 +1,19 @@
+<odoo>
+
+    <record id="view_deffered_revenue_wizard_form" model="ir.ui.view">
+        <field name="name">Deffered Revenue Wizards</field>
+        <field name="model">deffered.revenue.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group col="4">
+                    <field name="is_combined"/>
+                </group>
+                <footer>
+                    <button name="create_deffered_revenue" string="Create Deffered Revenue" type="object" class="btn-primary"/>
+                    <button string="Cancel" type="object" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

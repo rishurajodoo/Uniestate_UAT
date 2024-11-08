@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_commission_line,sale.commission.line,model_sale_commission_line,,1,1,1,1
+access_sale_commission_settlement_line,sale.commission.settlement.line,model_sale_commission_settlement_line,,1,1,1,1

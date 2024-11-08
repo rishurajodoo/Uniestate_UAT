@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_subcontractors_payment_certificate">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <table class="table table-sm table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <h4>
+                                            <strong>Project Name:</strong>
+                                            <strong>
+                                                <span style="padding-left:6px;" t-field="o.project_name.name"/>
+                                            </strong>
+                                        </h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Location:</strong>
+                                        <span style="padding-left:22px;" t-field="o.location"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Works:</strong>
+                                        <span style="padding-left:25px;" t-field="o.works"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div style="background-color:#ADD8E6; color:black; border:1px solid black;">
+                            <h5 class="text-center">SUBCONTRACTOR'S PAYMENT CERTIFICATE</h5>
+                        </div>
+                        <div class="row" style="align-items-center padding-top:20px">
+                            <div class="col-6">
+                                <br/>
+                                <table class="table table-sm table-borderless" style="padding-top:50px">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <strong>Project No :</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.project_name.project_reg_number"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Supplier Name :</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.partner_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Supplier No :</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.partner_id.phone"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Nature Of Work :</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.nature_of_work"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Payment Terms :</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.invoice_payment_term_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Type Of Contract :</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.type_of_contract"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>LPO Ref :</strong>
+                                            </td>
+                                            <!--                                            <td>-->
+                                            <!--                                                <span t-field="o.project_name.name"/>-->
+                                            <!--                                            </td>-->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <br/>
+                                <br/>
+                                <table class="table table-sm"
+                                       style="border:1px solid black; border-collapse: collapse;">
+                                    <tbody>
+                                        <strong>
+                                            <tr style="background-color:#fef65b; color:black; border:1px solid black;">
+                                                <td style="width:50%;  border:1px solid black;">
+                                                    <strong>P.C #</strong>
+                                                </td>
+                                                <td>
+                                                    <span t-field="o.purchase_order_count"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color:#fef65b; color:black; border:1px solid black;">
+                                                <td style="width:50%;  border:1px solid black;">
+                                                    <strong>Acct. Code</strong>
+                                                </td>
+                                                <td>
+                                                    <!--                                                    10-->
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color:#fef65b; color:black; border:1px solid black;">
+                                                <td style="width:50%;  border:1px solid black;">
+                                                    <strong>Interim / Final</strong>
+                                                </td>
+                                                <td>
+<!--                                                    <span t-field="o.int_final"/>-->
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color:#fef65b; color:black; border:1px solid black;">
+                                                <td style="width:50%;  border:1px solid black;">
+                                                    <strong>Assessment Date</strong>
+                                                </td>
+                                                <td>
+                                                    <span t-field="o.assessment_date"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color:#fef65b; color:black; border:1px solid black;">
+                                                <td style="width:50%;  border:1px solid black;">
+                                                    <strong>Invoice No.</strong>
+                                                </td>
+                                                <td>
+                                                    <span t-field="o.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color:#fef65b; color:black; border:1px solid black;">
+                                                <td style="width:50%;  border:1px solid black;">
+                                                    <strong>Invoice Rccd On.</strong>
+                                                </td>
+                                                <td>
+                                                    <span t-field="o.invoice_date"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color:#fef65b; color:black; border:1px solid black;">
+                                                <td style="width:50%;  border:1px solid black;">
+                                                    <strong>Payment due date</strong>
+                                                </td>
+                                                <td>
+                                                    <span t-field="o.invoice_date_due"/>
+                                                </td>
+                                            </tr>
+                                            <tr style="background-color:#fef65b; color:black; border:1px solid black;">
+                                                <td style="width:50%;  border:1px solid black;">
+                                                    <strong>QS Control #</strong>
+                                                </td>
+                                                <td>
+
+                                                </td>
+                                            </tr>
+                                        </strong>
+                                    </tbody>
+                                </table>
+                                <br/>
+                                <table class="table table-sm"
+                                       style="width: 100%; border:1px solid black; border-collapse: collapse;">
+                                    <tbody>
+                                        <tr style="color:black; border:1px solid black;">
+                                            <td style="width:50%;  border:1px solid black;">
+                                                <strong>Contract Value :</strong>
+                                            </td>
+                                            <td style="text-align:right;">
+                                                <span t-field="o.po_total_value"/>
+                                            </td>
+                                        </tr>
+                                        <tr style="color:black; border:1px solid black;">
+                                            <td style="width:50%;  border:1px solid black;">
+                                                <strong>Variations :</strong>
+                                            </td>
+                                            <td style="text-align:right;">
+                                                0
+                                            </td>
+                                        </tr>
+                                        <tr style="color:black; border:1px solid black;">
+                                            <td style="width:50%;  border:1px solid black;">
+                                                <strong>Total Contract Value</strong>
+                                            </td>
+                                            <td style="text-align:right;">
+                                                <span t-field="o.po_total_value"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                        <br/>
+
+
+                        <div>
+                            <div style="background-color:#fef65b; color:black; border:1px solid black;">
+                                <h6 class="text-center">Details Of Certificates</h6>
+                            </div>
+
+                            <table class="table table-sm table-borderless" style="width: 100%;">
+                                <tbody>
+                                    <tr style="color:black;">
+                                        <td style="width:10%;border-left: 1px solid black;">
+                                            <strong>A :</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Payables</strong>
+                                        </td>
+                                        <td style="text-align:right; width:25%;  border:1px solid black; border-style: none solid ">
+
+                                        </td>
+                                    </tr>
+                                    <tr style="color:black;">
+                                        <td style="width:10%;border-left: 1px solid black;">
+                                            <strong>A1 :</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Cumulative Value of certified work done on items</strong>
+                                        </td>
+                                        <td style="text-align:right; width:25%;  border:1px solid black; border-style: none solid">
+                                            <span t-esc="sum(o.invoice_line_ids.mapped('total_bill_amount'))"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="color:black;border-left: 1px solid black;">
+                                        <td style="width:10%;">
+
+                                        </td>
+                                        <td>
+                                            <strong>work done previous Invoice</strong>
+                                        </td>
+                                        <td style="text-align:right; width:25%;  border:1px solid black; border-style: none solid">
+                                            <span t-esc="sum(o.invoice_line_ids.mapped('previous_bill_amount'))"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="color:black;">
+                                        <td style="border:1px solid black; text-align:right;" colspan="2">
+                                            <strong>Current Month Work Done</strong>
+                                        </td>
+                                        <td style="text-align:right; width:25%;  border:1px solid black;">
+                                            <span t-esc="sum(o.invoice_line_ids.mapped('total_bill_amount')) - sum(o.invoice_line_ids.mapped('previous_bill_amount'))"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="color:black;">
+                                        <td style="width:10%;border-left: 1px solid black;">
+                                            <strong>B</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Deductables</strong>
+                                        </td>
+                                        <td style="text-align:right; width:25%;  border:1px solid black; border-style: none solid">
+
+                                        </td>
+                                    </tr>
+
+                                    <tr style="color:black;">
+                                        <td style="width:10%;border-left: 1px solid black;">
+                                            <strong>B1</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Less (Advance %)</strong>
+                                        </td>
+                                        <td style="text-align:right; width:25%; border:1px solid black; border-style: none solid">
+                                            <span t-field="o.advance_amount"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="color:black;">
+                                        <td style="width:10%;border-left: 1px solid black;">
+                                            <strong>B2</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Less (Retention %)</strong>
+                                        </td>
+                                        <td style="text-align:right; width:25%;  border:1px solid black; border-style: none solid">
+                                            <span t-field="o.retention_amount"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="color:black;">
+                                        <td style="border:1px solid black; text-align:right;" colspan="2">
+                                            <strong>Sum of All Upper</strong>
+                                        </td>
+                                        <td style="text-align:right; width:25%;  border:1px solid black;">
+                                            <span t-esc="o.retention_amount + o.advance_amount"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="color:black;">
+                                        <td style="width:10%;border-left: 1px solid black;">
+                                            <strong>C</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Net Payable to the Payee(A-B)</strong>
+                                        </td>
+                                        <td style="text-align:right; width:25%;  border:1px solid black; border-style: none solid">
+                                            <span t-esc="sum(o.invoice_line_ids.mapped('total_bill_amount')) - sum(o.invoice_line_ids.mapped('previous_bill_amount')) - (o.retention_amount + o.advance_amount)"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="color:black;">
+                                        <td style="width:10%;border-left: 1px solid black;">
+                                            <strong>F</strong>
+                                        </td>
+                                        <td>
+                                            <strong>5% vat on Net Payable</strong>
+                                        </td>
+                                        <td style="text-align:right; width:25%;  border:1px solid black; border-style: none solid">
+                                            <span t-esc="sum(o.invoice_line_ids.mapped('price_total')) - sum(o.invoice_line_ids.mapped('price_subtotal'))"/>
+                                            <!--                                            <span t-field="sum(o.invoice_line_ids.mapped('l10n_ae_vat_amount'))"/>-->
+                                        </td>
+                                    </tr>
+                                    <tr style="color:black;">
+                                        <td style="width:10%;border-left: 1px solid black;">
+                                            <strong>G</strong>
+                                        </td>
+                                        <td>
+                                            <strong>Net Payable to the Payee</strong>
+                                        </td>
+                                        <td style="text-align:right; width:25%;  border:1px solid black; border-style: none solid">
+                                            <span t-esc="sum(o.invoice_line_ids.mapped('total_bill_amount')) - sum(o.invoice_line_ids.mapped('previous_bill_amount')) - (o.retention_amount + o.advance_amount) + sum(o.invoice_line_ids.mapped('price_total')) - sum(o.invoice_line_ids.mapped('price_subtotal'))"/>
+                                            <!--                                            <span t-esc="o.amount_residual + sum(o.invoice_line_ids.mapped('total_bill_amount'))"/>-->
+                                        </td>
+                                    </tr>
+                                    <tr style="color:black;">
+                                        <td style="border:1px solid black; text-align:right;" colspan="2">
+                                            <span t-esc="o.amount_to_text(sum(o.invoice_line_ids.mapped('total_bill_amount')) - sum(o.invoice_line_ids.mapped('previous_bill_amount')) - (o.retention_amount + o.advance_amount) + sum(o.invoice_line_ids.mapped('price_total')) - sum(o.invoice_line_ids.mapped('price_subtotal')))"/>
+                                        </td>
+                                        <td style="text-align:right; width:25%;  border:1px solid black;">
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-sm table-bordered o_main_table mt-4 border-dark" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td style="border:1px solid black; text-align:left;">
+                                            <h6>
+                                                <strong>Recommending Approval:</strong>
+                                            </h6>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span>
+                                                <strong>Technical Manager</strong>
+                                            </span>
+                                        </td>
+                                        <td style="border:1px solid black; text-align:left;">
+                                            <h6>
+                                                <strong>Checked &amp; Noted by:</strong>
+                                            </h6>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span></span>
+                                        </td>
+                                        <td style="border:1px solid black; text-align:left;">
+                                            <h6>
+                                                <strong>Approved by:</strong>
+                                            </h6>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <span>
+                                                <strong>General Manager</strong>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

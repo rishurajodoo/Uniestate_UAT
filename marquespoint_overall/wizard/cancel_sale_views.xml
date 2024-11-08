@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_cancel_sale_wizard_form" model="ir.ui.view">
+        <field name="name">Cancel Sale Wizard</field>
+        <field name="model">cancel.sale.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group col="4">
+                    <field name="refund_amount"/>
+                    <field name="cancel_reason_id"/>
+                    <field name="cancel_feedback"/>
+                </group>
+                <footer>
+                    <button string="Cancel Order" type="object" name="action_cancel" class="btn btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

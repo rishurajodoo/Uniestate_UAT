@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- views -->
+
+    <record id="view_portal_attendance_tree" model="ir.ui.view">
+        <field name="name">portal.attendance.tree</field>
+        <field name="model">portal.attendance</field>
+        <field name="arch" type="xml">
+            <tree string="Portal Attendance">
+                <field name="employee_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_portal_attendance_form" model="ir.ui.view">
+        <field name="name">portal.attendance.form</field>
+        <field name="model">portal.attendance</field>
+        <field name="arch" type="xml">
+            <form string="Portal Attendance">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" options="{'no_create_edit': True}"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_portal_attendance_filter" model="ir.ui.view">
+        <field name="name">portal.attendance.filter</field>
+        <field name="model">portal.attendance</field>
+        <field name="arch" type="xml">
+            <search string="Portal Attendance Search">
+                <field name="employee_id"/>
+                <filter name="filter_start_date" date="start_date"/>
+                <filter name="filter_end_date" date="end_date"/>
+                <group expand="0" string="Group By">
+                    <filter string="Employee" name="groupby_employee" context="{'group_by': 'employee_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- actions -->
+
+    <record id="portal_attendance_action" model="ir.actions.act_window">
+        <field name="name">Portal Attendance</field>
+        <field name="res_model">portal.attendance</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

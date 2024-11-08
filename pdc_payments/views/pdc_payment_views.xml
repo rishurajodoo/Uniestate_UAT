@@ -1,0 +1,276 @@
+<odoo>
+
+    <record id="view_pdc_payment_form" model="ir.ui.view">
+        <field name="name">pdc.payment.form</field>
+        <field name="model">pdc.payment</field>
+        <field name="arch" type="xml">
+            <form string="PDC Payment">
+                <header>
+                    <!--                    <button name="button_register"-->
+                    <!--                            string="Register"-->
+                    <!--                            type="object"-->
+                    <!--                            class="oe_highlight"-->
+                    <!--                            states="draft"-->
+                    <!--                            groups="pdc_payments.group_register"/>-->
+
+                    <button name="button_cancel"
+                            string="Cancel"
+                            type="object"
+                            invisible="state in ['cancel','cleared', 'draft']"
+                            class="oe_highlight"
+                            groups="pdc_payments.group_cancel"/>
+
+                    <button name="button_bounce"
+                            string="Bounce"
+                            type="object"
+                            invisible="state not in ['registered'] or bounce_clear_btn_hide == True or not is_bounce_clear"
+                            class="oe_highlight"
+                            groups="pdc_payments.group_bounce"/>
+
+                    <button name="button_cleared"
+                            string="Cleared"
+                            type="object"
+                            invisible="state in ['draft', 'bounced', 'cleared', 'cancel']  or bounce_clear_btn_hide == True or not is_bounce_clear"
+                            class="oe_highlight"
+                            groups="pdc_payments.group_clear"/>
+
+                    <button name="button_recall"
+                            string="Recall"
+                            type="object"
+                            invisible="state not in ['registered'] or bounce_clear_btn_hide ==False or is_recall"
+                            class="oe_highlight"
+                            groups="pdc_payments.group_recall"/>
+
+                    <!--                    <button name="action_pdc_payment_wizard"-->
+                    <!--                            string="Partner Ledger Report"-->
+                    <!--                            type="object"-->
+                    <!--                            class="oe_highlight"-->
+                    <!--                            attrs="{'invisible': [('state', '!=', 'cleared')]}"/>-->
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,registered,bounced,cleared,cancel"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_get_registered_jv" type="object" icon="fa-bars"
+                                invisible="registered_counter == 0"
+                        >
+                            <field name="registered_counter" widget="statinfo" string="Registered"/>
+                        </button>
+                        <button class="oe_stat_button" name="action_get_invoices" type="object" icon="fa-bars"
+                                invisible="total_invoice == 0"
+                        >
+                            <field name="total_invoice" widget="statinfo" string="Invoices"/>
+                        </button>
+                        <button class="oe_stat_button" name="action_get_bounce_jv" type="object" icon="fa-bars"
+                                invisible="bounce_counter == 0"
+                        >
+                            <field name="bounce_counter" widget="statinfo" string="Bounce"/>
+                        </button>
+                        <button class="oe_stat_button" name="action_get_cleared_jv" type="object" icon="fa-bars"
+                                invisible="cleared_counter == 0"
+                        >
+                            <field name="cleared_counter" widget="statinfo" string="Cleared"/>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="name" readonly="1"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="partner_id" required="1"/>
+                            <field name="payment_amount" required="1"/>
+                            <field name="commercial_bank_id"/>
+                            <field name="memo"/>
+                            <field name="journal_id" required="1"/>
+                            <field name="destination_account_id" required="1"/>
+
+                            <field name="currency_id" required="1"/>
+                            <field name="pdc_type" required="1"/>
+                            <field name="is_bounce_clear" invisible="1"/>
+                            <field name="is_recall" invisible="1"/>
+                            <field name="bounce_clear_btn_hide" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="is_security" invisible="1"/>
+                            <field name="date_payment" required="is_security == False" string="Cheque Date"/>
+                            <field name="date_registered" required="1" string="Collection Date"/>
+                            <field name="date_bounced"/>
+                            <field name="date_cleared"/>
+                            <field name="cheque_no" required="1"/>
+                            <field name="cheque_type_id"/>
+                            <!--                            <field name="move_id"/>-->
+                            <field name="move_ids" widget="many2many_tags"/>
+                            <field name="purchaser_id"/>
+                            <field name="application_no"/>
+                            <field name="order_id"/>
+
+                        </group>
+                    </group>
+                    <group string="Property Details" col="4">
+                        <field name="unit_id" widget="many2many_tags"/>
+                        <field name="floor_id"/>
+                        <field name="building_id"/>
+                        <field name="project_id"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pdc_payment_tree" model="ir.ui.view">
+        <field name="name">pdc.payment.tree</field>
+        <field name="model">pdc.payment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="payment_amount" sum="Total"/>
+                <field name="commercial_bank_id"/>
+                <field name="date_payment" string="Due Date"/>
+                <field name="cheque_no"/>
+                <field name="date_registered" string="Registered Date"/>
+                <field name="pdc_type"/>
+                <field name="memo"/>
+                <field name="destination_account_id"/>
+                <field name="journal_id"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pdc_payment_search" model="ir.ui.view">
+        <field name="name">pdc.payment.search</field>
+        <field name="model">pdc.payment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="payment_amount"/>
+                <field name="commercial_bank_id"/>
+                <field name="memo"/>
+                <field name="destination_account_id"/>
+                <field name="journal_id"/>
+            </search>
+        </field>
+    </record>
+
+    <!--  Main Actions-->
+
+    <record id="action_pdc_payment_view" model="ir.actions.act_window">
+        <field name="name">PDC Cheques</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pdc.payment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_pdc_payment_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Record Found. Let's Create..........
+            </p>
+        </field>
+    </record>
+
+    <!--  Main Menus-->
+
+    <menuitem id="menu_pdc_payment_root"
+              name="PDC Cheques"
+              groups="base.group_user"
+              web_icon="pdc_payments,static/description/icon.png"/>
+
+    <menuitem id="menu_item_pdc_payment"
+              name="PDC Cheques"
+              sequence="1"
+              parent="menu_pdc_payment_root"/>
+
+    <menuitem id="menu_action_pdc_payment"
+              name="PDC Payment"
+              parent="menu_item_pdc_payment"
+              action="action_pdc_payment_view"
+              sequence="1"/>
+
+    <!--    Inhertied Views-->
+
+    <record id="view_account_payment_inherit" model="ir.ui.view">
+        <field name="name">account.payment.inherit</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_bank_id']" position="after">
+                <field name="pdc_ref"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_pdc_commercial_bank_form" model="ir.ui.view">
+        <field name="name">pdc.commercial.bank.form</field>
+        <field name="model">pdc.commercial.bank</field>
+        <field name="arch" type="xml">
+            <form string="PDC Payment">
+                <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pdc_commercial_bank_search" model="ir.ui.view">
+        <field name="name">pdc.commercial.bank.tree</field>
+        <field name="model">pdc.commercial.bank</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_pdc_commercial_view" model="ir.actions.act_window">
+        <field name="name">Commercial Bank</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pdc.commercial.bank</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_pdc_commercial_bank_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Record Found. Let's Create..........
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_pdc_conf"
+              name="Configuration"
+              sequence="10"
+              parent="menu_pdc_payment_root"/>
+
+    <menuitem id="menu_pdc_commercial_bank"
+              name="Commercial Bank"
+              parent="menu_pdc_conf"
+              action="action_pdc_commercial_view"
+    />
+
+
+    <!--Cheque Type-->
+    <record id="cheque_type_form_id" model="ir.ui.view">
+        <field name="name">Cheque Type</field>
+        <field name="model">cheque.type</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" string="_form">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="is_security"/>
+            </tree>
+        </field>
+    </record>
+    <record id="cheque_type_action_id" model="ir.actions.act_window">
+        <field name="name">Cheque Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cheque.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="cheque_type_menu_root_id" name="Cheque Type" parent="menu_pdc_conf" action="cheque_type_action_id"/>
+</odoo>

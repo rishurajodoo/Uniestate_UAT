@@ -1,0 +1,403 @@
+<odoo>
+    <data>
+        <template id="addendum_id_print">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <h4 class="text-center">ADDENDUM TO TENANCY CONTRACT (DMCC NO ASP7096)</h4>
+                            <table class="table table-sm table-borderless">
+                                <tr>
+                                    <th colspan="2">
+                                        Payments
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        1.
+                                    </th>
+                                    <td>
+                                        The Tenant will pay the Rent on the due dates specified in the Rent Payment Plan
+                                        and according to the terms of this Tenancy
+                                        Contract whether formally demanded or not, without exception, deduction,
+                                        set-off, counterclaim or retention of any kind.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Security Deposit
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        2.
+                                    </th>
+                                    <td>
+                                        A security Deposit equivalent to 10% (AED 30,000) of the Year 1 rent is payable
+                                        to the Landlord at the time of signing this
+                                        Tenancy Contract.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        3.
+                                    </th>
+                                    <td>
+                                        Should the Landlord not deduct any amount from the Security Deposit, then the
+                                        Landlord shall refund the Security Deposit to the
+                                        Tenant in sixty (60) days after the expiry or termination of this Tenancy
+                                        Contract and after receiving a written request from the
+                                        Tenant accompanied by the Handover Form.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Taxes, fees and costs
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        4.
+                                    </th>
+                                    <td>
+                                        If the Landlord is registered for Value Added Tax (VAT), then VAT shall be paid
+                                        by the Tenant on the rent. The Landlord will be
+                                        required to produce a Tax Registration Number and TRN certificate.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        5.
+                                    </th>
+                                    <td>
+                                        If a Tenant’s cheque is dishonoured, then Tenant shall pay to the Landlord a fee
+                                        of AED 1,000 plus AED 50 VAT.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        6.
+                                    </th>
+                                    <td>
+                                        If the Tenant fails to make any due payment by the due date, the Landlord may
+                                        charge a fee at a rate of 2% per month of the
+                                        amount due until such payment due is made.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Handover
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        7.
+                                    </th>
+                                    <td>
+                                        Handover of the Premises to the Tenant shall occur once the Tenant has signed
+                                        the tenancy contract and paid the security
+                                        deposit and first rental instalment and provided post-dated cheques as per the
+                                        Rent Payment Plan.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        8.
+                                    </th>
+                                    <td>
+                                        It is the Landlord’s responsibility to ensure the unit is not registered under
+                                        an existing Trade License (including own entities or
+                                        previous Tenants) and has no existing liabilities, including but not limited to
+                                        utilities, community service charges,
+                                        telecommunications.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Utilities and charges
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        10.
+                                    </th>
+                                    <td>
+                                        The Tenant is responsible for payment of all electricity, water, cooling and gas
+                                        charges resulting from occupying the property.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        11.
+                                    </th>
+                                    <td>
+                                        The Tenant is responsible for payment of telecommunications resulting from
+                                        occupying the property.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        12.
+                                    </th>
+                                    <td>
+                                        The Owner is responsible for payment of community service charges. Any utility
+                                        services billed via service charges but that
+                                        relate to the property and that due to a lack of individual premise metering are
+                                        charged to the Landlord, shall be reimbursed by
+                                        Tenant within 30 days subject to receiving an invoice from the Owner.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Parking
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        13.
+                                    </th>
+                                    <td>
+                                        There is two (2) parking space included. Parking slots B3-02/03 as per Title
+                                        Deed.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Permitted use
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        14.
+                                    </th>
+                                    <td>
+                                        The Tenant shall use the Premises only for the permitted use as per activities
+                                        allowed under their Commercial License
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        15.
+                                    </th>
+                                    <td>
+                                        The Tenant shall pay AED 250 to register the tenancy contract via Ejari.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        16.
+                                    </th>
+                                    <td>
+                                        The Landlord shall provide documents if required for Ejari or required by DMCC.
+                                        The Landlord shall not withhold any documents
+                                        to prevent the Tenant from applying for their DMCC license.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Fitting out and alteration
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        17.
+                                    </th>
+                                    <td>
+                                        The Tenant may not make modifications to the Premises or alter the fit-out
+                                        without a letter of no objection from the Landlord. The
+                                        Tenant agrees to provide the as-built, Concordia approved drawings to the
+                                        Landlord on completion of the modifications.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Care and maintenance
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        18.
+                                    </th>
+                                    <td>
+                                        The Tenant is responsible for the maintenance and upkeep of fixtures, fittings,
+                                        and mechanical, electrical and plumbing
+                                        components of the Premises.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        19.
+                                    </th>
+                                    <td>
+                                        The repair or replacement of an item or part costing more than of AED 1,000
+                                        shall be the responsibility of the Landlord to pay
+                                        and the repair and replacement of an item or part costing AED 1,000 or less
+                                        shall be the responsibility of the Tenant to pay.
+                                        The Tenant shall be responsible for call out charges as applicable incurred by
+                                        the landlord if the repair cost is assessed to be
+                                        under AED 1,000.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Access and inspection
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        20.
+                                    </th>
+                                    <td>
+                                        The Tenant agrees to provide access to service providers authorised by the
+                                        Landlord at all reasonable times and with two
+                                        business days’ notice to inspect, maintain, repair, or improve the property.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        21.
+                                    </th>
+                                    <td>
+                                        The Tenant agrees to allow the property to be viewed during the last three
+                                        months of the Tenancy Contract term or its earlier
+                                        termination at all reasonable times by brokers and prospective purchasers or
+                                        tenants of the property authorised by the
+                                        Landlord
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Insurance and indemnity
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        22.
+                                    </th>
+                                    <td>
+                                        Insurance of the contents of the property is the responsibility of the Tenant.
+                                        The Tenant indemnifies the Landlord If the Tenant
+                                        does not insure the contents of the property and suffers loss or damage on
+                                        account of fire, theft, flood or accident or for any
+                                        such event to the property during the Tenancy period.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Renewal
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        23.
+                                    </th>
+                                    <td>
+                                        Three (3) months’ notice in writing will be given to the Landlord if the tenant
+                                        does not wish to renew the tenancy contract.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Vacating
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        24.
+                                    </th>
+                                    <td>
+                                        The Tenant shall provide the Landlord with copies of all final utility bills and
+                                        evidence of payment thereof upon vacating the property.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        25.
+                                    </th>
+                                    <td>
+                                        The Tenant agrees that any rent, costs, or fees payable to the Landlord that
+                                        have not been paid by the Tenant by the end of
+                                        the Tenancy Contract term will be deducted from the Security Deposit.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        26.
+                                    </th>
+                                    <td>
+                                        At the end of the Tenancy Contract term or its earlier termination, the Tenant
+                                        must provide the Landlord with proof of an
+                                        address change from DMCC or a final de registration received from DMCC before
+                                        the security deposit is returned to the
+                                        Tenant.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        27.
+                                    </th>
+                                    <td>
+                                        The Tenant will hand back the unit in the same condition as it was received and
+                                        will repair any damages (excluding fair wear and
+                                        tear) to the premises or any of the Landlord's fitting and fixtures on vacating
+                                        the premises.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        28.
+                                    </th>
+                                    <td>
+                                        Tenant improvements to the Premises may be left in place at the discretion of
+                                        the Landlord.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Termination
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        29.
+                                    </th>
+                                    <td>
+                                        Should the Tenant wish to break the lease during the Tenancy Contract term, the
+                                        Landlord will require three (3) months’ written
+                                        notice and a penalty of equivalent 3 months’ rent to be paid by the Tenant.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">
+                                        Force Majeure
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        30.
+                                    </th>
+                                    <td>
+                                        Neither Party shall be held responsible for any delay in performance of any of
+                                        its obligations under this Agreement (except
+                                        accrued payment obligations) where such delay in performance is because of an
+                                        event of Force Majeure.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="5%">
+                                        31.
+                                    </th>
+                                    <td>
+                                        Force Majeure means a circumstance, condition or event outside the reasonable
+                                        direct or indirect control of the Party affected,
+                                        but only to the extent that such circumstances, condition or event:
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

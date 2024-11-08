@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="report_maintenance_request_form" model="ir.actions.report">
+        <field name="name">Maintenance Request Report</field>
+        <field name="model">maintenance.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">maintenance_request_report.maintenance_request_form</field>
+        <field name="report_file">maintenance_request_report.maintenance_request_form</field>
+        <field name="print_report_name">('Maintenance Request Report - %s' % (object.name))</field>
+        <field name="binding_model_id" ref="maintenance.model_maintenance_request"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

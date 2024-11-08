@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payment_mode,access.payment.mode,model_payment_mode,,1,1,1,1
+access_property_custom_report_wizard,access_property_custom_report_wizard,model_property_custom_report_wizard,,1,1,1,1

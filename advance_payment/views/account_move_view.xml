@@ -1,0 +1,138 @@
+<odoo>
+    <data>
+        <record id="view_move_form_inherited" model="ir.ui.view">
+            <field name="name">account.move.form.inherited</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@id='header_left_group']" position="inside">
+                    <!-- <xpath expr="//field[@name='payment_reference']" position="move"/> -->
+                    <!--                                        <field name="payment_ref"/>-->
+                     <!-- <label for="attendant" string="Attendent" style="font-weight:bold;" invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="attendant" invisible="po_type != 'project' or move_type != 'in_invoice'"
+                           domain="[('parent_id', '=', partner_id)]"/> -->
+                     <label for="attendant" string="Attendant" style="font-weight:bold;" invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                     <div class="o_col" invisible="po_type != 'project' or move_type != 'in_invoice'">
+                            <field name="attendant" nolabel="1"/>
+                     </div>
+                    <field name="project_name"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="project_shipment"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="project_code"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="po_no"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"
+                           domain="[('partner_id', '=', partner_id)]"/>
+                    <field name="invoice_name"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="invoice_arabic_name"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="total_wd"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="total_wd_arabic"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="po_type" invisible="move_type != 'in_invoice'"/>
+                    <field name="nature_of_work" invisible="move_type != 'in_invoice'"/>
+                    <field name="type_of_contract" invisible="move_type != 'in_invoice'"/>
+                    <field name="type" invisible="move_type != 'in_invoice'"/>
+                    <field name="location" invisible="move_type != 'in_invoice'"/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_date']" position="after">
+                    <field name="confirmation_date"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="assessment_date"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="po_total_value"/>
+                    <field name="sub_contractor"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"
+                           domain="[('parent_id', '=', partner_id)]"/>
+                    <field name="works"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="period"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="contract_order"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="retention"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="retention_amount" force_save="1"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="advance"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="advance_amount" force_save="1"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="advance_vat" force_save="1"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                    <field name="recoverable"
+                           invisible="po_type != 'project' or move_type != 'in_invoice'"/>
+                </xpath>
+                     <xpath expr="//field[@name='payment_reference']" position="replace">
+                            <field name="payment_reference" string="Payment Reference"/>
+                     </xpath>
+                <!--                Line Ids-->
+                <xpath expr="//field[@name='line_ids']/tree//field[@name='account_id']"
+                       position="after">
+                    <field name="is_bill" invisible="1"/>
+                    <field name="is_project" invisible="1"/>
+                    <field name="contract_per_amount" invisible="1"/>
+                    <field name="contract_amount" invisible="1"/>
+                    <field name="previous_percentage" invisible="1"/>
+                    <field name="this_month_percentage" invisible="1"/>
+                    <field name="total_percentage" invisible="1"/>
+                    <field name="percentage_total_amount" invisible="1"/>
+                    <field name="previous_bill_amount" invisible="1"/>
+                    <field name="current_bill_amount" invisible="1"/>
+                    <field name="total_bill_amount" invisible="1"/>
+                </xpath>
+                <!--                invoice Lines -->
+                <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='quantity']"
+                       position="after">
+                    <field name="is_bill" invisible="1"/>
+                    <field name="is_project" invisible="1"/>
+                    <field name="contract_per_amount" force_save="1" class="text-center" optional="hide" readonly="1"/>
+                    <!--                           attrs="{'invisible': ['|',('is_bill', '!=', True), ('is_project', '!=', True)]}"-->
+
+                    <field name="contract_amount" force_save="1"
+                           invisible="not is_bill or not is_project"
+                           class="text-center" optional="hide" readonly="1"/>
+                    <field name="previous_percentage"
+                           invisible="not is_bill or not is_project"
+                           class="text-center" optional="hide"/>
+                    <field name="this_month_percentage"
+                           invisible="not is_bill or not is_project"
+                           class="text-center" optional="hide"/>
+                    <field name="total_percentage"
+                           invisible="not is_bill or not is_project"
+                           class="text-center" optional="hide"/>
+                    <field name="percentage_total_amount"
+                           invisible="not is_bill or not is_project"
+                           class="text-center" optional="hide"/>
+                    <field name="previous_bill_amount"
+                           invisible="not is_bill or not is_project"
+                           class="text-center" optional="hide" sum="Previous Bill"/>
+                    <field name="current_bill_amount"
+                           invisible="not is_bill or not is_project"
+                           class="text-center" optional="hide" sum="Current Bill"/>
+                    <field name="total_bill_amount"
+                           invisible="not is_bill or not is_project"
+                           class="text-center" optional="hide" sum="Total Bill"/>
+                </xpath>
+<!--                <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='product_id']" position="attributes">-->
+<!--                    <attribute name="readonly">not is_project</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='account_id']" position="attributes">-->
+<!--                    <attribute name="required">0</attribute>-->
+<!--                    &lt;!&ndash;                    <attribute name="readonly">not is_project</attribute>&ndash;&gt;-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='quantity']" position="attributes">-->
+<!--                    <attribute name="readonly">not is_project</attribute>-->
+<!--                    <attribute name="optional">hide</attribute>-->
+<!--                </xpath>-->
+<!--                <xpath expr="//field[@name='invoice_line_ids']/tree//field[@name='price_unit']" position="attributes">-->
+<!--                    <attribute name="readonly">not is_project</attribute>-->
+<!--                    <attribute name="optional">hide</attribute>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+    </data>
+</odoo>

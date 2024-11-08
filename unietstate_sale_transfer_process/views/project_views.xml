@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="unietstate_sale_transfer_process_inherited_project_form" model="ir.ui.view">
+        <field name="name">project.project.form</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="spa_uniestate.edit_project_inherit"/>
+        <field name="arch" type="xml">
+            <field name="project_reg_number" position="after">
+                <field name="admin_fees_type" invisible="1"/>
+                <field name="token_money_due_days"/>
+                <field name="percentage" invisible="admin_fees_type in ['fixed_amount', False]"/>
+                <field name="fixed_amount" invisible="admin_fees_type in ['percentage', False]"/>
+<!--                <field name="sale_booking_type"/>-->
+<!--                <field name="sale_booking_percentage" invisible="sale_booking_type in ['sale_booking_fixed_amount', False]"/>-->
+<!--                <field name="sale_booking_amount" invisible="sale_booking_type in ['sale_booking_percentage', False]"/>-->
+<!--                <field name="renewal_charges"/>-->
+<!--                <field name="renewal_percentage" invisible="renewal_charges in ['renewal_fixed_amount', False]"/>-->
+<!--                <field name="renewal_fixed_amount" invisible="renewal_charges in ['renewal_percentage', False]"/>-->
+            </field>
+        </field>
+    </record>
+</odoo>

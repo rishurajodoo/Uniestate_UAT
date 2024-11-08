@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="onhand_wizard_form_id" model="ir.ui.view">
+            <field name="name">On Hand Cheque</field>
+            <field name="model">pdc.onhand.wizard</field>
+            <field name="arch" type="xml">
+                <form string="_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="generate_xls_file" invisible="1"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>
+                                <!--                               <field name="state"/>-->
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <footer>
+                        <button type="object" string="Print XLSX" name="print_onhand_report" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="onhand_wizard_action" model="ir.actions.act_window">
+            <field name="name">On Hand Cheque Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pdc.onhand.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="onhand_menu_item" name="On Hand Cheque Report" parent="pdc_payments.menu_item_pdc_payment"
+                  sequence="12" action="onhand_wizard_action"/>
+
+    </data>
+</odoo>

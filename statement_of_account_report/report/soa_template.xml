@@ -1,0 +1,299 @@
+<odoo>
+    <data>
+        <template id="soa_marquis_report_temp">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            <h1 class="text-center">
+                                Statement of Account
+                            </h1>
+                            <br/>
+                            <t t-if="o.for_sale">
+                                <div width="100%">
+                                    <table class="table table-sm table-borderless">
+                                        <t t-set="pr_no" t-value="0"/>
+                                        <t t-if="o.purchaser_ids" t-foreach="o.purchaser_ids" t-as="purchaser">
+                                            <tr>
+                                                <t t-set="pr_no" t-value="pr_no + 1"/>
+                                                <td width="40%">
+                                                    <strong>Purchaser<span t-esc="pr_no"/>&#160;:&#160;
+                                                    </strong>
+                                                    <span t-field="purchaser.purchase_individual.name"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <tr>
+                                            <td width="40%">
+                                                <strong>Project:&#160;</strong>
+                                                <strong t-field="o.project.name"/>
+                                            </td>
+                                            <td>
+                                                <strong>Property Details:&#160;</strong>
+                                                <br/>
+                                                <strong>Unit:</strong>
+                                                <span t-field="o.unit.name"/>,
+                                                <strong>Building:</strong>
+                                                <span t-field="o.building.name"/>,
+                                                <strong>Floor:</strong>
+                                                <span t-field="o.floor.name"/>,
+                                                <strong>Price:</strong>
+                                                <span t-field="o.amount_untaxed"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <table class="table table-sm" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Sr#
+                                            </th>
+                                            <th>
+                                                Invoice Number
+                                            </th>
+                                            <th>
+                                                Invoice Date
+                                            </th>
+                                            <th>
+                                                Due Date
+                                            </th>
+                                            <th>
+                                                Invoice Status
+                                            </th>
+                                            <th>
+                                                Payment Status
+                                            </th>
+                                            <th class="text-right">
+                                                Invoice Amount
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="sr_no" t-value="0"/>
+                                        <t t-set="grand_total" t-value="0"/>
+                                        <t t-foreach="o.installment_ids" t-as="line">
+                                            <tr>
+                                                <t t-set="sr_no" t-value="sr_no+1"/>
+                                                <t t-set="grand_total" t-value="grand_total+line.amount"/>
+                                                <td>
+                                                    <span t-esc="sr_no"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line.move_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line.invoice_date"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line.move_id.invoice_date_due"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line.invoice_status"/>
+                                                    <!--                                                <t t-esc="dict(line.fields_get(allfields=['invoice_status'])['invoice_status']['selection'])[line.invoice_status]"/>-->
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line.payment_status"/>
+                                                    <!--                                                <t t-esc="dict(line.fields_get(allfields=['payment_status'])['payment_status']['selection'])[line.payment_status]"/>-->
+                                                </td>
+                                                <td class="text-right">
+                                                    <t t-if="line.amount">
+                                                        <span t-esc="res_company.currency_id.name"/>
+                                                        <span t-esc="line.amount"
+                                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                                <t t-if="grand_total">
+                                    <div style="float:right; width:30%">
+                                        <table class="table table-sm">
+                                            <tr>
+                                                <td>
+                                                    <strong>Total</strong>
+                                                </td>
+                                                <td style="text-align:right;">
+                                                    <span t-esc="res_company.currency_id.name"/>
+                                                    <span t-esc="grand_total"
+                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </t>
+                            </t>
+                            <t t-if="o.for_rent">
+                                <div width="100%">
+                                    <table class="table table-sm table-borderless">
+                                        <tr>
+                                            <td width="40%">
+                                                <strong>Customer:&#160;</strong>
+                                                <span t-field="o.partner_id.name"/>
+                                            </td>
+                                            <td>
+                                                <strong>Floor:&#160;</strong>
+                                                <span t-field="o.floor.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="40%">
+                                                <strong>Project:&#160;</strong>
+                                                <span t-field="o.project.name"/>
+                                            </td>
+                                            <td>
+                                                <strong>Unit :&#160;</strong>
+                                                <span t-field="o.unit.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="40%">
+                                                <strong>Building:&#160;</strong>
+                                                <span t-field="o.building.name"/>
+                                            </td>
+                                            <td>
+                                                <strong>Contract Amount:&#160;</strong>
+                                                <span t-field="o.amount_untaxed"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <table class="table table-sm" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Sr#
+                                            </th>
+                                            <th>
+                                                Payment Mode
+                                            </th>
+                                            <th>
+                                                Cheque Number
+                                            </th>
+                                            <th>
+                                                Invoice Date
+                                            </th>
+                                            <th>
+                                                Cheque Date
+                                            </th>
+                                            <th>
+                                                Invoice Status
+                                            </th>
+                                            <th>
+                                                Payment Status
+                                            </th>
+                                            <th class="text-right">
+                                                Invoice Amount
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="sr_no" t-value="0"/>
+                                        <t t-set="grand_total" t-value="0"/>
+                                        <t t-foreach="o.invoice_ids" t-as="line">
+                                            <tr>
+                                                <t t-set="sr_no" t-value="sr_no+1"/>
+                                                <t t-set="grand_total" t-value="grand_total+line.amount_total"/>
+                                                <t t-if="o.env['pdc.payment'].search([('move_ids', 'in', [line.id])])">
+                                                    <t t-foreach="o.env['pdc.payment'].search([('move_ids', 'in', [line.id])])"
+                                                       t-as="pdc_id">
+                                                        <td>
+                                                            <span t-esc="sr_no"/>
+                                                        </td>
+                                                        <td>
+                                                            <span>Cheque</span>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="pdc_id.cheque_no"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="line.invoice_date"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="pdc_id.date_registered"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="line.state"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-esc="line.payment_state"/>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            <t t-if="line.amount_total">
+                                                                <span t-esc="res_company.currency_id.name"/>
+                                                                <span t-esc="line.amount_total"
+                                                                      t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+
+                                                            </t>
+                                                        </td>
+                                                    </t>
+                                                </t>
+                                                <t t-else="">
+                                                    <td>
+                                                        <span t-esc="sr_no"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-set="record"
+                                                           t-value="o.env['account.payment'].search([('ref', '=', line.name)])"/>
+                                                        <t t-if="len(record) > 1">
+                                                            <span>Cheque and Cash</span>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span>Cash</span>
+                                                        </t>
+                                                    </td>
+                                                    <td>
+                                                        <span>&#160;</span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.invoice_date"/>
+                                                    </td>
+                                                    <td>
+                                                        <span>&#160;</span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.state"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.payment_state"/>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <t t-if="line.amount_total">
+                                                            <span t-esc="res_company.currency_id.name"/>
+                                                            <span t-esc="line.amount_total"
+                                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+
+                                                        </t>
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                                <t t-if="grand_total">
+                                    <div style="float:right; width:30%">
+                                        <table class="table table-sm">
+                                            <tr>
+                                                <td>
+                                                    <strong>Total</strong>
+                                                </td>
+                                                <td style="text-align:right;">
+                                                    <span t-esc="res_company.currency_id.name"/>
+                                                    <span t-esc="grand_total"
+                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </t>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

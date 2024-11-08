@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_floor_document_id,floor_document,model_floor_plans,base.group_user,1,1,1,1
+access_floor_image_id,floor_images,model_floor_images,base.group_user,1,1,1,1
+access_unit_type_id,unit_type,model_unit_type,base.group_user,1,1,1,1
+access_unit_detail_id,unit_detail,model_unit_detail,base.group_user,1,1,1,1
+access_sub_unit_id,sub_unit_name,model_sub_unit_type,base.group_user,1,1,1,1
+access_property_amenities,property_amenities,model_property_amenities,base.group_user,1,1,1,1

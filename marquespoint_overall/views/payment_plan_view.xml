@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+        <record id="view_payment_plan_form" model="ir.ui.view">
+            <field name="name">payment.plan.form</field>
+            <field name="model">payment.plan</field>
+            <field name="arch" type="xml">
+                <form string="Payment Plan">
+                    <sheet>
+                        <group col="4">
+                            <field name="name"/>
+                            <field name="sequence"/>
+                            <field name="name_arabic"/>
+                            <field name='code'/>
+                            <field name='percentage'/>
+                            <field name='amount'/>
+                            <field name='is_booked'/>
+                            <field name='is_admin_fee'/>
+                            <field name='is_post_cheque'/>
+                            <field name='is_ejari'/>
+                            <field name='is_dld'/>
+                            <field name="is_service_charges"/>
+                            <field name='is_oqood'/>
+                            <field name='is_debit'/>
+                            <field name="is_renewal"/>
+                            <field name="is_utility_charge"/>
+                            <field name="is_invoice"/>
+                            <field name="chiller_charge_config" invisible="1"/>
+                            <field name="is_completion"/>
+                            <field name="is_chiller_charges" invisible="chiller_charge_config == False"/>
+
+                            <!--                            <field name='is_invoice'/>-->
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_payment_plan_tree" model="ir.ui.view">
+            <field name="name">payment.plan.tree</field>
+            <field name="model">payment.plan</field>
+            <field name="arch" type="xml">
+                <tree string="Payment Plan">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name='percentage'/>
+                    <field name='amount'/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_payment_plan">
+            <field name="name">Milestone</field>
+            <field name="res_model">payment.plan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_payment_plan_tree"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Record Found. Let's Create..........
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="action_payment_plan" id="menu_payment_plan_root" sequence="12"
+                  parent="sale.menu_sale_config"/>
+    </data>
+</odoo>

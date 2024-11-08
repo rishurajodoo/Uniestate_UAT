@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_settlement_sale_form">
+        <field name="name">Settlements sale form</field>
+        <field name="model">commission.settlement</field>
+        <field name="inherit_id" ref="commission.view_settlement_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[hasclass('oe_subtotal_footer')]" position="after">
+                <group string="Sale Order Details"/>
+                <field
+                        name="sale_commission_ids"
+                        nolabel="1"
+                        readonly="can_edit == False"
+                >
+                    <tree create="false">
+                        <field name="order_id"/>
+                        <field name="date"/>
+                        <field name="so_amount"/>
+                        <field name="invoiced_amount"/>
+                        <field name="paid_amount"/>
+                        <field name="outstanding_amount"/>
+                        <field name="outstanding_percentage"/>
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+</odoo>

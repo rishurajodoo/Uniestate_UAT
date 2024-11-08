@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Form View Definition -->
+    <record id="view_milestone_trigger_form" model="ir.ui.view">
+        <field name="name">milestone.trigger.form</field>
+        <field name="model">milestone.trigger</field>
+        <field name="arch" type="xml">
+            <form string="Mile Stone Trigger">
+                <group>
+                    <field name="project_id"/>
+                    <field name="building_id"/>
+                    <field name="unit_id"/>
+                    <field name="milestone_id"/>
+                    <field name="start_date"/>
+                </group>
+                <footer>
+                    <button string="Confirm" type="object" class="btn-primary" name="action_save"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_milestone_trigger_form" model="ir.actions.act_window">
+        <field name="name">Milestone Trigger</field>
+        <field name="res_model">milestone.trigger</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_milestone_trigger_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+            id="menu_milestone_trigger_form"
+            parent="sale.sale_menu_root"
+            action="action_milestone_trigger_form"
+            sequence="10"
+    />
+
+
+</odoo>

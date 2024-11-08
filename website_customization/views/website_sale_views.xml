@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="custom_product_page" inherit_id="website_sale.product">
+        <xpath expr="//a[@id='add_to_cart']" position="after">
+            <a role="button"
+               t-attf-class="btn btn-outline-secondary o_we_enquire_now ms-1 #{'btn-lg' if ctaSizeBig else ''}"
+               href="/website/enquire_now">
+                <i class="fa fa-question-circle me-2"/>
+                Enquire Now
+            </a>
+        </xpath>
+    </template>
+</odoo>
+

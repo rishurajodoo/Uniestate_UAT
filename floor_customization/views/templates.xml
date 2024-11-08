@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="floor_type_form_id" model="ir.ui.view">
+            <field name="name">Floor Type Form</field>
+            <field name="model">floor.type</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="floor_type_action_id" model="ir.actions.act_window">
+            <field name="name">Floor Types</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">floor.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="floor_type_menu_id" name="Floor Type" parent="project_customization.config_menu_item_id"
+                  action="floor_type_action_id"/>
+
+    </data>
+</odoo>

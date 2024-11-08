@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="receipt_header_footer_id">
+
+            <!--            <t t-foreach="docs" t-as="o">-->
+            <div class="header" style="padding-bottom: 4px!important;">
+                <div class="row">
+                    <div class="col-2 mb4">
+                        <img t-if="request.env.user.company_id.logo" t-att-src="image_data_uri(request.env.user.company_id.logo)"
+                             style="max-height: 80px;"
+                             alt="Logo"/>
+                    </div>
+                    <div class="col-6" name="company_name">
+                        <h3>
+                            <b>
+                                <div t-field="request.env.user.company_id.name" style="text-align:center;"/>
+                            </b>
+                        </h3>
+                        <p style="margin-top: 2px;text-align:center;">
+                            <b><t t-esc="request.env.user.company_id.partner_id.name"/><br/></b>
+                            <b><t t-esc="request.env.user.company_id.partner_id.street"/><br/></b>
+                            <b><t t-esc="request.env.user.company_id.partner_id.zip"/> <t t-esc="request.env.user.company_id.partner_id.city"/><br/></b>
+                        </p>
+                    </div>
+                    <!-- <div class="col-7 mb4 pl-5">
+                        <h3 style="font-family: Times New Roman, Times, serif; margin-left: 30px;font-style: normal;font-style: italic;">
+                            <strong>
+                                <span t-field="request.env.user.company_id.name"/>
+                            </strong>
+                        </h3>
+                    </div> -->
+
+                </div>
+                <div class="row mt-5" style="border-bottom: 2px double black;"></div>
+                <div class="row mt-1" style="border-bottom: 2px double black;"></div>
+
+                <div class="row text-center mt-1"
+                     style="font-family: Times New Roman, Times, serif; margin-left: 30px;font-style: normal;font-style: italic;">
+                    <div class="col-12">
+                        <t t-if="payment_type == 'outbound' or pdc_type == 'sent'">
+                            <h5>
+                                <strong>Payment Voucher</strong>
+                            </h5>
+                        </t>
+                        <t t-if="payment_type == 'inbound' or pdc_type == 'received'">
+                            <h5>
+                                <strong>Receipt Voucher</strong><br/>
+                            </h5>
+                        </t>
+                    </div>
+                </div>
+            </div>
+            <div class="footer" style="padding-bottom:20px">
+                <style>.footer_span{font-size:15px;}</style>
+                <div class="row">
+                    <div class="col-4">
+                        <strong>Prepared By: <u><t t-esc="request.env.user.name"/></u></strong>
+                    </div>
+                    <div class="col-4 offset-4 text-right">
+                        <strong>Received By:_____________</strong>
+                    </div>
+                </div>
+                <div class="text-center mt-2" style="border-top: 1px solid black;">
+
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page:
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+            <!--            </t>-->
+        </template>
+
+        <template id="receipt_temp_id">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page" style="font-family: Times New Roman, Times, serif; margin: 30px;">
+                        <p style="margin-top: 2px; text-align: left;">
+                            <b><t t-esc="request.env.user.company_id.name"/><br/></b>
+                            <b><t t-esc="request.env.user.company_id.street"/><br/></b>
+                            <b><t t-esc="request.env.user.company_id.zip"/> <t t-esc="request.env.user.company_id.city"/><br/></b>
+                        </p>
+                        <br/>
+                        <!-- Voucher Type (Payment/Receipt) on Top -->
+                        <div class="row text-center mt-1" style="font-family: Times New Roman, Times, serif; font-style: normal; font-style: italic;">
+                            <div class="col-10">
+                                <t t-if="payment_type == 'outbound' or pdc_type == 'sent'">
+                                    <h5><strong>Payment Voucher</strong></h5>
+                                </t>
+                                <t t-if="payment_type == 'inbound' or pdc_type == 'received'">
+                                    <h5><strong>Receipt Voucher</strong><br/></h5>
+                                </t>
+                            </div>
+                        </div><br/><br/>
+        
+                        <!-- Date and Recipient Info -->
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <strong>Date: </strong>
+                                <span><t t-esc="time.strftime('%d/%m/%Y')"/></span>
+                            </div>
+                            <div class="col-6">
+                                <span>
+                                    <t t-if="pdc.pdc_type == 'received'">
+                                        <strong>Received From: </strong>
+                                    </t>
+                                    <t t-elif="pdc.pdc_type == 'sent'">
+                                        <strong>Issued To: </strong>
+                                    </t>
+                                </span>
+                                <span><t t-esc="record[0]['partner_id']"/></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Project, Building, Floor, Unit Info -->
+                        <div class="row mt-3">
+                            <t t-foreach="unit_details" t-as="unit">
+                                <div class="col-6">
+                                    <strong>Project: </strong>
+                                    <span t-if="unit['project']"><t t-esc="unit['project']"/></span>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Building: </strong>
+                                    <span><t t-esc="unit['building']"/></span>
+                                </div>
+                            </t>
+                        </div>
+                        
+                        <div class="row mt-3">
+                            <t t-foreach="unit_details" t-as="unit">
+                                <div class="col-6">
+                                    <strong>Floor: </strong>
+                                    <span><t t-esc="unit['floor']"/></span>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Unit: </strong>
+                                    <span><t t-esc="unit['unit']"/></span>
+                                </div>
+                            </t>
+                        </div>
+        
+                        <!-- Amount Section -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <strong>Amount Total: </strong>
+                                <span><t t-esc="'{:,}'.format(total_total)"/></span>
+                            </div>
+                        </div>
+        
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <strong>Amount Total in Words: </strong>
+                                <span>**Dirhams <t t-esc="total_total_words"/>**</span>
+                            </div>
+                        </div>
+        
+                        <!-- Payment Details Table -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <style>
+                                    table {
+                                        border-collapse: collapse;
+                                        width: 100%;
+                                        margin: 0 auto;
+                                        font-size: 14px;
+                                    }
+                                    th, td {
+                                        border: 2px solid black;
+                                        padding: 8px;
+                                        text-align: center;
+                                    }
+                                    th {
+                                        background-color: #f2f2f2;
+                                    }
+                                    .total-row {
+                                        font-weight: bold;
+                                        border-top: 2px solid black;
+                                        border-bottom: 2px solid black;
+                                    }
+                                </style>
+        
+                                <table class="mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th>Pay Mode</th>
+                                            <th>Cheque No.</th>
+                                            <th>Cheque Date</th>
+                                            <th>Bank Name</th>
+                                            <th>Seq No</th>
+                                            <th>Memo</th>
+                                            <th>Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="record" t-as="rec">
+                                            <tr>
+                                                <td>Cheque</td>
+                                                <td><t t-esc="rec['cheque_no']"/></td>
+                                                <td style="width:15%;"><t t-esc="rec['cheque_date']"/></td>
+                                                <td><t t-esc="rec['bank_id']"/></td>
+                                                <td><t t-esc="rec['rv_num']"/></td>
+                                                <td><t t-esc="rec['memo']"/></td>
+                                                <td><t t-esc="'{:,}'.format(rec['amount'])"/></td>
+                                            </tr>
+                                        </t>
+                                        <tr class="total-row">
+                                            <td colspan="6">Total:</td>
+                                            <td>**Dirhams <t t-esc="pdc.currency_id.amount_to_text(total)"/>**</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+        
+                        <!-- Footer Section -->
+                        <div class="footer" style="padding-bottom:20px; margin-top: 30px;">
+                            <style>.footer_span{font-size:15px;}</style>
+                            <div class="row">
+                                <div class="col-4">
+                                    <strong>Prepared By: <u><t t-esc="request.env.user.name"/></u></strong>
+                                </div>
+                                <div class="col-4 offset-4 text-right">
+                                    <strong>Received By:_____________</strong>
+                                </div>
+                            </div>
+                            <div class="text-center mt-2" style="border-top: 1px solid black;">
+                                <div t-if="report_type == 'pdf'" class="text-muted">
+                                    Page: <span class="page"/> / <span class="topage"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>                
+        
+
+
+    </data>
+</odoo>

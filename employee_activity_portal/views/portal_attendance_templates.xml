@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Template for portal.attendance # T4964 -->
+
+    <template id="portal_my_home_menu_portal_attendance" name="Portal layout : Attendance" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'portal_attendance' or portal_attendance" t-attf-class="breadcrumb-item #{'active ' if not portal_attendance else ''}">
+                <a t-if="portal_attendance" t-attf-href="/my/attendance?{{ keep_query() }}">Attendance</a>
+                <t t-else="">Attendance</t>
+            </li>
+            <li t-if="portal_attendance" class="breadcrumb-item active">
+                <t t-esc="portal_attendance.display_name"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_portal_attendance" name="Show Attendance" customize_show="True" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <!-- Portal docs entry for Attendance -->
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Attendance</t>
+                <t t-set="url" t-value="'/my/attendance'"/>
+                <t t-set="placeholder_count" t-value="'portal_attendance_count'"/>
+            </t>
+
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_portal_attendance_check_in_out_n" name="Attendance Check In/Out" inherit_id="portal.portal_my_home" priority="21">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Check In/Out</t>
+                <t t-set="url" t-value="'/my/attendance/check_in'"/>
+                <t t-set="placeholder_count" t-value="'check_count'"/>
+            </t>
+            <!-- Display message when checked in -->
+            <t t-if="employee_attendance_state == 'checked_in'">
+                <p style="color: green; font-weight: bold;">
+                    You are currently checked in. Click the button to check out.
+                </p>
+            </t>
+
+            <!-- Display message when checked out -->
+            <t t-if="employee_attendance_state == 'checked_out'">
+                <p style="color: red; font-weight: bold;">
+                    You are not checked in. Click the button to check in.
+                </p>
+            </t>
+
+        </xpath>
+    </template>
+
+    <template id="portal_my_portal_attendance" name="Attendance">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Attendance</t>
+            </t>
+            <t t-if="not portal_attendances">
+                <p>There are currently no attendance for your account.</p>
+            </t>
+            <t t-if="portal_attendances" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Employee</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <t t-foreach="portal_attendances" t-as="attendance">
+                    <tr>
+                        <td><span t-field="attendance.employee_id"/></td>
+                        <td><span t-field="attendance.check_in"/></td>
+                        <td><span t-field="attendance.check_out"/></td>
+                        <!-- <td><span t-field="employee.employee_attendance_state"/></td> -->
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="agreement_external_layout_standard">
+                <div t-attf-class="header border-bottom o_company_#{company.id}_layout" width="100%"
+                     t-att-style="report_header_style">
+                    <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                        <tr>
+                            <td style="padding-top:40px; text-align:left;">
+                                <strong>
+                                    <h2 t-esc="res_company.name"/>
+                                </strong>
+                            </td>
+                            <td style="padding-top:10px;">
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                     style="max-height: 80px;" alt="Logo"/>
+                            </td>
+                            <td style="padding-top:40px; text-align:right;">
+                                <strong>
+                                    <h2 t-esc="res_company.name_arabic"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+                     <p style="text-align:right;margin-left: 100%;">
+                         <div style="text-align:left;float: right;">
+                             Page: <span class="page"/><br/>
+                             Date:<span t-out="datetime.date.today()" /><br/>
+                             Time:<span t-out="o.get_current_timezone_time()"/>
+                         </div>
+                     </p>
+                </div>
+
+                <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+                     t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+                     t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                     t-att-data-oe-lang="o and o.env.context.get('lang')">
+                    <t t-out="0"/>
+                </div>
+
+                <div t-attf-class="footer border-top border-bottom" width="100%" style="font-size:12px;">
+                    <table class="table table-sm table-borderless text-center" width="100%"
+                           style="padding:5px !important; margin:5px !important;">
+                        <tr>
+                            <td style="text-align:left;">
+                                <img src="/marquespoint_overall/static/description/location.png"
+                                     style="height:20px; width:20px; margin-right:10px;"/>
+                                <span>Uniestate Building, Oman Street, Ras Al Khaimah</span>
+                            </td>
+                            <td style="text-align:center;">
+                                <img src="/marquespoint_overall/static/description/phone.png"
+                                     style="height:20px; width:20px; margin-right:10px;"/>
+                                <span>800-776-776</span>
+                            </td>
+                            <td style="text-align:right;">
+                                <img src="/marquespoint_overall/static/description/global.png"
+                                     style="height:20px; width:20px; margin-right:10px;"/>
+                                <span>http://www.uniestate.com</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+        </template>
+    <template id="external_layout_custom">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <t t-call="transfer_property_report.agreement_external_layout_standard"><t t-out="0"/></t>
+
+    </template>
+
+
+    <template id="report_transfer">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="transfer_property_report.external_layout_custom">
+                    <div class="page">
+                        <br/>
+                        <center>
+                            <h5 style="background-color: #f0f0f0; padding: 10px; border-radius: 5px;">
+                                <b>AGREEMENT FOR TRANSFER OF PROPERTY
+                                </b>
+                            </h5>
+                        </center>
+                        <div class="row">
+                            <div class="col-5"/>
+                            <div class="col-5"/>
+                            <div class="col-2" style="text-align: left;">
+                                Ref No <![CDATA[&nbsp;]]> <![CDATA[&nbsp;]]>
+                                <t t-esc="o.name"/>
+                            </div>
+                        </div>
+                        <p>
+                            This agreement has been entered into on <![CDATA[&nbsp;]]>
+                            <span t-field="o.agreement_date" t-options='{"format": "d-MM-yyyy"}'/>
+                            <![CDATA[&nbsp;]]> by and between;
+                        </p>
+                        <div class="row">
+                            <div class="col-5">
+                                <table width="100%"
+                                       style=" border-right: 1px solid black; border-left: 1px solid black;height:500px;">
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;background-color: #f0f0f0;"
+                                            colspan="2">
+                                            <center>
+                                                First Party
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Name
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.purchaser_ids[0].purchase_individual.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Nationality
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.purchaser_ids[0].purchase_individual.country_arabic.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            ID No
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-if="o.purchaser_ids[0].purchase_individual.emirates_id">
+                                                <t t-esc="o.purchaser_ids[0].purchase_individual.emirates_id"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-esc="o.purchaser_ids[0].purchase_individual.passport_eng"/>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Date of issue
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.purchaser_ids[0].purchase_individual.date_of_issue"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Place of Issue
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.purchaser_ids[0].purchase_individual.place_of_issue"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Phone
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.purchaser_ids[0].purchase_individual.phone"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Fax
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.purchaser_ids[0].purchase_individual.fax_eng"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Mobile
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.purchaser_ids[0].purchase_individual.mobile"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            E-Mail Address
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.purchaser_ids[0].purchase_individual.email"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Mailing Address
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.purchaser_ids[0].purchase_individual.street"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Permanent Address
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.purchaser_ids[0].purchase_individual.street2"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-2">
+                            </div>
+                            <div class="col-5">
+                                <table width="100%"
+                                       style=" border-right: 1px solid black; border-left: 1px solid black;height:500px; ">
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;background-color: #f0f0f0;padding-top: 10px;"
+                                            colspan="2">
+                                            <center>
+                                                Second Party
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Name
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.new_owner.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Nationality
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.new_owner.country_arabic.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            ID No
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.new_owner.emirates_id"/>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Date of issue
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.new_owner.date_of_issue"/>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Place of Issue
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.new_owner.place_of_issue"/>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Phone
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.new_owner.phone"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Fax
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.new_owner.fax_eng"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Mobile
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.new_owner.mobile"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            E-Mail Address
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.new_owner.email"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Mailing Address
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.new_owner.street"/>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border:1px solid black;padding-bottom: 10px;padding-top: 10px;">
+                                            Permanent Address
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.new_owner.street2"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <table class="table-borderless">
+                            <tr>
+                                <td style="padding-bottom: 10px;">
+                                    Where as;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 10px;">
+                                    a)<![CDATA[&nbsp;]]>  he first party has a property unit hereinafter detailed in
+                                    clause (1.0)
+                                    and referred
+                                    to as "Unit Information",which
+                                    which he has acquired from M/s (hereinafter referred to as ?The Company?),
+                                    under
+                                    Al Thuraya Int. Real Estate
+                                    Sales Agreement Dated 20/04/2016
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 10px;">
+                                    b)<![CDATA[&nbsp;]]> Consequent to the sales agreement referred to in (a) above, the
+                                    Fist party has, as
+                                    of the date of this agreement, a balance outstanding
+                                    and payable to The Company, which amount has been reconciled in their respective
+                                    books and hereby confirmed and mentioned
+                                    hereinafter in (2.3).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 10px;">
+                                    c)<![CDATA[&nbsp;]]> The first party proposes to transfer the said unit to the
+                                    second party subject the
+                                    Second Party is accepting the terms and conditions
+                                    laid down in the original agreement referred to in (a) above, signed between The
+                                    Company and the First Party
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding-bottom: 10px;">
+                                    d)<![CDATA[&nbsp;]]> The Second Party is willing to accept transfer of the property
+                                    to its name on and
+                                    has agreed to pay the Sales Value defined
+                                    hereinafter in (2.2)
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding-bottom: 10px;">
+                                    Now, therefore, it is agreed between the parties to carry out the Transfer of
+                                    Property on the following terms and conditions;
+                                </td>
+                            </tr>
+                        </table>
+
+                        <p style="page-break-after: always;"/>
+                        <br/>
+                        <div class="row" style="margin-top:5%;">
+                            <div class="col-5">
+                                <table width="100%" style="height:400px;" class="table-borderless">
+                                    <tr>
+                                        <td >
+                                            1
+                                        </td>
+                                        <td style="border:1px solid black;background-color: #f0f0f0;text-align:center;padding-bottom: 10px;padding-top: 10px;"
+                                            colspan="2">
+                                            Unit Information
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            1.1
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Project Name
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.project.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            1.2
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Unit Number
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.unit.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            1.3
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Building
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.unit.building.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            1.4
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Unit Description
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.unit.unit_type_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            1.5
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Floor No.
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.unit.floor_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            1.1
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Total sellable Area
+                                            in square feet
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.unit.property_size"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            1.7
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Sales Agreement Date
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                           <t t-esc="o.agreement_date"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="col-5">
+                                <table width="100%" style="height:400px;" class="table-borderless">
+                                    <tr>
+                                        <td>
+                                            2
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;background-color: #f0f0f0;padding-bottom: 10px;padding-top: 10px;"
+                                            colspan="2">
+                                            Purchase Information
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2.1
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Price/SFT of salable area in (AED)
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                             <t t-esc="o.order_line[0].price_unit"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2.2
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Sales Value (AED)
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+<!--                                           <t t-esc="o.order_line[0].product_tmpl_id.reasonable_price"/>-->
+                                          <t t-esc="o.unit.reasonable_price"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2.3
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Balance Payable by the 1st Party to
+                                            the Company (AED)
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2.4
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Transfer Fee Payable to The
+                                            Company (AED)
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            <t t-esc="o.admin_fees_due"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2.5
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Commission Payable to
+                                            Agent (AED)
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2.6
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Paid by the 2nd Party to 1st
+                                            Party (AED)
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2.7
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                            Payable by 2nd Party to the
+                                            First party (AED)
+                                        </td>
+                                        <td style="border:1px solid black;text-align:center;padding-bottom: 10px;padding-top: 10px;">
+                                          <t t-esc="o.outstanding_invoice"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                        <br/>
+                        <table class="table-borderless">
+                            <tr>
+                                <td style="padding-bottom: 10px;">
+                                    3. The First Party agrees to pay an administrative fee equal to 1 % ( ONE percent)
+                                    of
+                                    the Sale Value of the property to The Company,
+                                    calculated and written hereinabove in clause (2.4) titled "Transfer Fee"
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 10px;">
+                                    4. The first party hereby waives all its rights in favor of second party, the new
+                                    buyer
+                                    and, consequently abrogates
+                                    all financial obligations towards the company in accordance with the original
+                                    agreement signed between the first party and The
+                                    Company.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 10px;">
+                                    5. Both of the parties are agreed that this agreement
+                                    will take effect only after acceptance and ratification by The
+                                    Company and the transfer fee referred hereinabove in (2.4) has been paid to The
+                                    Company
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 10px;">6. The Second Party agrees to deduct from sale value
+                                    and pay to The Company a sum as
+                                    calculated and
+                                    written hereinabove in clause (2.3) being the amount outstanding to the Company as
+                                    mentioned hereinabove
+                                    in clause (b)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 10px;">7. To affect this transfer The Second Party will sign
+                                    another agreement with the company called ?Sales &amp;
+                                    Maintenance Agreement?
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="row" style="margin-top:10%;">
+                            <div class="col-5">
+                                <span style="text-align:right">
+                                    <b>
+                                        Signature
+                                        <br/>
+                                        First Party
+                                        <br/>
+                                        <br/>
+                                        Accepted and Ratified
+                                        <br/>
+                                        <br/>
+                                        Signature and Stamp
+                                        for the Company
+                                    </b>
+
+                                </span>
+                            </div>
+                            <div class="col-2"></div>
+                            <div class="col-5">
+                                <span style="text-align:right">
+                                    <b>Signature
+                                        <br/>
+                                        Second Party
+                                    </b>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

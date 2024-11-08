@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="property_performance_template">
+            <t t-call="web.html_container">
+                <t t-call="property_performance_report.property_performance_report_header"/>
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <strong>
+                            <span style="border-bottom: 1px solid black;">Leasing Performance - Total Rented Units
+                            </span>
+                        </strong>
+                        <br/>
+                        <strong>
+                            <span style="border-bottom: 1px solid black;">From
+                                <span t-esc="start_date"/>
+                                to
+                                <span t-esc="end_date"/>
+                            </span>
+                        </strong>
+                        <br/>
+                        <br/>
+                        <table class="table table-bordered table-sm"
+                               style="border:1px solid black;text-align:center; font-size: 10px;">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="width: 15%;">Project Name</th>
+                                    <th rowspan="2" style="width: 5%;">Total Units</th>
+                                    <t t-foreach="months" t-as="month">
+                                        <th colspan="2" style="width: 6%;">
+                                            <span t-esc="month"/>
+                                        </th>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <t t-foreach="months" t-as="month">
+                                        <th>Rent</th>
+                                        <th>Vac</th>
+                                    </t>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="projects_data" t-as="project">
+                                    <td>
+                                        <span t-esc="project['project']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="project['total_units']"/>
+                                    </td>
+                                    <t t-foreach="months" t-as="month">
+                                        <td>
+                                            <span t-esc="project['monthly_counts'].get(month, {}).get('rent', 0)"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="project['total_units'] - project['monthly_counts'].get(month, {}).get('rent', 0)"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <t t-if="monthly_income">
+                            <strong>
+                                <span style="border-bottom: 1px solid black;">Leasing Performance - Revenue
+                                </span>
+                            </strong>
+                            <br/>
+                            <strong>
+                                <span style="border-bottom: 1px solid black;">From
+                                    <span t-esc="start_date"/>
+                                    to
+                                    <span t-esc="end_date"/>
+                                </span>
+                            </strong>
+                            <br/>
+                            <br/>
+                            <table class="table table-bordered table-sm"
+                                   style="border:1px solid black;text-align:center; font-size: 10px; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%;">Project Name</th>
+                                        <th style="width: 15%;">Total Units</th>
+                                        <t t-foreach="months" t-as="month">
+                                            <th style="width: 6%;">
+                                                <span t-esc="month"/>
+                                            </th>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="projects_data" t-as="project">
+                                        <td>
+                                            <span t-esc="project['project']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="project['total_units']"/>
+                                        </td>
+                                        <t t-foreach="months" t-as="month">
+                                            <td>
+                                                <span t-esc="project['monthly_counts'].get(month, {}).get('amount', 0)"
+                                                      t-options='{"widget": "float", "precision": 2}'/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
+                        <t t-if="financial_income and analytic_data">
+                            <strong>
+                                <span style="border-bottom: 1px solid black;">Leasing Performance - Total Cost of
+                                    Rent
+                                </span>
+                            </strong>
+                            <br/>
+                            <strong>
+                                <span style="border-bottom: 1px solid black;">From
+                                    <span t-esc="start_date"/>
+                                    to
+                                    <span t-esc="end_date"/>
+                                </span>
+                            </strong>
+                            <br/>
+                            <strong>
+                                <span style="border-bottom: 1px solid black;">Accounts :
+                                    <span t-esc="financial_account"/>
+                                </span>
+                            </strong>
+                            <br/>
+                            <br/>
+                            <table class="table table-bordered table-sm"
+                                   style="border:1px solid black;text-align:center; font-size: 10px; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%;">Project</th>
+                                        <th style="width: 15%;">Total Units</th>
+                                        <t t-foreach="months" t-as="month">
+                                            <th style="width: 6%;">
+                                                <span t-esc="month"/>
+                                            </th>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="projects_data" t-as="project">
+                                        <td>
+                                            <span t-esc="project['project']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="project['total_units']"/>
+                                        </td>
+                                        <t t-foreach="months" t-as="month">
+                                            <td>
+                                                <span t-esc="project['monthly_counts'].get(month, {}).get('balance', 0)"
+                                                      t-options='{"widget": "float", "precision": 2}'/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
+                        <strong>
+                            <span style="border-bottom: 1px solid black;">Leasing Performance Average Monthly
+                                Revenue vs
+                                Cost
+                            </span>
+                        </strong>
+                        <br/>
+                        <br/>
+                        <table class="table table-bordered table-sm"
+                               style="border:1px solid black;text-align:center; font-size: 10px; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="width: 15%;">Project</th>
+                                    <th rowspan="2" style="width: 15%;">Total Units</th>
+                                    <t t-foreach="months" t-as="month">
+                                        <th colspan="2" style="width: 6%;">
+                                            <span t-esc="month"/>
+                                        </th>
+                                    </t>
+                                    <tr>
+                                        <t t-foreach="months" t-as="month">
+                                            <th>Income</th>
+                                            <th>Cost</th>
+                                        </t>
+                                    </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="projects_data" t-as="project">
+                                    <td>
+                                        <span t-esc="project['project']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="project['total_units']"/>
+                                    </td>
+                                    <t t-foreach="months" t-as="month">
+                                        <td>
+                                            <span t-esc="project['monthly_counts'].get(month, {}).get('amount', 0)"
+                                                  t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="project['monthly_counts'].get(month, {}).get('balance', 0)"
+                                                  t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <strong>
+                            <span style="border-bottom: 1px solid black;">Leasing Performance Average Monthly
+                                Revenue vs
+                                Cost Per SQFT
+                            </span>
+                        </strong>
+                        <br/>
+                        <br/>
+                        <table class="table table-bordered table-sm"
+                               style="border:1px solid black;text-align:center; font-size: 10px; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="width: 15%;">Project</th>
+                                    <th rowspan="2" style="width: 15%;">Total Units</th>
+                                    <t t-foreach="months" t-as="month">
+                                        <th colspan="2" style="width: 6%;">
+                                            <span t-esc="month"/>
+                                        </th>
+                                    </t>
+                                    <tr>
+                                        <t t-foreach="months" t-as="month">
+                                            <th>Income</th>
+                                            <th>Cost</th>
+                                        </t>
+                                    </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="projects_data" t-as="project">
+                                    <td>
+                                        <span t-esc="project['project']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="project['total_units']"/>
+                                    </td>
+                                    <t t-foreach="months" t-as="month">
+                                        <td>
+                                            <span t-esc="project['monthly_counts'].get(month, {}).get('income', 0)"
+                                                  t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="project['monthly_counts'].get(month, {}).get('cost', 0)"
+                                                  t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <strong>
+                            <span style="border-bottom: 1px solid black;">Leasing Performance Revenue vs Cost Per
+                                Occupied SQFT
+                            </span>
+                        </strong>
+                        <br/>
+                        <br/>
+                        <table class="table table-bordered table-sm"
+                               style="border:1px solid black;text-align:center; font-size: 10px; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="width: 15%;">Project</th>
+                                    <th rowspan="2" style="width: 15%;">Total Units</th>
+                                    <t t-foreach="months" t-as="month">
+                                        <th colspan="2" style="width: 6%;">
+                                            <span t-esc="month"/>
+                                        </th>
+                                    </t>
+                                    <tr>
+                                        <t t-foreach="months" t-as="month">
+                                            <th>Income</th>
+                                            <th>Cost</th>
+                                        </t>
+                                    </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="projects_data" t-as="project">
+                                    <td>
+                                        <span t-esc="project['project']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="project['total_units']"/>
+                                    </td>
+                                    <t t-foreach="months" t-as="month">
+                                        <td>
+                                            <span t-esc="project['monthly_counts'].get(month, {}).get('unit_rent', 0)"
+                                                  t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="project['monthly_counts'].get(month, {}).get('unit_cost', 0)"
+                                                  t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <strong>
+                            <span style="border-bottom: 1px solid black;">Leasing Performance Revenue vs Cost Per
+                                Occupied Units
+                            </span>
+                        </strong>
+                        <br/>
+                        <br/>
+                        <table class="table table-bordered table-sm"
+                               style="border:1px solid black;text-align:center; font-size: 10px; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="width: 15%;">Project</th>
+                                    <th rowspan="2" style="width: 15%;">Total Units</th>
+                                    <t t-foreach="months" t-as="month">
+                                        <th colspan="2" style="width: 6%;">
+                                            <span t-esc="month"/>
+                                        </th>
+                                    </t>
+                                    <tr>
+                                        <t t-foreach="months" t-as="month">
+                                            <th>Income</th>
+                                            <th>Cost</th>
+                                        </t>
+                                    </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="projects_data" t-as="project">
+                                    <td>
+                                        <span t-esc="project['project']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="project['total_units']"/>
+                                    </td>
+                                    <t t-foreach="months" t-as="month">
+                                        <td>
+                                            <span t-esc="project['monthly_counts'].get(month, {}).get('total_unit_count', 0)"
+                                                  t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="project['monthly_counts'].get(month, {}).get('total_cost_count', 0)"
+                                                  t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <template id="property_performance_report_header">
+            <t t-set="company" t-value="user.company_id"/>
+            <div class="header border-bottom" width="100%">
+                <table class="table table-sm table-borderless" style="width:100%; font-size:14px;">
+                    <tr>
+                        <td style="padding-top:40px; text-align:left;">
+                            <strong>
+                                <h2 t-esc="res_company.name"/>
+                            </strong>
+                        </td>
+                        <td style="padding-top:10px;">
+                            <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                 style="max-height: 80px;" alt="Logo"/>
+                        </td>
+                        <td style="padding-top:40px; text-align:right;">
+                            <strong>
+                                <h2 t-esc="res_company.name_arabic"/>
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </template>
+    </data>
+</odoo>

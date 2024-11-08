@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="general_limit_approvals_form_view" model="ir.ui.view">
+        <field name="name">general.limit.approvals.form</field>
+        <field name="model">general.limit.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+
+                            <field name="name"/>
+                            <field name="companies_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="discount_approval" widget='radio'/>
+<!--                            <field name="minimum_percent" attrs="{'invisible': [('discount_approval', '!=', 'base')]}"/>-->
+                            <field name="minimum_percent" invisible="discount_approval != 'base'"/>
+<!--                            <field name="minimum_amount"-->
+<!--                                   attrs="{'invisible': [('discount_approval', '!=', 'amount base')]}"/>-->
+                            <field name="minimum_amount" invisible="discount_approval != 'amount base'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="sapproval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="approver_ids" widget="many2many_tags"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="general_limit_tree_view" model="ir.ui.view">
+        <field name="name">general.limit.approvals.tree</field>
+        <field name="model">general.limit.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sequence" widget="handle"/>
+
+                <field name="minimum_percent"/>
+                <field name="minimum_amount"/>
+                <field name="companies_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="special_limit_approvals_form_view" model="ir.ui.view">
+        <field name="name">special.limit.approvals.form</field>
+        <field name="model">special.limit.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+
+                            <field name="name"/>
+                            <field name="companies_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="discount_approval" widget='radio'/>
+<!--                            <field name="minimum_percent" attrs="{'invisible': [('discount_approval', '!=', 'base')]}"/>-->
+                            <field name="minimum_percent" invisible="discount_approval != 'base'"/>
+<!--                            <field name="minimum_amount"-->
+<!--                                   attrs="{'invisible': [('discount_approval', '!=', 'amount base')]}"/>-->
+                            <field name="minimum_amount" invisible="discount_approval != 'amount base'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="sapproval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="approver_ids" widget="many2many_tags"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="special_limit_tree_view" model="ir.ui.view">
+        <field name="name">special.limit.approvals.tree</field>
+        <field name="model">special.limit.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sequence" widget="handle"/>
+
+                <field name="minimum_percent"/>
+                <field name="minimum_amount"/>
+                <field name="companies_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="special_expense_approvals_form_view" model="ir.ui.view">
+        <field name="name">special.expense.approvals.form</field>
+        <field name="model">special.expense.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+
+                            <field name="name"/>
+                            <field name="companies_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="discount_approval" widget='radio'/>
+<!--                            <field name="minimum_percent" attrs="{'invisible': [('discount_approval', '!=', 'base')]}"/>-->
+                            <field name="minimum_percent" invisible="discount_approval != 'base'"/>
+<!--                            <field name="minimum_amount"-->
+<!--                                   attrs="{'invisible': [('discount_approval', '!=', 'amount base')]}"/>-->
+                            <field name="minimum_amount" invisible="discount_approval != 'amount base'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="sapproval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="approver_ids" widget="many2many_tags"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="special_expense_tree_view" model="ir.ui.view">
+        <field name="name">special.expense.approvals.tree</field>
+        <field name="model">special.expense.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sequence" widget="handle"/>
+
+                <field name="minimum_percent"/>
+                <field name="minimum_amount"/>
+                <field name="companies_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="general_expense_approvals_form_view" model="ir.ui.view">
+        <field name="name">general.expense.approvals.form</field>
+        <field name="model">general.expense.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+
+                            <field name="name"/>
+                            <field name="companies_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="discount_approval" widget='radio'/>
+<!--                            <field name="minimum_percent" attrs="{'invisible': [('discount_approval', '!=', 'base')]}"/>-->
+                            <field name="minimum_percent" invisible="discount_approval != 'base'"/>
+<!--                            <field name="minimum_amount"-->
+<!--                                   attrs="{'invisible': [('discount_approval', '!=', 'amount base')]}"/>-->
+                            <field name="minimum_amount" invisible="discount_approval != 'amount base'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="sapproval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="approver_ids" widget="many2many_tags"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="general_expense_tree_view" model="ir.ui.view">
+        <field name="name">general.expense.approvals.tree</field>
+        <field name="model">general.expense.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sequence" widget="handle"/>
+
+                <field name="minimum_percent"/>
+                <field name="minimum_amount"/>
+                <field name="companies_ids"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

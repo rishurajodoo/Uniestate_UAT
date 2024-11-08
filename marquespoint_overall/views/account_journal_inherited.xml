@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_account_journal_form_inherit_pay_rec" model="ir.ui.view">
+            <field name="name">account.journal.inherit.pay.rec</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="pay_rec" invisible="type not in ['bank', 'cash']"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

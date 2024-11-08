@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Payslip Approvals Form view -->
+    <record id="hr_payslip_approvals_form_view" model="ir.ui.view">
+        <field name="name">hr.payslip.approvals.form</field>
+        <field name="model">hr.payslip.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                                                        <field name="companies_ids" widget="many2many_tags"/>
+
+                            <!-- Add other fields as needed -->
+                        </group>
+                        <group>
+                            <!-- Add other fields as needed -->
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="approval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="approver_ids" widget="many2many_tags"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Payslip Approvals Tree view -->
+    <record id="hr_payslip_approvals_tree_view" model="ir.ui.view">
+        <field name="name">hr.payslip.approvals.tree</field>
+        <field name="model">hr.payslip.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                                <field name="companies_ids"/>
+
+                <!-- Add other fields as needed -->
+            </tree>
+        </field>
+    </record>
+
+    <!-- Window Action for which is called in the menu = Payslip Approval Configuration -->
+    <record id="hr_payslip_approvals_action" model="ir.actions.act_window">
+        <field name="name">Payslip Approval Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.payslip.approvals</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a New Payslip Approval
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_hr_payslip_approvals"
+            name="Payslip Approval Configuration"
+            parent="hr_payroll.menu_hr_payroll_global_settings"
+            action="hr_payslip_approvals_action"
+            sequence="50"/>
+
+    <!-- Payslip Inherit -->
+    <record id="hr_payslip_form_inherit" model="ir.ui.view">
+        <field name="name">hr.payslip.form.inherit</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <field name="payslip_approval_id" invisible="1"/>
+                <field name="level_of_approval_needed" invisible="1"/>
+                <field name="levels_approved" invisible="1"/>
+                <field name="all_level_approved" invisible="1"/>
+                <field name="l1_payslip_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l2_payslip_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l3_payslip_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l1_payslip_approved_id" invisible="1"/>
+                <field name="l2_payslip_approved_id" invisible="1"/>
+                <field name="l3_payslip_approved_id" invisible="1"/>
+                <field name="show_first" invisible="1"/>
+                <field name="show_second" invisible="1"/>
+                <field name="show_third" invisible="1"/>
+                <field name="is_level_one" invisible="1"/>
+                <field name="is_level_two" invisible="1"/>
+                <field name="is_level_three" invisible="1"/>
+            </xpath>
+        <xpath expr="//header" position="inside">
+                <button name="approve_first_discount" string="First Approve" type="object" class="oe_highlight"
+                       invisible ="show_first == False"   />
+
+                <button name="approve_second_discount" string="Second Approve" type="object" class="oe_highlight"
+                      invisible ="show_second == False"  />
+
+                <button name="approve_third_discount" string="Third Approve" type="object" class="oe_highlight"
+                      invisible ="show_third == False"   />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="discount_approve" string="Payslip Approvers"
+                     invisible="payslip_approval_id == False">
+                    <group string="Level 1 Approval" invisible=" is_level_one == False">
+                        <group>
+                            <field name="l1_payslip_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l1_payslip_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Level 2 Approval" invisible="is_level_two == False">
+                        <group>
+                            <field name="l2_payslip_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l2_payslip_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Level 3 Approval" invisible="is_level_three == False">
+                        <group>
+                            <field name="l3_payslip_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l3_payslip_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

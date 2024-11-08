@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <record id="res_config_settings_token_view_form_inherited" model="ir.ui.view">
+            <field name="name">res.config.settings.token.view.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <h2 style="background-color:#e1e3e6; padding-left:30px">Token Money Settings</h2>
+                    <div class="o_settings_container">
+                        <div class="o_setting_box" title="Token Money Settings">
+                            <div class="o_setting_right_pane">
+                                <group col="6">
+                                    <field name="product_id"/>
+                                    <!--                                    <field name="tax_afm"/>-->
+                                </group>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_order_form_token_inherited" model="ir.ui.view">
+            <field name="name">sale.order.form.token.inherited</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <!--                <notebook position="inside">-->
+                    <page string="Token Money/Booking" invisible="for_sale != True">
+                        <field name="invoice_line_dum_ids" nolabel="1" colspan="4">
+                            <tree string="Token Money Booking" editable="bottom">
+                            <field name="reference_id"/>
+                            <field name="date"/>
+                            <field name="amount_advance"/>
+                            <field name="is_invoiced"  column_invisible="True"/>
+                            <button
+                        name="button_create_invoice"
+                        string="Create invoices"
+                        type="object"
+                        invisible="is_invoiced == True"
+                        class="oe_highlight"
+                            />
+                            </tree>
+                        </field>
+                        <field
+                                invisible="1"
+                                name="token_invoice_ids"
+                                nolabel="1"
+                                colspan="4"
+                                domain="[('id','in',invoice_line_dum_ids)]"
+                                context="{'form_view_ref': 'account.view_move_form','tree_view_ref': 'account.view_out_invoice_tree'}"
+                        />
+<!--                        <button-->
+<!--                        name="button_create_invoice"-->
+<!--                        string="Create invoices"-->
+<!--                        type="object"-->
+<!--                        class="oe_highlight"-->
+<!--                    />-->
+                    </page>
+                    <!--                </notebook>-->
+                </xpath>
+            </field>
+        </record>
+
+        <!--        <record id="account_view_move_form" model="ir.ui.view">-->
+        <!--            <field name="name">account.move.form.token.inherited</field>-->
+        <!--            <field name="model">account.move</field>-->
+        <!--            <field name="inherit_id" ref="account.view_move_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//notebook" position="inside">-->
+        <!--                    <page name="Token Money">-->
+        <!--                        &lt;!&ndash;                        <field name="invoice_line_ids"/>&ndash;&gt;-->
+        <!--                        <field name="is_token_money_obj"/>-->
+        <!--                        <field name="order_id"/>-->
+        <!--                    </page>-->
+        <!--                </xpath>-->
+        <!--                &lt;!&ndash;            invoice_line_dum_ids&ndash;&gt;-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+    </data>
+</odoo>

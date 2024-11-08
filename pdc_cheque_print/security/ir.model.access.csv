@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pdc_cheque_print,pdc_cheque_print,model_pdc_cheque_print,base.group_user,1,1,1,1
+access_cheque_types,cheque_types,model_cheque_types,base.group_user,1,1,1,1
+access_pdc_cheque_print_format_line,pdc_cheque_print_format_line,model_pdc_cheque_print_format_line,base.group_user,1,1,1,1

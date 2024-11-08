@@ -1,0 +1,13 @@
+<odoo>
+
+    <record id="account_report_form_view_inherit" model="ir.ui.view">
+        <field name="name">account.report.form.view.inherit</field>
+        <field name="model">account.report</field>
+        <field name="inherit_id" ref="account_reports.account_report_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='column_ids']//tree" position="inside">
+                <field name="is_editable"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

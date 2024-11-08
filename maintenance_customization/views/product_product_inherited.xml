@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="product_tree_inherit_maintenance" model="ir.ui.view">
+            <field name="name">product.product.tree.maintenance</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="unit_customiztion.product_tree_inherit_id"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='got_to_opportunity']" position="replace">
+                    <button type="object" name="got_to_opportunity" string="CRM" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//button[@name='got_to_opportunity']" position="after">
+                    <button type="object" name="go_to_maintenance" icon="fa-gears" class="oe_highlight"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

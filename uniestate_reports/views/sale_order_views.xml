@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_view_inherited_uniestate_reports" model="ir.ui.view">
+        <field name="name">product.form.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="tenancy_contract_report.product_view_inherit_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parking_space']" position="after">
+                <field name="parking_price"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_inherited_uniestate_reports" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other_information']" position="inside">
+                <group name="bank_details" string="Bank Details">
+                    <field name="bank_details"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_hr_payslip_summary_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.tree.summary</field>
+        <field name="model">hr.payslip</field>
+        <field name="arch" type="xml">
+            <tree string="Payslips" sample="1" multi_edit="1">
+                <field name="date_from" string="Start Date"/>
+                <field name="date_to" string="End Date"/>
+                <field name="employee_id" string="Employee" widget="many2one_avatar_user"/>
+                <field name="payslip_run_id" string="Batch"/>
+                <field name="sum_no_of_days" optional="show"/>
+                <field name="absent_day" optional="show"/>
+                <field name="sum_no_of_hours" optional="show"/>
+                <field name="basic_salary" optional="show"/>
+                <field name="house_rent_allowance_salary" optional="show"/>
+                <field name="other_allowance" optional="show"/>
+                <field name="gross_payslip" optional="show"/>
+                <field name="net_salary" optional="show"/>
+                <field name="company_id" optional="hide" options="{'no_create': True}"/>
+                <field name="state" column_invisible="True"/>
+                <button string="Approve" class="btn btn-link" type="object" name="action_approve" invisible="state != 'pending_approval'"/>
+                <button string="Refuse" class="btn btn-link" type="object" name="action_refuse"/>
+                <!--                <field name="basic_wage" widget="monetary" options="{'currency_field': 'currency_id'}" optional="show"/>-->
+                <!--                <field name="gross_wage" widget="monetary" options="{'currency_field': 'currency_id'}" optional="show"/>-->
+                <!--                <field name="net_wage" widget="monetary" options="{'currency_field': 'currency_id'}" decoration-bf="1" optional="show"/>-->
+                <!--                <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'verify'" decoration-success="state == 'done'" decoration-primary="state == 'paid'"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hr_payslip_filter_v1" model="ir.ui.view">
+        <field name="name">hr.payslip.select.inherit.v1</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='credit_note']" position="after">
+                <separator/>
+                <filter string="Pending Approval" name="state" domain="[('state', '=', 'pending_approval')]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="action_view_hr_payroll_summary_tree" model="ir.actions.act_window">
+        <field name="name">Payslip Summary</field>
+        <field name="res_model">hr.payslip</field>
+        <field name="view_id" ref="view_hr_payslip_summary_tree"/>
+        <field name="binding_view_types">tree</field>
+    </record>
+
+    <record model="ir.actions.server" id="action_hr_payroll_approve">
+        <field name="name">Approve</field>
+        <field name="model_id" ref="hr_payroll.model_hr_payslip"/>
+        <field name="binding_model_id" ref="hr_payroll.model_hr_payslip"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">
+            records.action_hr_payroll_approve()
+        </field>
+    </record>
+
+    <menuitem
+            action="action_view_hr_payroll_summary_tree"
+            id="hr_payroll_summary_menu"
+            parent="hr_payroll.menu_hr_payroll_payslips"
+            name="Payslip Summary"
+            sequence="45"
+    />
+
+</odoo>

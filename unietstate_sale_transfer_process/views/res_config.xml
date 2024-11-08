@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="res_config_settings_sale_transfer_inherited" model="ir.ui.view">
+            <field name="name">res.config.settings.sale.transfer.view.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <h2 style="background-color:#e1e3e6; padding-left:30px">Admin Fees Product</h2>
+                    <div class="o_settings_container">
+                        <div class="o_setting_box" title="Admin Fees">
+                            <div class="o_setting_right_pane">
+                                <group>
+                                    <field name="custom_admin_fees_product_id"/>
+                                    <!--                                    <field name="tax_afm"/>-->
+                                </group>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

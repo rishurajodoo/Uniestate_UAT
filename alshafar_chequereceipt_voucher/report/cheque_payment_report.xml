@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--        <template id="receipt_payment_temp_id">-->
+        <!--            <t t-call="web.html_container">-->
+        <!--                <t t-call="alshafar_chequereceipt_voucher.receipt_payment_temp_id"/>-->
+        <!--                <t t-call="web.external_layout">-->
+        <!--                    <div class="page" style="font-family: Times New Roman, Times, serif; margin-left: 30px;">-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-6">-->
+        <!--                                <span>-->
+        <!--                                    <strong>-->
+        <!--                                        Date:-->
+        <!--                                    </strong>-->
+        <!--                                </span>-->
+        <!--                                <span class="">-->
+        <!--                                    <t t-esc="time.strftime('%Y-%m-%d')"/>-->
+        <!--                                </span>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </t>-->
+        <!--            </t>-->
+        <!--        </template>-->
+
+        <template id="receipt_payment_temp_id">
+            <t t-call="web.html_container">
+                <!-- <t t-call="alshafar_chequereceipt_voucher.receipt_header_footer_id"/> -->
+                <t t-call="web.external_layout">
+                    <div class="row text-center mt-1" style="font-family: Times New Roman, Times, serif; font-style: normal; font-style: italic;">
+                        <div class="row">
+                            <div class="col-12">
+                                <br/>
+                                <p style="margin-top: 14px; text-align: left;">
+                                    <b><t t-esc="request.env.user.company_id.name"/><br/></b>
+                                    <b><t t-esc="request.env.user.company_id.street"/><br/></b>
+                                    <b><t t-esc="request.env.user.company_id.zip"/> <t t-esc="request.env.user.company_id.city"/><br/></b>
+                                </p>
+                                <br/>
+                                <h3 class="text-center">
+                                    <br/>
+                                    <t t-if="payment_type == 'inbound' and journal_type == 'bank'">Bank
+                                        Receipt
+                                    </t>
+                                    <t t-if="payment_type == 'inbound' and journal_type == 'cash'">Cash
+                                        Receipt
+                                    </t>
+                                    <t t-if="payment_type == 'outbound' and journal_type == 'bank'">Bank
+                                        Payment
+                                    </t>
+                                    <t t-if="payment_type == 'outbound' and journal_type == 'cash'">Cash
+                                        Payment
+                                    </t>
+                                </h3>
+                            </div>
+                        </div>
+                    </div><br/><br/>
+                    <div class="page" style="font-family: Times New Roman, Times, serif; margin-left: 30px; margin-top: 0; ">
+                        <div class="row text-center mb-4" style="margin-top: 0;">
+                            <!-- <div class="col-2" style="margin-top: 0;">
+                                <img t-if="company_logo" t-att-src="image_data_uri(company_logo)"
+                                     style="max-height: 50px;"
+                                     alt="Logo"/>
+                            </div>
+                            <div class="col-6" name="company_name">
+                                <h3>
+                                    <b>
+                                        <t t-esc="company_name"/>
+                                    </b>
+                                </h3>
+                                <h5>
+                                    <t t-esc="company_address"/>
+                                </h5>
+                            </div> -->
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-6">
+                                <span>
+                                    <strong>
+                                        Date:
+                                    </strong>
+                                </span>
+                                <span class="">
+                                    <t t-esc="date.strftime('%d/%m/%Y')"/>
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span>
+                                    <strong>
+                                        <t t-if="payment_type == 'outbound'">Issued To:</t>
+                                        <t t-else="">Received From:</t>
+                                    </strong>
+                                </span>
+                                <span>
+                                    <t t-esc="partner"/>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:10px;">
+                            <t t-foreach="unit_details" t-as="unit">
+                                <div class="col-6">
+                                    <span>
+                                        <strong>
+                                            Project:
+                                        </strong>
+                                    </span>
+                                    <span class="" t-if="unit['project']">
+                                        <t t-esc="unit['project']"/>
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <span>
+                                        <strong>
+                                            Building:
+                                        </strong>
+                                    </span>
+                                    <span>
+                                        <t t-esc="unit['building']"/>
+                                    </span>
+                                </div>
+                            </t>
+                        </div>
+
+                        <div class="row" style="margin-top:10px;">
+                            <t t-foreach="unit_details" t-as="unit">
+                                <div class="col-6">
+                                    <span>
+                                        <strong>
+                                            Floor:
+                                        </strong>
+                                    </span>
+                                    <span class="">
+                                        <t t-esc="unit['floor']"/>
+                                    </span>
+                                </div>
+                                <div class="col-6">
+                                    <span>
+                                        <strong>
+                                            Unit:
+                                        </strong>
+                                    </span>
+                                    <span>
+                                        <t t-esc="unit['unit']"/>
+                                    </span>
+                                </div>
+                            </t>
+                        </div>
+
+                        <div class="row" style="margin-top:30px;">
+                            <div class="col-12">
+                                <span>
+                                    <strong>
+                                        Amount Total:
+                                    </strong>
+                                </span>
+                                <span class="">
+                                    <t t-esc="total_amount"/>
+                                    <t t-esc="currency_symbol"/>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:30px;">
+                            <div class="col-12">
+                                <span>
+                                    <strong>
+                                        Amount Total:
+                                    </strong>
+                                </span>
+                                <span>
+                                    **Dirhams
+                                    <t t-esc="total_amount_words"/>
+                                    **
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <!--                            *************************************************************************************-->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <style>
+                                    table {
+                                    border-collapse: collapse;
+                                    border:2px solid black
+                                    }
+
+                                    th {
+                                    border: 2px solid black;
+                                    padding: 8px;
+                                    padding:5px;
+                                    text-align:center;
+                                    }
+
+                                    .noborder{
+                                    padding:5px;
+                                    text-align:center;
+                                    border-bottom:1px solid white;
+                                    border-right:2px solid black;
+                                    padding:10px;
+                                    }
+                                    .withborder{
+                                    text-align:center;
+                                    border-bottom:2px solid black;
+                                    border-right:2px solid black;
+
+                                    }
+                                    tr:last-child {
+                                    border-bottom: 1px solid white;
+                                    }
+                                </style>
+                                <!--                                    <t t-if="pdc">-->
+                                <!--                                        <table width="100%" class="mt-2" style="border:1px solid black">-->
+                                <!--                                        <thead>-->
+                                <!--                                            <th>Pay Mode</th>-->
+                                <!--                                            <th>Cheque No.</th>-->
+                                <!--                                            <th>Check Date</th>-->
+                                <!--                                            <th>Bank Name</th>-->
+                                <!--                                            <th>Seq No</th>-->
+                                <!--                                            <th>Memo</th>-->
+                                <!--                                            <th>Amount</th>-->
+                                <!--                                        </thead>-->
+
+                                <!--                                        <t t-foreach="record" t-as="rec">-->
+                                <!--                                            <tr>-->
+                                <!--                                                <td class="noborder">Cheque</td>-->
+
+                                <!--                                                <td class="noborder">-->
+                                <!--                                                    <t t-esc="rec['cheque_no']"/>-->
+                                <!--                                                </td>-->
+                                <!--                                                <td class="noborder">-->
+                                <!--                                                    <t t-esc="rec['cheque_date']"/>-->
+                                <!--                                                </td>-->
+                                <!--                                                <td class="noborder">-->
+                                <!--                                                    <t t-esc="rec['bank_id']"/>-->
+                                <!--                                                </td>-->
+                                <!--                                                <td class="noborder">-->
+                                <!--                                                    <t t-esc="rec['rv_num']"/>-->
+                                <!--                                                </td>-->
+                                <!--                                                <td class="noborder">-->
+                                <!--                                                    <t t-esc="rec['memo']"/>-->
+                                <!--                                                </td>-->
+                                <!--                                                <td class="noborder">-->
+                                <!--                                                    <t t-esc="'{:,}'.format(rec['amount'])"/>-->
+                                <!--                                                </td>-->
+
+                                <!--                                            </tr>-->
+                                <!--                                        </t>-->
+                                <!--                                        <tr>-->
+                                <!--                                            <td colspan="8"-->
+                                <!--                                                style="border-top:2px solid black;border-bottom:2px solid black; border-right:2px solid black;border-left:2px solid black">-->
+                                <!--                                                <span style="text-decoration:underline">Total:</span>-->
+                                <!--                                                <span>**Dirhams-->
+                                <!--                                                    <t t-esc="pdc.currency_id.amount_to_text(total)"/>-->
+                                <!--                                                    **-->
+                                <!--                                                </span>-->
+                                <!--                                                <span class="text-right">-->
+                                <!--                                                    <t t-esc="'{:,}'.format(total)"/>-->
+                                <!--                                                </span>-->
+                                <!--                                            </td>-->
+                                <!--                                        </tr>-->
+                                <!--                                    </table>-->
+                                <!--                                    </t>-->
+                                <!-- <div class="row">
+                                    <div class="col-12">
+                                        <h3 class="text-center">
+                                            <br/>
+                                            <t t-if="payment_type == 'inbound' and journal_type == 'bank'">Bank
+                                                Receipt
+                                            </t>
+                                            <t t-if="payment_type == 'inbound' and journal_type == 'cash'">Cash
+                                                Receipt
+                                            </t>
+                                            <t t-if="payment_type == 'outbound' and journal_type == 'bank'">Bank
+                                                Payment
+                                            </t>
+                                            <t t-if="payment_type == 'outbound' and journal_type == 'cash'">Cash
+                                                Payment
+                                            </t>
+                                        </h3>
+                                    </div>
+                                </div> -->
+                                <table class="mt-1" width="100%">
+                                    <thead>
+                                        <th>Pay Mode</th>
+                                        <th>Date</th>
+                                        <th>Memo</th>
+                                        <th>Amount</th>
+                                    </thead>
+                                    <t t-foreach="cash_list" t-as="line">
+                                        <tr>
+                                            <td class="noborder">
+                                                <t t-esc="line['pay_mode']"/>
+                                            </td>
+                                            <td class="noborder">
+                                                <t t-esc="line['date']"/>
+                                            </td>
+                                            <td class="noborder">
+                                                <t t-esc="line['memo']"/>
+                                            </td>
+                                            <td class="noborder">
+                                                <t t-esc="'{:,}'.format(line['amount'])"/>
+                                                <t t-esc="currency_symbol"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td colspan="8"
+                                            style="border-top:2px solid black;border-bottom:2px solid black; border-right:2px solid black;border-left:2px solid black">
+                                            <span style="text-decoration:underline">Total:</span>
+                                            <span>**Dirhams
+                                                <t t-esc="total_amount_words"/>
+                                                **
+                                            </span>
+                                            <span class="text-right">
+                                                <t t-esc="total_amount"/>
+                                                <t t-esc="currency_symbol"/>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="footer" style="padding-bottom:20px; margin-top: 30px;">
+                            <style>.footer_span{font-size:15px;}</style>
+                            <div class="row">
+                                <div class="col-4">
+                                    <strong>Prepared By: <u><t t-esc="request.env.user.name"/></u></strong>
+                                </div>
+                                <div class="col-4 offset-4 text-right">
+                                    <strong>Received By:_____________</strong>
+                                </div>
+                            </div>
+                            <div class="text-center mt-2" style="border-top: 1px solid black;">
+                                <div t-if="report_type == 'pdf'" class="text-muted">
+                                    Page: <span class="page"/> / <span class="topage"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+
+            </t>
+        </template>
+
+    </data>
+</odoo>

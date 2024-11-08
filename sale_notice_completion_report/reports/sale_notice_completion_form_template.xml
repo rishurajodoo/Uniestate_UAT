@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="sale_notice_form">
+            <t t-call="web.html_container">
+                <t t-call="sale_notice_completion_report.sale_notice_completion_header"/>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page" style="font-size: 15px;">
+                            <div class="oe_structure"/>
+                            <table class="table table-sm table-borderless">
+                                <tr>
+                                    <td>
+                                        <strong>Date:</strong>
+                                        <span t-field="o.date_order" t-options='{"widget": "date"}'/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Ref:</strong>
+                                        <span t-field="o.name"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-sm table-borderless">
+                                <t t-foreach="spa_list" t-as="spa">
+                                    <tr>
+                                        <td style="padding-left:15px;">
+                                            <t t-esc="spa['name']"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left:15px;">
+                                            <t t-esc="spa['street']"/>,
+                                            <t t-esc="spa['street2']"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left:15px;">
+                                            Phone:
+                                            <t t-esc="spa['phone']"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left:15px;">
+                                            Mobile:
+                                            <t t-esc="spa['mobile']"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left:15px;">
+                                            Fax No:
+                                            <t t-esc="spa['fax']"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left:15px;">
+                                            Email:
+                                            <t t-esc="spa['email']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                            <br/>
+                            <span style="padding-left:15px;">Dear Sir/Madam,</span>
+                            <br/>
+                            <br/>
+                            <span style="padding-left:15px;">
+                                <strong>SUBJECT: NOTICE FOR COMPLETION</strong>
+                            </span>
+                            <br/>
+                            <br/>
+                            <p>We are pleased to inform and congratulate you that the following property unit, purchased
+                                by you in our project, is now
+                                <br/>
+                                completed;.
+                            </p>
+                            <table class="table table-bordered" style="border:1px solid black;">
+                                <tr>
+                                    <td>
+                                        Project
+                                    </td>
+                                    <td>
+                                        <span t-field="o.project.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Unit
+                                    </td>
+                                    <td>
+                                        <span t-field="o.unit[0].name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Area
+                                    </td>
+                                    <td>
+                                        <span t-field="o.unit[0].property_size"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Unit Description
+                                    </td>
+                                    <td>
+                                        <span t-field="o.unit[0].sub_unit_id.name"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <p>You are kindly requested to proceed with the handover process as soon as possible within
+                                a 30 days period commencing
+                                <br/>
+                                <br/>
+                                5th July 2020. Building is equiped with DEWA,Empower(Chiller Services) &amp; Lootha Gas
+                                Connection. Please contact our
+                                <br/>
+                                <br/>
+                                customer service department in Dubai branch to fix an appointment for viewing your
+                                property and commencing the
+                                <br/>
+                                <br/>
+                                handover process.
+                                <br/>
+                                <br/>
+                                We would appreciate if you make payment against all payables including your final
+                                payment on or before 15th Feb 2024,
+                                <br/>
+                                <br/>
+                                to ensure the smooth handover of property and avoid any unnecessary delays. Please
+                                ensure to provide and bring
+                                <br/>
+                                <br/>
+                                along with you the following:
+                                <br/>
+                                <br/>
+                                1. Original Land Department/Oqood Registration Certificate - (in case it has not been
+                                issued to you yet, please come
+                                with the original Sale and Purchase Agreement and/or Allotment Letter).
+                                <br/>
+                                <br/>
+                                2. Wire Transfer/Deposit/Payment Proof or a Manager's Cheque - for the payment required
+                                under this notice .i.e
+                            </p>
+                            <br/>
+                            <p>AED <strong><span t-esc="total_completion"/>  (<span t-esc="o.amount_to_text(total_completion)"/>)</strong> being the amo
+                                from you upon completion of property. For your convenience,
+                            </p>
+
+                            <table class="table table-bordered" style="border:1px solid black;">
+                                <tr>
+                                    <th>Particulars</th>
+                                    <th>Amount (AED)</th>
+                                </tr>
+                                <tr t-foreach="line_list" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <span t-esc="line['name']"/>
+                                        </td>
+                                        <td style="text-align:right">
+                                            <span t-esc="line['price']"/>
+                                        </td>
+                                    </tr>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Total Payable</strong>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <strong>
+                                            <span t-field="o.amount_residual"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Amount paid</strong>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <strong>
+                                            <span t-field="o.paid_amount"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Total Due on Completion</strong>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <strong>
+                                            <span t-esc="total_completion"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <p>3. Manager's Cheque for property registration to the following authorities:</p>
+                            <br/>
+
+                            <table class="table table-bordered" style="border:1px solid black;">
+                                <tr>
+                                    <th>Particulars</th>
+                                    <th>Amount (AED)</th>
+                                    <th>In Favour of</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Property Registration Fee (Initial)
+                                    </td>
+                                    <td style="text-align:right">
+                                    </td>
+                                    <td>
+                                        Dubai Land Department
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Mortgage Registration Fee (in case of finance plan with Uniestate)
+                                    </td>
+                                    <td style="text-align:right">
+                                    </td>
+                                    <td>
+                                        Dubai Land Department
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Utilities Connection Charges
+                                    </td>
+                                    <td style="text-align:right">
+                                    </td>
+                                    <td>
+                                        DEWA
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Property Registration Fee (Final)
+                                    </td>
+                                    <td style="text-align:right">
+                                        .00
+                                    </td>
+                                    <td>
+                                        Dubai Land Department
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Knowledge Fee
+                                    </td>
+                                    <td style="text-align:right">
+                                        .00
+                                    </td>
+                                    <td>
+                                        Dubai Land Department
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Innovation Fee
+                                    </td>
+                                    <td style="text-align:right">
+                                        .00
+                                    </td>
+                                    <td>
+                                        Dubai Land Department
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Other Charges
+                                    </td>
+                                    <td style="text-align:right">
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>Total Payable</strong>
+                                    </td>
+                                    <td style="text-align:right">
+                                        <strong>
+                                            <t t-esc="total_payable"/>
+                                        </strong>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <br/>
+                            <p>4. Post Dated Cheques/Security Documents - for the amounts payable after completion,
+                                subject to the finance plan, if any.
+                                <br/>
+                                <br/>
+                                5. Updated Identity Documents - (a) copy of passport in case of non-national
+                                non-resident, (b) copy of passport, visa and
+                                <br/>
+                                <br/>
+                                emirates ID in case of expat being UAE resident, (c) copy of emirates ID in case of UAE
+                                national, (d) incorporation
+                                <br/>
+                                <br/>
+                                certificate/license in case of a nonperson entity.
+                                <br/>
+                                <br/>
+                                6. Proof of Identity Of the Person Taking Over - (a) Original Passport in case of
+                                non-national non-resident; (b) Emirates ID in
+                                <br/>
+                                <br/>
+                                case of residents and UAE nationals.
+                                <br/>
+                                <br/>
+                                7. Power of Attorney - (a) dully notarized/legalized power of attorney in case of
+                                co-ownership from co-buyer(s) authorizing
+                                <br/>
+                                <br/>
+                                you to sign documents and takeover possession on his/her behalf, (b) in case you send a
+                                representative to sign documents
+                                <br/>
+                                <br/>
+                                and take possession on your behalf, (c) in case you are a nonperson entity i.e. company,
+                                establishment, corporation etc.
+                                <br/>
+                                <br/>
+                                We attached herewith step by step handover process for your convenience. Our offices
+                                will open from 9:00 am to 5:00 pm
+                                <br/>
+                                <br/>
+                                Monday to Friday, except gazetted holidays. If we do not hear from you during this 30
+                                days' notice period we will consider
+                                <br/>
+                                <br/>
+                                that a viewing is not required by you.
+                                <br/>
+                                <br/>
+                                Should you require an assistance or further clarification, please don't hesitate to
+                                contact us on our office numbers or emails.
+                                <br/>
+                                <br/>
+                                We once again thank you for doing business with us and look forward to welcome you in
+                                your new community.
+                                <br/>
+                                Yours Sincerely,
+                                <br/>
+                            </p>
+                            For
+                            <strong>Uniestate Properties</strong>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            Sales &amp; Customer Services
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="sale_notice_completion_header">
+            <t t-set="company" t-value="user.company_id"/>
+            <div class="header border-bottom" width="100%">
+                <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                    <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                        <tr>
+                            <td style="padding-top:40px; text-align:left;">
+                                <strong>
+                                    <h2 t-esc="res_company.name"/>
+                                </strong>
+                            </td>
+                            <td style="padding-top:10px;">
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                     style="max-height: 80px;" alt="Logo"/>
+                            </td>
+                            <td style="padding-top:40px; text-align:right;">
+                                <strong>
+                                    <h2 t-esc="res_company.name_arabic"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+                </table>
+            </div>
+        </template>
+    </data>
+</odoo>

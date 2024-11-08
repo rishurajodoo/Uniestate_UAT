@@ -1,0 +1,96 @@
+<odoo>
+
+    <template id="portal_my_home_menu_portal_time_off" name="Portal layout : Leave" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'portal_timeoff' or portal_timeoff" t-attf-class="breadcrumb-item #{'active ' if not portal_timeoff else ''}">
+                <a t-if="portal_timeoff" t-attf-href="/my/timeoff?{{ keep_query() }}">Time Off</a>
+                <t t-else="">Time Off</t>
+            </li>
+            <li t-if="portal_timeoff" class="breadcrumb-item active">
+                <t t-esc="portal_timeoff.display_name"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_timeoff" name="Employee Time Off">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Leaves</t>
+            </t>
+            <div class="container">
+                <h2>My Time Off</h2>
+                <div class="mt16">
+                    <h4>Allocated Time Off</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Time Off Type</th>
+                                <th>Allocated Days</th>
+                                <th>Used Days</th>
+                            </tr>
+                        </thead>
+                        <!-- <tbody>
+                            <t t-foreach="timeoff_allocations" t-as="allocation">
+                                <t t-set="used_leaves" t-value="len(timeoff_requests.filtered(lambda r: r.holiday_status_id.id == allocation.holiday_status_id.id))"/>
+                                <tr>
+                                    <td><span t-field="allocation.holiday_status_id.name"/></td>
+                                    <td><span t-field="allocation.number_of_days_display"/></td>
+                                    <td><span><t t-out="used_leaves"/></span></td>
+
+                                </tr>
+                            </t>
+                        </tbody> -->
+
+                        <tbody>
+                            <t t-foreach="leave_types" t-as="leave_type">
+                                <t t-set="allocation" t-value="timeoff_allocations.filtered(lambda a: a.holiday_status_id.id == leave_type.id)[:1]"/>
+                                <t t-set="used_leaves" t-value="len(timeoff_requests.filtered(lambda r: r.holiday_status_id.id == leave_type.id))"/>
+                                
+                                <tr>
+                                    <td><span t-field="leave_type.name"/></td>
+                                    <td><span t-esc="allocation and allocation.number_of_days_display or '-'"/></td>
+                                    <td><span><t t-esc="used_leaves"/></span></td>
+                                </tr>
+                            </t>
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="mt16">
+                    <h4>Used Time Off</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Time Off Type</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="timeoff_requests" t-as="leave">
+                                <tr>
+                                    <td><span t-field="leave.holiday_status_id.name"/></td>
+                                    <td><span t-field="leave.date_from"/></td>
+                                    <td><span t-field="leave.date_to"/></td>
+                                    <td><span t-field="leave.state"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_timeoff_menu" name="Portal Time Off" inherit_id="portal.portal_my_home" priority="21">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Time Off</t>
+                <t t-set="url" t-value="'/my/timeoff'"/>
+                <t t-set="placeholder_count" t-value="'timeoff_count'"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

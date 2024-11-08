@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_uniestate_booking_confirmation" model="ir.actions.report">
+        <field name="name">SPA Uniestate Booking Confirmation Report</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">uniestate_reports.report_uniestate_booking_confirmation_letter</field>
+        <field name="report_file">uniestate_reports.report_uniestate_booking_confirmation_letter</field>
+        <field name="print_report_name">'SPA-Uniestate-Booking-Confirmation'</field>
+        <field name="binding_model_id" ref="model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

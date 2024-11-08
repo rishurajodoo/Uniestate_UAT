@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_settlement_tree">
+        <field name="name">Settlements tree - Invoice decoration</field>
+        <field name="model">commission.settlement</field>
+        <field name="inherit_id" ref="commission.view_settlement_tree"/>
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="decoration-muted">state == 'invoiced'</attribute>
+                <attribute
+                        name="decoration-danger"
+                >state == 'except_invoice'
+                </attribute>
+            </tree>
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="payment_state"
+                       widget="badge"
+                       decoration-danger="payment_state == 'not_paid'"
+                       decoration-warning="payment_state in ('partial', 'in_payment')"
+                       decoration-success="payment_state in ('paid', 'reversed')"
+                       invisible="payment_state in ['invoicing_legacy']"
+                       optional="show"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_settlement_form">
+        <field name="name">Settlements - Add invoice stuff</field>
+        <field name="model">commission.settlement</field>
+        <field name="inherit_id" ref="commission.view_settlement_form"/>
+        <field name="arch" type="xml">
+
+            <button name="action_cancel" position="before">
+                <t groups="account.group_account_invoice">
+                    <button
+                            string="Make invoice"
+                            invisible="state != 'settled' or agent_type not in  ['agent', 'agent1']"
+                            class="oe_highlight"
+                            type="object"
+                            name="action_invoice"
+                            groups="account.group_account_invoice"
+                    />
+                    <button
+                            string="Reset to draft"
+                            invisible="state != 'except_invoice'"
+                            type="object"
+                            name="action_draft"
+                            groups="account.group_account_invoice"
+                    />
+                </t>
+            </button>
+            <field name="date_to" position="after">
+                <t groups="account.group_account_invoice">
+                    <field
+                            name="invoice_id"
+                            invisible="state != 'invoiced'"
+                            groups="account.group_account_invoice"
+                    />
+                </t>
+            </field>
+            <xpath expr="//field[@name='can_edit']" position="before">
+                <t groups="account.group_account_invoice">
+                    <widget name="web_ribbon" title="Paid"
+                            invisible="payment_state != 'paid'"/>
+                    <widget name="web_ribbon" title="In Payment"
+                            invisible="payment_state != 'in_payment'"/>
+                    <widget name="web_ribbon" title="Partial"
+                            invisible="payment_state != 'partial'"/>
+                    <widget name="web_ribbon" title="Reversed"
+                            bg_color="bg-danger"
+                            invisible="payment_state != 'reversed'"/>
+                </t>
+            </xpath>
+            <xpath expr="//field[@name='invoice_id']" position="after">
+                <t groups="account.group_account_invoice">
+                    <field name="payment_state" invisible="1"/>
+                </t>
+            </xpath>
+            <xpath
+                    expr="//field[@name='line_ids']/tree/field[@name='date']"
+                    position="after"
+            >
+<!--                <t groups="account.group_account_invoice">-->
+                    <field
+                            name="invoice_line_id"
+                            groups="account.group_account_invoic"
+                    />
+<!--                </t>-->
+            </xpath>
+
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_settlement_line_tree_inherit">
+        <field name="name">Settlement lines</field>
+        <field name="model">commission.settlement.line</field>
+        <field name="inherit_id" ref="commission.view_settlement_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="field[@name='agent_id']" position="after">
+                <field name="invoice_line_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_invoicing_commission_settlement">
+        <field name="name">Invoices Settlements</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">commission.settlement</field>
+        <field name="view_mode">tree,form</field>
+<!--        <field name="domain">[('settlement_type', '=', 'sale_invoice')]</field>-->
+    </record>
+    <menuitem
+            id="menu_invoicing_settlements"
+            parent="menu_invoicing_commission"
+            action="action_invoicing_commission_settlement"
+            sequence="10"
+    />
+</odoo>

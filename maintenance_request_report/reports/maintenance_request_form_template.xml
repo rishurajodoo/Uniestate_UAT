@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="maintenance_request_form">
+            <t t-call="web.html_container">
+                <t t-call="maintenance_request_report.maintenance_request_header"/>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            <strong>
+                                <h5 style="background-color: #C0C0C0;; color: black; text-align: center;">CLIENTS MOVE
+                                    OUT
+                                    CONDITION CHECK LIST
+                                </h5>
+                            </strong>
+                            <table class="table table-bordered"
+                                   style="width: 100%; border: 2px solid black;border-collapse: collapse;">
+                                <tr>
+                                    <td colspan="2" style="border: 1px solid black;">
+                                        <strong>CUSTOMER NAME:</strong>
+                                        <span style="padding-left: 8px;" t-esc="o.sale_order_id.partner_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="border: 1px solid black;">
+                                        <strong>MOBILE NUMBER:</strong>
+                                        <span style="padding-left: 8px;" t-esc="o.sale_order_id.partner_id.mobile"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;">
+                                        <strong>BUILDING NAME:</strong>
+                                        <span style="padding-left: 8px;" t-esc="o.building_id.name"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <strong>FLAT NUMBER:</strong>
+                                        <span style="padding-left: 8px;" t-esc="o.unit_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;">
+                                        <strong>MOVE IN DATE:</strong>
+                                        <span t-esc="date_str"/>
+                                    </td>
+                                    <td colspan="2" style="border: 1px solid black;">
+                                        <strong>INSPECTION DATE:</strong>
+                                        <span t-esc="date_str"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;">
+                                        <strong>Time:</strong>
+                                        <span t-esc="time_str"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <strong>By:</strong>
+                                        <span/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered"
+                                   style="width: 100%; margin-top: 20px;border: 2px solid black; border-collapse: collapse;">
+                                <tr>
+                                    <td rowspan="4" style="border: 1px solid black;">
+                                        <strong>OUTSIDE &amp; INSIDE DOORS KEYS HANDED OVER</strong>
+                                    </td>
+                                    <td style="border: 1px solid black;">:</td>
+                                    <td style="border: 1px solid black;">Yes [ ]</td>
+                                    <td style="border: 1px solid black;">No [ ]</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;">:</td>
+                                    <td style="border: 1px solid black;" colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;">:</td>
+                                    <td style="border: 1px solid black;" colspan="2"></td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered"
+                                   style="width: 100%; margin-top: 20px;border: 2px solid black; border-collapse: collapse;">
+                                <tr style="background-color: #C0C0C0;">
+                                    <th colspan="4">CHECKLIST
+                                        DESCRIPTION
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="border: 1px solid black; text-align: center;">Description</th>
+                                    <th style="border: 1px solid black; text-align: center;">Remarks</th>
+                                    <th style="border: 1px solid black; text-align: center;">Other Info</th>
+                                    <th style="border: 1px solid black; text-align: center;">Status</th>
+                                </tr>
+                                <tr t-foreach="check_list" t-as="check">
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="check['description']"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="check['remarks']"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="check['ohter_infor']"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="check['state']"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered"
+                                   style="width: 100%; margin-top: 20px;border: 2px solid black; border-collapse: collapse;">
+                                <tr style="background-color: #C0C0C0;">
+                                    <th colspan="4">INVENTORY
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="border: 1px solid black; text-align: center;">Product</th>
+                                    <th style="border: 1px solid black; text-align: center;">Qty</th>
+                                    <th style="border: 1px solid black; text-align: center;">Cost</th>
+                                    <th style="border: 1px solid black; text-align: center;">Total Cost</th>
+                                </tr>
+                                <tr t-foreach="spare_list" t-as="spare">
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="spare['product']"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="spare['qty']"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="spare['cost']"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="spare['total_cost']"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border:none;"/>
+                                    <td style="border:none;"/>
+                                    <td style="text-align:right;border:none;">Total:</td>
+                                    <td style="border:none;">
+                                        <t t-esc="total_amount"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-bordered"
+                                   style="width: 100%; margin-top: 20px; border: 2px solid black; border-collapse: collapse;">
+                                <tr>
+                                    <td style="border: 1px solid black; width: 33%; vertical-align: top;">
+                                        <strong>FACILITIES SIGNATURE:</strong>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <strong>NAME:</strong>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <strong>DATE:</strong>
+                                    </td>
+                                    <td style="border: 1px solid black; width: 33%; vertical-align: top;">
+                                        <strong>LEASING SIGNATURE:</strong>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <strong>NAME:</strong>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <strong>DATE:</strong>
+                                    </td>
+                                    <td style="border: 1px solid black; width: 33%; vertical-align: top;">
+                                        <strong>CUSTOMER'S SIGNATURE:</strong>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <strong>NAME:</strong>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <strong>DATE:</strong>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="maintenance_request_header">
+            <t t-set="company" t-value="user.company_id"/>
+            <div class="header border-bottom" width="100%">
+                <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                    <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                        <tr>
+                            <td style="padding-top:40px; text-align:left;">
+                                <strong>
+                                    <h2 t-esc="res_company.name"/>
+                                </strong>
+                            </td>
+                            <td style="padding-top:10px;">
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                     style="max-height: 80px;" alt="Logo"/>
+                            </td>
+                            <td style="padding-top:40px; text-align:right;">
+                                <strong>
+                                    <h2 t-esc="res_company.name_arabic"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+                </table>
+            </div>
+        </template>
+    </data>
+</odoo>

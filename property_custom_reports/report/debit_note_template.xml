@@ -1,0 +1,222 @@
+<odoo>
+    <data>
+        <template id="debit_note_id_print">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="property_custom_reports.alsharaf_property_letterhead_debit_note"/>
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="border">
+                                <br/>
+                                <h1 class="text-center">
+                                    <u>Debit Note</u>
+                                </h1>
+                                <br/>
+                                <table class="table table=sm table-borderless" width="100%">
+                                    <tr>
+                                        <td width="50%">
+                                            <strong>To:</strong>
+                                            <br/>
+                                            <strong t-field="o.partner_id.name"/>
+                                            <br/>
+                                            <t t-if="o.partner_id.street">
+                                                <strong t-field="o.partner_id.street"/>,
+                                                <br/>
+                                            </t>
+                                            <t t-if="o.partner_id.state_id">
+                                                <strong t-field="o.partner_id.state_id.name"/>
+                                            </t>
+                                            <t t-if="o.partner_id.country_id">
+                                                ,&#160;<strong t-field="o.partner_id.country_id.name"/>
+                                            </t>
+                                            <t t-if="o.partner_id.zip">
+                                                ,&#160;<strong t-field="o.partner_id.zip"/>
+                                            </t>
+                                        </td>
+                                        <td>
+                                            <table class="table table-sm table-bordered" width="100%">
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <td>
+                                                        <span t-esc="context_timestamp(o.date_order).strftime('%d.%m.%Y')"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Ref</th>
+                                                    <td><span t-field="o.name"/></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td width="10%"/>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <table class="table table-sm table-bordered" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">SL NO.</th>
+                                            <th class="text-center">DESCRIPTION</th>
+                                            <th class="text-center">UNIT</th>
+                                            <th class="text-center">Qty</th>
+                                            <th class="text-center">UNIT RATE</th>
+                                            <th class="text-right">TOTAL (<span t-esc="res_company.currency_id.name"/>)</th>
+                                        </tr>
+                                    </thead>
+                                    <t t-set="sr_no" t-value="0"/>
+                                    <t t-set="net_amount" t-value="0"/>
+                                    <t t-as="line" t-foreach="o.order_line">
+                                        <t t-if="line.is_debit">
+                                            <tr>
+                                                <t t-set="sr_no" t-value="sr_no + 1"/>
+                                                <td class="text-center">
+                                                    <span t-esc="sr_no"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span t-esc="line.name"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span t-esc="line.product_id.sub_unit_id.name"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span t-esc="line.product_uom_qty"
+                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span t-esc="line.price_unit"
+                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="line.price_subtotal"
+                                                          t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                                    <t t-set="net_amount" t-value="net_amount + line.price_subtotal"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </table>
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <tr>
+                                            <td class="text-center"/>
+                                            <td class="text-center">
+                                                <strong>NET AMOUNT</strong>
+                                            </td>
+                                            <td/>
+                                            <td/>
+                                            <td/>
+                                            <td class="text-right">
+                                                <span t-esc="res_company.currency_id.name"/>&#160;<span t-esc="net_amount"
+                                                                                                        t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                            </td>
+                                        </tr>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <strong>&#160;Amount In Words:
+                                    <t t-esc="o.get_amount_in_words(net_amount)"/>
+                                </strong>
+<!--                                <table class="table table-sm table-borderless">-->
+<!--                                    <tr>-->
+<!--                                        <td width="30%" class="text-center">-->
+<!--                                            <br/>-->
+<!--                                            <br/>-->
+<!--                                            <br/>-->
+<!--                                            <br/>-->
+<!--                                            <br/>-->
+<!--                                            <div style="border-top: 1px solid black; width:90%;margin-left:20px;">-->
+<!--                                                Al Shafar Properties-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td width="40%">-->
+<!--                                        </td>-->
+<!--                                        <td width="30%" class="text-center">-->
+<!--                                            <br/>-->
+<!--                                            <br/>-->
+<!--                                            <br/>-->
+<!--                                            <br/>-->
+<!--                                            <br/>-->
+<!--                                            <div style="border-top: 1px solid black; width:90%;">-->
+<!--                                                Tenant Sign &amp; Stamp-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                </table>-->
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <template id="alsharaf_property_letterhead_debit_note">
+            <t t-set="company" t-value="user.company_id"/>
+            <div class="header border-bottom" width="100%">
+                <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                    <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                        <tr>
+                            <td style="padding-top:40px; text-align:left;">
+                                <strong>
+                                    <h2 t-esc="res_company.name"/>
+                                </strong>
+                            </td>
+                            <td style="padding-top:10px;">
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                     style="max-height: 80px;" alt="Logo"/>
+                            </td>
+                            <td style="padding-top:40px; text-align:right;">
+                                <strong>
+                                    <h2 t-esc="res_company.name_arabic"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+                </table>
+            </div>
+            <div class="footer" width="100%">
+<!--                <table class="table table-sm table-borderless" style="margin-bottom:10px;">-->
+                <table class="table table-sm table-borderless">
+                    <tr>
+                        <td width="30%" class="text-center">
+                            <div style="border-top: 1px solid black; width:90%;margin-left:20px;">
+                                Al Shafar Properties
+                            </div>
+                        </td>
+                        <td width="40%">
+                        </td>
+                        <td width="30%" class="text-center">
+                            <div style="border-top: 1px solid black; width:90%;">
+                                Tenant Sign &amp; Stamp
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="border-top border-bottom" style="font-size:12px;">
+                <table class="table table-sm table-borderless text-center" width="100%"
+                       style="padding:5px !important; margin:5px !important;">
+                    <tr>
+                        <td style="text-align:left;">
+                            <img src="/marquespoint_overall/static/description/location.png"
+                                 style="height:20px; width:20px; margin-right:10px;"/>
+                            <!--                                <span>Office no. 101 &amp; 102, The V Building, Al Barsha South Arjan, Dubai, UAE</span>-->
+                             <span>Uniestate Building, Oman Street, Ras Al Khaimah</span>
+                        </td>
+                        <td style="text-align:center;">
+                            <img src="/marquespoint_overall/static/description/phone.png"
+                                 style="height:20px; width:20px; margin-right:10px;"/>
+                          <span>800-776-776</span>
+                        </td>
+                        <td style="text-align:right;">
+                            <img src="/marquespoint_overall/static/description/global.png"
+                                 style="height:20px; width:20px; margin-right:10px;"/>
+                            <span>http://www.uniestate.com</span>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+                <!--                <span>-->
+                <!--                    Office no. 101 &amp; 102, The V Building, Al Barsha South Arjan, Dubai, UAE | Tel. 04 240 1014 |-->
+                <!--                    PO Box 95447-->
+                <!--                </span>-->
+            </div>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,69 @@
+<odoo>
+    <data>
+
+        <record id="action_create_merged_pdc" model="ir.actions.server">
+            <field name="name">Create PDC Payment</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                action = records.action_combine_pdc_payment_wizard()
+            </field>
+        </record>
+
+        <record id="view_contact_creation_form" model="ir.ui.view">
+            <field name="name">account.move.form.inherited</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="model">account.move</field>
+            <field name="priority">100</field>
+            <field type="xml" name="arch">
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button name="action_show_pdc"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-bars"
+                            invisible="move_type != 'out_invoice'"
+                           >
+                        <field name="pdc_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+                <xpath expr="//button[@name='action_register_payment']" position="replace">
+                    <button name="action_register_payment" id="account_invoice_payment_btn"
+                            type="object" class="oe_highlight"
+                            invisible="(state != 'posted' or payment_state not in ('not_paid', 'partial')) or (move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))"
+                            context="{'dont_redirect_to_payments': True}"
+                            string="Register Payment" data-hotkey="g"
+                            groups="account.group_account_invoice"/>
+<!--                    ('is_pdc_created', '=',True),-->
+                </xpath>
+                <xpath expr="//button[@name='button_draft']" position="after">
+                    <button name="action_pdc_payment_wizard"
+                            string="Create PDC Payment"
+                            type="object"
+                            class="oe_highlight"
+                    />
+<!--                    attrs="{'invisible': ['|','|',('state', 'not in', ['posted']), ('is_pdc_created', '=',True), ('payment_state', 'not in', ('not_paid', 'partial'))]}"-->
+                </xpath>
+                <xpath expr="//field[@name='payment_reference']" position="before">
+                    <field name="application_no" invisible="move_type != 'entry'"/>
+                </xpath>
+                <xpath expr="//field[@name='journal_id']" position="after">
+                    <field name="pdc_registered_id" invisible="1"/>
+                    <field name="pdc_bounce_id" invisible="1"/>
+                    <field name="pdc_cleared_id" invisible="1"/>
+                    <field name="is_pdc_created" invisible="1"/>
+                    <field name="pdc_recall_id" invisible="1"/>
+                </xpath>
+                <xpath expr="//page[@name='other_info']//group[@id='other_tab_entry_group']//group[@name='misc_group']//field[@name='to_check']" position="after">
+                    <field name="cheque_no"/>
+                </xpath>
+
+                <xpath expr="//page[@id='aml_tab']//field[@name='line_ids']//tree//field[@name='balance']" position="before">
+                    <field name="cheque_no"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

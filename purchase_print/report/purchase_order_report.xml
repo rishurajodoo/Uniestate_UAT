@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="report_purchase_order">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <style>
+                                tbody .c1{
+                                text-align:left;
+                                border:1px solid black;
+                                width: 15%;
+                                }
+                                tbody .c2{
+                                text-align:left;
+                                border:1px solid black;
+                                width: 35;
+                                }
+                            </style>
+
+                            <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                                <tbody class="tbody1">
+                                    <tr>
+                                        <td style="text-align:center; background-color:gray; font-size:22px;" colspan="4">
+                                            <strong>WORK ORDER/LPO - AL SHAMKHA BUILDING MATERIALS TRADING</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1">Supplier Code:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.partner_id.ref"/>
+                                        </td>
+                                        <td class="c1">Work Order #:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1">supplier Name:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.partner_id.name"/>
+                                        </td>
+                                        <td class="c1">Order Date:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.date_approve"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1"></td>
+                                        <td class="c2"></td>
+                                        <td class="c1">Order By:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.company_id.display_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1">TRN:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.partner_id.trade_licence_no"/>
+                                        </td>
+                                        <td class="c1">TRN:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.company_id.vat"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1">Tel:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.partner_id.phone"/>
+                                        </td>
+                                        <td class="c1">Contact at Site:</td>
+                                        <td class="c2"><t t-esc="o.site_contact"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1">Fax:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.partner_id.fax_eng"/>
+                                        </td>
+                                        <td class="c1">Site:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.project_name.display_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1" style="border-bottom: none;">Address:</td>
+                                        <td>
+                                            <t t-esc="o.partner_id.street"/>
+                                        </td>
+                                        <td class="c1"></td>
+                                        <td class="c2"><t t-esc="o.project_name.project_location"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1" style="border-top: none;"></td>
+                                        <td ><t t-esc="o.partner_id.state_id.display_name"/>,
+                                            <t t-esc="o.partner_id.country_id.display_name"/>
+                                        </td>
+                                        <td class="c1">Contact Person:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.partner_id.buyer_id.display_name"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="contact" t-value="o.partner_id.child_ids.filtered(lambda rec: rec.type == 'contact')[0]"/>
+                                    <tr>
+                                        <td class="c1">Contact Person:</td>
+                                        <td class="c2">
+                                            <t t-esc="contact.name"/>
+                                        </td>
+                                        <td class="c1">Mobile #:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.partner_id.buyer_id.mobile"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1">Mobile #:</td>
+                                        <td class="c2"><t t-esc="contact.mobile"/></td>
+                                        <td class="c1">P.O Box:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.partner_id.street2"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1">E-mail:</td>
+                                        <td class="c2"><t t-esc="contact.email"/></td>
+                                        <td class="c1">Tel:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.partner_id.buyer_id.phone"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1">Quote Reference:</td>
+                                        <td class="c2"><t t-esc="o.origin"/></td>
+                                        <td class="c1">Fax:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.partner_id.buyer_id.fax_arabic"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="c1">Dated:</td>
+                                        <td class="c2"><t t-esc="o.date_approve"/></td>
+                                        <td class="c1">Email Id:</td>
+                                        <td class="c2">
+                                            <t t-esc="o.partner_id.buyer_id.email"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <style>
+                                .tbody2 th{
+                                    border:1px solid black;
+                                    text-align: left;
+                                }
+                                .serial, .sub_header{
+                                    font-weight: bold;
+                                    border-right:1px solid black;
+                                }
+                            </style>
+                        <table class="table table-sm table-borderless"
+                               style="width:100%; border:1px solid black; font-size:14px;">
+                                <tbody class="tbody2">
+                                    <tr style="background-color:gray;">
+                                        <th>Serial</th>
+                                        <th>Item Description</th>
+                                        <th>UOM</th>
+                                        <th>Quantity</th>
+                                        <th>Rate</th>
+                                        <th>Amount (AED)</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="serial"
+                                            style="border-right: 1px solid black; border-bottom: 1px solid black;">A</td>
+                                        <td  class="sub_header" colspan="5"
+                                        style="border-bottom: 1px solid black;">Order Lines Items</td>
+                                    </tr>
+                                    <t t-set="count" t-value="1"/>
+                                    <t t-foreach="o.order_line" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <t t-esc="count"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.product_uom.display_name"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.product_qty"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.price_unit"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="line.price_subtotal"/>
+                                            </td>
+                                        </tr>
+                                        <t t-set="count" t-value="count+1"/>
+                                    </t>
+                                    <tr>
+                                        <br/>
+                                    </tr>
+                                    <tr>
+                                        <td class="serial"
+                                        style="border-right: 1px solid black; border-top: 1px solid black;">B</td>
+                                        <td class="sub_header"
+                                            style="border-top: 1px solid black;">
+                                            Untaxed Total</td>
+                                        <td class="sub_header" colspan="3"
+                                        style="border-top: 1px solid black;">AED</td>
+                                        <td style="border-top: 1px solid black;">
+                                            <t t-esc="o.amount_untaxed"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="serial"
+                                        style="border-right: 1px solid black; border-top: 1px solid black;">C</td>
+                                        <td class="sub_header"
+                                        style="border-top: 1px solid black;">Taxes</td>
+                                        <td class="sub_header" colspan="3"
+                                        style="border-top: 1px solid black;">AED</td>
+                                        <td style="border-top: 1px solid black;">
+                                            <t t-esc="o.amount_tax"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="serial"
+                                        style="border-right: 1px solid black; border-top: 1px solid black;">D</td>
+                                        <td class="sub_header"
+                                        style="border-top: 1px solid black;">Total</td>
+                                        <td class="sub_header" colspan="3"
+                                        style="border-top: 1px solid black;">AED</td>
+                                        <td style="border-top: 1px solid black;">
+                                            <t t-esc="o.amount_total"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <t t-set="grand_total" t-value="o.amount_untaxed + o.get_vat_amount()"/>
+                                        <th style="text-align: center;" colspan="6">
+                                            <span t-esc="o.company_id.currency_id.name"/>
+                                        (
+                                        <span t-esc="o.grand_total_in_words(grand_total)"/>
+                                        )
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center;"  colspan="6">Payment Terms</th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center;"  colspan="6">
+                                            <t t-if="o.payment_term_id">
+                                                <t t-esc="o.payment_term_id.display_name"/>
+                                            </t>
+                                            <t t-else="">
+                                                None
+                                            </t>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center;"  colspan="6">Delivery Terms</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"  colspan="6">
+                                            <t t-esc="o.picking_type_id.display_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th style="text-align: center;"  colspan="6">Terms and Conditions</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center;"  colspan="6">
+                                            <t t-esc="o.notes"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                            <style>
+                                .tbody3 th{
+                                    text-align: left;
+                                }
+                            </style>
+                            <table class="table"
+                               style="width:100%; border:1px solid black; font-size:14px;">
+                                <tbody class="tbody3">
+                                    <tr style="height: 20px">
+                                        <th class="s5" dir="ltr" colspan="3" rowspan="3" style="text-align: center;">INTERNAL
+                                            <br/>
+                                            INFORMATION
+                                        </th>
+                                        <th class="s23" dir="ltr" colspan="2">Requisition : NA</th>
+                                        <th class="s39" dir="ltr">Details:</th>
+                                        <th class="s23" dir="ltr" colspan="5">Offer attached</th>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <th class="s24" colspan="1" rowspan="2">Type of Works</th>
+                                        <th class="s24" colspan="2" rowspan="2"></th>
+                                        <th class="s24" dir="ltr" colspan="2" rowspan="2"
+                                        style="text-align: center;">Contact Person :</th>
+                                        <th class="s29" dir="ltr" colspan="3"
+                                        style="text-align: center;">Mr. Abdul Ghafoor</th>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <th class="s24" dir="ltr" colspan="3"
+                                        style="text-align: center;">050-2680229</th>
+
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <th class="s41" dir="ltr" colspan="3" rowspan="4"
+                                        style="text-align: center;">APPROVALS</th>
+                                        <th class="s42" dir="ltr" colspan="3"
+                                        style="text-align: center;">Prepared By: Reviewed by:</th>
+                                        <th class="s38" dir="ltr" colspan="3">Date :</th>
+                                        <th class="s24" dir="ltr" colspan="2" rowspan="4"
+                                        style="text-align: center;">Status : Approved</th>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <th class="s43" dir="ltr" colspan="3">Purchase/Finance:</th>
+                                        <th class="s43" dir="ltr" colspan="3">Date :</th>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <th class="s43" dir="ltr" colspan="3">Operation:</th>
+                                        <th class="s43" dir="ltr" colspan="3">Date :</th>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <th class="s43" dir="ltr" colspan="3">General Manager:</th>
+                                        <th class="s43" dir="ltr" colspan="3">Date :</th>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <th class="s44" dir="ltr" colspan="11">Notes/Documents Required for Goods
+                                            Delivery/Payment
+                                        </th>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <th class="s45" dir="ltr">A.1</th>
+                                        <td class="s26" dir="ltr" colspan="10">Delivery Note (Duly received by Uniestate
+                                            incharge)
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <th class="s45" dir="ltr">A.2</th>
+                                        <td class="s26" dir="ltr" colspan="10">Original Invoice with company stamp &amp;
+                                            signatures on it.
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <th class="s46" dir="ltr">A.3</th>
+                                        <td class="s47" dir="ltr" colspan="10">Copy of company trade license with
+                                            company stamp on it.
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <th class="s49" dir="ltr">B.1</th>
+                                        <th class="s44" dir="ltr" colspan="7">Proforma Invoice on Original Letter Head
+                                            with Company Stamp &amp;
+                                            Signatures on it. (For Advance Payments Only)
+                                        </th>
+                                        <td class="s50" colspan="3"></td>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <td class="s52" dir="ltr" colspan="11">PO Must be referred in all
+                                            correspondences.
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <td class="s52" dir="ltr" colspan="11">Delivery must be at our site in RAK,
+                                            UAE.
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <td class="s52" dir="ltr" colspan="11">The delivered product must be in good
+                                            condition.
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <td class="s52" dir="ltr" colspan="11">All necessary permitts if needed to be
+                                            arranged by supplier.
+                                        </td>
+                                    </tr>
+                                    <tr style="height: 20px">
+                                        <td class="s53" dir="ltr" colspan="11">Loading, Transportation charges included
+                                            in above mentioned rates.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

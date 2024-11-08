@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form_inherited_marquespoint_overall" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.marquespoint.overall</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="90"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app data-string="Property" string="Property" name="marquespoint_overall">
+                        <block title="Chiller Charges">
+                            <setting
+                                    help="Enable this option to add chiller charges!">
+                                <field name="is_chiller_charges"/>
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="marquespoint_overall_config_settings_action" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'marquespoint_overall', 'bin_size': False}</field>
+        </record>
+
+        <menuitem id="marquespoint_overall_config_settings_menu" name="General Settings"
+                  parent="project_customization.config_menu_item_id" sequence="0"
+                  action="marquespoint_overall_config_settings_action"/>
+    </data>
+</odoo>

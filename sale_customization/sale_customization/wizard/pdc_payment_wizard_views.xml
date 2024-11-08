@@ -1,0 +1,41 @@
+<odoo>
+
+    <record id="view_pdc_sale_wizard_form" model="ir.ui.view">
+        <field name="name">PDC Payment wizards</field>
+        <field name="model">pdc.sale.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group col="4">
+                    <field name="partner_id" required="1"/>
+                    <field name="payment_amount" required="1"/>
+                    <field name="cheque_type_id" required="1"/>
+                    <field name="journal_id" required="1"/>
+                    <field name="currency_id" required="1"/>
+<!--                    <field name="destination_account_id" attrs="{'required': [('cheque_type', '!=', 'sd')]}"/>-->
+                    <field name="destination_account_id"/>
+
+                    <field name="pdc_type" readonly="1"/>
+<!--                    <field name="date_payment" attrs="{'required': [('cheque_type', '!=', 'sd')]}"/>-->
+                    <field name="date_payment"/>
+                    <field name="date_registered" required="1"/>
+                    <field name="commercial_bank_id"/>
+                    <field name="cheque_no" required="1"/>
+                    <field name="memo"/>
+                    <field name="move_ids" readonly="1" widget="many2many_tags"/>
+
+                </group>
+                <group string="Property Details" col="4">
+                    <field name="unit_id" readonly="1"/>
+                    <field name="floor_id" readonly="1"/>
+                    <field name="building_id" readonly="1"/>
+                    <field name="project_id" readonly="1"/>
+                </group>
+                <footer>
+                    <button name="create_pdc_payments" string="Create PDC Payment" type="object" class="btn-primary"/>
+                    <button string="Cancel" type="object" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

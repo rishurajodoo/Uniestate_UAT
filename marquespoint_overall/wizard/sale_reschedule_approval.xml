@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sales_reschedule_approval_form_view" model="ir.ui.view">
+        <field name="name">sales.approval.form</field>
+        <field name="model">sales.reschedule.approval</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="title"/>
+                    </group>
+                    <notebook>
+                        <page string="Approval">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="approval_stages"/>
+                                    <field name="user_ids" widget="many2many_tags"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sales_reschedule_approval_tree_view" model="ir.ui.view">
+        <field name="name">sales.approval.form</field>
+        <field name="model">sales.reschedule.approval</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="user_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sales_reschedule_approvals_action" model="ir.actions.act_window">
+        <field name="name">Reschedule Approval User</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sales.reschedule.approval</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a New Approval
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_sales_reschedule_approvals"
+            name="Reschedule Approval User"
+            parent="sale.menu_sale_config"
+            action="sales_reschedule_approvals_action"
+            sequence="50"/>
+
+
+    <record id="view_reschedule_wizard_data_tree" model="ir.ui.view">
+        <field name="name">reschedule.wizard.data.tree</field>
+        <field name="model">reschedule.wizard.data</field>
+        <field name="arch" type="xml">
+            <tree string="Reschedule Wizard Data">
+                <field name="milestone_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="installment_period"/>
+                <field name="installment_no"/>
+                <field name="installments_due"/>
+                <field name="amounts_due"/>
+                <!--                <field name="is_submitted"/>-->
+                <!--                <field name="is_approved"/>-->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_reschedule_wizard_data_form" model="ir.ui.view">
+        <field name="name">reschedule.wizard.data.form</field>
+        <field name="model">reschedule.wizard.data</field>
+        <field name="arch" type="xml">
+            <form string="Reschedule Wizard Data">
+                <sheet>
+                    <header>
+                        <field name="is_approval_button_visible" invisible="0"/>
+                        <button name="action_approve" string="Approve" type="object" class="btn-primary"
+                                invisible="not is_approval_button_visible"/>
+                    </header>
+                    <group>
+                        <field name="order_id"/>
+                        <field name="milestone_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="installment_period"/>
+                        <field name="installment_no"/>
+                        <field name="installments_due"/>
+                        <field name="amounts_due"/>
+                        <!--                        <field name="is_submitted"/>-->
+                        <!--                        <field name="is_approved"/>-->
+                    </group>
+                    <group string="Approval Levels">
+                        <field name="approval_line_ids" widget="many2many_tags" options="{'no_create': True}"
+                               readonly="1"/>
+                    </group>
+                    <group string="Approval Actions">
+                        <field name="required_approvals"/>
+                        <field name="current_approvals"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

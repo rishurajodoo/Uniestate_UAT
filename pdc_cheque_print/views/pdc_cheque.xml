@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cheque_layout_wizard" model="ir.ui.view">
+        <field name="name">pdc.cheque.layout.form</field>
+        <field name="model">pdc.cheque.layout</field>
+        <field name="arch" type="xml">
+            <form string="Cheque Layout Configuration">
+                <sheet>
+                    <div class="cheque-layout-container">
+                        <img class="cheque-image" src="data:image/png;base64,[[field.cheque_image]]"
+                             style="height: [[field.cheque_height]]px; width: [[field.cheque_width]]px;"/>
+                        <group>
+                            <field name="pdc_cheque_line_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="font_size"/>
+                                    <field name="letter_spacing"/>
+                                    <field name="top_displacement"/>
+                                    <field name="left_displacement"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </div>
+                </sheet>
+                <footer>
+                    <button string="Apply" type="object" name="apply_layout" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

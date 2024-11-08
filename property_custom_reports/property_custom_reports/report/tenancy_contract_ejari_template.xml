@@ -1,0 +1,1287 @@
+<odoo>
+    <data>
+        <template id="tenancy_contract_ejari_id_print">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <!--                    <t t-call="property_custom_reports.custom_tenancy_header_footer"/>-->
+                    <t t-call="web.basic_layout">
+                        <!--                        <div class="row">-->
+                        <table border="0" cellpadding="0" cellspacing="0"
+                               style="background-color: white; padding: 0px; border-collapse:separate;">
+                            <tr>
+                                <td width="40%" style="text-align: left;">
+                                    <img src="/property_custom_reports/static/description/logo.png"
+                                         style="height:80px; width:180px;"/>
+                                </td>
+                                <td width="60%" style="text-align: right; padding-left:440px;">
+                                    <img src="/property_custom_reports/static/description/logo2.png"
+                                         style="height:80px; width:300px;"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="page text-justify" style="color: #374f6c !important; padding-top:10px;">
+                            <div class="text-center" style="padding:5px; border:1px solid #374f6c; font-size: 13px;">
+                                <table border="0" cellpadding="0" cellspacing="0"
+                                       style="background-color: white; padding: 0px; border-collapse:separate;">
+                                    <tr>
+                                        <td width="40%" style="text-align: left;">
+                                            <br/>
+                                            <span>Date</span>
+                                            <t t-if="o.date_order">
+                                                <span style="border-bottom:1px dashed #374f6c;"
+                                                      t-esc="context_timestamp(o.date_order).strftime('%d/%m/%Y')"/>
+                                            </t>
+                                            <t t-else="">
+                                                ___________________
+                                            </t>
+                                            <span dir="rtl">اﻟﺘﺎرﻳﺦ</span>
+                                        </td>
+                                        <td width="50%" style="text-align: center; padding-right:150px;">
+                                            <img src="/property_custom_reports/static/description/tc_logo.jpeg"
+                                                 style="height:60px; width:100;"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!-- Owner / Lessor Information Start -->
+                            <!--                            <t t-if="o.unit.property_owner">-->
+                            <div class="owner_details border" style="margin-top:10px;">
+                                <table width="100%" class="table table-sm table-borderless"
+                                       style="margin-bottom: 10px;">
+                                    <tr style="background-color:#374f6c; color:white;font-size:15px;">
+                                        <th style="text-align:left;padding-left:10px;" colspan="3">Owner / Lessor
+                                            Information
+                                        </th>
+                                        <th dir="rtl" style="text-align:right;padding-right:10px;" colspan="3">
+                                            معلومات المالك / المؤجر
+                                        </th>
+                                    </tr>
+                                </table>
+                                <table width="100%" class="table table-sm table-borderless"
+                                       style="border-spacing: 0px; color: #374f6c !important;">
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left;padding-left:10px;" width="16%">Owner’s Name</td>
+                                        <th colspan="4" class="text-left"
+                                            style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="len(o.order_line.filtered(lambda x: x.product_id.is_unit)) > 1">
+                                                <t t-if="o.property_owner">
+                                                    <span t-field="o.property_owner.name"/>
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-set="unit_lines"
+                                                   t-value="o.order_line.filtered(lambda x: x.product_id.is_unit)"/>
+                                                <t t-if="unit_lines">
+                                                    <span t-field="unit_lines.product_id.property_owner.name"/>
+                                                </t>
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;" width="19%">
+                                            أسم المالك
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Lessor’s Name
+                                        </td>
+                                        <th colspan="4" class="text-left"
+                                            style="border-bottom:1px dashed #374f6c;">
+                                            <!--                                            <t t-as="child" t-foreach="o.unit.lessor.child_ids">-->
+                                            <!--                                                    <t t-if="child.type=='contact' and child.name">-->
+                                            <t t-if="len(o.order_line.filtered(lambda x: x.product_id.is_unit)) > 1">
+                                                <t t-if="o.lessor">
+                                                    <span t-field="o.lessor.name"/>
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-set="unit_lines"
+                                                   t-value="o.order_line.filtered(lambda x: x.product_id.is_unit)"/>
+                                                <t t-if="unit_lines">
+                                                    <span t-field="unit_lines.product_id.lessor.name"/>
+                                                </t>
+                                            </t>
+                                            <!--                                            </t>-->
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">اسم المؤجر</td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left;padding-left:10px;">Lessor’s Emirates
+                                            ID
+                                        </td>
+                                        <th colspan="4" class="text-left"
+                                            style="border-bottom:1px dashed #374f6c;">
+                                            <!--                                            <t t-as="child" t-foreach="o.unit.property_owner.child_ids">-->
+                                            <t t-if="len(o.order_line.filtered(lambda x: x.product_id.is_unit)) > 1">
+                                                <t t-if="o.lessor">
+                                                    <span t-field="o.lessor.emirates_id"/>
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-set="unit_lines"
+                                                   t-value="o.order_line.filtered(lambda x: x.product_id.is_unit)"/>
+                                                <t t-if="unit_lines">
+                                                    <span t-field="unit_lines.product_id.lessor.emirates_id"/>
+                                                </t>
+                                            </t>
+                                            <!-- <t t-if="o.unit.lessor.emirates_id">
+                                                <span t-field="o.unit.lessor.emirates_id"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t> -->
+                                            <!--                                            </t>-->
+
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">
+                                            الهوية الإمارتية للمؤجر
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size: 13px;">
+                                        <td style="text-align:left; padding-left:10px;">License No.</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="len(o.order_line.filtered(lambda x: x.product_id.is_unit)) > 1">
+                                                <t t-if="o.lessor">
+                                                    <span t-field="o.lessor.trade_licence_no"/>
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-set="unit_lines"
+                                                   t-value="o.order_line.filtered(lambda x: x.product_id.is_unit)"/>
+                                                <t t-if="unit_lines">
+                                                    <span t-field="unit_lines.product_id.lessor.trade_licence_no"/>
+                                                </t>
+                                            </t>
+                                            <!-- <t t-if="o.unit.lessor.trade_licence_no">
+                                                <span t-field="o.unit.lessor.trade_licence_no"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t> -->
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-left:40px;">رقم الرخصة</td>
+                                        <td style="text-align:left; padding-left:60px;">Licensing Authority</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="len(o.order_line.filtered(lambda x: x.product_id.is_unit)) > 1">
+                                                <t t-if="o.lessor">
+                                                    <span t-field="o.lessor.x_studio_l_auth"/>
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-set="unit_lines"
+                                                   t-value="o.order_line.filtered(lambda x: x.product_id.is_unit)"/>
+                                                <t t-if="unit_lines">
+                                                    <span t-field="unit_lines.product_id.lessor.x_studio_l_auth"/>
+                                                </t>
+                                            </t>
+                                            <!-- <t t-if="o.unit.lessor.x_studio_l_auth">
+                                                <span t-field="o.unit.lessor.x_studio_l_auth"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t> -->
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">سلطة الترخيص</td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Lessor’s Email</td>
+                                        <th colspan="4" class="text-left"
+                                            style="border-bottom:1px dashed #374f6c;">
+                                            <!--                                            <t t-as="child" t-foreach="o.unit.property_owner.child_ids">-->
+                                            <t t-if="len(o.order_line.filtered(lambda x: x.product_id.is_unit)) > 1">
+                                                <t t-if="o.lessor">
+                                                    <span t-field="o.lessor.email"/>
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-set="unit_lines"
+                                                   t-value="o.order_line.filtered(lambda x: x.product_id.is_unit)"/>
+                                                <t t-if="unit_lines">
+                                                    <span t-field="unit_lines.product_id.lessor.email"/>
+                                                </t>
+                                            </t>
+                                            <!-- <t t-if="o.unit.lessor.email">
+                                                <span t-field="o.unit.lessor.email"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t> -->
+                                            <!--                                            </t>-->
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">
+                                            البريد الإلكتروني
+                                            للمؤجر
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Lessor’s Phone</td>
+                                        <th colspan="4" class="text-left"
+                                            style="border-bottom:1px dashed #374f6c;">
+                                            <!--                                            <t t-as="child" t-foreach="o.unit.property_owner.child_ids">-->
+                                            <t t-if="len(o.order_line.filtered(lambda x: x.product_id.is_unit)) > 1">
+                                                <t t-if="o.lessor">
+                                                    <span t-field="o.lessor.phone"/>
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-set="unit_lines"
+                                                   t-value="o.order_line.filtered(lambda x: x.product_id.is_unit)"/>
+                                                <t t-if="unit_lines">
+                                                    <span t-field="unit_lines.product_id.lessor.phone"/>
+                                                </t>
+                                            </t>
+                                            <!-- <t t-if="o.unit.lessor.phone">
+                                                <span t-field="o.unit.lessor.phone"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t> -->
+                                            <!--                                            </t>-->
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">رقم هاتف المؤجر
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--                            </t>-->
+                            <!-- Owner / Lessor Information End -->
+
+
+                            <!-- Tenant Information Start -->
+                            <div class="tenant_details border" style="font-size:14px; margin-top:10px;">
+                                <table width="100%" class="table table-sm table-borderless"
+                                       style="margin-bottom: 10px;">
+                                    <tr style="background-color: #374f6c; color:white;font-size:15px;">
+                                        <th style="text-align:left; padding-left:10px;" colspan="3">Tenant
+                                            Information
+                                        </th>
+                                        <th dir="rtl" style="text-align:right;padding-right:10px;" colspan="3">معلومات
+                                            المستأجر
+                                        </th>
+                                    </tr>
+                                </table>
+                                <table width="100%" class="table table-sm table-borderless"
+                                       style="border-spacing: 0px; color: #374f6c !important;">
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;" width="16%">Tenant’s Name</td>
+                                        <th colspan="4" class="text-left"
+                                            style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.partner_id.name">
+                                                <span t-field="o.partner_id.name"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;" width="19%">اسم
+                                            المستأجر
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Tenant’s Emirates
+                                            ID
+                                        </td>
+                                        <th colspan="4" class="text-left"
+                                            style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.partner_id.emirates_id">
+                                                <span t-field="o.partner_id.emirates_id"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">
+                                            الهوية الإمارتية المستأجر
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">License No.</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.partner_id.trade_licence_no">
+                                                <span t-field="o.partner_id.trade_licence_no"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:center;padding-right:10px;">رقم الرخصة</td>
+                                        <td style="text-align:left; padding-left:10px;">Licensing Authority</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.partner_id.x_studio_l_auth">
+                                                <span t-field="o.partner_id.x_studio_l_auth"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">سلطة الترخيص</td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Tenant’s Email</td>
+                                        <th colspan="4" class="text-left"
+                                            style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.partner_id.email">
+                                                <span t-field="o.partner_id.email"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">البريد الإلكتروني
+                                            للمستأجر
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Tenant’s Phone</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.partner_id.phone">
+                                                <span t-field="o.partner_id.phone"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">رقم هاتف المستأجر
+                                        </td>
+                                        <td style="text-align:left; padding-left:10px;">Number of Co-Occupants
+                                        </td>
+                                        <th class="text-center" style="border-bottom:1px dashed #374f6c;">
+                                            <t>
+                                                -
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">ﻋﺪد اﻟﻘﺎﻃﻨﻴﻦ
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!-- Tenant Information End -->
+
+                            <!-- Property Information Start -->
+                            <div class="tendant_details border" style="font-size:14px; margin-top:10px;">
+                                <table width="100%" class="table table-sm table-borderless"
+                                       style="margin-bottom: 10px;">
+                                    <tr style="background-color: #374f6c; color:white;font-size:15px;">
+                                        <th style="text-align:left; padding-left:10px;" colspan="3">Property Information
+                                        </th>
+                                        <th dir="rtl" style="text-align:right;padding-right:10px;" colspan="3">ﻣﻌﻠﻮﻣﺎت
+                                            اﻟﻌﻘﺎر
+                                        </th>
+                                    </tr>
+                                </table>
+                                <table width="100%" class="table table-sm table-borderless"
+                                       style="color: #374f6c !important;">
+                                    <tr style="font-size:13px;">
+                                        <th style="text-align:left; padding-left:10px;" width="16%">Property Usage
+                                        </th>
+                                        <td colspan="4" class="text-center">
+                                            <table class="text-center">
+                                                <tr>
+                                                    <td style="padding-left:100px;">
+                                                        <input type="radio"/>
+                                                    </td>
+                                                    <td>
+                                                        Industrial
+                                                    </td>
+                                                    <td dir="rtl">
+                                                        ﺻﻨﺎﻋﻲ
+                                                    </td>
+                                                    <td width="3%">
+
+                                                    </td>
+                                                    <td>
+                                                        <input type="radio"/>
+                                                    </td>
+                                                    <td>
+                                                        Commercial
+                                                    </td>
+                                                    <td dir="rtl">
+                                                        ﺗﺠﺎري
+                                                    </td>
+                                                    <td width="3%">
+
+                                                    </td>
+                                                    <td>
+                                                        <input type="radio"/>
+                                                    </td>
+                                                    <td>
+                                                        Residential
+                                                    </td>
+                                                    <td dir="rtl">
+                                                        ﺳﻜﻨﻲ
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;" width="19%">اﺳﺘﺨﺪام
+                                            اﻟﻌﻘﺎر
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Plot No.</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.unit.plot_num">
+                                                <span t-esc="o.unit.plot_num"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                            <!--                                            <t t-if="o.get_plot_number()">-->
+                                            <!--                                                <span t-esc="o.get_plot_number()"/>-->
+                                            <!--                                            </t>-->
+                                            <!--                                            <t t-else="">-->
+                                            <!--                                                - -->
+                                            <!--                                            </t>-->
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">رﻗﻢ اﻷرض
+                                        </td>
+                                        <td style="text-align:left; padding-left:10px;">Makani No.</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.unit.makani_no">
+                                                <span t-field="o.unit.makani_no"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">رﻗﻢ ﻣﻜﺎﻧﻲ
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Building Name</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.building.name">
+                                                <span t-field="o.building.name"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">اﺳﻢ اﻟﻤﺒﻨﻰ
+                                        </td>
+                                        <td style="text-align:left; padding-left:10px;">Property No.
+                                        </td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.get_property_number()">
+                                                <span t-esc="o.get_property_number()"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">رﻗﻢ اﻟﻌﻘﺎر
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Property Type</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.building.building_type_id.name">
+                                                <span t-field="o.unit.unit_type_id.name"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">ﻧﻮع اﻟﻮﺣﺪة
+                                        </td>
+                                        <td style="text-align:left; padding-left:10px;">Property Area (S.F)</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.building.name">
+                                                <span t-field="o.unit.property_size"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">ﻣﺴﺎﺣﺔ اﻟﻌﻘﺎر (قدم
+                                            ﻣﺮﺑﻊ.)
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Location</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.unit.unit_location">
+                                                <span t-field="o.unit.unit_location"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">اﻟﻤﻮﻗﻊ
+                                        </td>
+                                        <td style="text-align:left; padding-left:10px;">Premises No. (DEWA)</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.unit.premise_no">
+                                                <span t-field="o.unit.premise_no"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">رﻗﻢ اﻟﻤﺒﻨﻰ (دﻳﻮا)
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!-- Property Information End -->
+
+                            <!-- Contract Information Start -->
+                            <div class="tenant_details border" style="font-size:13px;margin-top:10px;">
+                                <table width="100%" class="table table-sm table-borderless"
+                                       style="margin-bottom: 10px;">
+                                    <tr style="background-color: #374f6c; color:white;font-size:15px;">
+                                        <th style="text-align:left; padding-left:10px;" colspan="3">Contract
+                                            Information
+                                        </th>
+                                        <th dir="rtl" style="text-align:right;padding-right:10px;" colspan="3">
+                                            ﻣﻌﻠﻮﻣﺎت اﻟﻌﻘﺪ
+
+                                        </th>
+                                    </tr>
+                                </table>
+                                <table width="100%" class="table table-sm table-borderless"
+                                       style="color: #374f6c !important;">
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;" width="16%">Contract
+                                            Period
+                                        </td>
+                                        <th class="text-center" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.start_date or o.end_date">
+                                                <span t-esc="o.start_date.strftime('%d/%m/%Y')"/>
+                                                -
+                                                <span t-esc="o.end_date.strftime('%d/%m/%Y')"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">ﻓﺘﺮة اﻟﻌﻘﺪ
+                                        </td>
+                                        <td style="text-align:left; padding-left:10px;">Contract Value</td>
+                                        <th class="text-center" style="border-bottom:1px dashed #374f6c;">
+                                            <!--                                                    <t t-if="line.price_unit">-->
+                                            <!--                                                        <span t-esc="res_company.currency_id.name"/>&#160;-->
+                                            <!--                                                        <span t-field="line.price_unit + line.price_tax"/>-->
+                                            <!--                                                    </t>-->
+
+                                            <!--                                            <t t-set="amo_total" t-value="line.price_unit + line.price_tax"/>-->
+                                            <span t-esc="res_company.currency_id.name"/>
+                                            <!-- <span t-esc="amo_total"/> -->
+                                            <span t-esc="'{:,}'.format(o.get_is_unit_order_total_with_tax())"/>
+                                            <!-- <span t-esc="amo_total" t-options="{'widget': 'monetary', 'display_currency': 'o.currency_id'}"/> -->
+
+
+                                            <!--                                                    <t t-else="">-->
+
+                                            <!--                                                    </t>-->
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;" width="19%">
+                                            ﻗﻴﻤﺔ اﻟﻌﻘﺪ
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Annual Rent</td>
+                                        <th class="text-left" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.get_is_unit_order_total_without_tax()">
+                                                <span t-esc="res_company.currency_id.name"/>&#160;
+                                                <span t-esc="o.get_is_unit_order_total_without_tax()"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="res_company.currency_id.name"/>&#160; 0.00
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">اﻻﻳﺠﺎر اﻟﺴﻨﻮي
+                                        </td>
+                                        <td style="text-align:left; padding-left:10px;">Security Deposit
+                                            Amount
+                                        </td>
+                                        <th class="text-center" style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.get_cheque_deposit()">
+                                                <span t-esc="res_company.currency_id.name"/>&#160;<span
+                                                    t-esc="o.get_cheque_deposit()"
+                                                    t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="res_company.currency_id.name"/>&#160; 0.00
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">ﻣﺒﻠﻎ اﻟﺘﺄﻣﻴﻦ
+                                        </td>
+                                    </tr>
+                                    <tr style="font-size:13px;">
+                                        <td style="text-align:left; padding-left:10px;">Mode of Payment</td>
+                                        <th colspan="4" class="text-left"
+                                            style="border-bottom:1px dashed #374f6c;">
+                                            <t t-if="o.payment_mode_id.name">
+                                                <span t-esc="o.payment_mode_id.name"/>
+                                            </t>
+                                            <t t-else="">
+
+                                            </t>
+                                        </th>
+                                        <td dir="rtl" style="text-align:right;padding-right:10px;">ﻃﺮﻳﻘﺔ اﻟﺪﻓﻊ
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- Contract Information End -->
+                            <!--                            <p style="page-break-before:always;"/>-->
+                            <!-- Terms and Conditions Start -->
+                            <table class="table table-borderless table-sm text-justify"
+                                   style="table-layout: fixed; width: 100%; font-size:13px; margin-top:10px;margin-bottom: 10px;">
+                                <tr style="background-color:#374f6c; color: white; font-size:15px;">
+                                    <th style="padding-left:10px;">
+                                        <strong>
+                                            Terms and Conditions
+                                        </strong>
+                                    </th>
+                                    <th style="padding-right:10px;" dir="rtl">الأحكام
+                                        والشروط
+                                    </th>
+                                </tr>
+                            </table>
+                            <table class="table table-borderless table-sm text-justify"
+                                   style="table-layout: fixed; width: 100%; font-size:12px;color: #374f6c !important;">
+                                <tr>
+                                    <td width="3%" style="text-align:left">1</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">The tenant has inspected the premises and agreed
+                                            to
+                                            lease
+                                            the unit on its current condition.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>عاين المستاجر الوحدة موضوع الإيجار ووافق على إستئجار العقار على حالته
+                                            الحالية
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">1</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">2</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">Tenant undertakes to use the premises for
+                                            designated
+                                            purpose, tenant has no rights to transfer or relinquish the tenancy
+                                            contract
+                                            either with or alime without counterpart to any without landlord
+                                            written
+                                            approval Also tenant is not allowed to sublease the premises or any
+                                            part
+                                            thereof
+                                            to third party in whole or in part unless it is legally permitted.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>يتعهد المستاجر باستعمال الماجور للغرض المخصص له، ولا يجوز للمستاجر
+                                            تحويل أو
+                                            التنازل عن عقد الايجار للغير بمقابل أو دون مقابل دون موافقة المالك
+                                            خطيا، كما
+                                            لا
+                                            يجوز للمستاجر تأجير الماجور او أي جزء منه من الباطن مالم يسمح بذلك
+                                            قانونا.
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">2</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">3</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">The tenant undertakes not to make any
+                                            amendments,
+                                            modifications or addendums to the premises subject of the contract
+                                            without
+                                            obtaining the landlord written approval, tenant shall be liable for
+                                            any
+                                            damages
+                                            or failure due to that.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>يتعهد المستاجر بعدم إجراء أي تعديلات أو إضافات على العقار موضوع العقد
+                                            دون
+                                            موافقة
+                                            المالك الخطية، ويكون المستأجر مسؤولا عن أي أضرار أو نقص أو تلف يلحق
+                                            بالعقار
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">3</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">4</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">The tenant shall be responsible for payment of
+                                            all
+                                            electricity, water, jäµ cooling and gas charges resulting of
+                                            occupying
+                                            leased
+                                            unit unless other condition agreed in written.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>يكون المستأجر مسؤولا عن سداد كافة فواتير الكهرباء والمياه والتبريد
+                                            والغاز
+                                            المترتبة عن اشغاله الماجور، مالم يتم الاتفاق على غير ذلك كتابياً
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">4</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">5</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">The tenant shall be responsible for payment of
+                                            all
+                                            electricity, water, jäµ cooling and gas charges resulting of
+                                            occupying
+                                            leased
+                                            unit unless other condition agreed in written.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>يتعهد المستأجر بسداد مبلغ الإيجار المتفق عليه في هذا العقد في
+                                            التواريخ
+                                            والطريقة
+                                            المتفق عليها
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">5</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">6</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">The tenant must pay the rent amount in the
+                                            manner and
+                                            dates
+                                            agreed with the landlord.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>يلتزم المستاجر التقيد التام بالانظمة والتعليمات المتعلقة باستخدام
+                                            الماجور
+                                            والمنافع المشتركة (كمواقف السيارات، أحواض السباحة، النادي الصحي،
+                                            الخ)
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">6</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">7</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">The tenant fully undertakes to comply with all
+                                            the
+                                            regulations and instructions related to the management of property
+                                            and use
+                                            of be
+                                            premises and of common areas such as (parking, swimming pools,
+                                            gymnasium,
+                                            etc...)
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>يقر أطراف التعاقد بصحة العناوين وأرقام الهواتف المذكورة أعلاه، وتكون
+                                            تلك
+                                            العناوين
+                                            هي المعتمدة رسمياً للإخطارات والإعلانات القضائية في حالة نشوء أي
+                                            نزاع بين
+                                            أطراف
+                                            العقد
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">7</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">8</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">Tenancy contract parties declare all the mention
+                                            email
+                                            addresses and phone numbers are correct, all formal and legal
+                                            notifications
+                                            will
+                                            be sent to those addresses in case of dispute between parties.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>يتعهد المؤجر بتمكين المستاجر من الانتفاع التام بالعقار للغرض المؤجر
+                                            لأجله
+                                            والمرافق الخاصة به (حوض سباحة، نادي صحي، مواقف سيارات ...... إلخ)
+                                            كما يكون
+                                            مسئولا عن اعمال الصيانة مالم يتم الاتفاق على غير ذلك، وعدم التعرض له
+                                            في
+                                            منفعة
+                                            العقار
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">8</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">9</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">By signing this agreement from the first party.
+                                            the
+                                            "Landlord" hereby confirms and undertakes that he is the current
+                                            owner of
+                                            the
+                                            property or his legal representative under legal power of attorney
+                                            duly
+                                            entitled
+                                            by the competent authority.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>يعتبر توقيع المؤجر على هذا العقد إقراراً منه بأنه المالك الحالي
+                                            للعقار أو
+                                            الوكيل
+                                            القانوني لذلك المالك بموجب وكالة قانونية موثقة وفق الأصول لدى الجهات
+                                            المختصة
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">9</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">10</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">Any disagreement or dispute may arise from
+                                            execution or
+                                            interpretation of the contract shell be settled by the Rental
+                                            Dispute
+                                            Center.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>أي خلاف او نزاع قد ينشأ عن تنفيذ أو تفسير هذا العقد يعود البت فيه
+                                            لمركز فض
+                                            المنازعات الإيجارية.
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">10</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">11</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">This Contract is subject to all provisions of
+                                            Law No
+                                            (26) of
+                                            2007 regulating the relation between landlord and tenants in the
+                                            Emirate of
+                                            Dubai as amended, and as it will be changed or amended from time to
+                                            time, as
+                                            long with any related legislation's applied in the Emirate of Dubai.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>يخضع هذا العقد لكافة أحكام القانون رقم (26) لسنة 2007 بشأن تنظيم
+                                            العلاقة بين
+                                            مؤجري ومستأجري العقارات في إمارة دبي، وتعديلاته وأي تغيير أو تعديل
+                                            يطرا عليه
+                                            من
+                                            وقت لآخر، كما يخضع للتشريعات واللوائح الأخرى ذات العلاقة النافذة في
+                                            إمارة
+                                            دبي.
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">11</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">12</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">Any additional condition will not be considered
+                                            in case
+                                            it
+                                            conflicts with law.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>لا يعتد بأي شرط تم إضافته إلى هذا العقد في حال تعارضه مع القانون.</span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">12</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">13</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">In case of discrepancy occurs between Arabic and
+                                            non
+                                            Arabic
+                                            texts with regards to the interpretation of this agreement or the
+                                            scope of
+                                            its
+                                            application, the Arabic text shall prevail.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>في حال حدوث أي تعارض أو اختلاف في التفسير بين النص العربي والنص
+                                            الأجنبي يعتمد
+                                            النص العربي.
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">13</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">14</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">The Landlord undertakes to register this tenancy
+                                            contract on
+                                            EJRI affiliated to Dubai Land Department and provide with all
+                                            required
+                                            documents.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>يتعهد المؤجر بتسجيل عقد الإيجار في نظام إيجاري التابع لدائرة الأراضي
+                                            والأملاك
+                                            وتوفير كافة المستندات اللازمة لذلك
+                                        </span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">14</td>
+                                </tr>
+                            </table>
+                            <!-- Terms and Conditions End -->
+
+                            <!-- Know Your Rights Start -->
+                            <table class="table table-borderless table-sm"
+                                   style="table-layout: fixed; width: 100%; font-size:14px;margin-bottom: 10px;margin-bottom: 10px;">
+                                <tr style="background-color:#374f6c; color: white; font-size:15px;">
+                                    <th style="padding-left:10px;">
+                                        <strong>
+                                            Know your rights
+                                        </strong>
+                                    </th>
+                                    <th dir="rtl" style="padding-right:10px;">ﻟﻤﻌﺮﻓﺔ ﺣﻘﻮق اﻷﻃﺮاف</th>
+                                </tr>
+                            </table>
+                            <table class="table table-borderless table-sm"
+                                   style="table-layout: fixed; width: 100%; font-size:12px;color: #374f6c !important;">
+                                <tr>
+                                    <td style="text-align:left;">
+                                        <!--                                        <ul>-->
+                                        <li>
+                                            <span class="text-justify">You may visit Rental Dispute Center
+                                                website
+                                                through www.dubailand.gov.ae in case of any
+                                                rental dispute between parties.
+                                            </span>
+                                        </li>
+                                        <!--                                        </ul>-->
+                                    </td>
+                                    <td style="text-align:right;" dir="rtl">
+                                        <!--                                        <ul>-->
+                                        <li>
+                                            ﻳﻤﻜﻨﻜﻢ زﻳﺎرة ﻣﻮﻗﻊ ﻣﺮﻛﺰ ﻓﺾ اﻟﻤﻨﺎزﻋﺎت اﻹﻳﺠﺎرﻳﺔ ﻣﻦ ﺧﻼل www.dubailand.gov.ae
+                                            ﻓﻲ ﺣﺎل ﻧﺸﻮء أي ﻧﺰاع إﻳﺠﺎري ﺑﻴﻦ اﻷﻃﺮاف.
+                                        </li>
+                                        <!--                                        </ul>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">
+                                        <!--                                        <ul>-->
+                                        <li>
+                                            <span class="text-justify">Law No 26 of 2007 regulating
+                                                relationship
+                                                between
+                                                landlords and tenants.
+                                            </span>
+                                        </li>
+                                        <!--                                        </ul>-->
+                                    </td>
+                                    <td style="text-align:right;" dir="rtl">
+                                        <!--                                        <ul>-->
+                                        <li>اﻹﻃﻼع ﻋﻠﻰ ﻗﺎﻧﻮن رﻗﻢ 26 ﻟﺴﻨﺔ 2007 ﺑﺸﺄن ﺗﻨﻈﻴﻢ اﻟﻌﻼﻗﺔ ﺑﻴﻦ اﻟﻤﺆﺟﺮﻳﻦ
+                                            واﻟﻤﺴﺘﺄﺟﺮﻳﻦ.
+                                        </li>
+                                        <!--                                        </ul>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">
+                                        <!--                                        <ul>-->
+                                        <li>
+                                            <span class="text-justify">Law No 33 of 2008 amending law 26 of
+                                                year
+                                                2007.
+                                            </span>
+                                        </li>
+                                        <!--                                        </ul>-->
+                                    </td>
+                                    <td style="text-align:right;" dir="rtl">
+                                        <!--                                        <ul>-->
+                                        <li>اﻹﻃﻼع ﻋﻠﻰ ﻗﺎﻧﻮن رﻗﻢ 33 ﻟﺴﻨﺔ 2008 اﻟﺨﺎص ﺑﺘﻌﺪﻳﻞ ﺑﻌﺾ أﺣﻜﺎم ﻗﺎﻧﻮن 26 ﻟﻌﺎم
+                                            .2007
+                                        </li>
+                                        <!--                                        </ul>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">
+                                        <!--                                        <ul>-->
+                                        <li>
+                                            <span class="text-justify">Law No 43 of 2013 determining rent
+                                                increases for
+                                                projects.
+                                            </span>
+                                        </li>
+                                        <!--                                        </ul>-->
+                                    </td>
+                                    <td style="text-align:right;" dir="rtl">
+                                        <!--                                        <ul>-->
+                                        <li>اﻹﻃﻼع ﻋﻠﻰ ﻗﺎﻧﻮن رﻗﻢ 43 ﻟﺴﻨﺔ 2013 ﺑﺸﺄن ﺗﺤﺪﻳﺪ زﻳﺎدة ﺑﺪل اﻹﻳﺠﺎر.</li>
+                                        <!--                                        </ul>-->
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- Know Your Rights End -->
+
+                            <!-- Attachments for EJARI Registration Start -->
+                            <table class="table table-borderless table-sm"
+                                   style="table-layout: fixed; width: 100%; font-size:14px; margin-bottom: 10px;">
+                                <tr style="background-color:#374f6c; color: white; font-size:15px;">
+                                    <th style="padding-left: 15px;">
+                                        <strong>
+                                            Attachments for EJARI Registration
+                                        </strong>
+                                    </th>
+                                    <th style="padding-right:10px;" dir="rtl">مرفقات التسجيل في إيجاري
+                                    </th>
+                                </tr>
+                            </table>
+
+                            <table class="table table-borderless table-sm"
+                                   style="table-layout: fixed; width: 100%; font-size:12px;color: #374f6c !important;">
+                                <tr>
+                                    <td width="3%" style="text-align:left">1</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">Original unified tenancy contract</span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>ﻧﺴﺨﺔ أﺻﻠﻴﺔ ﻋﻦ ﻋﻘﺪ اﻻﻳﺠﺎر الموحد</span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">1</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">2</td>
+                                    <td style="text-align:left; padding-right:15px">
+                                        <span class="text-justify">Original Emirates ID of applicant
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>اﻟﻬﻮﻳﺔ اﻹﻣﺎراﺗﻴﺔ اﻷﺻﻠﻴﺔ ﻟﻤﻘﺪم اﻟﻄﻠﺐ</span>
+                                    </td>
+                                    <td width="3%" style="text-align:right">2</td>
+                                </tr>
+                            </table>
+                            <!-- Attachments for EJARI Registration Emd -->
+
+                            <!-- Additional Terms Start -->
+                            <table class="table table-borderless table-sm"
+                                   style="table-layout: fixed; width: 100%; font-size:14px;margin-bottom: 10px;">
+                                <tr style="background-color:#374f6c; color: white; font-size:15px;">
+                                    <th style="padding-left:10px; padding-right:10px;">
+                                        <div class="row">
+                                            <div class="col-6 text-left">
+                                                <strong>
+                                                    Additional Terms:
+                                                </strong>
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <span dir="rtl">
+                                                    شروط إضافية
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </table>
+                            <table class="table table-borderless table-sm"
+
+                                   style="width: 100%; font-size:12px;color: #374f6c !important;">
+                                <tr>
+                                    <td width="3%" style="text-align:left;">1</td>
+                                    <td width="90%" class="text-left">
+                                        <!--                                        <hr style="border-top: 1px solid #374f6c;"/>-->
+                                        <div style="border-bottom: 1px solid #374f6c; width:100%;">
+
+                                            <t t-esc="o.get_property_names()"/>
+                                            <br/>
+                                        </div>
+                                    </td>
+                                    <td width="3%" style="text-align:right;">1</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">2</td>
+                                    <td width="90%" class="text-center">
+                                        <!--                                        <hr style="border-top: 1px solid #374f6c;"/>-->
+                                        <div style="border-bottom: 1px solid #374f6c; width:100%;">
+                                            <![CDATA[&nbsp;]]>
+                                            <br/>
+                                        </div>
+                                    </td>
+                                    <td width="3%" style="text-align:right">2</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">3</td>
+                                    <td width="90%" class="text-center">
+                                        <!--                                        <hr style="border-top: 1px solid #374f6c;"/>-->
+                                        <div style="border-bottom: 1px solid #374f6c; width:100%;">
+                                            <![CDATA[&nbsp;]]>
+                                            <br/>
+                                        </div>
+                                    </td>
+                                    <td width="3%" style="text-align:right">3</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">4</td>
+                                    <td width="90%" class="text-center">
+                                        <!--                                        <hr style="border-top: 1px solid #374f6c;"/>-->
+                                        <div style="border-bottom: 1px solid #374f6c; width:100%;">
+                                            <![CDATA[&nbsp;]]>
+                                            <br/>
+                                        </div>
+                                    </td>
+                                    <td width="3%" style="text-align:right">4</td>
+                                </tr>
+                                <tr>
+                                    <td width="3%" style="text-align:left">5</td>
+                                    <td width="90%" class="text-center">
+                                        <!--                                        <hr style="border-top: 1px solid #374f6c;"/>-->
+                                        <div style="border-bottom: 1px solid #374f6c; width:100%;">
+                                            <![CDATA[&nbsp;]]>
+                                            <br/>
+                                        </div>
+                                    </td>
+                                    <td width="3%" style="text-align:right">5</td>
+                                </tr>
+                            </table>
+                            <!-- Additional Terms End -->
+
+                            <!-- Note Start -->
+                            <table class="table table-borderless table-sm"
+                                   style="table-layout: fixed; width: 100%; font-size:12px;color: #374f6c !important;">
+                                <tr style="font-size:12px;">
+                                    <td>
+                                        <span class="text-justify">Note: You may add an addendum to this tenancy
+                                            contract
+                                            in case
+                                            you have additional terms while it needs to be signed by all
+                                            parties.
+                                        </span>
+                                    </td>
+                                    <td style="text-align:right; padding-left:15px" dir="rtl">
+                                        <span>ملاحظة: يمكن إضافة ملحق إلى هذا العقد في حال وجود أي شروط إضافية، على
+                                            أن يوقع
+                                            من
+                                            أطراف التعاقد
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- Note End -->
+
+                            <!-- Signature Start -->
+                            <div class="signature" style="font-size:12px;">
+                                <table width="100%" class="table table-sm table-borderless"
+                                       style="margin-bottom: 10px;">
+                                    <tr style="background-color: #374f6c; color:white;font-size:15px;">
+                                        <th style="text-align:left; padding-left:10px;">Signatures
+                                        </th>
+                                        <th dir="rtl" style="text-align:right;padding-right:10px;">
+                                            اﻟﺘﻮﻗﻴﻌﺎت
+                                        </th>
+                                    </tr>
+                                </table>
+                                <table width="100%" class="table table-sm table-borderless"
+                                       style="color: #374f6c !important; margin-bottom: 10px;">
+                                    <tr>
+                                        <th style="border:1px solid #374f6c; height:100px;">
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <table width="100%">
+                                                <tr>
+                                                    <td>
+                                                        Tenant’s Signature
+                                                    </td>
+                                                    <td dir="rtl">ﺗﻮﻗﻴﻊ اﻟﻤﺴﺘﺄﺟﺮ</td>
+                                                    <td>Date</td>
+                                                    <td>
+                                                        ______________________
+                                                    </td>
+                                                    <td dir="rtl">اﻟﺘﺎرﻳﺦ</td>
+                                                </tr>
+                                            </table>
+                                        </th>
+                                        <th width="5%"/>
+                                        <th style="border:1px solid #374f6c;">
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                            <table width="100%" style="padding-top:100px;">
+                                                <tr>
+                                                    <td>Lessor’s Signature</td>
+                                                    <td dir="rtl">ﺗﻮﻗﻴﻊ اﻟﻤﺆﺟﺮ</td>
+                                                    <td>Date</td>
+                                                    <td>
+                                                        ______________________
+                                                    </td>
+                                                    <td dir="rtl">اﻟﺘﺎرﻳﺦ</td>
+                                                </tr>
+                                            </table>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!-- Signature End -->
+                            <p style="page-break-after: always;"/>
+                        </div>
+                        <!--                    </div>-->
+                    </t>
+                </t>
+            </t>
+        </template>
+        <template id="custom_tenancy_header_footer">
+            <t t-set="company" t-value="user.company_id"/>
+            <div class="row" style="padding-left:10px;">
+                <div style="text-align: left;" class="column">
+                    <img src="/property_custom_reports/static/description/logo.png"
+                         style="height:80px; width:180px;"/>
+                </div>
+                <div style="text-align: right; padding-left:450px;" class="column">
+                    <img src="/property_custom_reports/static/description/logo2.png"
+                         style="height:85px; width:300px;"/>
+                </div>
+            </div>
+            <div class="footer">
+                <!--                <table class="table table-borderless table-sm"-->
+                <!--                       style="table-layout: fixed; width: 100%; font-size:14px;">-->
+                <!--                    <tr>-->
+                <!--                        <td style="text-align:center">-->
+                <!--                            &lt;!&ndash;                                         <hr style="border-top: 1px solid #374f6c; width:150px;"/> &ndash;&gt;-->
+                <!--                            <strong>توقيع المستأجر</strong>-->
+                <!--                            <br/>-->
+                <!--                            <strong>Tenant Signature</strong>-->
+                <!--                        </td>-->
+                <!--                        <td style="text-align:center;">-->
+                <!--                            &lt;!&ndash;                                         <hr style="border-top: 1px solid #374f6c; width:150px;"/> &ndash;&gt;-->
+                <!--                            <strong>توقيع المؤجر</strong>-->
+                <!--                            <br/>-->
+                <!--                            <strong>Lessor’s Signature</strong>-->
+                <!--                        </td>-->
+                <!--                    </tr>-->
+                <!--                    <br/>-->
+                <!--                    <br/>-->
+                <!--                    <tr>-->
+                <!--                        <td style="text-align:center">-->
+                <!--                            <strong>Date _____________________ تاريخ</strong>-->
+                <!--                        </td>-->
+                <!--                        <td style="text-align:center">-->
+                <!--                            <strong>Date _____________________ تاريخ</strong>-->
+                <!--                        </td>-->
+                <!--                    </tr>-->
+                <!--                </table>-->
+            </div>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Defines a "For Sale" menu item under the main
+     website menu linking to the '/for_sale' route -->
+
+    <record id="menu_for_sale" model="website.menu">
+        <field name="name">For Sale</field>
+        <field name="url">/for_sale</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">60</field>
+    </record>
+
+    <!-- Defines a "For Rent" menu item under the main
+     website menu linking to the '/for_rent' route -->
+
+    <record id="menu_for_rent" model="website.menu">
+        <field name="name">For Rent</field>
+        <field name="url">/for_rent</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">60</field>
+    </record>
+</odoo>

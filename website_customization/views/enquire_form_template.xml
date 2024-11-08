@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--  Template for the 'Enquire Now' form displayed as a modal, allowing
+          users to submit their name, phone, and email The form includes
+          'Submit' and 'Discard' buttons, with styling and layout to center
+          the form on the page. -->
+
+    <template id="website_customization.enquire_form_template">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f4f4f4;">
+                    <div class="container" style="max-width: 800px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #ffffff;">
+                        <h2 class="text-center mb-4" style="color: #333; font-size: 24px;">
+                            Enquire Now
+                        </h2>
+                        <form role="form" action="/webform/enquiry/submit" method="POST" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-success-mode="" data-success-page="" data-model_name="">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                            <!-- Name Field -->
+                            <div class="form-group mb-4">
+                                <label for="name" class="col-form-label" style="font-size: 16px;">Name
+                                    <span class="s_website_form_mark">*</span>
+                                </label>
+                                <input id="name" type="text"
+                                       class="form-control" name="name"
+                                       placeholder="Enter your name"
+                                       required="1"
+                                       style="border-radius: 4px; border: 1px solid #ccc; padding: 12px;"/>
+                            </div>
+
+                            <!-- Phone Field -->
+                            <div class="form-group mb-4">
+                                <label for="phone" class="col-form-label" style="font-size: 16px;">Phone</label>
+                                <input id="phone" type="text"
+                                       class="form-control"
+                                       name="phone"
+                                       style="border-radius: 4px; border: 1px solid #ccc; padding: 12px;"/>
+                            </div>
+
+                            <!-- Email Field -->
+                            <div class="form-group mb-4">
+                                <label for="email" class="col-form-label" style="font-size: 16px;">Email</label>
+                                <input id="email" type="email"
+                                       class="form-control"
+                                       name="email"
+                                       style="border-radius: 4px; border: 1px solid #ccc; padding: 12px;"/>
+                            </div>
+
+                            <!-- Buttons: Submit and Discard -->
+                            <div class="form-group text-center mb-0">
+                                <button type="submit" class="btn btn-primary" style="padding: 12px 20px; font-size: 16px; margin-right: 10px;">Submit</button>
+                                <button type="button" class="btn btn-secondary" style="padding: 12px 20px; font-size: 16px;" onclick="window.location.href='/shop';">Discard</button>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rent_payment_plan_line,access.rent.payment.plan.line,model_rent_payment_plan_line,,1,1,1,1
+access_rent_installment_line,access.rent.installment.line,model_rent_installment_line,,1,1,1,1
+access_rent_installment_wizard,access.rent.installment.wizard,model_rent_installment_wizard,,1,1,1,1
+access_pdc_sale_wizard,access.pdc.sale.wizard,model_pdc_sale_wizard,,1,1,1,1
+access_payment_plan_wizard,access_payment_plan_wizard,model_payment_plan_wizard,,1,1,1,1

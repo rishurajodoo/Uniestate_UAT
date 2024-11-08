@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.cron" id="cron_hide_btn_pdc_based_on_cheque_date">
+        <field name="name">Hide Button PDC Based on Cheque Date</field>
+        <field name="model_id" ref="pdc_payments.model_pdc_payment"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_hide_button_based_on_cheque_date()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <data> -->
+    <record id="spare_parts_tree_view" model="ir.ui.view">
+        <field name="name">spare.parts.tree</field>
+        <field name="model">spare.parts</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id"/>
+                <field name="from_location_id"/>
+                <field name="Qty"/>
+                <field name="act_Qty"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Spare Parts Form View -->
+    <record id="spare_parts_form_view" model="ir.ui.view">
+        <field name="name">spare.parts.form</field>
+        <field name="model">spare.parts</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <!-- Add fields or other elements to the form view -->
+                    <field name="product_id"/>
+                    <field name="from_location_id" readonly="1"/>
+                    <field name="Qty"/>
+                    <field name="act_Qty"/>
+                    <!-- Add any additional fields as needed -->
+                </group>
+            </form>
+        </field>
+    </record>
+    <!-- Tree View -->
+    <record id="view_checklist_tree" model="ir.ui.view">
+        <field name="name">checklist.tree</field>
+        <field name="model">check.list</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="maintenance_equipment_id"/>
+
+                <field name="description"/>
+<!--                <field name="temperature"/>-->
+<!--                <field name="pr_bar"/>-->
+                <field name="remarks"/>
+                <field name="ohter_infor"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_checklist_form" model="ir.ui.view">
+        <field name="name">checklist.form</field>
+        <field name="model">check.list</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <grou>
+                        <field name="maintenance_equipment_id"/>
+
+                        <field name="description"/>
+<!--                        <field name="temperature"/>-->
+                    </grou>
+                    <grou>
+<!--                        <field name="pr_bar"/>-->
+                        <field name="remarks"/>
+                        <field name="ohter_infor"/>
+                        <field name="state"/>
+                    </grou>
+
+
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- <record id="maintenance_request_view_form_inherit_mrp_inherited__" model="ir.ui.view">
+        <field name="name">maintenance.request.view.form.inherit.mrp</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="mrp_maintenance.maintenance_request_view_form_inherit_mrp"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='production_id']" position="after">
+                <field name="state" invisible="1"/>
+            </xpath>
+        </field>
+    </record> -->
+
+    <record id="maintenance_request_view_form_inherit_mrp_new" model="ir.ui.view">
+        <field name="name">maintenance.request.view.form.inherit.hr1</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="hr_maintenance.maintenance_request_view_form_inherit_hr"/>
+        <field name="arch" type="xml">
+
+            <!--                <xpath expr="//field[@name='employee_id' and not(preceding-sibling::field[@name='employee_id'])]" position="attributes">-->
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+                <field name="state" invisible="1"/>
+            </xpath>
+
+            <!-- For the second occurrence of employee_id -->
+            <!--                <xpath expr="//field[@name='employee_id' and preceding-sibling::field[@name='employee_id']]" position="attributes">-->
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+                <field name="state" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <!-- <attribute name="attrs">{'readonly': [('stage_id', 'in', [2])]}</attribute> -->
+                <field name="state" invisible="1"/>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="maintenance_request_form_view_inherited_maintenace_customization" model="ir.ui.view">
+        <field name="name">maintenance.request.form.inherited</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='maintenance_type']" position="after">
+                <!--                    <field name="picking_type_id" attrs="{'readonly': [('state', '=', 'Repaired')]}"/>-->
+                <field name="picking_type_id" readonly="state == 'Repaired'"/>
+                <!--                    <field name="component_location_id" attrs="{'readonly': [('state', '=', 'Repaired')]}"/>-->
+                <field name="component_location_id" readonly="state == 'Repaired'"/>
+                <!--                    <field name="component_destination_id" attrs="{'readonly': [('state', '=', 'Repaired')]}"/> -->
+                <field name="component_destination_id" readonly="state == 'Repaired'"/>
+                <!-- <field name="company_id" attrs="{'readonly': [('state', '=', 'Repaired')]}"/>  -->
+                <field name="state" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='email_cc']" position="after">
+                <!--                    <field name="total_check_list_no" readonly="1" attrs="{'invisible': [('checklist', '=', False)]}" widget="percentpie"/>-->
+                <field name="total_check_list_no" readonly="1" invisible="checklist == False" widget="percentpie"/>
+                <!--                    <field name="completed_row" readonly="1" attrs="{'invisible': [('checklist', '=', False)]}" widget="percentpie"/>-->
+                <field name="completed_row" readonly="1" invisible="checklist == False" widget="percentpie"/>
+                <!--                    <field name="draft_row" readonly="1" attrs="{'invisible': [('checklist', '=', False)]}" widget="percentpie"/> -->
+                <field name="draft_row" readonly="1" invisible="checklist == False" widget="percentpie"/>
+                <!-- <field name="company_id" attrs="{'readonly': [('state', '=', 'Repaired')]}"/>  -->
+                <field name="state" invisible="1"/>
+            </xpath>
+            <xpath expr="//div[@class='oe_title']" position="before">
+                <div class="oe_center">
+                    <label for="checklist" string="Check List"/>
+                    <div>
+                        <field name="checklist"/>
+                    </div>
+                </div>
+            </xpath>
+
+
+            <!-- <xpath expr="//field[@name='description']" position="attributes">
+                <attribute name="string">Des</attribute>
+                <attribute name="readonly">[('state', '=', 'Repaired')]</attribute>
+            </xpath> -->
+            <xpath expr="//field[@name='description']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <!-- <xpath expr="//field[@name='owner_user_id']" position="attributes">
+                <attribute name="string">Des</attribute>
+                <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>
+            </xpath> -->
+            <xpath expr="//field[@name='equipment_id']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='request_date']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='done']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='close_date']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='archive']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='maintenance_type']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='maintenance_team_id']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='schedule_date']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='duration']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='priority']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='email_cc']" position="attributes">
+                <!-- <attribute name="string">Des</attribute> -->
+                <!--                    <attribute name="attrs">{'readonly': [('state', '=', 'Repaired')]}</attribute>-->
+                <attribute name="readonly">state == 'Repaired'</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='archive_equipment_request']" position="after">
+                <!--                    <button string="Move To In Progress" type="object" name="in_new_requestToprogress" attrs="{'invisible': [('stage_id', 'in', [2,3,4])]}"/>-->
+                <!--                    <button string="Move To In Progress" type="object" name="in_new_requestToprogress" invisible="stage_id in [2,3,4]"/>-->
+                <!--                    <button string="Create Move" type="object" name="move_to_next_stage" attrs="{'invisible': [('stage_id', 'in', [1,3,4])]}"/>-->
+                <!--                    <button string="Create Move" type="object" name="move_to_next_stage" invisible="stage_id in [1,2,3]"/>-->
+<!--                <button string="Create Move" type="object" name="move_to_next_stage"-->
+<!--                        invisible="stage != 'repaired'"/>-->
+
+            </xpath>
+            <xpath expr="//form" position="attributes">
+                <!--                    <attribute name="edit">{'readonly': [('stage_id.id', '=', 2)]}</attribute>-->
+                <attribute name="readonly">stage_id.id == 2</attribute>
+            </xpath>
+
+            <!--               <xpath expr="//sheet" position="inside">-->
+            <!--                    <notebook>-->
+            <!--                        &lt;!&ndash; First Page &ndash;&gt;-->
+            <!--                        <page string="Spare Parts" name="page1">-->
+            <!--                            <field name="sparepart_ids" options="{'editable_bottom': true}">-->
+            <!--                                <tree string="SpareParts Order Lines" editable="bottom">-->
+            <!--&lt;!&ndash;                                    <field name="product_id" attrs="{'readonly': [('parent.state', '=', 'Repaired')]}"/>&ndash;&gt;-->
+            <!--                                    <field name="product_id" readonly="parent.state == 'Repaired'"/>-->
+            <!--                                    <field name="from_location_id" readonly="1"/>-->
+            <!--                                    <field name="to_location_id" readonly="1"/>-->
+            <!--&lt;!&ndash;                                    <field name="Qty" attrs="{'readonly': [('parent.state', '=', 'Repaired')]}"/>&ndash;&gt;-->
+            <!--                                    <field name="Qty" readonly="parent.state == 'Repaired'"/>-->
+            <!--&lt;!&ndash;                                    <field name="uom_id" attrs="{'readonly': [('parent.state', '=', 'Repaired')]}"/>&ndash;&gt;-->
+            <!--                                    <field name="uom_id" readonly="parent.state == 'Repaired'"/>-->
+            <!--&lt;!&ndash;                                    <field name="act_Qty" attrs="{'readonly': [('parent.state', '=', 'Repaired')]}"/>&ndash;&gt;-->
+            <!--                                    <field name="act_Qty" readonly="parent.state == 'Repaired'"/>-->
+            <!--                                    <button name="open_corresponding_move" type="object" string="Product Moves" class="oe_stat_button" icon="fa-exchange" />-->
+            <!--                                </tree>-->
+            <!--                            </field>-->
+            <!--                        </page>-->
+            <!--&lt;!&ndash;                        <page string="Check List" name="page2" attrs="{'invisible': [('checklist', '=', False)]}">&ndash;&gt;-->
+            <!--                        <page string="Check List" name="page2" invisible="checklist == False">-->
+            <!--                            <field name="checklist_ids" options="{'editable_bottom': true}">-->
+            <!--                                <tree string="Check List Order Lines" editable="bottom">-->
+            <!--                                    <field name="maintenance_equipment_id"/>-->
+            <!--                                    -->
+            <!--                                    <field name="description"/>-->
+            <!--                                    <field name="temperature"/>-->
+            <!--                                    <field name="pr_bar"/>-->
+            <!--                                    <field name="remarks"/>-->
+            <!--                                    <field name="ohter_infor"/>-->
+            <!--                                    <field name="state"/>-->
+            <!--                                </tree>-->
+            <!--                            </field>-->
+            <!--                        </page>-->
+
+            <!--                        -->
+            <!--                    </notebook>-->
+            <!--                </xpath>-->
+            <xpath expr="//notebook" position="inside">
+                <!--                    <notebook>-->
+                <!-- First Page -->
+                <page string="Spare Parts" name="page1">
+                    <field name="sparepart_ids" options="{'editable_bottom': true}">
+                        <tree string="SpareParts Order Lines" editable="bottom">
+                            <!--                                    <field name="product_id" attrs="{'readonly': [('parent.state', '=', 'Repaired')]}"/>-->
+                            <field name="product_id" readonly="parent.state == 'Repaired'"/>
+                            <field name="from_location_id" readonly="1"/>
+                            <field name="to_location_id" readonly="1"/>
+                            <!--                                    <field name="Qty" attrs="{'readonly': [('parent.state', '=', 'Repaired')]}"/>-->
+                            <field name="Qty" readonly="parent.state == 'Repaired'"/>
+                            <!--                                    <field name="uom_id" attrs="{'readonly': [('parent.state', '=', 'Repaired')]}"/>-->
+                            <field name="uom_id" readonly="parent.state == 'Repaired'"/>
+                            <!--                                    <field name="act_Qty" attrs="{'readonly': [('parent.state', '=', 'Repaired')]}"/>-->
+                            <field name="act_Qty" readonly="parent.state == 'Repaired'" column_invisible="True"/>
+                            <field name="cost" readonly="parent.state == 'Repaired'"/>
+                            <field name="total_cost" readonly="parent.state == 'Repaired'"/>
+
+                            <button name="open_corresponding_move" type="object" string="Product Moves"
+                                    class="oe_stat_button" icon="fa-exchange"/>
+                        </tree>
+                    </field>
+                </page>
+                <!--                        <page string="Check List" name="page2" attrs="{'invisible': [('checklist', '=', False)]}">-->
+                <page string="Check List" name="page2" invisible="checklist == False">
+                    <field name="checklist_ids" options="{'editable_bottom': true}">
+                        <tree string="Check List Order Lines" editable="bottom">
+                            <!--                                    <field name="maintenance_equipment_id"/>-->
+                            <field name="description"/>
+                            <!--                                    <field name="temperature"/>-->
+                            <!--                                    <field name="pr_bar"/>-->
+                            <field name="remarks"/>
+                            <field name="ohter_infor"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                </page>
+
+
+                <!--                    </notebook>-->
+            </xpath>
+        </field>
+    </record>
+    <!-- </data> -->
+</odoo>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Invoice Approvals Form view -->
+    <record id="invoice_approvals_form_view" model="ir.ui.view">
+        <field name="name">invoice.approvals.form</field>
+        <field name="model">invoice.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="companies_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="discount_approval" widget='radio'/>
+                            <field name="minimum_percent" invisible="discount_approval != 'base'"/>
+                            <field name="minimum_amount" invisible="discount_approval != 'amount base'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="approval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="approver_ids" widget="many2many_tags"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Invoice Approvals Tree view -->
+    <record id="invoice_approvals_tree_view" model="ir.ui.view">
+        <field name="name">invoice.approvals.tree</field>
+        <field name="model">invoice.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="minimum_percent"/>
+                <field name="minimum_amount"/>
+                <field name="companies_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Window Action for which is called in the menu = Invoice Approval Configuration -->
+    <record id="invoice_approvals_action" model="ir.actions.act_window">
+        <field name="name">invoice Bill Approval Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoice.approvals</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a New invoice Bill Approval
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_invoice_approvals"
+            name="invoice bill Approval Configuration"
+            parent="account.menu_finance_configuration"
+            action="invoice_approvals_action"
+            sequence="50"/>
+
+    <!-- Account Move Inherit -->
+    <record id="account_move_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="invoice_approval_id" invisible="1"/>
+                <field name="level_of_approval_needed" invisible="1"/>
+                <field name="levels_approved" invisible="1"/>
+                <field name="all_level_approved" invisible="1"/>
+                <field name="l1_invoice_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l2_invoice_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l3_invoice_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l1_invoice_approved_id" invisible="1"/>
+                <field name="l2_invoice_approved_id" invisible="1"/>
+                <field name="l3_invoice_approved_id" invisible="1"/>
+                <field name="show_first" invisible="1"/>
+                <field name="show_second" invisible="1"/>
+                <field name="show_third" invisible="1"/>
+                <field name="is_level_one" invisible="1"/>
+                <field name="is_level_two" invisible="1"/>
+                <field name="is_level_three" invisible="1"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="approve_first_discount" string="First Approve" type="object" class="oe_highlight"
+                        invisible="show_first == False or move_type != 'out_invoice'"/>
+                <button name="approve_second_discount" string="Second Approve" type="object" class="oe_highlight"
+                        invisible="show_second == False or move_type != 'out_invoice'"/>
+                <button name="approve_third_discount" string="Third Approve" type="object" class="oe_highlight"
+                        invisible="show_third == False or move_type != 'out_invoice'"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+
+
+                <page name="discount_approve" string="Invoice Approvers"
+                      invisible="invoice_approval_id == False or move_type != 'out_invoice'">
+                <group string="Level 1 Approval" invisible="is_level_one == False or move_type != 'out_invoice'">
+                        <group>
+                            <field name="l1_invoice_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l1_invoice_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                <group string="Level 2 Approval" invisible="is_level_two == False or move_type != 'out_invoice'">
+                        <group>
+                            <field name="l2_invoice_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l2_invoice_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                <group string="Level 3 Approval" invisible="is_level_three == False or move_type != 'out_invoice'">
+                        <group>
+                            <field name="l3_invoice_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l3_invoice_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

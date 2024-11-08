@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vendor Approvals Form view -->
+    <record id="vendorr_approvals_form_view" model="ir.ui.view">
+        <field name="name">vendorr.approvals.form</field>
+        <field name="model">vendorr.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="vendorr_companies_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="vendorr_discount_approval" widget='radio'/>
+                            <field name="vendorr_minimum_percent" invisible="vendorr_discount_approval != 'base'"/>
+                            <field name="vendorr_minimum_amount" invisible="vendorr_discount_approval != 'amount base'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="vendorr_approval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="vendorr_approver_ids" widget="many2many_tags"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vendor Approvals Tree view -->
+    <record id="vendorr_approvals_tree_view" model="ir.ui.view">
+        <field name="name">vendorr.approvals.tree</field>
+        <field name="model">vendorr.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="vendorr_minimum_percent"/>
+                <field name="vendorr_minimum_amount"/>
+                <field name="vendorr_companies_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Window Action for which is called in the menu = Vendor Approval Configuration -->
+    <record id="vendorr_approvals_action" model="ir.actions.act_window">
+        <field name="name">Vendor Approval Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vendorr.approvals</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a New Vendor Approval
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_vendorr_approvals"
+            name="Vendor Approval Configuration"
+            parent="account.menu_finance_configuration"
+            action="vendorr_approvals_action"
+            sequence="45"/>
+
+    <!-- Account Move Inherit -->
+    <record id="account_move_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="in_vendorr_approval_id" invisible="1"/>
+                <field name="level_of_vendorr_approval_needed" invisible="1"/>
+                <field name="vendorr_levels_approved" invisible="1"/>
+                <field name="vendorr_all_level_approved" invisible="1"/>
+                <field name="l1_in_vendorr_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l2_in_vendorr_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l3_in_vendorr_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l1_in_vendorr_approved_id" invisible="1"/>
+                <field name="l2_in_vendorr_approved_id" invisible="1"/>
+                <field name="l3_in_vendorr_approved_id" invisible="1"/>
+                <field name="vendorr_show_first" invisible="1"/>
+                <field name="vendorr_show_second" invisible="1"/>
+                <field name="vendorr_show_third" invisible="1"/>
+                <field name="vendorr_is_level_one" invisible="1"/>
+                <field name="vendorr_is_level_two" invisible="1"/>
+                <field name="vendorr_is_level_three" invisible="1"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="vendorr_approve_first_discount" string="First Approve" type="object" class="oe_highlight"
+                        invisible="vendorr_show_first == False or move_type != 'in_invoice'"/>
+                <button name="vendorr_approve_second_discount" string="Second Approve" type="object" class="oe_highlight"
+                        invisible="vendorr_show_second == False or move_type != 'in_invoice'"/>
+                <button name="vendorr_approve_third_discount" string="Third Approve" type="object" class="oe_highlight"
+                        invisible="vendorr_show_third == False or move_type != 'in_invoice'"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="vendorr_discount_approve" string="Vendor Note Approvers"
+                      invisible="in_vendorr_approval_id == False or move_type != 'in_invoice'">
+                    <group string="Level 1 Approval" invisible="vendorr_is_level_one == False or move_type != 'in_invoice'">
+                        <group>
+                            <field name="l1_in_vendorr_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l1_in_vendorr_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Level 2 Approval" invisible="vendorr_is_level_two == False or move_type != 'in_invoice'">
+                        <group>
+                            <field name="l2_in_vendorr_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l2_in_vendorr_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Level 3 Approval" invisible="vendorr_is_level_three == False or move_type != 'in_invoice'">
+                        <group>
+                            <field name="l3_in_vendorr_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l3_in_vendorr_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

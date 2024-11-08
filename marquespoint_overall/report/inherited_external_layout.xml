@@ -1,0 +1,118 @@
+<odoo>
+    <data>
+        <template id="web.external_layout_standard">
+            <t t-name="web.external_layout_standard">
+                <div t-attf-class="header border-bottom o_company_#{company.id}_layout" width="100%"
+                     t-att-style="report_header_style">
+                    <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                        <tr>
+                            <td style="padding-top:40px; text-align:left;">
+                                <strong>
+                                    <h2 t-esc="res_company.name"/>
+                                </strong>
+                            </td>
+                            <td style="padding-top:10px;">
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                     style="max-height: 80px;" alt="Logo"/>
+                            </td>
+                            <td style="padding-top:40px; text-align:right;">
+                                <strong>
+                                    <h2 t-esc="res_company.name_arabic"/>
+                                </strong>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+                     t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+                     t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                     t-att-data-oe-lang="o and o.env.context.get('lang')">
+                    <div class="pt-5">
+                        <!-- This div ensures that the address is not cropped by the header. -->
+                        <t t-call="web.address_layout"/>
+                    </div>
+                    <t t-out="0"/>
+                </div>
+
+                <div t-attf-class="footer border-top border-bottom" width="100%" style="font-size:12px;">
+                    <table class="table table-sm table-borderless text-center" width="100%"
+                           style="padding:5px !important; margin:5px !important;">
+                        <tr>
+                            <td style="text-align:left;">
+                                <img src="/marquespoint_overall/static/description/location.png"
+                                     style="height:20px; width:20px; margin-right:10px;"/>
+                                <!--                                <span>Office no. 101 &amp; 102, The V Building, Al Barsha South Arjan, Dubai, UAE</span>-->
+                                <span>Uniestate Building, Oman Street, Ras Al Khaimah</span>
+                            </td>
+                            <td style="text-align:center;">
+                                <img src="/marquespoint_overall/static/description/phone.png"
+                                     style="height:20px; width:20px; margin-right:10px;"/>
+                                <span>800-776-776</span>
+                            </td>
+                            <td style="text-align:right;">
+                                <img src="/marquespoint_overall/static/description/global.png"
+                                     style="height:20px; width:20px; margin-right:10px;"/>
+                                <span>http://www.uniestate.com</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <!--        This is default header and footers-->
+        <!--        <template>-->
+        <!--            <t t-name="web.external_layout_standard">-->
+        <!--                <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">-->
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-3 mb4">-->
+        <!--                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;"-->
+        <!--                                 alt="Logo"/>-->
+        <!--                        </div>-->
+        <!--                        <div class="col-9 text-end" style="margin-top:22px;" t-field="company.report_header"-->
+        <!--                             name="moto"/>-->
+        <!--                    </div>-->
+        <!--                    <div t-if="company.logo or company.report_header" class="row zero_min_height">-->
+        <!--                        <div class="col-12">-->
+        <!--                            <div style="border-bottom: 1px solid black;"/>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                    <div class="row">-->
+        <!--                        <div class="col-6" name="company_address">-->
+        <!--                            <span t-if="company.company_details" t-field="company.company_details"/>-->
+        <!--                            <span t-else="" t-field="company.partner_id"-->
+        <!--                                  t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+
+        <!--                <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"-->
+        <!--                     t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"-->
+        <!--                     t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"-->
+        <!--                     t-att-data-oe-lang="o and o.env.context.get('lang')">-->
+        <!--                    <div class="pt-5">-->
+        <!--                        &lt;!&ndash; This div ensures that the address is not cropped by the header. &ndash;&gt;-->
+        <!--                        <t t-call="web.address_layout"/>-->
+        <!--                    </div>-->
+        <!--                    <t t-out="0"/>-->
+        <!--                </div>-->
+
+        <!--                <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">-->
+        <!--                    <div class="text-center" style="border-top: 1px solid black;">-->
+        <!--                        <ul class="list-inline mb4">-->
+        <!--                            <div t-field="company.report_footer"/>-->
+        <!--                        </ul>-->
+
+        <!--                        <div t-if="report_type == 'pdf'" class="text-muted">-->
+        <!--                            Page:-->
+        <!--                            <span class="page"/>-->
+        <!--                            /-->
+        <!--                            <span class="topage"/>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </t>-->
+        <!--        </template>-->
+    </data>
+</odoo>

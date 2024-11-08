@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    sales.approvals Form view -->
+    <record id="sales_approvals_form_view" model="ir.ui.view">
+        <field name="name">sales.approvals.form</field>
+        <field name="model">sales.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="name"/>
+                            <field name="companies_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="discount_approval" widget="radio"/>
+                            <field name="minimum_percent" invisible="discount_approval != 'base'"/>
+                            <field name="maximum_percent" invisible="discount_approval != 'base'"/>
+                            <field name="minimum_amount" invisible="discount_approval != 'amount base'"/>
+                            <field name="maximum_amount" invisible="discount_approval != 'amount base'"/>
+                            <field name="minimum_discount" invisible="discount_approval != 'discount'"/>
+                            <field name="maximum_discount" invisible="discount_approval != 'discount'"/>
+                            <!--                                <field name="discount_approval" widget="radio"/>-->
+                            <!--                                <field name="minimum_percent" attrs="{'invisible': [('discount_approval', '!=', 'base')]}"/>-->
+                            <!--                                <field name="maximum_percent" attrs="{'invisible': [('discount_approval', '!=', 'base')]}"/>-->
+                            <!--                                <field name="minimum_amount" attrs="{'invisible': [('discount_approval', '!=', 'amount base')]}"/>-->
+                            <!--                                <field name="maximum_amount" attrs="{'invisible': [('discount_approval', '!=', 'amount base')]}"/>-->
+                        </group>
+                    </group>
+                    <group>
+                        <label for="sale_domain" string="Apply Domain to"/>
+                         <div>
+                             <field name="sale_domain" widget="domain" options="{'model': 'sale.order'}"/>
+                         </div>
+                    </group>
+
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="sapproval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="approver_ids" widget="many2many_tags"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--    sales.approvals Tree view -->
+    <record id="sales_approvals_tree_view" model="ir.ui.view">
+        <field name="name">sales.approvals.tree</field>
+        <field name="model">sales.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sequence" widget="handle"/>
+
+                <field name="minimum_percent"/>
+                <field name="minimum_amount"/>
+                <field name="companies_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Window Action for which is call in the menue= Discount Approval Configuration -->
+    <record id="sales_approvals_action" model="ir.actions.act_window">
+        <field name="name">Approval Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sales.approvals</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a New Approval
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_sales_approvals"
+            name="Approval Configuration"
+            parent="sale.menu_sale_config"
+            action="sales_approvals_action"
+            sequence="50"/>
+
+    <!--    sale.order inherit-->
+    <record id="sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="sale_approval_id" invisible="1"/>
+                <field name="level_of_approval_needed" invisible="1"/>
+                <field name="levels_approved" invisible="1"/>
+                <field name="all_level_approved" invisible="1"/>
+                <field name="l1_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l2_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l3_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l1_sale_approved_id" invisible="1"/>
+                <field name="l2_sale_approved_id" invisible="1"/>
+                <field name="l3_sale_approved_id" invisible="1"/>
+                <field name="show_first" invisible="1"/>
+                <field name="show_second" invisible="1"/>
+                <field name="show_third" invisible="1"/>
+                <field name="is_level_one" invisible="1"/>
+                <field name="is_level_two" invisible="1"/>
+                <field name="is_level_three" invisible="1"/>
+                <field name="is_correct_user" invisible="1"/>
+                <field name="pending_flag" invisible="1"/>
+
+                <!--                <field name="sale_approval_id"/>-->
+                <!--                <field name="level_of_approval_needed"/>-->
+                <!--                <field name="levels_approved"/>-->
+                <!--                <field name="all_level_approved"/>-->
+                <!--                <field name="l1_sale_approver_ids" widget="many2many_tags"/>-->
+                <!--                <field name="l2_sale_approver_ids" widget="many2many_tags"/>-->
+                <!--                <field name="l3_sale_approver_ids" widget="many2many_tags"/>-->
+                <!--                <field name="l1_sale_approved_id"/>-->
+                <!--                <field name="l2_sale_approved_id"/>-->
+                <!--                <field name="l3_sale_approved_id"/>-->
+                <!--                <field name="show_first"/>-->
+                <!--                <field name="show_second"/>-->
+                <!--                <field name="show_third"/>-->
+                <!--                <field name="is_level_one"/>-->
+                <!--                <field name="is_level_two"/>-->
+                <!--                <field name="is_level_three"/>-->
+
+            </xpath>
+            <!--            <xpath expr="//field[@name='state']" position="replace">-->
+            <!--                <field name="state" widget="statusbar" statusbar_visible="draft,sent,sale"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//button[@name='action_draft']" position="replace">
+                <!--                <button name="action_draft" attrs="{'invisible': ['|', ('state', 'not in', ['pending_approval', 'approved', 'cancel']), ('is_correct_user', '=', False)]}" type="object" string="Set to Quotation" data-hotkey="w"/>-->
+                <button name="action_draft"
+                        invisible="state in ('pending_approval', 'approved', 'sale') or is_correct_user == False"
+                        type="object" string="Set to Quotation" data-hotkey="w"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="readonly">state in ('pending_approval', 'approved')</attribute>
+                <!--                <attribute name="attrs">{'readonly': [('state', 'in', ('pending_approval', 'approved'))]}</attribute>-->
+            </xpath>
+            <!--            <xpath expr="//field[@name='project']" position="attributes">-->
+            <!--                <attribute name="readonly">state in ('pending_approval', 'approved')</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='building']" position="attributes">-->
+            <!--                <attribute name="readonly">state in ('pending_approval', 'approved')</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='floor']" position="attributes">-->
+            <!--                <attribute name="readonly">state in ('pending_approval', 'approved')</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='unit']" position="attributes">-->
+            <!--                <attribute name="readonly">state in ('pending_approval', 'approved')</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='date_order']" position="replace">-->
+            <!--                <div class="o_td_label" groups="base.group_no_one"-->
+            <!--                     attrs="{'invisible': [('state', 'in', ['sale'])]}">-->
+            <!--                    <label for="date_order" string="Quotation Date"/>-->
+            <!--                </div>-->
+            <!--                <field name="date_order" nolabel="1" groups="base.group_no_one"-->
+            <!--                       attrs="{'invisible': [('state', 'in', ['sale'])]}"/>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='date_order']" position="replace">-->
+            <!--                <div class="o_td_label" attrs="{'invisible': [('state', 'not in', ['sale'])]}">-->
+            <!--                    <label for="date_order" string="Order Date"/>-->
+            <!--                </div>-->
+            <!--                <field name="date_order" attrs="{'invisible': [('state', 'not in', ['sale'])]}" nolabel="1"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//group[@name='order_details']" position="replace">
+                <!--                <group name="order_details">-->
+                <!--&lt;!&ndash;                    <field name="validity_date" attrs="{'readonly': [('state', 'in', ('pending_approval', 'approved'))]}"/>&ndash;&gt;-->
+                <!--                <field name="validity_date" readonly="state in ('pending_approval', 'approved')"/>-->
+                <!--&lt;!&ndash;                <div class="o_td_label" groups="base.group_no_one"&ndash;&gt;-->
+                <!--&lt;!&ndash;                     attrs="{'invisible': [('state', 'in', ['sale'])]}">&ndash;&gt;-->
+                <!--                <div class="o_td_label" groups="base.group_no_one"-->
+                <!--                     invisible="state in ['sale']">-->
+                <!--                    <label for="date_order" string="Quotation Date"/>-->
+                <!--                </div>-->
+                <!--                <field name="date_order" nolabel="1" groups="base.group_no_one"-->
+                <!--                       invisible="state in ['sale']" readonly="state in ('pending_approval', 'approved')"/>-->
+                <!--&lt;!&ndash;                       attrs="{'invisible': [('state', 'in', ['sale'])], 'readonly': [('state', 'in', ('pending_approval', 'approved'))]}"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;                <div class="o_td_label" attrs="{'invisible': [('state', 'not in', ['sale'])]}">&ndash;&gt;-->
+                <!--                <div class="o_td_label" invisible="state not in ['sale']">-->
+                <!--                    <label for="date_order" string="Order Date"/>-->
+                <!--                </div>-->
+                <!--&lt;!&ndash;                <field name="date_order" attrs="{'invisible': [('state', 'not in', ['sale'])]}" nolabel="1"/>&ndash;&gt;-->
+                <!--                <field name="date_order" invisible="state not in ['sale']" nolabel="1"/>-->
+                <!--                <field name="show_update_pricelist" invisible="1"/>-->
+                <!--                <label for="pricelist_id" groups="product.group_product_pricelist"/>-->
+                <!--                <div groups="product.group_product_pricelist" class="o_row">-->
+                <!--                    <field name="pricelist_id" options="{'no_open':True,'no_create': True}"/>-->
+                <!--                    <button name="action_update_prices" type="object"-->
+                <!--                            string=" Update Prices"-->
+                <!--                            help="Recompute all prices based on this pricelist"-->
+                <!--                            class="btn-link mb-1 px-0" icon="fa-refresh"-->
+                <!--                            confirm="This will update all unit prices based on the currently set pricelist."-->
+                <!--                            invisible="show_update_pricelist == False or state in ['sale', 'done', 'cancel']"/>-->
+                <!--&lt;!&ndash;                            attrs="{'invisible': ['|', ('show_update_pricelist', '=', False), ('state', 'in', ['sale', 'done', 'cancel'])]}"/>&ndash;&gt;-->
+                <!--                </div>-->
+                <!--                <field name="company_id" invisible="1"/>-->
+                <!--                <field name="currency_id" invisible="1"/>-->
+                <!--                <field name="pricelist_id" invisible="1" groups="!product.group_product_pricelist"/>-->
+                <!--                <field name="tax_country_id" invisible="1"/>-->
+                <!--                <field name="payment_term_id" options="{'no_open':True,'no_create': True}"/>-->
+                <!--                </group>-->
+                <group name="order_details">
+                    <!--                        <field name="validity_date" invisible="state == 'sale'" readonly="state in ['cancel', 'sale']"/>-->
+                    <field name="validity_date" readonly="state in ('pending_approval', 'approved')"/>
+                    <div class="o_td_label" groups="base.group_no_one"
+                         invisible="state in ['sale']">
+                        <label for="date_order" string="Quotation Date"/>
+                    </div>
+                    <field name="date_order" nolabel="1" groups="base.group_no_one"
+                           invisible="state in ['sale']" readonly="state in ('pending_approval', 'approved')"/>
+                    <!--                       attrs="{'invisible': [('state', 'in', ['sale'])], 'readonly': [('state', 'in', ('pending_approval', 'approved'))]}"/>-->
+                    <!--                <div class="o_td_label" attrs="{'invisible': [('state', 'not in', ['sale'])]}">-->
+                    <div class="o_td_label" invisible="state not in ['sale']">
+                        <label for="date_order" string="Order Date"/>
+                    </div>
+                    <!--                <field name="date_order" attrs="{'invisible': [('state', 'not in', ['sale'])]}" nolabel="1"/>-->
+                    <field name="date_order" invisible="state not in ['sale']" nolabel="1"/>
+                    <!--                        <div class="o_td_label" groups="base.group_no_one" invisible="state in ['sale', 'cancel']">-->
+                    <!--                            <label for="date_order" string="Quotation Date"/>-->
+                    <!--                        </div>-->
+                    <!--                        <field name="date_order" nolabel="1" groups="base.group_no_one" invisible="state in ['sale', 'cancel']" readonly="state in ['cancel', 'sale']"/>-->
+                    <!--                        <div class="o_td_label" invisible="state in ['draft', 'sent']">-->
+                    <!--                            <label for="date_order" string="Order Date"/>-->
+                    <!--                        </div>-->
+                    <!--                        <field name="date_order" invisible="state in ['draft', 'sent']" readonly="state in ['cancel', 'sale']" nolabel="1"/>-->
+                    <field name="has_active_pricelist" invisible="1"/>
+                    <field name="show_update_pricelist" invisible="1"/>
+                    <label for="pricelist_id"
+                           groups="product.group_product_pricelist"
+                           invisible="not has_active_pricelist"/>
+                    <div groups="product.group_product_pricelist"
+                         class="o_row"
+                         invisible="not has_active_pricelist">
+                        <field name="pricelist_id" options="{'no_open':True,'no_create': True}"
+                               readonly="state in ['cancel', 'sale']"/>
+                        <button name="action_update_prices" type="object"
+                                string=" Update Prices"
+                                help="Recompute all prices based on this pricelist"
+                                class="btn-link mb-1 px-0" icon="fa-refresh"
+                                confirm="This will update the unit price of all products based on the new pricelist."
+                                invisible="not show_update_pricelist or state in ['sale', 'cancel']"/>
+                    </div>
+                    <field name="country_code" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="pricelist_id" invisible="1" readonly="state in ['cancel', 'sale']"
+                           groups="!product.group_product_pricelist"/>
+                    <field name="tax_country_id" invisible="1"/>
+                    <field name="tax_calculation_rounding_method" invisible="1"/>
+                    <field name="payment_term_id" options="{'no_open': True, 'no_create': True}"/>
+                </group>
+            </xpath>
+            <!--            <xpath expr="//field[@name='validity_date']" position="attributes">-->
+            <!--                <attribute name="attrs">{'readonly': [('state', 'in', ('pending_approval', 'approved'))]}</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='date_order']" position="attributes">-->
+            <!--                <attribute name="attrs">{'readonly': [('state', 'in', ('pending_approval', 'approved'))],-->
+            <!--                    'invisible': [('state', 'not in', ['sale'])]}</attribute>-->
+            <!--            </xpath>-->
+
+            <xpath expr="//field[@name='pricelist_id']" position="attributes">
+                <!--                <attribute name="attrs">{'readonly': [('state', 'in', ('pending_approval', 'approved'))]}</attribute>-->
+                <attribute name="readonly">state in ('pending_approval', 'approved')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']" position="attributes">
+                <!--                <attribute name="attrs">{'readonly': [('state', 'in', ('pending_approval', 'approved'))]}</attribute>-->
+                <attribute name="readonly">state in ('pending_approval', 'approved')</attribute>
+            </xpath>
+            <!--            <xpath expr="//field[@name='for_sale']" position="attributes">-->
+            <!--                <attribute name="readonly">state in ('pending_approval', 'approved')</attribute>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='for_rent']" position="attributes">-->
+            <!--                <attribute name="readonly">state in ('pending_approval', 'approved')</attribute>-->
+            <!--            </xpath>-->
+            <xpath expr="//header" position="inside">
+                <button name="approve_first_discount" string="First Approve" type="object" class="oe_highlight"
+                        invisible="show_first == False"/>
+                <!--                        attrs="{'invisible': [('show_first', '=', False)]}"/>-->
+                <button name="submit_for_approval" string="Submit For Approval" type="object" class="oe_highlight"
+                        invisible="state != 'draft'"/>
+                        invisible="state not in ('draft','sent', 'booked')"/>
+                <!--                        attrs="{'invisible': [('state', '!=', 'draft')]}"/>-->
+                <!--                <button name="change_request_view" string="Change Request" type="object" class="oe_highlight"-->
+                <!--                        attrs="{'invisible': [('state', 'not in', ['pending_approval', 'approved'])]}"/>-->
+                <!--                <button name="approve_first_discount" string="First Approve" type="object" class="oe_highlight"-->
+                <!--                        invisible="(show_first == False) or (state != 'pending_approval')"/>-->
+
+                <!--                <button name="approve_second_discount" string="Second Approve" type="object" class="oe_highlight"-->
+                <!--                        attrs="{'invisible': [('show_second', '=', False)]}"/>-->
+                <button name="approve_second_discount" string="Second Approve" type="object" class="oe_highlight"
+                        invisible="show_second == False"/>
+
+                <!--                <button name="approve_third_discount" string="Third Approve" type="object" class="oe_highlight"-->
+                <!--                        attrs="{'invisible': [('show_third', '=', False)]}"/>-->
+                <button name="approve_third_discount" string="Third Approve" type="object" class="oe_highlight"
+                        invisible="show_third == False"/>
+                <button name="action_confirm" data-hotkey="v"
+                        string="Confirm" type="object" context="{'validate_analytic': True}"
+                        invisible="state not in ['approved']"/>
+                <!--                    attrs="{'invisible': [('state', 'not in', ['approved'])]}"/>-->
+                <!--                <button name="approve_third_discount" string="Third Approve" type="object" class="oe_highlight"-->
+                <!--                        invisible="show_third == False"/>-->
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="discount_approve" string="Approvers"
+                      invisible="sale_approval_id == False">
+                    <!--                      attrs="{'invisible': [('sale_approval_id', '=', False)]}">-->
+                    <!--                <page name="discount_approve" string="Discount Approvers"-->
+                    <!--                      invisible="sale_approval_id == False">-->
+                    <!--                    <group string="Level 1 Approval" attrs="{'invisible': [('is_level_one', '=', False)]}">-->
+                    <group string="Level 1 Approval" invisible="is_level_one == False">
+                        <group>
+                            <field name="l1_sale_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l1_sale_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <!--                    <group string="Level 2 Approval" attrs="{'invisible': [('is_level_two', '=', False)]}">-->
+                    <group string="Level 2 Approval" invisible="is_level_two == False">
+                        <group>
+                            <field name="l2_sale_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l2_sale_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+
+                    </group>
+                    <!--                    <group string="Level 3 Approval" attrs="{'invisible': [('is_level_three', '=', False)]}">-->
+                    <group string="Level 3 Approval" invisible="is_level_three == False">
+                        <group>
+                            <field name="l3_sale_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l3_sale_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_approval_filters" model="ir.ui.view">
+        <field name="name">sale.order.approval.filters</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='sales']" position="after">
+                <filter string="Pending Approvals" name="pending_approve" domain="[('state', '=','pending_approval')]"/>
+                <filter string="Approved" name="approve" domain="[('state', '=','approved')]"/>
+            </xpath>
+            <!--            <search>-->
+            <!--                -->
+            <!--            </search>-->
+        </field>
+    </record>
+
+</odoo>

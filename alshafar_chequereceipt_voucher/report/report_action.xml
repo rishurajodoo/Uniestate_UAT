@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Define the Paper Format -->
+        <record id="custom_paperformat_voucher" model="report.paperformat">
+            <field name="name">Voucher Paper Format</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field>   <!-- Top margin in mm -->
+            <field name="margin_bottom">20</field> <!-- Bottom margin in mm -->
+            <field name="margin_left">10</field>  <!-- Left margin in mm -->
+            <field name="margin_right">10</field> <!-- Right margin in mm -->
+            <field name="header_spacing">10</field> <!-- Space between header and content -->
+            <field name="dpi">90</field> <!-- Dots per inch for printing -->
+        </record>
+        
+        
+        
+        <record id="cheque_receipt_voucher_id" model="ir.actions.report">
+            <field name="name">Cheque Receipt Voucher</field>
+            <field name="model">pdc.payment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">alshafar_chequereceipt_voucher.receipt_temp_id</field>
+            <field name="report_file">alshafar_chequereceipt_voucher.receipt_temp_id</field>
+            <field name="binding_model_id" ref="model_pdc_payment"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="custom_paperformat_voucher"/>
+        </record>
+
+        <record id="cheque_receipt_voucher_payment_id" model="ir.actions.report">
+            <field name="name">Cheque Receipt Voucher</field>
+            <field name="model">account.payment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">alshafar_chequereceipt_voucher.receipt_payment_temp_id</field>
+            <field name="report_file">alshafar_chequereceipt_voucher.receipt_payment_temp_id</field>
+            <field name="binding_model_id" ref="account.model_account_payment"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="custom_paperformat_voucher"/>
+        </record>
+
+    </data>
+</odoo>

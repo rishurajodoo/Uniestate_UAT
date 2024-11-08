@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+        <template id="invoices_report_inherit" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@class='row mt-3 mb-1']" position="after">
+                <div id="invoice_inherit_id" class="row mt-4 mb-4">
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.company_id.company_registry" name="c_registry">
+                        <strong style="color: #ADD8E6;">Trade Licence:</strong>
+                        <p class="m-0" t-field="o.company_id.company_registry"/>
+                    </div>
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.company_id.company_registry" name="c_registry">
+                        <strong style="color: #ADD8E6;">TRN:</strong>
+                        <p class="m-0" t-field="o.company_id.vat"/>
+                    </div>
+                </div>
+
+            </xpath>
+        </template>
+    </data>
+</odoo>

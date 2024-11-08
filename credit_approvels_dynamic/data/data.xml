@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <!-- Activity Type for Purchase Discount Approval -->
+        <record id="notification_discount_credit_approval" model="mail.activity.type">
+            <field name="name">Customer Credit Note Approval</field>
+            <field name="icon">fa-pencil-square-o</field>
+            <field name="delay_count">5</field>
+            <field name="res_model">account.move</field>
+        </record>
+
+    </data>
+</odoo>

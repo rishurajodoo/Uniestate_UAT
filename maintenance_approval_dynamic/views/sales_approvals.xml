@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    maintenance.approvals Form view -->
+    <record id="maintenance_approvals_form_view" model="ir.ui.view">
+        <field name="name">maintenance.approvals.form</field>
+        <field name="model">maintenance.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="sequence"/>
+
+                            <field name="name"/>
+                            <field name="companies_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="maintenance_team_id" options="{'no_open':True,'no_create': True}"/>
+                        </group>
+                    </group>
+                     <group>
+                        <label for="maintenance_domain" string="Apply Domain to"/>
+                         <div>
+                             <field name="maintenance_domain" widget="domain" options="{'model': 'maintenance.request'}"/>
+                         </div>
+                    </group>
+
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="sapproval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="approver_ids" widget="many2many_tags"/>
+                                    <!-- Add other fields as needed -->
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--    maintenance.approvals Tree view -->
+    <record id="maintenance_approvals_tree_view" model="ir.ui.view">
+        <field name="name">maintenance.approvals.tree</field>
+        <field name="model">maintenance.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="sequence" widget="handle"/>
+                <field name="maintenance_team_id" options="{'no_open':True,'no_create': True}"/>
+                <field name="companies_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Window Action for which is call in the menue= Discount Approval Configuration -->
+    <record id="maintenance_approvals_action" model="ir.actions.act_window">
+        <field name="name">Approval Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">maintenance.approvals</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a New Approval
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_maintenance_approvals"
+            name="Approval Configuration"
+            parent="maintenance.menu_maintenance_configuration"
+            action="maintenance_approvals_action"
+            sequence="50"/>
+
+    <!--    sale.order inherit-->
+    <record id="maintenance_order_form_inherit" model="ir.ui.view">
+        <field name="name">maintenance.request.inherit</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='equipment_id']" position="after">
+                <field name="sale_approval_id" invisible="1"/>
+                <field name="level_of_approval_needed" invisible="1"/>
+                <field name="levels_approved" invisible="1"/>
+                <field name="all_level_approved" invisible="1"/>
+                <field name="l1_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l2_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l3_sale_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l1_sale_approved_id" invisible="1"/>
+                <field name="l2_sale_approved_id" invisible="1"/>
+                <field name="l3_sale_approved_id" invisible="1"/>
+                <field name="show_first" invisible="1"/>
+                <field name="show_second" invisible="1"/>
+                <field name="show_third" invisible="1"/>
+                <field name="is_level_one" invisible="1"/>
+                <field name="is_level_two" invisible="1"/>
+                <field name="is_level_three" invisible="1"/>
+                <field name="is_correct_user" invisible="1"/>
+                <field name="pending_flag" invisible="1"/>
+            </xpath>
+            <xpath expr="//button[@name='action_manager_approval']" position="replace">
+                <button type="object" name="action_submit_manager_approval_ext" string="Sent To Manager"
+                        class="oe_highlight"
+                        invisible="is_ecr != True or stage != 'repaired' or is_approve"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <field name="is_approve" invisible="1"/>
+                <field name="approver_user_id" invisible="1"/>
+                <field name="team_manager_id" invisible="1"/>
+                <field name="is_manager_approve" invisible="1"/>
+                <button name="approve_first_discount" string="First Approve" type="object" class="oe_highlight"
+                        invisible="show_first == False"/>
+                <button name="submit_for_approval" string="Submit For Approval" type="object" class="oe_highlight"
+                        invisible="stage not in ['new_req']"/>
+                <button name="approve_second_discount" string="Second Approve" type="object" class="oe_highlight"
+                        invisible="show_second == False"/>
+                <button type="object" name="manager_approval" string="Manager Approval" class="oe_highlight"
+                        invisible="stage != 'repaired' or approver_user_id != team_manager_id or not is_approve or is_ecr != True or is_manager_approve"/>
+                <button name="approve_third_discount" string="Third Approve" type="object" class="oe_highlight"
+                        invisible="show_third == False"/>
+                <button string="Consume Inventory" type="object" name="move_to_next_stage"
+                        invisible="stage != 'repaired'"/>
+                <button string="Move To Repaired" type="object" name="action_move_to_repaired"
+                        invisible="stage not in ['in_progress', 'pending_approval']"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="discount_approve" string="Approvers"
+                      invisible="sale_approval_id == False">
+                    <group string="Level 1 Approval" invisible="is_level_one == False">
+                        <group>
+                            <field name="l1_sale_approver_ids" string="Responsible" force_save="1"
+                                   widget="many2many_tags"/>
+                            <field name="l1_sale_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Level 2 Approval" invisible="is_level_two == False">
+                        <group>
+                            <field name="l2_sale_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l2_sale_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+
+                    </group>
+                    <group string="Level 3 Approval" invisible="is_level_three == False">
+                        <group>
+                            <field name="l3_sale_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l3_sale_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

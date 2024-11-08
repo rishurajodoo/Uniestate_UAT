@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <record id="unit_type_form_id" model="ir.ui.view">
+            <field name="name">Unit Type</field>
+            <field name="model">unit.type</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="_form">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- sub unit type-->
+        <record id="sub_unit_form_id" model="ir.ui.view">
+            <field name="name">Sub Unit</field>
+            <field name="model">sub.unit.type</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="parent_unit_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="unit_type_action_id" model="ir.actions.act_window">
+            <field name="name">Unit Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">unit.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="unit_type_menu_root_id" name="Unit Types" parent="project_customization.config_menu_item_id"/>
+
+        <menuitem id="unit_type_menu_id" name="Unit Type" parent="unit_type_menu_root_id"
+                  action="unit_type_action_id"/>
+
+        <record id="sub_unit_action" model="ir.actions.act_window">
+            <field name="name">Sub Unit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sub.unit.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="sub_unit_type_menu_id" action="sub_unit_action" name="Sub Unit Type" parent="unit_type_menu_root_id"/>
+<!--Amenities-->
+        <record id="amenities_type_form_id" model="ir.ui.view">
+            <field name="name">Amenities</field>
+            <field name="model">property.amenities</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" string="_form">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="amenities_type_action_id" model="ir.actions.act_window">
+            <field name="name">Amenities</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">property.amenities</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="amenities_menu_root_id" name="Amenities" parent="project_customization.config_menu_item_id" action="amenities_type_action_id"/>
+    </data>
+</odoo>

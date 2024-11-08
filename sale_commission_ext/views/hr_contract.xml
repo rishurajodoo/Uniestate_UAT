@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_contract_view_form_inherit_notice_period" model="ir.ui.view">
+        <field name="name">hr.contract.view.form.inherit.notice.period</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='contract_type_id']" position="after">
+                <!-- Makes no sense to display only one possibility -->
+                <field name="notice_period" groups="hr_payroll.group_hr_payroll_user" readonly="is_np_editable == False" />
+                <field name="is_np_editable" groups="hr_payroll.group_hr_payroll_user"/>
+                <field name="notice_period_bool" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

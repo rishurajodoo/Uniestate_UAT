@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+
+        <record id="paper_format_soa_marquis" model="report.paperformat">
+            <field name="name">Statement of Account Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <record id="soa_marquis_report_pdf" model="ir.actions.report">
+            <field name="name">Statement of Account Report</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">statement_of_account_report.soa_marquis_report_temp</field>
+            <field name="report_file">statement_of_account_report.soa_marquis_report_temp</field>
+            <field name="print_report_name">('SOA - %s' % (object.name))</field>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="statement_of_account_report.paper_format_soa_marquis"/>
+        </record>
+
+
+        <!--        <record id="soa_marquis_report_pdf" model="ir.actions.report">-->
+        <!--            <field name="name">Statement of Account Report</field>-->
+        <!--            <field name="model">sale.order</field>-->
+        <!--            <field name="report_type">qweb-pdf</field>-->
+        <!--            <field name="report_name">statement_of_account_report.soa_marquis_report_temp</field>-->
+        <!--            <field name="report_file">statement_of_account_report.soa_marquis_report_temp</field>-->
+        <!--            <field name="print_report_name">('SOA - %s' % (object.name))</field>-->
+        <!--            <field name="binding_model_id" ref="model_sale_order"/>-->
+        <!--            <field name="binding_type">report</field>-->
+        <!--            <field name="paperformat_id" ref="paper_format_soa_marquis"/>-->
+        <!--        </record>-->
+
+    </data>
+</odoo>

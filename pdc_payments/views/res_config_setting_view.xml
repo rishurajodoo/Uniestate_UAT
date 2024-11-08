@@ -1,0 +1,28 @@
+<data>
+    <odoo>
+        <record id="res_config_settings_view_form_inherited" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <h2 style="background-color:#e1e3e6; padding-left:30px">PDC Payment</h2>
+                    <div class="o_settings_container">
+                        <div class="o_setting_box" title="PDC Payment">
+                            <div class="o_setting_right_pane">
+                                <group col="4">
+                                    <field name="pdc_bnk_customer"/>
+                                    <field name="pdc_bnk_vendor"/>
+                                    <field name="pdc_receivable"/>
+                                    <field name="pdc_payable"/>
+                                    <field name="pdc_first_bounce"/>
+                                    <field name="pdc_already_bounce_check"/>
+                                </group>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </odoo>
+</data>

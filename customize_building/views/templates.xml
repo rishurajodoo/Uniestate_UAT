@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="building_form_inherit_id" model="ir.ui.view">
+            <field name="name">Building Form</field>
+            <field name="model">property.building</field>
+            <field name="inherit_id" ref="ol_property_custom.view_building_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='image_1920']" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_show_assets"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-bars"
+                                string="Assets">
+                        </button>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='project_id']" position="after">
+                    <field name="building_type_id"/>
+                </xpath>
+                <xpath expr="//field[@name='number_of_floors']" position="after">
+                    <field name="facility_charges"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

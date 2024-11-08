@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="uniestate_custom_header">
+        <t t-set="company" t-value="user.company_id"/>
+        <div class="header border-bottom" width="100%">
+            <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                    <tr>
+                        <td style="padding-top:40px; text-align:left;">
+                            <strong>
+                                <h2 t-esc="res_company.name"/>
+                            </strong>
+                        </td>
+                        <td style="padding-top:10px;">
+                            <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                 style="max-height: 80px;" alt="Logo"/>
+                        </td>
+                        <td style="padding-top:40px; text-align:right;">
+                            <strong>
+                                <h2 t-esc="res_company.name_arabic"/>
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+            </table>
+        </div>
+    </template>
+
+    <template id="de_partner_ledger_pdf_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page" style="margin-top:-10px;">
+
+                    <t t-foreach="partners" t-as="p">
+                        <div class="text-center">
+                            <h3>
+                                <span t-esc="p.name"/>
+                            </h3>
+                        </div>
+                        <div class="text-center">
+                            <strong>From:&#160;</strong>
+                            <span t-esc="result.start_date.strftime('%d/%m/%Y')"/>
+                            <strong>&#160;To:&#160;</strong>
+                            <span t-esc="result.end_date.strftime('%d/%m/%Y')"/>
+                        </div>
+                        <br/>
+                        <t t-set="foreign_bal" t-value="0"/>
+                        <t t-set="closing_bal" t-value="0"/>
+                        <t t-set="net_balance" t-value="0"/>
+                        <t t-set="open_bal" t-value="0"/>
+                        <t t-foreach="sale" t-as="sa" style="font-size: 13px;" t-if="sa.partner_id.id == p.id ">
+                            <h4>
+                                <t t-esc="sa.name"/>
+                            </h4>
+                            <table class="table table-sm" name="sale_table" style="border-bottom:1px solid black;">
+                                <tr style="border-bottom:1px solid black;">
+                                    <td style="border-bottom:1px solid black;">
+                                        Unit name
+                                    </td>
+                                    <td style="border-bottom:1px solid black;">
+                                        Building Name
+                                    </td>
+                                    <td style="border-bottom:1px solid black;">
+                                        Floor Name
+                                    </td>
+                                    <td style="border-bottom:1px solid black;">
+                                        Project Name
+                                    </td>
+                                    <td style="border-bottom:1px solid black;">
+                                        Sale Order
+                                    </td>
+                                    <td style="border-bottom:1px solid black;">
+                                        Start Date
+                                    </td>
+                                    <td style="border-bottom:1px solid black;">
+                                        End Date
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-bottom:1px solid black;" class="text-left">
+                                        <t t-esc="sa.unit.name"/>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;" class="text-left">
+                                        <t t-esc="sa.building.name"/>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;" class="text-left">
+                                        <t t-esc="sa.floor.name.name"/>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;" class="text-left">
+                                        <t t-esc="sa.project.name"/>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;" class="text-left">
+                                        <t t-esc="sa.name"/>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;" class="text-left">
+                                        <t t-esc="sa.start_date"/>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;" class="text-left">
+                                        <t t-esc="sa.end_date"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-sm" name="account_lines_table"
+                                   style="border-bottom:1px solid black;">
+                                <tr style="border-bottom:1px solid black;">
+                                    <td style="border-bottom:1px solid black;">
+                                        <strong>Date</strong>
+                                    </td>
+                                    <td style="border-bottom:   1px solid black;">
+                                        <strong>Journal</strong>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;">
+                                        <strong>Account</strong>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;">
+                                        <strong>Label</strong>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;" class="text-right">
+                                        <strong>Debit</strong>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;" class="text-right">
+                                        <strong>Credit</strong>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;" class="text-right">
+                                        <strong>Amount In Currency</strong>
+                                    </td>
+                                    <td style="border-bottom:1px solid black;" class="text-right">
+                                        <strong>Balance</strong>
+                                    </td>
+                                </tr>
+                                <tbody>
+                                    <t t-set="amount_currency" t-value="0"/>
+                                    <t t-set="total_debit" t-value="0"/>
+                                    <t t-set="total_credit" t-value="0"/>
+                                    <t t-set="bal" t-value="open_bal"/>
+                                    <t t-foreach="dat" t-as="da" style="font-size: 13px;"
+                                       t-if="da.partner_id.id == p.id and da.move_id.so_ids.id == sa.id or da.move_id.order_id.id == sa.id or da.move_id.pdc_registered_id.order_id.id == sa.id or da.move_id.pdc_bounce_id.order_id.id == sa.id">
+                                        <tr t-foreach="da" t-as="d" style="font-size: 13px;">
+                                            <t t-set="bal" t-value="bal + (d.debit - d.credit)"/>
+                                            <t t-set="total_debit" t-value="total_debit + d.debit"/>
+                                            <t t-set="total_credit" t-value="total_credit + d.credit"/>
+                                            <t t-set="amount_currency" t-value="amount_currency+(d.amount_currency)"/>
+                                            <td style="border-bottom:1px solid black;" class="text-left">
+                                                <span t-esc="d.date" t-options="{'widget': 'date'}"/>
+                                            </td>
+                                            <td style="border-bottom:1px solid black;" class="text-left">
+                                                <span t-esc="d.move_id.name"/>
+                                            </td>
+                                            <td style="border-bottom:1px solid black;" class="text-left">
+                                                <span t-esc="d.journal_id.name"/>
+                                            </td>
+                                            <td style="border-bottom:1px solid black;" class="text-left">
+                                                <span t-esc="d.name"/>
+                                            </td>
+                                            <td style="border-bottom:1px solid black;" class="text-right">
+                                                <t t-esc="'{0:,.0f}'.format(int(d.debit))"/>
+                                            </td>
+                                            <td style="border-bottom:1px solid black;" class="text-right">
+                                                <t t-esc="'{0:,.0f}'.format(int(d.credit))"/>
+                                            </td>
+                                            <td style="border-bottom:1px solid black;" class="text-right">
+                                                <span t-field="d.amount_currency"
+                                                   t-options='{"widget": "monetary", "display_currency": d.currency_id}'/>
+                                            </td>
+                                            <td style="border-bottom:1px solid black;" class="text-right">
+                                                <!--                                            <t t-esc="bal"/>-->
+                                                <t t-esc="'{0:,.0f}'.format(int(bal))"/>
+                                            </td>
+                                        </tr>
+
+                                    </t>
+                                    <tr style="border-top:1px solid #000;">
+                                        <td style="border-bottom:1px solid black;font-size:13px;" colspan="4"
+                                            class="text-left">
+                                            <strong>Closing Balance</strong>
+                                        </td>
+                                        <td style="border-bottom:1px solid black;font-size:13px;"
+                                            class="text-right text-nowrap">
+                                            <strong>
+                                                <t t-esc="'{0:,.0f}'.format(int(total_debit))"/>
+                                            </strong>
+                                        </td>
+                                        <td style="border-bottom:1px solid black;font-size:13px;"
+                                            class="text-right text-nowrap">
+                                            <strong>
+                                                <t t-esc="'{0:,.0f}'.format(int(total_credit))"/>
+                                            </strong>
+                                        </td>
+                                        <td style="border-bottom:1px solid black;font-size:13px;"
+                                            class="text-right text-nowrap">
+                                            <strong>
+
+                                            </strong>
+                                        </td>
+                                        <td style="border-bottom:1px solid black;font-size:13px;"
+                                            class="text-right text-nowrap">
+                                            <strong>
+                                                <!--                                            <t t-esc="closing_bal"/>-->
+                                                <!--                                                <t t-esc="'{0:,.0f}'.format(int(closing_bal))"/>-->
+                                                <t t-esc="'{0:,.0f}'.format(int(amount_currency+foreign_bal))"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </t>
+                        <br/>
+                        <br/>
+
+                        <p style="page-break-after: always;"/>
+
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

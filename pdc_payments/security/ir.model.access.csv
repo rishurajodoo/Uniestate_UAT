@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pdc_payment,pdc.payment,model_pdc_payment,base.group_user,1,1,1,1
+access_pdc_payment_wizard,pdc.payment.wizard,model_pdc_payment_wizard,base.group_user,1,1,1,1
+access_pdc_commercial_bank,pdc.commercial.bank,model_pdc_commercial_bank,base.group_user,1,1,1,1
+access_cheque_type,access.cheque.type,model_cheque_type,,1,1,1,1
+access_pdc_recall_wizard,access.pdc.recall.wizard,model_pdc_recall_wizard,,1,1,1,1
+access_pdc_bounce_wizard,access.pdc.bounce.wizard,model_pdc_bounce_wizard,,1,1,1,1

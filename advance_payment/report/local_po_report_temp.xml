@@ -1,0 +1,409 @@
+<odoo>
+    <data>
+        <template id="report_local_po_temp">
+            <t t-call="web.html_container">
+                <!--                <t t-call="advance_payment.local_po_header_footer"/>-->
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                                <tr>
+                                    <td style="text-align:center; background-color:gray; font-size:22px;" colspan="4">
+                                        <strong>Local Purchase Order</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"/>
+                                    <td style="text-align:center; font-size:22px;">
+                                        <strong>LPO No:
+                                            <span t-field="o.name"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;" width="10%">From:</th>
+                                    <th style="text-align:left; border:1px solid black;" width="35%">
+                                        <span t-field="res_company.name"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;" width="10%">To:</th>
+                                    <th style="text-align:left; border:1px solid black;" width="35%">
+                                        <span t-field="o.partner_id.name"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;" width="10%">TRN:</th>
+                                    <th style="text-align:left; border:1px solid black;" width="35%">
+                                        <span t-field="res_company.vat"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;" width="10%">TRN:</th>
+                                    <th style="text-align:left; border:1px solid black;" width="35%">
+                                        <span t-field="o.partner_id.vat"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;" width="10%">P.O Box:</th>
+                                    <th style="text-align:left; border:1px solid black;" width="35%">
+                                        <span t-esc="res_company.zip"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;" width="10%">P.O Box:</th>
+                                    <th style="text-align:left; border:1px solid black;" width="35%">
+                                        <span t-field="o.partner_id.zip"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;" width="10%">Tel:</th>
+                                    <td style="text-align:left; border:1px solid black;" width="35%">
+                                        <span t-esc="res_company.phone"/>
+                                    </td>
+                                    <th style="text-align:left; border:1px solid black;" width="10%">Attn:</th>
+                                    <td style="text-align:left; border:1px solid black;" width="35%">
+                                        <t t-if="o.attendant">
+                                            <span t-field="o.attendant.name"/>
+                                        </t>
+                                        <t t-if="not o.attendant">
+                                            -
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+<!--                                    <th style="text-align:left; border:1px solid black;" width="10%">Fax:</th>-->
+<!--                                    <td style="text-align:left; border:1px solid black;" width="35%">-->
+<!--                                        <span t-esc="res_company.fax_eng"/>-->
+<!--                                    </td>-->
+                                    <th style="text-align:left; border:1px solid black;" width="10%">Tel:</th>
+                                    <td style="text-align:left; border:1px solid black;" width="35%">
+                                        <span t-field="o.partner_id.phone"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;" width="10%">Date:</th>
+                                    <td style="text-align:left; border:1px solid black;" width="35%">
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+                                    </td>
+                                    <th style="text-align:left; border:1px solid black;" width="10%">Pages:</th>
+                                    <td style="text-align:left; border:1px solid black;" width="35%">
+                                        <div>
+                                            <!--                                            <span class="page"/>-->
+                                            <!--                                            /-->
+                                            <!--                                            <span class="topage"/>-->
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align: center; border:1px solid black;">
+                                        <table width="100%">
+                                            <tr>
+                                                <th style="text-align: center; border-right:1px solid black;">
+                                                    Project/Site
+                                                </th>
+                                                <th>
+                                                    <span t-esc="res_company.street"/>
+                                                    <t t-if="res_company.street2">
+                                                        ,
+                                                        <span t-esc="res_company.street2"/>
+                                                    </t>
+                                                    <t t-if="res_company.city">
+                                                        ,
+                                                        <span t-esc="res_company.city"/>
+                                                    </t>
+                                                </th>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-sm table-borderless"
+                                   style="width:100%; border:1px solid black; font-size:14px;">
+                                <tr style="border-top:1px solid black; background-color:gray;">
+                                    <th style="border:1px solid black;">No</th>
+                                    <th style="border-top:1px solid black;">Description</th>
+                                    <th style="border:1px solid black;">Qty</th>
+                                    <th style="border:1px solid black;">Unit</th>
+                                    <th style="border:1px solid black;">Rate</th>
+                                    <th style="border:1px solid black;">Amount in AED</th>
+                                </tr>
+                                <t t-if="o.partner_ref">
+                                    <tr>
+                                        <td style="border-right:1px solid black;"/>
+                                        <td style="border-right:1px solid black;">
+                                            <span t-field="o.partner_ref"/>
+                                        </td>
+                                        <td style="border-right:1px solid black;"/>
+                                        <td style="border-right:1px solid black;"/>
+                                        <td style="border-right:1px solid black;"/>
+                                        <td/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;">
+                                        Following Works as per mention Quotation
+                                    </td>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td/>
+                                </tr>
+                                <t t-set="sr_no" t-value="0"/>
+                                <t t-set="amount_untaxed" t-value="0"/>
+                                <t t-foreach="o.order_line" t-as="line">
+                                    <tr>
+                                        <t t-set="sr_no" t-value="sr_no + 1"/>
+                                        <t t-set="amount_untaxed" t-value="amount_untaxed + line.price_subtotal"/>
+                                        <td style="border-right:1px solid black;">
+                                            <span t-esc="sr_no"/>
+                                        </td>
+                                        <td style="border-right:1px solid black;">
+                                            <span t-esc="line.product_id.name"/>
+                                            (As per attached Quotation)
+                                        </td>
+                                        <td style="border-right:1px solid black;">
+                                            <span t-esc="line.product_qty"/>
+                                        </td>
+                                        <td style="border-right:1px solid black;">
+                                            <span t-esc="line.product_uom.name"/>
+                                        </td>
+                                        <td style="border-right:1px solid black; text-align:right;">
+                                            <span t-esc="line.price_unit"
+                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="line.price_subtotal"
+                                                  t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;">
+                                        <u>
+                                            <strong>Delivery Schedule:</strong>
+                                            <span t-field="o.date_planned"/>
+                                        </u>
+                                        <br/>
+                                        <u>
+                                            <strong>Payment Terms:</strong>
+                                        </u>
+                                        <br/>
+                                        <span t-field="o.payment_term_id.note"/>
+                                        <br/>
+                                        <strong>
+                                            Location:
+                                            <span t-esc="res_company.street"/>
+                                            <t t-if="res_company.city">
+                                                ,
+                                                <span t-esc="res_company.city"/>
+                                            </t>
+                                            <t t-if="res_company.state_id">
+                                                ,
+                                                <span t-esc="res_company.state_id.name"/>
+                                            </t>
+                                        </strong>
+                                        <br/>
+                                        <strong>
+                                            <u>Terms &amp; Conditions</u>
+                                        </strong>
+                                        <br/>
+                                        <span t-field="o.notes"/>
+                                        <br/>
+                                    </td>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;"/>
+                                    <th style="border:1px solid black; text-align:right;" colspan="3">Subtotal</th>
+                                    <td style="border:1px solid black; text-align:right;">
+                                        <span t-esc="amount_untaxed"
+                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;"/>
+                                    <th style="border:1px solid black; text-align:right;" colspan="3">Discount</th>
+                                    <td style="border:1px solid black; text-align:right;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;"/>
+                                    <th style="border:1px solid black; text-align:right;" colspan="3">Price Before
+                                        Tax
+                                    </th>
+                                    <td style="border:1px solid black; text-align:right;">
+                                        <span t-esc="amount_untaxed"
+                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;"/>
+                                    <th style="border:1px solid black; text-align:right;" colspan="3">Vat (5%)</th>
+                                    <td style="border:1px solid black; text-align:right;">
+                                        <span t-esc="o.get_vat_amount()"
+                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                    </td>
+                                </tr>
+                                <t t-set="grand_total" t-value="amount_untaxed + o.get_vat_amount()"/>
+                                <tr>
+                                    <td style="border:1px solid black;"/>
+                                    <th style="border:1px solid black; font-size:12px;">
+                                        <span t-esc="res_company.currency_id.name"/>
+                                        (
+                                        <span t-esc="o.grand_total_in_words(grand_total)"/>
+                                        )
+                                    </th>
+                                    <th style="border:1px solid black; text-align:right;" colspan="3">Grand Total
+                                    </th>
+                                    <th style="border:1px solid black; text-align:right;">
+                                        <span t-esc="grand_total"
+                                              t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="local_po_header_footer">
+            <t t-set="company" t-value="user.company_id"/>
+            <t t-foreach="docs" t-as="o">
+                <div class="header first-page row" style=" border: 1px solid black; margin:8px !important;">
+                    <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                        <tr>
+                            <td colspan="4">
+                                <img src="/advance_payment/static/description/header.png"
+                                     style="height:100px; width:100%;"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center; background-color:gray; font-size:22px;" colspan="4">
+                                <strong>Local Purchase Order</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"/>
+                            <td style="text-align:center; font-size:22px;">
+                                <strong>LPO No:
+                                    <span t-field="o.name"/>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:left; border:1px solid black;" width="10%">From:</th>
+                            <th style="text-align:left; border:1px solid black;" width="35%">
+                                <span t-esc="res_company.name"/>
+                            </th>
+                            <th style="text-align:left; border:1px solid black;" width="10%">To:</th>
+                            <th style="text-align:left; border:1px solid black;" width="35%">
+                                <span t-field="o.partner_id.name"/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="text-align:left; border:1px solid black;" width="10%">TRN:</th>
+                            <th style="text-align:left; border:1px solid black;" width="35%">-</th>
+                            <th style="text-align:left; border:1px solid black;" width="10%">TRN:</th>
+                            <th style="text-align:left; border:1px solid black;" width="35%">-</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align:left; border:1px solid black;" width="10%">P.O Box:</th>
+                            <th style="text-align:left; border:1px solid black;" width="35%">
+                                <span t-esc="res_company.zip"/>
+                            </th>
+                            <th style="text-align:left; border:1px solid black;" width="10%">P.O Box:</th>
+                            <th style="text-align:left; border:1px solid black;" width="35%">
+                                <span t-field="o.partner_id.zip"/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="text-align:left; border:1px solid black;" width="10%">Tel:</th>
+                            <td style="text-align:left; border:1px solid black;" width="35%">
+                                <span t-esc="res_company.phone"/>
+                            </td>
+                            <th style="text-align:left; border:1px solid black;" width="10%">Attn:</th>
+                            <td style="text-align:left; border:1px solid black;" width="35%">
+                                <t t-if="o.attendant">
+                                    <span t-field="o.attendant.name"/>
+                                </t>
+                                <t t-if="not o.attendant">
+                                    -
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+<!--                            <th style="text-align:left; border:1px solid black;" width="10%">Fax:</th>-->
+<!--                            <td style="text-align:left; border:1px solid black;" width="35%">-->
+<!--                                <span t-esc="res_company.fax_eng"/>-->
+<!--                            </td>-->
+                            <th style="text-align:left; border:1px solid black;" width="10%">Tel:</th>
+                            <td style="text-align:left; border:1px solid black;" width="35%">
+                                <span t-field="o.partner_id.phone"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align:left; border:1px solid black;" width="10%">Date:</th>
+                            <td style="text-align:left; border:1px solid black;" width="35%">
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+                            </td>
+                            <th style="text-align:left; border:1px solid black;" width="10%">Pages:</th>
+                            <td style="text-align:left; border:1px solid black;" width="35%">
+                                <div>
+                                    <span class="page"/>
+                                    /
+                                    <span class="topage"/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align: center; border:1px solid black;">
+                                <table width="100%">
+                                    <tr>
+                                        <th style="text-align: center; border-right:1px solid black;">Project/Site</th>
+                                        <th>
+                                            <span t-esc="res_company.street"/>
+                                            <t t-if="res_company.street2">
+                                                ,
+                                                <span t-esc="res_company.street2"/>
+                                            </t>
+                                            <t t-if="res_company.city">
+                                                ,
+                                                <span t-esc="res_company.city"/>
+                                            </t>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <!--                    <div width="100%" style="border:1px solid black;">-->
+                    <!--                        <img src="/advance_payment/static/description/header.png"-->
+                    <!--                             style="height:100px; width:100%;"/>-->
+                    <!--                    </div>-->
+                    <!--                    <h4 class="text-center">LOCAL PURCHASE ORDER</h4>-->
+                </div>
+                <div class="footer">
+                    <table class="table table-sm table-borderless" style="font-size:14px;">
+                        <tr>
+                            <th>
+                                <u>Prepared By</u>
+                            </th>
+                            <th style="text-align:center;">
+                                <u>Accounts Manager</u>
+                            </th>
+                            <th style="text-align:center;">
+                                <u>Managing Director</u>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

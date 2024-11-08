@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Account Move Inherit -->
+    <record id="account_move_approval_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.approval.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="account_approval_id" invisible="1"/>
+                <field name="level_of_approval_needed" invisible="1"/>
+                <field name="levels_approved" invisible="1"/>
+                <field name="all_level_approved" invisible="1"/>
+                <field name="l1_account_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l2_account_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l3_account_approver_ids" widget="many2many_tags" invisible="1"/>
+                <field name="l1_account_approved_id" invisible="1"/>
+                <field name="l2_account_approved_id" invisible="1"/>
+                <field name="l3_account_approved_id" invisible="1"/>
+                <field name="show_first" invisible="1"/>
+                <field name="show_second" invisible="1"/>
+                <field name="show_third" invisible="1"/>
+                <field name="is_level_one" invisible="1"/>
+                <field name="is_level_two" invisible="1"/>
+                <field name="is_level_three" invisible="1"/>
+            </xpath>
+             <xpath expr="//header/button[@name='action_post']" position="replace">
+                <button name="action_post" string="Confirm" class="oe_highlight"
+                        type="object" groups="account.group_account_invoice" data-hotkey="q"
+                        context="{'validate_analytic': True}"
+                        invisible="hide_post_button or move_type == 'entry' or display_inactive_currency_warning or state != 'approved'"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="submit_for_account_approval" string="Submit For Approval" type="object"
+                        class="oe_highlight"
+                        invisible="state != 'draft'"/>
+                <button name="approve_first_discount" string="First Approve" type="object" class="oe_highlight"
+                        invisible="show_first == False"/>
+
+                <button name="approve_second_discount" string="Second Approve" type="object" class="oe_highlight"
+                        invisible="show_second == False"/>
+                <button name="approve_third_discount" string="Third Approve" type="object" class="oe_highlight"
+                        invisible="show_third  == False"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page name="discount_approve" string="Account Approvers" invisible="account_approval_id==False "
+                >
+                    <group string="Level 1 Approval" invisible="is_level_one == False">
+                        <group>
+
+
+                            <field name="l1_account_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l1_account_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Level 2 Approval" invisible="is_level_two == False">
+                        <group>
+                            <field name="l2_account_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l2_account_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Level 3 Approval" invisible="is_level_three == False">
+                        <group>
+                            <field name="l3_account_approver_ids" string="Responsible" widget="many2many_tags"/>
+                            <field name="l3_account_approved_id" string="Approved By" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_invoice_approval_groupby" model="ir.ui.view">
+        <field name="name">account.move.approval.groupby</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='draft']" position="after">
+                <filter name="pending_approval" string="Pending Approved" domain="[('state','=','pending_approval')]"/>
+                <filter name="approved" string="Approved" domain="[('state','=','approved')]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_move_approval_groupby" model="ir.ui.view">
+        <field name="name">account.move.approval.groupby.js</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_move_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='unposted']" position="before">
+                <filter name="pending_approval" string="Pending Approved" domain="[('state','=','pending_approval')]"/>
+                <filter name="approved" string="Approved" domain="[('state','=','approved')]"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

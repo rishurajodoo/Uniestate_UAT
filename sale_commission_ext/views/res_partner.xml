@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_form_sale_commission_agent" model="ir.ui.view">
+        <field name="name">res.partner.form.sale.commission.agent</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="priority" eval="18" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='agent_information']//group[1]" position="after">
+                  <group
+                            string="Sale Commission"
+                        >
+                           <field name="sale_commission_ids">
+                                <tree
+                                >
+                                    <field name="order_id" invisible="status != 'sale'"/>
+                                    <field name="date" invisible="status != 'sale'"/>
+                                    <field name="status" invisible="status != 'sale'"/>
+                                    <field name="payment_status" invisible="status != 'sale'"/>
+                                    <field name="invoice_status" invisible="status != 'sale'"/>
+                                    <field name="settlement_status" invisible="status != 'sale'"/>
+                                    <field name="commission_amount" invisible="status != 'sale'"/>
+                                </tree>
+                            </field>
+                        </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

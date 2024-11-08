@@ -1,0 +1,39 @@
+<odoo>
+
+    <record id="view_pdc_bounce_wizard_form" model="ir.ui.view">
+        <field name="name">PDC Bounce wizards</field>
+        <field name="model">pdc.bounce.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="product_id" required="1"/>
+                        <field name="penalty_amount"/>
+                        <field name="cheque_no"/>
+                        <field name="invoice_policy" widget="radio"/>
+
+                    </group>
+                    <group>
+                        <field name="pdc_cheque_id" invisible="1"/>
+<!--                        <field name="previous_cheque_ids2" invisible="0" widget="many2many_tags"/>-->
+                    </group>
+                </group>
+<!--                <group>-->
+                    <h5>Previously Bounced cheque</h5>
+<!--                </group>-->
+
+                    <field name="previous_cheque_ids" readonly="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="cheque_no"/>
+                        </tree>
+                    </field>
+                <footer>
+                    <button name="create_bounce" string="Create PDC Bounce" type="object" class="btn-primary"/>
+                    <button string="Cancel" type="object" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

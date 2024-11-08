@@ -1,0 +1,197 @@
+<odoo>
+    <!--    Invoice   -->
+    <record id="view_move_form_inherited" model="ir.ui.view">
+        <field name="name">account.move.purchaser.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="purchaser_ids" widget="many2many_tags"
+                       invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--    Register Payment   -->
+    <record id="view_account_payment_register_form_purchaser" model="ir.ui.view">
+        <field name="name">account.payment.register.purchaser.inherit</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_bank_id']" position="after">
+                <field name="order_id"/>
+            </xpath>
+            <xpath expr="//form/group/group[@name='group1']/field[@name='partner_bank_id']" position="after">
+                <field name="is_invoice" invisible="1"/>
+                <field name="purchaser_ids" widget="many2many_tags" invisible="1"/>
+                <field name="purchaser_id" options="{'no_create': True}"
+                       invisible="is_invoice == False" required="is_invoice == True"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    Payment   -->
+    <record id="view_account_payment_form_inherited" model="ir.ui.view">
+        <field name="name">account.payment.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_bank_id']" position="after">
+                <!--                <field name="purchaser_ids" widget="many2many_tags"/>-->
+                <field name="purchaser_id" options="{'no_create': True}"
+                       invisible="payment_type != 'inbound'"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--   Payment Report   -->
+    <template id="report_payment_receipt_document" inherit_id="account.report_payment_receipt_document">
+<!--        <xpath expr='//t[@t-call="web.external_layout"]' position='replace'>-->
+<!--            <t t-call="web.external_layout">report_payment_receipt_document-->
+<!--                <t t-set="o" t-value="o.with_context(lang=lang)"/>-->
+<!--                <div class="page">-->
+<!--                    <h3>-->
+<!--                        <strong>Payment Receipt:-->
+<!--                            <span t-field="o.name"/>-->
+<!--                        </strong>-->
+<!--                    </h3>-->
+<!--                    <div class="mb-4 mt-3">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-6">-->
+<!--                                <t t-if="o.date">-->
+<!--                                    <strong>Payment Date:</strong>-->
+<!--                                    <span t-field="o.date"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="o.partner_id">-->
+<!--                                    <br/>-->
+<!--                                    <t t-if="o.partner_type == 'customer'">-->
+<!--                                        <strong>Customer:</strong>-->
+<!--                                    </t>-->
+<!--                                    <t t-if="o.partner_type == 'supplier'">-->
+<!--                                        <strong>Vendor:</strong>-->
+<!--                                    </t>-->
+<!--                                    <span t-field="o.partner_id"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="o.amount">-->
+<!--                                    <br/>-->
+<!--                                    <strong>Payment Amount:</strong>-->
+<!--                                    <span t-field="o.amount"-->
+<!--                                          t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="o.payment_method_id">-->
+<!--                                    <br/>-->
+<!--                                    <strong>Payment Method:</strong>-->
+<!--                                    <span t-field="o.payment_method_id.name"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="o.ref">-->
+<!--                                    <br/>-->
+<!--                                    <strong>Memo:</strong>-->
+<!--                                    <span t-field="o.ref"/>-->
+<!--                                </t>-->
+<!--                            </div>-->
+<!--                            <div class="col-6" t-if="o.purchaser_id">-->
+<!--                                <span t-field="o.purchaser_id"-->
+<!--                                      t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <t t-set="partials" t-value="o.move_id._get_reconciled_invoices_partials()"/>-->
+<!--                    <t t-set="invoices" t-value="{partial[2].move_id for partial in partials}"/>-->
+<!--                    &lt;!&ndash; Check if invoices include different currencies &ndash;&gt;-->
+<!--                    <t t-foreach="invoices" t-as="inv">-->
+<!--                        <t t-if="any(inv.currency_id != par[2].currency_id for par in inv._get_reconciled_invoices_partials()[0])" t-set="otherCurrency" t-value="True"/>-->
+<!--                    </t>-->
+
+<!--                    <table class="table table-sm">-->
+<!--                        <thead>-->
+<!--                            <tr>-->
+<!--                                <th>-->
+<!--                                    <span>Invoice Date</span>-->
+<!--                                </th>-->
+<!--                                <th>-->
+<!--                                    <span>Invoice Number</span>-->
+<!--                                </th>-->
+<!--                                <th>-->
+<!--                                    <span>Reference</span>-->
+<!--                                </th>-->
+<!--                                &lt;!&ndash; Add a column if there are different currencies &ndash;&gt;-->
+<!--                                <th t-if="otherCurrency" class="text-right">-->
+<!--                                    <span>Amount In Currency</span>-->
+<!--                                </th>-->
+<!--                                <th class="text-right">-->
+<!--                                    <span>Amount</span>-->
+<!--                                </th>-->
+<!--                            </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                            <t t-foreach="invoices" t-as="inv">-->
+<!--                                &lt;!&ndash; MOVE &ndash;&gt;-->
+<!--                                <t t-if="inv.move_type != 'entry'">-->
+<!--                                    <tr>-->
+<!--                                        <td>-->
+<!--                                            <span t-field="inv.invoice_date"/>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <span t-field="inv.name"/>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <span t-field="inv.ref"/>-->
+<!--                                        </td>-->
+<!--                                        <td t-if="otherCurrency"/>-->
+<!--                                        <td class="text-right">-->
+<!--                                            <span t-field="inv.amount_total"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    &lt;!&ndash; PAYMENTS/REVERSALS &ndash;&gt;-->
+<!--                                    <tr t-foreach="inv._get_reconciled_invoices_partials()" t-as="par">-->
+<!--                                        <t t-set="payment" t-value="par[2].move_id"/>-->
+<!--                                        <td>-->
+<!--                                            <span t-field="payment.date"/>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <span t-field="payment.name"/>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <span t-field="payment.ref"/>-->
+<!--                                        </td>-->
+<!--                                        <t t-set="amountPayment" t-value="-payment.amount_total"/>-->
+<!--                                        <t t-set="amountInvoice" t-value="-par[1]"/>-->
+<!--                                        <t t-set="currencyPayment" t-value="payment.currency_id"/>-->
+<!--                                        <t t-set="currencyInvoice" t-value="inv.currency_id"/>-->
+<!--                                        &lt;!&ndash; Fill the column "Amount In Currency" only if necessary &ndash;&gt;-->
+<!--                                        <td t-if="otherCurrency" class="text-right">-->
+<!--                                            <span t-if="currencyPayment != currencyInvoice" t-esc="amountPayment"-->
+<!--                                                  t-options="{'widget': 'monetary', 'display_currency': currencyPayment}"/>-->
+<!--                                        </td>-->
+<!--                                        <td class="text-right">-->
+<!--                                            <span t-esc="amountInvoice"-->
+<!--                                                  t-options="{'widget': 'monetary', 'display_currency': currencyInvoice}"/>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    &lt;!&ndash; BALANCE &ndash;&gt;-->
+<!--                                    <tr>-->
+<!--                                        <td/>-->
+<!--                                        <td>-->
+<!--                                            <strong>Due Amount for-->
+<!--                                                <span t-field="inv.name"/>-->
+<!--                                            </strong>-->
+<!--                                        </td>-->
+<!--                                        <td/>-->
+<!--                                        <td t-if="otherCurrency"/>-->
+<!--                                        <td class="text-right">-->
+<!--                                            <strong>-->
+<!--                                                <span t-field="inv.amount_residual"/>-->
+<!--                                            </strong>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                </t>-->
+<!--                            </t>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--        </xpath>-->
+    </template>
+</odoo>

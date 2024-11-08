@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_maintenance_operation_type,access.maintenance.oprtaion.type,model_maintenance_operation_type,,1,1,1,1
+access_spare_parts,name_spare_parts,model_spare_parts,base.group_user,1,1,1,1
+access_maintenance_request,name_maintenance_request,model_maintenance_request,base.group_user,1,1,1,1
+access_maintenance_category,maintenance.category,model_maintenance_category,,1,1,1,1
+3,name_check_list,model_check_list,base.group_user,1,1,1,1

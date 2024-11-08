@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_payment_plan,access.payment.plan,model_payment_plan,,1,1,1,1
+access_payment_plan_line,access.payment.plan.line,model_payment_plan_line,,1,1,1,1
+access_installment_wizard,access.installment.wizard,model_installment_wizard,,1,1,1,1
+access_installment_line,access.installment.line.line,model_installment_line,,1,1,1,1
+access_account_voucher_wizard_sale,access.account.voucher.wizard.sale,model_account_voucher_wizard_sale,,1,1,1,1
+access_tenancy_contract,access.tenancy.contract,model_tenancy_contract,,1,1,1,1
+access_reschedulement_wizard,access.reschedulement.wizard,model_reschedulement_wizard,,1,1,1,1
+access_cancel_sale_wizard,access_cancel_sale_wizard,model_cancel_sale_wizard,,1,1,1,1
+access_sale_cancel_reason,access_sale_cancel_reason,model_sale_cancel_reason,,1,1,1,1
+access_milestone_trigger,access_milestone_trigger,model_milestone_trigger,,1,1,1,1
+access_sales_reschedule_approval,access_sale_reschedule_approval,model_sales_reschedule_approval,,1,1,1,1
+access_sales_reschedule_approval_line,access_sale_reschedule_approval_line,model_sales_reschedule_approval_line,,1,1,1,1
+access_reschedule_wizard_data,access_reschedule_wizard_data,model_reschedule_wizard_data,,1,1,1,1

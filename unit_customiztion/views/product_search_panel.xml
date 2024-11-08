@@ -1,0 +1,20 @@
+<odoo>
+    <record id="product_product_search_panel"
+            model="ir.ui.view">
+        <field name="name">product.product.search.unit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <search position="inside">
+                <searchpanel>
+                    <field name="building" enable_counters="1"/>
+                    <field name="floor_name" enable_counters="1" string="FLOOR"/>
+                    <field name="unit_type_id" enable_counters="1"/>
+                </searchpanel>
+            </search>
+            <xpath expr="//filter[@name='inactive']" position="attributes">
+                <attribute name="string">Blocked Units</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

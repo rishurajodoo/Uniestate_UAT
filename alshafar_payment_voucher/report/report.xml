@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="paymet_voucher_id" model="ir.actions.report">
+            <field name="name">Payment Voucher</field>
+            <field name="model">pdc.payment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">alshafar_payment_voucher.payment_voucher_temp_id</field>
+            <field name="report_file">alshafar_payment_voucher.payment_voucher_temp_id</field>
+            <field name="binding_model_id" ref="model_pdc_payment"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="journal_payments_id" model="ir.actions.report">
+            <field name="name">Journal Payments</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">alshafar_payment_voucher.journal_payment_r</field>
+            <field name="report_file">alshafar_payment_voucher.journal_payment_r</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+
+<!--        <report-->
+<!--                id="paymet_voucher_id"-->
+<!--                model="pdc.payment"-->
+<!--                report_type="qweb-pdf"-->
+<!--                string="Payment Voucher"-->
+<!--                name="alshafar_payment_voucher.payment_voucher_temp_id"-->
+<!--                file="alshafar_payment_voucher.payment_voucher_temp_id"-->
+<!--        />-->
+
+<!--        <report-->
+<!--                id="journal_payments_id"-->
+<!--                model="account.move"-->
+<!--                report_type="qweb-pdf"-->
+<!--                string="Journal Payments"-->
+<!--                name="alshafar_payment_voucher.journal_payment_r"-->
+<!--                file="alshafar_payment_voucher.journal_payment_r"-->
+<!--        />-->
+
+    </data>
+</odoo>

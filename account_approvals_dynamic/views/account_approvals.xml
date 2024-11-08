@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Purchase Approvals Form view -->
+    <record id="account_approvals_form_view_original" model="ir.ui.view">
+        <field name="name">account.approvals.form</field>
+        <field name="model">account.approvals</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="companies_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group>
+                        <label for="account_domain" string="Apply Domain to"/>
+                        <div>
+                            <field name="account_domain" widget="domain" options="{'model': 'account.move'}"/>
+                        </div>
+                    </group>
+
+                    <notebook>
+                        <page string="Approval Level Details">
+                            <field name="approval_level_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="approver_ids" widget="many2many_tags"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- You can add more pages if needed -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Purchase Approvals Tree view -->
+    <record id="account_approvals_tree_view" model="ir.ui.view">
+        <field name="name">account.approvals.tree</field>
+        <field name="model">account.approvals</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="companies_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Window Action for which is called in the menu = Discount Approval Configuration -->
+    <record id="account_approvals_action" model="ir.actions.act_window">
+        <field name="name">Approval Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.approvals</field>
+        <field name="view_mode">tree,form,kanban,pivot,graph</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('account_approvals_tree_view')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('account_approvals_form_view_original')}),
+                          ]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a New Approval
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_account_approvals"
+            name="Approval Configuration"
+            parent="account.account_invoicing_menu"
+            action="account_approvals_action"
+            sequence="50"/>
+</odoo>

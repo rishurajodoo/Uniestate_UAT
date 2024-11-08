@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="credit_approver_id" model="res.groups">
+        <field name="name"> Customer Credit Note Approver</field>
+    </record>
+
+</odoo>

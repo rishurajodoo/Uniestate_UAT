@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Portal Employees Page Header # T4964 -->
+    <template
+        id="portal_my_home_menu_portal_employee_list"
+        name="Portal layout : Employees"
+        inherit_id="portal.portal_breadcrumbs"
+        priority="20"
+    >
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li
+                t-if="page_name == 'portal_employee' or portal_employee"
+                t-attf-class="breadcrumb-item #{'active ' if not portal_employee else ''}"
+            >
+                <a
+                    t-if="portal_employee"
+                    t-attf-href="/my/portal_employees?{{ keep_query() }}"
+                >
+                    Employees
+                </a>
+                <t t-else="">Employees</t>
+            </li>
+            <li t-if="portal_employee" class="breadcrumb-item active">
+                <t t-esc="portal_employee.display_name" />
+            </li>
+        </xpath>
+    </template>
+    <!-- List Portal Employees Button # T4964 -->
+    <template
+        id="portal_my_home_portal_employee"
+        name="Employees"
+        customize_show="True"
+        inherit_id="portal.portal_my_home"
+        priority="19"
+    >
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Employees</t>
+                <t t-set="url" t-value="'/my/portal_employees'" />
+                <t t-set="placeholder_count" t-value="'portal_employee_count'" />
+            </t>
+        </xpath>
+    </template>
+    <!-- List Portal Employees Template # T4964 -->
+    <template id="portal_my_employees_list" name="List Employees">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Employees</t>
+            </t>
+            <t t-if="not portal_employees">
+                <p>No employee found.</p>
+            </t>
+            <div>
+                <a
+                    role="button"
+                    style="width: 200px;"
+                    t-attf-href="/my/portal_register_employee/"
+                    class="border btn btn-primary "
+                >
+                    Add New
+                </a>
+            </div>
+            <t t-if="portal_employees" t-call="portal.portal_table">
+                <div name="portal_employee_list">
+                    <thead>
+                        <tr class="active">
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="portal_employees" t-as="employee">
+                        <tr>
+                            <td>
+                                <a
+                                    t-att-href="'/my/portal_employees/%s?access_token=%s' % (employee.id, employee.access_token)"
+                                >
+                                    <span t-field="employee.name" />
+                                </a>
+                            </td>
+                            <td>
+                                <span t-field="employee.phone" />
+                            </td>
+                            <td>
+                                <span t-field="employee.email" />
+                            </td>
+                        </tr>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

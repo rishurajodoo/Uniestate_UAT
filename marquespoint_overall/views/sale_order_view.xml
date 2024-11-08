@@ -1,0 +1,174 @@
+<odoo>
+    <data>
+        <record id="view_order_form_inherited" model="ir.ui.view">
+            <field name="name">sale.order.form.inherited</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button name="action_open_reschedule_request"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-bars" invisible="for_rent == True"
+                    >
+                        <field name="reschedule_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="after">
+                    <button name="action_cancel_marquespoint_overall" type="object" string="Cancel"
+                            invisible="state not in ['draft', 'sent', 'sale'] or not id or locked or not for_sale"
+                            data-hotkey="x"/>
+                </xpath>
+                 <xpath expr="//button[@name='action_confirm']" position="after">
+                    <button name="action_cancel_renew_order" type="object" string="Cancel"
+                            invisible="state != 'sale' or for_rent != True or is_renewed != True"
+                            data-hotkey="x"/>
+                </xpath>
+                <xpath expr="//div[@class='oe_title']" position="before">
+                    <group>
+                        <field name="for_sale" readonly="state == 'sale'"/>
+                        <field name="for_rent" readonly="state == 'sale'"/>
+                        <field name="is_renewed" readonly="1"/>
+                        <field name="is_sale_installments" invisible="1"/>
+                        <field name="is_rent_installments" invisible="1"/>
+                    </group>
+                </xpath>
+                <field name='payment_term_id' position="attributes">
+                    <attribute name="invisible">for_sale != True</attribute>
+                </field>
+                <xpath expr="//page[@name='spa']" position="attributes">
+                    <attribute name="invisible">for_sale != True</attribute>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <!--                    %(action_view_account_voucher_wizard)d-->
+                    <button
+                            name="action_open_voucher_wizard"
+                            string="Booking Payment"
+                            type="object"
+                            invisible="state not in ['draft', 'sent']"/>
+                    <!--                            invisible="is_sale_installments != True or state in ['expired']"-->
+                    <!--                    />-->
+                </xpath>
+                <field name="tax_totals" position="after">
+                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                        <label for="amount_residual"/>
+                    </div>
+                    <field
+                            name="amount_residual"
+                            nolabel="1"
+                            class="oe_subtotal_footer_separator"
+                            widget="monetary"
+                            options="{'currency_field': 'currency_id'}"
+                    />
+                </field>
+<!--                <notebook position="inside">-->
+<!--                    <page string="Token Money" invisible="for_sale != True">-->
+<!--                        <field-->
+<!--                                name="account_payment_ids"-->
+<!--                                nolabel="1"-->
+<!--                                colspan="4"-->
+<!--                                context="{'form_view_ref': 'account.view_account_payment_form','tree_view_ref': 'account.view_account_payment_tree'}"-->
+<!--                        />-->
+<!--                    </page>-->
+<!--                </notebook>-->
+                <xpath expr="//page[@name='other_information']" position="after">
+                    <page string="Payment Plan" name="sale_payment_plan" invisible="for_sale != True">
+                        <field name="plan_ids" readonly="state == 'sale'">
+                            <tree sample="1" editable="bottom">
+                                <field name="milestone_id"/>
+<!--                                <button string="Add" class="btn btn-primary" name="open_payment_plan_wizard"-->
+<!--                                        type="object" column_invisible="parent.state == 'sale'"/>-->
+                                <field name="percentage" readonly="1"/>
+                                <field name="amount" readonly="1" force_save="1"/>
+                                <field name="start_date" readonly="1"/>
+                                <field name="end_date" readonly="1"/>
+                                <!--                                <field name="cheque_no"/>-->
+                                <!--                                <field name="bank_name"/>-->
+                                <!--                                <field name="cheque_date"/>-->
+                                <field name="installment_no" readonly="1"/>
+                                <field name="installment_period" readonly="1"/>
+                                <field name="ac_date_eng" optional="hide"/>
+                                <field name="ac_date_arabic" optional="hide"/>
+                                <field name="is_admin_fee" optional="show" force_save="1" invisible="1"/>
+                                <field name="installments_due"/>
+                                <field name="amounts_due"/>
+                                <field name="state" invisible="1"/>
+                                <field name="is_available_for_reschedule" invisible="1"/>
+                                <button name="action_reschedule" string="Reschedule" type="object"
+                                        invisible="state != 'sale'"/>
+<!--                                   <button name="action_booking_milestone" string="Booking Milestone" type="object"-->
+<!--                                        invisible="is_available_for_reschedule"/>-->
+                                <field name="milestone_visible" invisible="1"/>
+                                <button name="action_booking_milestone" string="Booking Milestone" type="object"
+                                        invisible="state not in ['sale'] and not milestone_visible"/>
+                            </tree>
+                        </field>
+                        <notebook name="installment">
+                            <page string="Installments" name="installments_sale"
+                                  invisible="is_sale_installments != True">
+                                <field name="installment_ids">
+                                    <tree readonly="1" create="0" delete="0">
+                                        <field name="inv_status" invisible="1"/>
+                                        <field name="pymt_status" invisible="1"/>
+                                        <field name="milestone_id" readonly="1"/>
+                                        <field name="amount" readonly="1"/>
+                                        <field name="move_id" readonly="1"
+                                               column_invisible="parent.state != 'sale'"/>
+                                        <field name="invoice_date" readonly="1"
+                                               column_invisible="parent.state != 'sale'"/>
+                                        <field name="invoice_payment_date" readonly="1"
+                                               column_invisible="parent.state != 'sale'"/>
+                                        <field name="invoice_status" readonly="1"
+                                               column_invisible="parent.state != 'sale'"/>
+                                        <field name="payment_status" readonly="1"
+                                               column_invisible="parent.state != 'sale'"/>
+                                        <field name="date" invisible="1"/>
+
+                                    </tree>
+                                    <form readonly="1">
+                                        <group>
+                                            <field name="inv_status" invisible="1"/>
+                                            <field name="pymt_status" invisible="1"/>
+                                            <field name="milestone_id" readonly="1"/>
+                                            <field name="amount" readonly="1"/>
+                                            <field name="move_id" readonly="1"/>
+                                            <field name="invoice_date" readonly="1"/>
+                                            <field name="invoice_payment_date" readonly="1"/>
+                                            <field name="invoice_status" readonly="1"/>
+                                            <field name="payment_status" readonly="1"/>
+                                            <field name="date" invisible="1"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group name="ins_amount" col="6" class="mt-2 mt-md-0" invisible="state != 'sale'">
+                            <group colspan="2">
+                                <field name="ins_amount" string="Total"/>
+                                <div class="oe_clear"/>
+                            </group>
+                        </group>
+                        <notebook name="Invoice Amount">
+                            <page name="cancellation process">
+                                <group>
+                                    <group>
+                                        <field name="outstanding_amount"/>
+                                        <field name="paid_amount"/>
+                                    </group>
+                                    <group>
+                                        <field name="outstanding_percentage"/>
+                                        <field name="paid_amount_percentage"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

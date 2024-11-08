@@ -1,0 +1,407 @@
+<odoo>
+    <data>
+        <template id="report_local_po_temp_uni">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="oe_structure"/>
+                            <table class="table table-sm table-borderless" style="width:100%;  font-size:14px;">
+                                <tr>
+                                    <td style="text-align:center; background-color:gray; font-size:22px;" colspan="4">
+                                        <strong>WORK ORDER/LPO -
+                                            <span t-field="o.partner_id.name"/>
+                                        </strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"/>
+                                    <td style="text-align:center; font-size:22px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;">Supplier Code</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.partner_id.ref"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">Work Order #</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.name"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;">Supplier Name</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.partner_id.name"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">Order Date</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.date_order" t-options='{"widget": "date"}'/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;">TRN</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.partner_id.vat"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">Order By</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.company_id.name"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;">Tel</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.partner_id.phone"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">TRN</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.company_id.vat"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;">Fax</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.partner_id.fax_eng"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">Contact Site</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.contact_site"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;">Address</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.partner_id.street"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">Site</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.project_name.name"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;"/>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.partner_id.state_id.name"/>,
+                                        <span t-field="o.partner_id.country_id.name"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;"/>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.project_name.location"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;">Contact Person</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.partner_id.child_ids[0].name"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">Contact Person</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.user_id.name"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;">Mobile #</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.partner_id.child_ids[0].mobile"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">Mobile #</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.user_id.mobile"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;">E-mail</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.partner_id.child_ids[0].email"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">Mobile #</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.user_id.email"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;">Order Reference</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.partner_ref"/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">P.O Box</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.user_id.po_box"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;">Dated</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.date_approve" t-options='{"widget": "date"}'/>
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">Tel</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.user_id.phone"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;"/>
+                                    <th style="text-align:left; border:1px solid black;">
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">Fax</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.user_id.fax_eng"/>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="text-align:left; border:1px solid black;"/>
+                                    <th style="text-align:left; border:1px solid black;">
+                                    </th>
+                                    <th style="text-align:left; border:1px solid black;">Email id</th>
+                                    <th style="text-align:left; border:1px solid black;">
+                                        <span t-field="o.user_id.email"/>
+                                    </th>
+                                </tr>
+                            </table>
+                            <table class="table table-sm table-borderless"
+                                   style="width:100%; border:1px solid black; font-size:14px;">
+                                <tr style="border:1px solid black;">
+                                    <th style="border:1px solid black;">Serial</th>
+                                    <th style="border:1px solid black;">Item Description</th>
+                                    <th style="border:1px solid black;">UOM</th>
+                                    <th style="border:1px solid black;">Quantity</th>
+                                    <th style="border:1px solid black;">Rate</th>
+                                    <th style="border:1px solid black;">Amount(AED)</th>
+                                </tr>
+                                <tr>
+                                    <td style="border-right:1px solid black;">
+                                        <strong>A</strong>
+                                    </td>
+                                    <td style="border-right:1px solid black;">
+                                        <strong>Order Lines Items</strong>
+                                    </td>
+                                    <td/>
+                                    <td/>
+                                    <td/>
+                                    <td style="border-right:1px solid black;"/>
+                                </tr>
+                                <t t-set="sl_no" t-value="1"/>
+                                <tr t-foreach="line_list" t-as="line">
+                                    <td style="border-right:1px solid black;text-align:center;">
+                                        <t t-esc="sl_no"/>
+                                        <t t-set="sl_no" t-value="sl_no+1"/>
+                                    </td>
+                                    <td style="border-right:1px solid black;">
+                                        <span t-esc="line['description']"/>
+                                    </td>
+                                    <td style="border-right:1px solid black;">
+                                        <span t-esc="line['uom']"/>
+                                    </td>
+                                    <td style="border-right:1px solid black;text-align:right">
+                                        <span t-esc="line['qty']"/>
+                                    </td>
+                                    <td style="border-right:1px solid black;text-align:right">
+                                        <span t-esc="line['unit']"/>
+                                    </td>
+                                    <td style="border-right:1px solid black;text-align:right">
+                                        <span t-esc="line['total']"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right:1px solid black;">
+                                        <strong>B</strong>
+                                    </td>
+                                    <td style="border-right:1px solid black;">
+                                        <strong>Untaxed Total</strong>
+                                    </td>
+                                    <td style="border-right:1px solid black;">
+                                        <strong>AED</strong>
+                                    </td>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;text-align:right">
+                                        <span t-field="o.amount_untaxed"
+                                              t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border-right:1px solid black;">
+                                        <strong>C</strong>
+                                    </td>
+                                    <td style="border-right:1px solid black;">
+                                        <strong>Taxes</strong>
+                                    </td>
+                                    <td style="border-right:1px solid black;">
+                                        <strong>AED</strong>
+                                    </td>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;text-align:right">
+                                        <span t-field="o.amount_tax" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border-right:1px solid black;">
+                                        <strong>D</strong>
+                                    </td>
+                                    <td style="border-right:1px solid black;">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td style="border-right:1px solid black;">
+                                        <strong>AED</strong>
+                                    </td>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;"/>
+                                    <td style="border-right:1px solid black;text-align:right">
+                                        <span t-field="o.amount_total" t-options='{"widget": "float", "precision": 2}'/>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <table class="table table-sm" style="width:100%;">
+                                <tr style="border-bottom:1px solid black;">
+                                    <th colspan="2" style="text-align:center;">
+                                        <span t-esc="o.amount_to_text(o.amount_total)"/>
+                                    </th>
+                                </tr>
+                                <tr style="border-bottom:1px solid black;">
+                                    <th colspan="2" style="text-align:center;">
+                                        Payment Terms
+                                    </th>
+                                </tr>
+                                <tr style="border-bottom:1px solid black;">
+                                    <td style="text-align:left;">
+                                        <span t-field="o.payment_term_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom:1px solid black;">
+                                    <th colspan="2" style="text-align:center;">
+                                        Delivery Terms
+                                    </th>
+                                </tr>
+                                <tr style="border-bottom:1px solid black;">
+                                    <td style="text-align:left;">
+                                        <span t-field="o.picking_type_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom:1px solid black;">
+                                    <th colspan="2" style="text-align:center;">
+                                        Terms and Conditions
+                                    </th>
+                                </tr>
+                            </table>
+                            <p>
+                                1. We reserve the right to cancel this order in a whole or part in the event of the
+                                supplier not complying with conditions of order.
+                                <br/>
+                                2. Quality of materials supplied to this order is subject to our final approval.
+                                <br/>
+                                3. Above mentioned rates is the full compensation for delivery of materials at site. i.e
+                                Value of materials, loading/unloading, transportation or any other legal fee (if
+                                required) etc.
+                                <br/>
+                                <strong>4.VAT Will be applicable as per Government rules and regulations.</strong>
+                            </p>
+                            <table border="1" cellspacing="0" cellpadding="5"
+                                   style="border-collapse: collapse; width: 100%;">
+                                <tr>
+                                    <td rowspan="2" colspan="2" style="text-align: center; font-weight: bold;">INTERNAL
+                                        INFORMATION
+                                    </td>
+                                    <td>Requisition: NA</td>
+                                    <td>Details: Offer attached</td>
+                                </tr>
+                                <tr>
+                                    <td>Type of Works</td>
+                                    <td>Contact Person: Mr. Abdul Ghafoor</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" rowspan="2"></td>
+                                    <td>Prepared By: Reviewed by:</td>
+                                    <td>050-2680229</td>
+                                </tr>
+                                <tr>
+                                    <td>Date:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Purchase/Finance:</td>
+                                    <td>Date:</td>
+                                    <td>Operation:</td>
+                                    <td>Date:</td>
+                                </tr>
+                                <tr>
+                                    <td>General Manager:</td>
+                                    <td>Date:</td>
+                                    <td>Status:</td>
+                                    <td>Approved</td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <p>
+                                <strong>Notes/Documents Required for Goods Delivery/Payment</strong>
+                            </p>
+                            <table class="table table-sm table-borderless">
+                                <tr>
+                                    <td>
+                                        <th>
+                                            A.1
+                                        </th>
+                                    </td>
+                                    <td style="padding-left:20px;">
+                                        <span>Delivery Note (Duly received by Uniestate incharge)</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <th>
+                                            A.2
+                                        </th>
+                                    </td>
+                                    <td style="padding-left:20px;">
+                                        <span>Original Invoice with company stamp &amp; signatures on it</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <th>
+                                            A.3
+                                        </th>
+                                    </td>
+                                    <td style="padding-left:20px;">
+                                        <span>Copy of company trade license with company stamp on it.</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <th>
+                                            B.1
+                                        </th>
+                                    </td>
+                                    <td style="padding-left:20px;">
+                                        <strong>
+                                            <span>Proforma Invoice on Original Letter Head with Company Stamp &amp;
+                                                Signatures on it. (For Advance Payments Only)
+                                            </span>
+                                        </strong>
+                                    </td>
+                                </tr>
+                            </table>
+                            <p>
+                                PO Must be referred in all correspondences.
+                                <br/>
+                                Delivery must be at our site in RAK, UAE.
+                                <br/>
+                                The delivered product must be in good condition.
+                                <br/>
+                                All necessary permitts if needed to be arranged by supplier.
+                                <br/>
+                                All necessary permitts if needed to be arranged by supplier.
+                                <br/>
+                            </p>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

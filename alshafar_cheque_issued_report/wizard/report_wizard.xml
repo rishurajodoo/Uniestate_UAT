@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="cheque_report_wizard_form_id" model="ir.ui.view">
+            <field name="name">Cheque Issued Report</field>
+            <field name="model">pdc.cheque.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id" widget="many2many_tags"/>
+                                <field name="date_from"/>
+                            </group>
+                            <group>
+                                <field name="state"/>
+                                <field name="date_to"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                    <footer>
+                        <button type="object" string="Print XLSX" name="pdc_cheque_report_excel" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="cheque_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">Cheque Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pdc.cheque.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="cheque_issued_menu_item" name="Cheque Issued Report" parent="pdc_payments.menu_item_pdc_payment"
+                  sequence="10" action="cheque_report_wizard_action"/>
+
+    </data>
+</odoo>

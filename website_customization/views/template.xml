@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <!-- Template for displaying product list with dynamic title
+    and filtered data (For Rent / For Sale). -->
+
+    <template id="products_template" name="Product List Template">
+        <t t-call="website.layout">
+            <div class="container mt32">
+                <h1 style="text-align: center; color: #5c5c5c; font-size: 36px; margin-bottom: 30px;">
+                    <t t-esc="title"/>
+                </h1>
+                <table class="table table-striped" style="width: 100%; border-collapse: collapse;">
+                    <thead style="background-color: #f7f7f7; color: #333;">
+                        <tr>
+                            <th style="padding: 10px; text-align: left; font-weight: bold;">Unit Type</th>
+                            <th style="padding: 10px; text-align: left; font-weight: bold;">Subunit</th>
+                            <th style="padding: 10px; text-align: left; font-weight: bold;">Name</th>
+                            <th style="padding: 10px; text-align: right; font-weight: bold;">Sales Price</th>
+                            <th style="padding: 10px; text-align: right; font-weight: bold;">Amount</th>
+                            <th style="padding: 10px; text-align: left; font-weight: bold;">State</th>
+                            <th style="padding: 10px; text-align: left; font-weight: bold;">Furnishing</th>
+                            <th style="padding: 10px; text-align: right; font-weight: bold;">Cost</th>
+                            <th style="padding: 10px; text-align: right; font-weight: bold;">On Hand</th>
+                            <th style="padding: 10px; text-align: right; font-weight: bold;">Forecasted</th>
+                            <th style="padding: 10px; text-align: left; font-weight: bold;">UOM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="products" t-as="product">
+                            <tr>
+                                <td style="padding: 8px; text-align: left;">
+                                    <t t-esc="product.unit_type_id.name"/>
+                                </td>
+                                <td style="padding: 8px; text-align: left;">
+                                    <t t-esc="product.sub_unit_id.name"/>
+                                </td>
+                                <td style="padding: 8px; text-align: left;">
+                                    <a t-att-href="'/web#id=' + str(product.id) + '&amp;view_type=form&amp;model=product.product'"
+                                       style="color: #0066cc; text-decoration: none;">
+                                        <t t-esc="product.name"/>
+                                    </a>
+                                </td>
+                                <td style="padding: 8px; text-align: right;">
+                                    <t t-esc="product.lst_price"/>
+                                </td>
+                                <td style="padding: 8px; text-align: right;">
+                                    <t t-esc="product.so_amount"/>
+                                </td>
+                                <td style="padding: 8px; text-align: left;">
+                                    <t t-esc="product.state"/>
+                                </td>
+                                <td style="padding: 8px; text-align: left;">
+                                    <t t-esc="product.furnishing"/>
+                                </td>
+                                <td style="padding: 8px; text-align: right;">
+                                    <t t-esc="product.standard_price"/>
+                                </td>
+                                <td style="padding: 8px; text-align: right;">
+                                    <t t-esc="product.qty_available"/>
+                                </td>
+                                <td style="padding: 8px; text-align: right;">
+                                    <t t-esc="product.virtual_available"/>
+                                </td>
+                                <td style="padding: 8px; text-align: left;">
+                                    <t t-esc="product.uom_id.name"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

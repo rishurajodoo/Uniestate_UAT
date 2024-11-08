@@ -1,0 +1,480 @@
+<odoo>
+    <template id="report_spa_uniestate_booking_confirmation_letter_template_update">
+
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="header">
+                    <div class="row">
+                        <div class="col-2 mb4">
+                            <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)"
+                                 style="max-height: 45px;"
+                                 alt="Logo"/>
+                        </div>
+
+                        <div class="col-6" name="company_name">
+                            <h3>
+                                <b>
+                                    <div t-field="o.company_id.name"/>
+                                </b>
+                            </h3>
+                        </div>
+                        <div class="col-4 text-right" style="margin-top:22px;" t-field="o.company_id.report_header"
+                             name="moto"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-2 mb4"></div>
+                        <div class="col-6" name="company_address">
+                            <div t-field="o.company_id"
+                                 t-options='{"widget": "contact", "fields": ["name"], "no_marker": true}'
+                            />
+                        </div>
+                    </div>
+                    <div t-if="o.company_id.logo or o.company_id.report_header" class="row zero_min_height">
+                        <div class="col-12">
+                            <div style="border-bottom: 1px solid black;"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="page">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-2" style="text-align: right;">
+                                <span>Date</span>
+                                <span style="margin-left : 10px; margin-right:10px;">:</span>
+                            </div>
+                            <div class=" col-3">
+                                <span t-field="o.date_order" t-options='{"format": "yyyy-MM-d"}'/>
+                            </div>
+                            <div class="col-2">
+
+                            </div>
+                            <div class="col-2" style="text-align: right;">
+                                <span>Our Ref</span>
+                                <span style="margin-left : 10px; margin-right:10px;">:</span>
+                            </div>
+                            <div class="col-3">
+                                <t t-esc="o.name"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-2" style="text-align: right;">
+                                <span>To</span>
+                                <span style="margin-left : 10px; margin-right:10px;">:</span>
+                            </div>
+                            <div class="col-3">
+                                <t t-if="o.for_sale">
+                                    <t t-esc="o.purchaser_ids[0].purchase_individual.name"/>
+                                </t>
+                                <t t-if="o.for_rent">
+                                    <t t-esc="o.partner_id.name"/>
+                                </t>
+                            </div>
+                            <div class="col-3">
+
+                            </div>
+                            <div class="col-1">
+
+                            </div>
+                            <div class="col-3">
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-2" style="text-align: right;">
+                                <span>Address</span>
+                                <span style="margin-left : 10px; margin-right:10px;">:</span>
+                            </div>
+                            <div class="col-3">
+                                <t t-if="o.for_sale">
+                                    <t t-esc="o.purchaser_ids[0].purchase_individual.street"/>
+                                    <br/>
+                                    <t t-esc="o.purchaser_ids[0].purchase_individual.state_id.name"/>,
+                                    <t t-esc="o.purchaser_ids[0].purchase_individual.country_id.name"/>
+                                </t>
+                                <t t-if="o.for_rent">
+                                    <span t-esc="o.partner_id.street"/>
+                                    <br/>
+                                    <span t-esc="o.partner_id.state_id.name"/>,
+                                    <span t-esc="o.partner_id.country_id.name"/>
+                                </t>
+                            </div>
+                            <div class="col-3">
+
+                            </div>
+                            <div class="col-1">
+                            </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-2" style="text-align: right;">
+                                <span>Fax No</span>
+                                <span style="margin-left : 10px; margin-right:10px;">:</span>
+                            </div>
+                            <div class="col-4">
+                                <t t-if="o.for_sale">
+                                    <span t-field="o.purchaser_ids[0].purchase_individual.fax_eng"/>
+                                </t>
+                                <t t-else="">
+                                    <span t-field="o.partner_id.fax_eng"/>
+                                </t>
+                            </div>
+                            <div class="col-2">
+
+                            </div>
+                            <div class="col-1" style="text-align: right;">
+                            </div>
+                            <div class="col-3">
+                            </div>
+                        </div>
+                        <div>
+                            <center>
+                                <b>
+                                    <u>
+                                        Subject: Booking Confirmation Letters
+                                    </u>
+                                </b>
+                            </center>
+                        </div>
+                        <div>
+
+                            Dear Sir/Madam,
+                            <br/>
+                            <p>
+                                I/We hereby apply to book
+                                <span t-field="o.unit[0].sub_unit_id.name"/>
+                                ,office/apartment No.
+                                <span t-field="o.unit[0].name"/>
+                                in "
+                                <t t-esc="o.project.name"/>
+                                at an agreed price of AED
+                                <t tesc="o.order_line[0].price_unit"/>
+                                Upon Allotment I/We also commit to payment terms and conditions agreed for the purchase
+                                of
+                                the said unit.I/We have read and understood the sales Agreement.I/We understand the
+                                booking
+                                fee of AED
+                                <t t-esc="o.advance_booking_amount"/>
+                                is non refundable, if the agreed payment is not made within 90 days of unit reserved by
+                                Me/Us.I/We furnish below my personal details for the purpose of considering allotment
+                                and
+                                declare the same to be true and correct. The address furnished by Me/Us is the address
+                                of
+                                the correspondence and for all other purpose.
+                            </p>
+                            <br/>
+                            <table width="100%" class="table table-borderless">
+                                <tr>
+                                    <td>
+                                        Name of the Applicant: 1 .
+                                        <t t-esc="o.partner_id.name"/>
+                                    </td>
+                                    <td>
+                                        2 .
+                                        <t t-if="o.for_sale">
+                                            <t t-esc="o.purchaser_ids[0].purchase_individual.name"/>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Date of Birth: 1 .
+                                        <t t-esc="o.partner_id.dob"/>
+                                    </td>
+                                    <td>
+                                        <td>
+                                            <t t-if="len(o.purchaser_ids)>1">
+                                                2.
+                                                <t t-esc="o.purchaser_ids[1].purchase_individual.name"/>
+                                            </t>
+                                        </td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <t t-if="o.partner_id.is_resident">
+                                        <td>Residential Status : Resident</td>
+                                    </t>
+                                    <t t-else="">
+                                        <td>Residential Status : NR</td>
+                                    </t>
+
+                                    <t t-if="o.partner_id.is_company">
+                                        <td>Entity Status : Company</td>
+                                    </t>
+                                    <t t-else="">
+                                        <td>Entity Status : Individual</td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Contact Details:
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <t t-esc="o.partner_id.street"/>,<t t-if="o.partner_id.city"
+                                                                            t-esc="o.partner_id.city"/>,
+                                        <t t-esc="o.partner_id.zip"/>,
+                                        <t t-esc="o.partner_id.state_id.display_name"/>,
+                                        <t t-esc="o.partner_id.country_id.display_name"/>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="table table-borderless" width="100%">
+                                <tr>
+                                    <td>Phone(R):
+                                        <t t-esc="o.partner_id.phone"/>
+                                    </td>
+                                    <td>Phone(O):
+                                        <t t-esc="o.partner_id.phone_o"/>
+                                    </td>
+                                    <td>Fax:
+                                        <t t-esc="o.partner_id.fax_eng"/>
+                                    </td>
+                                    <td>Mobile:
+                                        <t t-esc="o.partner_id.mobile"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Email:
+                                        <t t-esc="o.partner_id.email"/>
+                                    </td>
+                                    <td colspan="2">Occupation:
+                                        <t t-esc="o.partner_id.function"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                        <div>
+                            <p>Dear
+                                <t t-if="o.for_sale">
+                                    <span t-field="o.purchaser_ids[0].purchase_individual.name"/>
+                                </t>
+                                <t t-else="">
+                                    <span t-field="o.partner_id.name"/>
+                                </t>
+                            </p>
+                            <p>
+                                We thank you for booking an apartment in
+                                <span t-esc="o.project.name"/>
+                                , details for which
+                                are give
+                            </p>
+                        </div>
+                        <div>
+                            <br/>
+                            <table class="table-bordered mb-5">
+                                <thead>
+                                    <tr style="height: 50px; width: 40px; padding-top: 5px; margin-left: 5px; margin-right: 5px;"
+                                        class="text-center">
+                                        <th>
+                                            Floor No.
+                                        </th>
+                                        <th>
+                                            Apartment No.
+                                        </th>
+                                        <th>
+                                            Apartment
+                                            Type.
+                                        </th>
+                                        <th>
+                                            Total Area
+                                            (Sq.Ft)
+                                        </th>
+                                        <th>
+                                            Rate/Sq.Ft
+                                        </th>
+                                        <th>
+                                            Sales Price
+                                            (AED)
+                                        </th>
+                                        <th>
+                                            Parking Price
+                                            (AED)
+                                        </th>
+                                        <th>
+                                            Total Price
+                                            (AED)
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.unit" t-as="unit">
+                                        <tr class="text-center">
+                                            <td>
+                                                <span t-field="o.floor.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="unit.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="unit.sub_unit_id.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="unit.property_size"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="unit.price_sqft"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="unit.lst_price"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="unit.parking_price"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="unit.lst_price + unit.parking_price"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <p>
+                                We are pleased to inform you that, we have now booked apartment and request you to pay
+                                the
+                                remaining non-refundable 5% purchase fee amounting AED 5,000.00 by 28th JULY 2023
+                                The payment terms for your apartment are as follows :
+                            </p>
+                        </div>
+                        <div>
+                            <center>
+                                <table class="table-bordered mb-5" width="60%">
+                                    <thead>
+                                        <tr style="height: 50px; width: 40px; margin: 5px;" class="text-center">
+                                            <th>
+                                                Installment
+                                                No
+                                            </th>
+                                            <th>
+
+                                                Milestone
+                                            </th>
+                                            <th>
+                                                %
+                                            </th>
+                                            <th>
+                                                Date of Payment
+                                            </th>
+                                            <th>
+                                                Amount
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="sequence" t-value="1"/>
+                                        <t t-if="o.for_sale">
+                                            <t t-foreach="o.installment_ids" t-as="line">
+                                                <t t-if="not line.milestone_id.is_dld and not line.milestone_id.is_oqood and not line.milestone_id.is_service_charges">
+                                                    <tr style="height: 30px; width: 50px; margin: 5px;"
+                                                        class="text-center">
+                                                        <td>
+                                                            <t t-esc="sequence"/>
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="line.milestone_id.name"/>
+                                                        </td>
+                                                        <td>
+                                                            <t t-set="total_price"
+                                                               t-value="sum(o.unit.mapped('lst_price')) + sum(o.unit.mapped('parking_price'))"/>
+                                                            <t t-set="amount" t-value="line.amount"/>
+                                                            <t t-if="total_price!=0">
+                                                                <t t-esc="round((amount / total_price) * 100 ,2)"/>
+                                                            </t>
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="line.date"/>
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="round(line.amount, 2)"/>
+                                                        </td>
+                                                        <t t-set="sequence" t-value="sequence+1"/>
+                                                    </tr>
+                                                </t>
+                                            </t>
+                                        </t>
+
+                                        <t t-if="o.for_rent">
+                                            <t t-foreach="o.rent_plan_ids" t-as="line">
+                                                <t t-if="not line.milestone_id.is_dld and not line.milestone_id.is_oqood and not line.milestone_id.is_service_charges">
+
+                                                    <tr style="height: 30px; width: 50px; margin: 5px;"
+                                                        class="text-center">
+                                                        <td>
+                                                            <t t-esc="sequence"/>
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="line.milestone_id.name"/>
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="line.percentage"/>
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="line.start_date"/>
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="line.amount"/>
+                                                        </td>
+                                                        <t t-set="sequence" t-value="sequence+1"/>
+                                                    </tr>
+                                                </t>
+                                            </t>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </center>
+                            <div>
+                                <p>Payment can be made by as follows:</p>
+                                <!--                                <br/>-->
+                                <p>1.By Cheque: made payable to
+                                    <span t-esc="o.bank_details.account_name"/>
+                                    to address PO Box 4373, Ras
+                                    Alkhaimah,U.A.E., www.uniestate.com
+                                </p>
+                                <br/>
+                                <p>
+                                    Please note that only local cheques are accepted.
+                                </p>
+                                <p>
+                                    2.By cash or Bank Transfer : to
+                                    <t t-esc="o.bank_details.name"/>
+                                    , Ras Alkhaimah, U.A.E.,
+                                    www.uniestate.com
+                                    In the event of bank transfer for any of the above payments please, ensure that copy
+                                    of the transfer document
+                                    from your bankers (give transaction number) is fixed/mailed to us for purpose of
+                                    tracking the payment and
+                                    crediting your account.
+                                </p>
+                                <p>
+                                    Thanking you,
+                                </p>
+                                <p>
+                                    Best Regards
+                                </p>
+                                <br/>
+                                <p>
+                                    For Uniestate Properties LLC
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+
+    </template>
+
+    <template id="report_uniestate_booking_confirmation_letter">
+        <t t-call="web.html_container">
+
+            <t t-call="uniestate_reports.report_spa_uniestate_booking_confirmation_letter_template_update"/>
+        </t>
+    </template>
+</odoo>

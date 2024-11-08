@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="view_order_deffered_revenue" model="ir.ui.view">
+            <field name="name">Sale Order Deffered Revenue</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="marquespoint_overall.view_order_form_inherited"/>
+            <field name="arch" type="xml">
+                <!--                All boolean fields on order lines-->
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button name="create_deffered_revenue"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-files-o"
+                            string="Deffered Revenue"
+                            invisible="state != 'sale' or not for_rent"
+                    >
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

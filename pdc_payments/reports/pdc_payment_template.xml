@@ -1,0 +1,141 @@
+<odoo>
+
+    <template id="pdc_payment_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h3>
+                            <strong>PDC Payment Receipt:
+                                <span t-field="o.name"/>
+                            </strong>
+                        </h3>
+                        <div class="row mt64">
+                            <div class="col-6">
+                                <t t-if="o.date_payment">
+                                    <strong>Payment Date:</strong>
+                                    <span t-field="o.date_payment"/>
+                                </t>
+                                <t t-if="o.partner_id">
+                                    <br/>
+                                    <strong>Partner:</strong>
+                                    <span t-field="o.partner_id.name"/>
+                                </t>
+                                <t t-if="o.payment_amount">
+                                    <br/>
+                                    <strong>PDC Payment Amount:</strong>
+                                    <span t-field="o.payment_amount"
+                                          t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                </t>
+                                <t t-if="o.memo">
+                                    <br/>
+                                    <strong>Memo:</strong>
+                                    <span t-field="o.memo"/>
+                                </t>
+                                <t t-if="o.date_registered">
+                                    <br/>
+                                    <strong>Registered Date:</strong>
+                                    <span t-field="o.date_registered"/>
+                                </t>
+                                <t t-if="o.date_payment">
+                                    <br/>
+                                    <strong>Due Date:</strong>
+                                    <span t-field="o.date_payment"/>
+                                </t>
+                                <t t-if="o.cheque_no">
+                                    <br/>
+                                    <strong>Cheque No:</strong>
+                                    <span t-field="o.cheque_no"/>
+                                </t>
+                            </div>
+                            <div class="col-6">
+                                <t t-if="o.purchaser_id">
+                                    <span t-field="o.purchaser_id"
+                                          t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                                </t>
+                                <t t-if="o.destination_account_id">
+                                    <strong>Bank:</strong>
+                                    <span t-field="o.destination_account_id.name"/>
+                                </t>
+                            </div>
+                        </div>
+
+                        <div class="row mb64">
+                            <div class="col-6" t-if="o.commercial_bank_id">
+                                <strong>Commercial Bank:</strong>
+                                <span t-field="o.commercial_bank_id.name"/>
+                            </div>
+                        </div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span>Invoice Date</span>
+                                    </th>
+                                    <th>
+                                        <span>Invoice Number</span>
+                                    </th>
+                                    <th>
+                                        <span>Reference</span>
+                                    </th>
+                                    <th class="text-right">
+                                        <span>Original Amount</span>
+                                    </th>
+                                    <th class="text-right">
+                                        <span>Amount Paid</span>
+                                    </th>
+                                    <th class="text-right">
+                                        <span>Balance</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="o.move_ids">
+                                    <!--                                    <tr t-foreach="o.move_ids._get_reconciled_invoices_partials()" t-as="rec">-->
+                                    <tr t-foreach="o.move_ids" t-as="inv">
+                                        <!--                                        <t t-set="amount" t-value="rec[1]"/>-->
+                                        <!--                                        <t t-set="inv" t-value="rec[2].move_id"/>-->
+                                        <!--                                        <t t-if="inv.move_type != 'entry'">-->
+                                        <td>
+                                            <span t-field="inv.invoice_date"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="inv.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="inv.ref"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="inv.amount_total"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="inv.amount_total"
+                                                  t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="inv.amount_residual"/>
+                                        </td>
+                                        <!--                                        </t>-->
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <!--                        <br/>-->
+                        <!--                        <p name="arabic" align="left">-->
+                        <!--                            <b>-->
+                        <!--                                This is a certified electronic receipt and does not require a stamp-->
+                        <!--                            </b>-->
+                        <!--                        </p>-->
+                        <!--                        <p name="eng" align="right">-->
+                        <!--                            <b>-->
+                        <!--                                "هذا إيصال إلكتروني معتمد ولا يتطلب ختم أو توقيع"-->
+                        <!--                            </b>-->
+                        <!--                        </p>-->
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_crm_lead_inherit_form" model="ir.ui.view">
+            <field name="name">crm_lead_model_inherit_form</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <group>
+                        <field name="for_sale"/>
+                        <field name="for_rent"/>
+                    </group>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="lost_reason" string="Lost Reason">
+                        <field name="lost_reason_id"/>
+                        <field name="is_lost"/>
+                    </page>
+                </xpath>
+                <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d'][2]" position="replace">
+                </xpath>
+                <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d'][1]" position="replace">
+                    <button name="%(crm.crm_lead_lost_action)d" string="Lost" data-hotkey="l" title="Mark as lost"
+                            type="action" invisible="is_lost"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

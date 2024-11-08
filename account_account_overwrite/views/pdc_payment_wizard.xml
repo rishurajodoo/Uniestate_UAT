@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pdc_payment_wizard_form_inherited" model="ir.ui.view">
+        <field name="name">pdc.payment.wizard.form</field>
+        <field name="model">pdc.payment.wizard</field>
+        <field name="inherit_id" ref="pdc_payments.view_pdc_payment_wizard_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='pdc_type']" position="after">
+                <field name="is_overwrite"/>
+                <field name="overwite_account_id" invisible="not is_overwrite"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

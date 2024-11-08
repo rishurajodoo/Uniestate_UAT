@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="snd_petty_cash_form_inherited_maintenance" model="ir.ui.view">
+            <field name="name">snd.petty.cash.form.rent</field>
+            <field name="model">snd.petty.cash</field>
+            <field name="inherit_id" ref="snd_petty_cash.snd_petty_cash_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name="request_id" readonly="1"/>
+                </xpath>
+                <xpath expr="//group[last()]" position="after">
+                    <group col="4" string="Property Details">
+                        <field name="unit_id"/>
+                        <field name="floor_id"/>
+                        <field name="building_id"/>
+                        <field name="project_id"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

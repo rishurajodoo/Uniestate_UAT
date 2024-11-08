@@ -1,0 +1,71 @@
+<odoo>
+
+	<template id="portal_my_home_menu_portal_time_off_request" name="Portal layout : Request Leave" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'portal_timeoff_request' or portal_timeoff_request" t-attf-class="breadcrumb-item #{'active ' if not portal_timeoff_request else ''}">
+                <a t-if="portal_timeoff_request" t-attf-href="/my/timeoff?{{ keep_query() }}">Request Time Off</a>
+                <t t-else="">Request Time Off</t>
+            </li>
+            <li t-if="portal_timeoff_request" class="breadcrumb-item active">
+                <t t-esc="portal_timeoff_request.display_name"/>
+            </li>
+        </xpath>
+    </template>
+
+	<template id="portal_timeoff_request_link" inherit_id="portal.portal_my_home" name="Portal Time Off Request Link">
+	    <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+	        <t t-call="portal.portal_docs_entry">
+	            <t t-set="title">Request Time Off</t>
+	            <t t-set="url" t-value="'/my/timeoff_request'"/>
+	            <t t-set="placeholder_count" t-value="'timeoff_req_count'"/>
+	        </t>
+	    </xpath>
+	</template>
+
+	<template id="portal_timeoff_request" name="Portal Time Off Request">
+	    <t t-call="portal.portal_layout">
+	    	<t t-set="breadcrumbs_searchbar" t-value="True"/>
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Request Time Off</t>
+            </t>
+	        <div class="container">
+	            <h2>Request Time Off</h2>
+	            <form action="/my/timeoff_request/submit" method="POST" enctype="multipart/form-data">
+	                <input type="hidden" name="csrf_token" t-att-value="csrf_token"/>
+	                <div class="form-group">
+	                    <label for="leave_type">Time Off Type</label>
+	                    <select id="leave_type" name="leave_type" class="form-control" required="required">
+	                        <t t-foreach="leave_types" t-as="leave_type">
+	                            <option t-att-value="leave_type.id">
+	                                <t t-esc="leave_type.name"/>
+	                            </option>
+	                        </t>
+	                    </select>
+	                </div>
+
+	                <div class="form-group">
+	                    <label for="date_from">From</label>
+	                    <input type="date" id="date_from" name="date_from" class="form-control" required="required"/>
+	                </div>
+
+	                <div class="form-group">
+	                    <label for="date_to">To</label>
+	                    <input type="date" id="date_to" name="date_to" class="form-control" required="required"/>
+	                </div>
+
+	                <div class="form-group">
+	                    <label for="description">Description</label>
+	                    <textarea id="description" name="description" class="form-control"></textarea>
+	                </div>
+
+	                <div class="form-group">
+	                    <label for="attachment">Supporting Document</label>
+	                    <input type="file" id="attachment" name="attachment" class="form-control"/>
+	                </div>
+
+	                <button type="submit" class="btn btn-primary">Submit Request</button>
+	            </form>
+	        </div>
+	    </t>
+	</template>
+</odoo>

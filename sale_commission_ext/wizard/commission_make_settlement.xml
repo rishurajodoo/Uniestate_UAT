@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_settled_wizard_ext" model="ir.ui.view">
+        <field name="name">Select period to settle ext</field>
+        <field name="model">commission.make.settle</field>
+        <field name="inherit_id" ref="commission.view_settled_wizard"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_to']" position="before">
+                <field name="date_from"/>
+            </xpath>
+              <xpath expr="//field[@name='date_to']" position="after">
+                  <field name="sale_order_domain" invisible="1"/>
+                <field name="filter_agent_ids" domain="sale_order_domain" widget="many2many_tags"/>
+            </xpath>
+            <xpath expr="//field[@name='settlement_type']" position="attributes">
+                <attribute name="invisible">1</attribute>
+                <attribute name="required">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='agent_ids']" position="attributes">
+                <attribute name="domain">sale_order_domain</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

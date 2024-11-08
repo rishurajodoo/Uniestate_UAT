@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Register Portal Employee Template # T4964 -->
+    <template id="portal_employee_register_template">
+        <t t-call="portal.portal_layout">
+            <div id="wrap" class="page">
+                <div class="col-lg-8 mt-4 mt-lg-0">
+                    <section
+                        class="s_website_form"
+                        data-vcss="001"
+                        data-snippet="s_website_form"
+                    >
+                        <div class="container">
+                            <form
+                                id="portal_employee_form"
+                                method="post"
+                                t-att-action="'/my/portal_register_employee/continue'"
+                                enctype="multipart/form-data"
+                                class="o_mark_required"
+                                data-mark="*"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="csrf_token"
+                                    t-att-value="request.csrf_token()"
+                                />
+                                <div class="s_website_form_rows row s_col_no_bgcolor">
+                                    <div
+                                        class="form-group col-12 s_website_form_field s_website_form_custom s_website_form_required"
+                                        data-type="char"
+                                        data-name="Field"
+                                    >
+                                        <div
+                                            class="row s_col_no_resize s_col_no_bgcolor"
+                                        >
+                                            <label
+                                                class="col-form-label col-sm-auto s_website_form_label"
+                                                style="width: 200px"
+                                                for="name"
+                                            >
+                                                <span
+                                                    class="s_website_form_label_content"
+                                                >
+                                                    Name
+                                                </span>
+                                                <span class="s_website_form_mark">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input
+                                                    id="emp_name"
+                                                    type="text"
+                                                    class="form-control s_website_form_input"
+                                                    name="name"
+                                                    required=""
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="form-group col-12 s_website_form_field s_website_form_custom"
+                                        data-type="char"
+                                        data-name="Field"
+                                    >
+                                        <div
+                                            class="row s_col_no_resize s_col_no_bgcolor"
+                                        >
+                                            <label
+                                                class="col-form-label col-sm-auto s_website_form_label"
+                                                style="width: 200px"
+                                                for="phone"
+                                            >
+                                                <span
+                                                    class="s_website_form_label_content"
+                                                >
+                                                    Phone Number
+                                                </span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input
+                                                    id="emp_phone"
+                                                    type="tel"
+                                                    class="form-control s_website_form_input"
+                                                    name="phone"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="form-group col-12 s_website_form_field s_website_form_required"
+                                        data-type="email"
+                                        data-name="Field"
+                                    >
+                                        <div
+                                            class="row s_col_no_resize s_col_no_bgcolor"
+                                        >
+                                            <label
+                                                class="col-form-label col-sm-auto s_website_form_label"
+                                                style="width: 200px"
+                                                for="email"
+                                            >
+                                                <span
+                                                    class="s_website_form_label_content"
+                                                >
+                                                    Email
+                                                </span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input
+                                                    id="emp_email"
+                                                    type="email"
+                                                    class="form-control s_website_form_input"
+                                                    name="email"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="form-group col-12 s_website_form_submit"
+                                        data-name="Submit Button"
+                                    >
+                                        <div
+                                            style="width: 200px;"
+                                            class="s_website_form_label"
+                                        />
+                                        <button type="submit" class="btn btn-primary ">
+                                            Submit
+                                            <span class="fa fa-long-arrow-right" />
+                                        </button>
+                                        <span id="s_website_form_result" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </t>
+    </template>
+    <!-- Edit Portal Employee Template # T4964  -->
+    <template id="portal_employee_edit_template" name="Edit Employee">
+        <t t-if="portal_employee">
+            <t t-call="portal.portal_layout">
+                <div id="wrap" class="page">
+                    <div>
+                        <section
+                            class="s_website_form"
+                            data-vcss="001"
+                            data-snippet="s_website_form"
+                        >
+                            <div class="container">
+                                <form
+                                    id="portal_employee_form"
+                                    method="post"
+                                    t-att-action="'/my/portal_employees/continue/%s?access_token=%s' % (portal_employee.id, portal_employee.access_token)"
+                                    enctype="multipart/form-data"
+                                    class="o_mark_required"
+                                    data-mark="*"
+                                    t-att-data-token="portal_employee.access_token"
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="csrf_token"
+                                        t-att-value="request.csrf_token()"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        class="form-control s_website_form_input"
+                                        name="portal_employee_id"
+                                        id="portal_employee_id"
+                                        t-att-value="portal_employee.id"
+                                    />
+                                    <div class="form-group row col-xl-8 mx-auto mt-3">
+                                        <label
+                                            for="name"
+                                            class="col-md-4 col-form-label s_website_form_mark"
+                                        >
+                                            Name *
+                                        </label>
+                                        <div class="col-md-8">
+                                            <input
+                                                id="portal_emp_name"
+                                                type="text"
+                                                class="form-control"
+                                                required=""
+                                                name="portal_employee"
+                                                t-att-value="portal_employee.name"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-8 mx-auto">
+                                        <label
+                                            for="phone"
+                                            class="col-md-4 col-form-label s_website_form_mark"
+                                        >
+                                            Phone
+                                        </label>
+                                        <div class="col-md-8 input-group">
+                                            <input
+                                                id="portal_emp_phone"
+                                                type="phone"
+                                                name="phone"
+                                                class="form-control s_website_form_input"
+                                                t-att-value="portal_employee.phone"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-8 mx-auto">
+                                        <label
+                                            for="email"
+                                            class="col-md-4 col-form-label"
+                                        >
+                                            Email
+                                        </label>
+                                        <div class="col-md-8 input-group">
+                                            <input
+                                                id="portal_emp_email"
+                                                type="email"
+                                                name="email"
+                                                class="form-control s_website_form_input"
+                                                t-att-value="portal_employee.email"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="row justify-content-center success_msg"
+                                        t-if="success"
+                                    >
+                                        <span t-esc="success" />
+                                    </div>
+                                    <div
+                                        class="row form-group justify-content-center"
+                                        data-name="Submit Button"
+                                    >
+                                        <div class="s_website_form_label" />
+                                        <button
+                                            type="submit"
+                                            role="button"
+                                            class="btn btn-primary btn-lg "
+                                        >
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

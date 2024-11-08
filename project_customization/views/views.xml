@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="project_wizard_form_id" model="ir.ui.view">
+            <field name="name">Project Wizard Form</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.project_project_view_form_simplified"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="for_rent"/>
+                    <field name="for_sale"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

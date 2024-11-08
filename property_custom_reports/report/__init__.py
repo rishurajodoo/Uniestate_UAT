@@ -1,0 +1,1 @@
+from . import sale_quote_report_template_rent
